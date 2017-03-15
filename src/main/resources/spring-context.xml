@@ -3,26 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-
 	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/java/EEIT92"></property>
 	</bean>
 
-
- 	<bean id="fagaoBookService" class="tw.iamsroat.fagao.service.BookService">
- 		<!-- collaborators and configuration for this bean go here -->
- 		<property name="fagaobookDao">
- 			<ref bean="fagaoBookDao" />
- 		</property>
- 	</bean>
- 
-  	<bean id="fagaoBookDao" class="tw.iamsroat.fagao.dao.BookDao">
-  		<!-- collaborators and configuration for this bean go here -->
-  	</bean>
- 	
  	<bean id="fagaoBookController" class="tw.iamsroat.fagao.web.FagaoBookController">
  	</bean>
-
 
 </beans>
