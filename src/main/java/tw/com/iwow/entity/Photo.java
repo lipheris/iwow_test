@@ -1,6 +1,6 @@
 package tw.com.iwow.entity;
 
-import java.sql.Blob;
+//import java.sql.Blob;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -22,13 +22,17 @@ public class Photo {
 	private Long id;
 	private Integer assort;
 	private String name;
+	@Column(name = "D_UPDATE")
 	private LocalDateTime dateUpdate;
 	private boolean visibility;
 	private Double price;
-//	private Blob file;
+	// private Blob file;
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="performance")
-	private Performance performance;
+	@JoinColumn(name="PER_ID")
+	private Statistics statistics;
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="REP_ID")
+	private Report report;
 
 	public Long getId() {
 		return id;
@@ -78,11 +82,11 @@ public class Photo {
 		this.price = price;
 	}
 
-//	public Blob getFile() {
-//		return file;
-//	}
-//
-//	public void setFile(Blob file) {
-//		this.file = file;
-//	}
+	// public Blob getFile() {
+	// return file;
+	// }
+	//
+	// public void setFile(Blob file) {
+	// this.file = file;
+	// }
 }
