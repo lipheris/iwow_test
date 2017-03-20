@@ -20,6 +20,8 @@ public class Tag {
 	@Column(unique = true, nullable = false)
 	private Integer id;
 	private String name;
+	
+	//typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
 	@Column(name="TYPE_ID")
 	private Integer typeId;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")

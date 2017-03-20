@@ -23,11 +23,14 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
+	//assort 為分類普通/ 18禁圖片
 	private Integer assort;
 	@Column(nullable = false)
 	private String name;
 	@Column(name = "DATE_UPDATE", nullable = false)
 	private LocalDateTime dateUpdate;
+	
+	//visibility 為區分公開/ 私人
 	private boolean visibility;
 	private Double price;
 	@Column(nullable = false)

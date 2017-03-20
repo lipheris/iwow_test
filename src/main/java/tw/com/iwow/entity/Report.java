@@ -19,6 +19,8 @@ public class Report {
 	private Long id;
 	private Clob descript;
 	private LocalDateTime date;
+	
+	//state 為區分report 狀態為處理/未處理
 	private Boolean state;
 
 	public Long getId() {
