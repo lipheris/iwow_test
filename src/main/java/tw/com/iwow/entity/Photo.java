@@ -2,6 +2,7 @@ package tw.com.iwow.entity;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,28 +12,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PHOTO")
+@Table(name = "PHOTOS")
 public class Photo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 	private Integer assort;
+	@Column(nullable = false)
 	private String name;
-	@Column(name = "DATE_UPDATE")
+	@Column(name = "DATE_UPDATE", nullable = false)
 	private LocalDateTime dateUpdate;
 	private boolean visibility;
 	private Double price;
-	 private Blob file;
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="PER_ID")
-	private Statistics statistics;
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="REP_ID")
+	@Column(nullable = false)
+	private Blob file;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "STA_ID")
+	private Stats stats;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "REP_ID")
 	private Report report;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PHO_ID", referencedColumnName = "ID")
+	private Set<Spec> specs;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "photo")
+	private Set<TagDetail> tagDetails;
 
 	public Long getId() {
 		return id;
@@ -88,5 +98,29 @@ public class Photo {
 
 	public void setFile(Blob file) {
 		this.file = file;
+	}
+
+	public Stats getStats() {
+		return stats;
+	}
+
+	public void setStats(Stats stats) {
+		this.stats = stats;
+	}
+
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
+	}
+
+	public Set<Spec> getSpecs() {
+		return specs;
+	}
+
+	public void setSpecs(Set<Spec> specs) {
+		this.specs = specs;
 	}
 }

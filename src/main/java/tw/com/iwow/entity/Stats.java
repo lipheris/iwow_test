@@ -7,10 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="STATISTICS")
-public class Statistics  {
+@Table(name="STATS")
+public class Stats  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 	@Column(name="SAL_TOTAL")
 	private Double salesTotal;
@@ -20,5 +21,4 @@ public class Statistics  {
 //	private Double salesMonthly;
 //	@Column(name="SAL_WEEKLY")
 //	private Double salesWeekly;
-
 }

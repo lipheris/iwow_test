@@ -3,6 +3,7 @@ package tw.com.iwow.entity;
 import java.sql.Clob;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,14 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "REPORT")
+@Table(name = "REPORTS")
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 	private Clob descript;
 	private LocalDateTime date;
-	private Boolean status;
+	private Boolean state;
 
 	public Long getId() {
 		return id;
@@ -43,12 +45,17 @@ public class Report {
 		this.date = date;
 	}
 
-	public Boolean getStatus() {
-		return status;
+	public Boolean getState() {
+		return state;
 	}
 
-	public void setStatus(Boolean status) {
-		this.status = status;
+	public void setState(Boolean state) {
+		this.state = state;
+	}
+
+	@Override
+	public String toString() {
+		return "Report [id=" + id + ", date=" + date + ", status=" + state + "]";
 	}
 
 }
