@@ -2,12 +2,9 @@ package tw.com.iwow.entity;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-=======
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,13 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-=======
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 @Entity
 @Table(name = "MEMBERS")
 public class Member implements UserDetails {
@@ -67,95 +61,72 @@ public class Member implements UserDetails {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getPassword() {
 		return password;
 	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getNickname() {
 		return nickname;
 	}
-
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-
 	public Integer getGender() {
 		return gender;
 	}
-
 	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
-
 	public LocalDateTime getBirth() {
 		return birth;
 	}
-
 	public void setBirth(LocalDateTime birth) {
 		this.birth = birth;
 	}
-
 	public String getPhone() {
 		return phone;
 	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 	public Integer getPriority() {
 		return priority;
 	}
-
 	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
-
 	public Blob getPhoto() {
 		return photo;
 	}
-
 	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
-
 	public Set<MemRole> getMemRoles() {
 		return memRoles;
 	}
-
 	public void setMemRoles(Set<MemRole> memRoles) {
 		this.memRoles = memRoles;
 	}
-<<<<<<< HEAD
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -192,7 +163,4 @@ public class Member implements UserDetails {
 		return true;
 	}
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 }
