@@ -16,17 +16,17 @@ import javax.persistence.Table;
 public class Type {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="TYPE_ID", referencedColumnName="ID")
 	private Set<Tag> tags;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

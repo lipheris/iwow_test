@@ -8,29 +8,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MEM_ROLE")
+@Table(name = "MEM_ROLES")
 public class MemRole {
 	@Id
-	private Integer id;
+	private Long id;
 	@Column(name = "MEM_ID")
-	private Integer memberId;
+	private Long memberId;
 	@ManyToOne
 	@JoinColumn(name = "ROLE_ID")
 	private Role role;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getMemberId() {
+	public Long getMemberId() {
 		return memberId;
 	}
 
-	public void setMemberId(Integer memberId) {
+	public void setMemberId(Long memberId) {
 		this.memberId = memberId;
 	}
 
