@@ -1,5 +1,8 @@
 package tw.com.iwow.entity;
 
+import java.math.BigDecimal;
+import java.sql.Blob;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +16,17 @@ public class Spec {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Integer id;
+	private Long id;
 	private Integer size;
 	// use enums?
-	private Double price;
-	private Integer picId;
-
-	public Integer getId() {
+	private BigDecimal price;
+	private Long picId;
+	private Blob file;	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -35,20 +38,28 @@ public class Spec {
 		this.size = size;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	public Integer getPicId() {
+	public Long getPicId() {
 		return picId;
 	}
 
-	public void setPicId(Integer picId) {
+	public void setPicId(Long picId) {
 		this.picId = picId;
+	}
+
+	public Blob getFile() {
+		return file;
+	}
+
+	public void setFile(Blob file) {
+		this.file = file;
 	}
 
 }

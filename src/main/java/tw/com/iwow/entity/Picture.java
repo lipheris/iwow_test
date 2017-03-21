@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -23,17 +24,17 @@ public class Picture {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
-	//assort 為分類普通/ 18禁圖片
+	// assort 為分類普通/ 18禁圖片
 	private Integer assort;
-	@Column(nullable = false)
 	private String name;
-	@Column(name = "DATE_UPDATE", nullable = false)
-	private LocalDateTime dateUpdate;
-	
-	//visibility 為區分公開/ 私人
+	private LocalDateTime update;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UP_ID")
+	private Member uploader;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
+	private Set<PicColl> picColls;
+	// visibility 為區分公開/ 私人
 	private boolean visibility;
-	private Double price;
-	@Column(nullable = false)
 	private Blob file;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "STA_ID")
@@ -71,12 +72,12 @@ public class Picture {
 		this.name = name;
 	}
 
-	public LocalDateTime getDateUpdate() {
-		return dateUpdate;
+	public LocalDateTime getUpdate() {
+		return update;
 	}
 
-	public void setDateUpdate(LocalDateTime dateUpdate) {
-		this.dateUpdate = dateUpdate;
+	public void setUpdate(LocalDateTime update) {
+		this.update = update;
 	}
 
 	public boolean isVisibility() {
@@ -85,14 +86,6 @@ public class Picture {
 
 	public void setVisibility(boolean visibility) {
 		this.visibility = visibility;
-	}
-
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
 	}
 
 	public Blob getFile() {
@@ -125,5 +118,13 @@ public class Picture {
 
 	public void setSpecs(Set<Spec> specs) {
 		this.specs = specs;
+	}
+
+	public Set<TagDetail> getTagDetails() {
+		return tagDetails;
+	}
+
+	public void setTagDetails(Set<TagDetail> tagDetails) {
+		this.tagDetails = tagDetails;
 	}
 }

@@ -1,5 +1,6 @@
 package tw.com.iwow.entity;
 
+import java.sql.Clob;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -18,20 +19,21 @@ public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
-	private Integer id;
+	private Long id;
 	private String name;
-	
-	//typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
-	@Column(name="TYPE_ID")
-	private Integer typeId;
+
+	// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
+	@Column(name = "TYPE_ID")
+	private Long typeId;
+	private Clob description;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")
 	private Set<TagDetail> tagDetail;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -43,12 +45,20 @@ public class Tag {
 		this.name = name;
 	}
 
-	public Integer getTypeId() {
+	public Long getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(Integer typeId) {
+	public void setTypeId(Long typeId) {
 		this.typeId = typeId;
+	}
+
+	public Clob getDescription() {
+		return description;
+	}
+
+	public void setDescription(Clob description) {
+		this.description = description;
 	}
 
 	public Set<TagDetail> getTagDetail() {

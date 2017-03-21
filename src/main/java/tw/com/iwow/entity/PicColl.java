@@ -2,25 +2,25 @@ package tw.com.iwow.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TAG_DETAILS")
-public class TagDetail {
+@Table(name = "PIC_COLLS")
+public class PicColl {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// use composite primary key?
-	// use joinTable?
-	@ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REFRESH)
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "PIC_ID")
 	private Picture picture;
-	@ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REFRESH)
-	@JoinColumn(name = "TAG_ID")
-	private Tag tag;
+	@ManyToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "COL_ID")
+	private Member collector;
 
 	public Long getId() {
 		return id;
@@ -38,11 +38,11 @@ public class TagDetail {
 		this.picture = picture;
 	}
 
-	public Tag getTag() {
-		return tag;
+	public Member getCollector() {
+		return collector;
 	}
 
-	public void setTag(Tag tag) {
-		this.tag = tag;
+	public void setCollector(Member collector) {
+		this.collector = collector;
 	}
 }
