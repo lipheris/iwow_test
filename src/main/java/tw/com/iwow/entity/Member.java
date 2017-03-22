@@ -46,6 +46,14 @@ public class Member {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<MemRole> memRoles;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "DONOR_ID", referencedColumnName = "ID")
+	private Set<Donation> donations;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "REC_ID", referencedColumnName = "ID")
+	private Set<Donation> recDonations;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
+	private Set<GroupMem> groups;
 
 	public Long getId() {
 		return id;
@@ -135,12 +143,60 @@ public class Member {
 		this.photo = photo;
 	}
 
+	public Set<Picture> getUploadPics() {
+		return uploadPics;
+	}
+
+	public void setUploadPics(Set<Picture> uploadPics) {
+		this.uploadPics = uploadPics;
+	}
+
+	public Set<PicColl> getPicColls() {
+		return picColls;
+	}
+
+	public void setPicColls(Set<PicColl> picColls) {
+		this.picColls = picColls;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
 	public Set<MemRole> getMemRoles() {
 		return memRoles;
 	}
 
 	public void setMemRoles(Set<MemRole> memRoles) {
 		this.memRoles = memRoles;
+	}
+
+	public Set<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(Set<Donation> donations) {
+		this.donations = donations;
+	}
+
+	public Set<Donation> getRecDonations() {
+		return recDonations;
+	}
+
+	public void setRecDonations(Set<Donation> recDonations) {
+		this.recDonations = recDonations;
+	}
+
+	public Set<GroupMem> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<GroupMem> groups) {
+		this.groups = groups;
 	}
 
 }
