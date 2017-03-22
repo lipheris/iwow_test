@@ -1,4 +1,4 @@
-package tw.com.iwow.entity;
+package tw.com.iwow.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package tw.com.iwow.entity;
+package tw.com.iwow.model.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
