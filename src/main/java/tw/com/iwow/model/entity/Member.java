@@ -42,24 +42,24 @@ public class Member implements UserDetails {
 	private Integer priority;
 	// enum?
 	private Blob photo;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "uploader")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "uploader")
 	private Set<Picture> uploadPics;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "collector")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "collector")
 	private Set<PicColl> picColls;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<Order> orders;
 	// private Collection<? extends GrantedAuthority> authorities;
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<MemRole> memRoles;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "DONOR_ID", referencedColumnName = "ID")
 	private Set<Donation> donations;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "REC_ID", referencedColumnName = "ID")
 	private Set<Donation> recDonations;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
 	private Set<GroupMem> groups;
 
 	public Long getId() {

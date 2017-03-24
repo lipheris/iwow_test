@@ -36,16 +36,16 @@ public class Picture {
 	// visibility 為區分公開/ 私人
 	private boolean visibility;
 	private Blob file;
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "STA_ID")
 	private Stats stats;
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "REP_ID")
 	private Report report;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
 	private Set<TagDetail> tagDetails;
 
 	public Long getId() {

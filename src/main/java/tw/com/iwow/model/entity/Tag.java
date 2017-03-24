@@ -26,7 +26,7 @@ public class Tag {
 	@Column(name = "TYPE_ID")
 	private Long typeId;
 	private Clob description;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")
+	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")
 	private Set<TagDetail> tagDetail;
 
 	public Long getId() {
