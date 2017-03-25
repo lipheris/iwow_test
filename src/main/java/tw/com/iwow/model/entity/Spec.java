@@ -21,6 +21,7 @@ public class Spec {
 	// use enums?
 	private BigDecimal price;
 	private Long picId;
+	@Column(name = "file_s")
 	private Blob file;	
 	public Long getId() {
 		return id;

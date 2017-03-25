@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Columns;
+
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
@@ -27,6 +29,7 @@ public class Picture {
 	// assort 為分類普通/ 18禁圖片
 	private Integer assort;
 	private String name;
+	@Column(name = "date_update")
 	private LocalDateTime update;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UP_ID")
@@ -35,6 +38,7 @@ public class Picture {
 	private Set<PicColl> picColls;
 	// visibility 為區分公開/ 私人
 	private boolean visibility;
+	@Column(name = "file_p")
 	private Blob file;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "STA_ID")
