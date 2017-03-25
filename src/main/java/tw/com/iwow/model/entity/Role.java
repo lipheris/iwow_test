@@ -12,7 +12,7 @@ public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String authority;
+	private String authority;//獲得腳色之使用權限設定
 
 	public Long getId() {
 		return id;

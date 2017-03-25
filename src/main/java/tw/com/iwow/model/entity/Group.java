@@ -17,7 +17,7 @@ public class Group {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String name; //group name, ex:line 群組EEIT92的名字
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group")
 	private Set<GroupMem> members;
 	public Long getId() {

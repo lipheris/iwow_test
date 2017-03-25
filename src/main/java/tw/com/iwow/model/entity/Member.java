@@ -39,7 +39,7 @@ public class Member implements UserDetails {
 	private String phone;
 	private String address;
 	// more detail?
-	private Integer priority;
+	private Integer priority;//會員等級 以數字區分方便擴充
 	// enum?
 	private Blob photo;
 	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "uploader")

@@ -15,13 +15,13 @@ import javax.persistence.Table;
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	private LocalDateTime time;
-	@Column(name = "DONOR_ID")
+	private Long id; // 此id為查詢各donate 紀錄
+	private LocalDateTime time; //donate time 
+	@Column(name = "DONOR_ID")	//donate的人id
 	private Long donorId;
 	@Column(name = "REC_ID")
-	private Long receiverId;
-	private BigDecimal amount;
+	private Long receiverId; //接受donate memberid
+	private BigDecimal amount; //單次donate 金額 
 
 	public Long getId() {
 		return id;

@@ -17,11 +17,11 @@ public class Spec {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
-	private Integer size;
+	private Integer size;//每張圖之解析度
 	// use enums?
-	private BigDecimal price;
+	private BigDecimal price;//單圖對應各種解析度之定價
 	private Long picId;
-	@Column(name = "file_s")
+	@Column(name = "file_s")//database file 欄位好像不可使用file 故對應為file_s
 	private Blob file;	
 	public Long getId() {
 		return id;

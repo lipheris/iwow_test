@@ -12,13 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ORDER_DETAILS")
+@Table(name = "ORDER_DETAILS")//oderDetail 為記錄每次訂單內容,因單次可有多筆訂單,拆出orderDetail
 public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "ORDER_ID")
-	private Long orderId;
+	private Long orderId; 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "SPEC_ID")
 	private Spec spec;

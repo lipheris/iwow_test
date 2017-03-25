@@ -17,12 +17,12 @@ public class Stats  {
 	private Long id;
 	@Column(name="SAL_TOTAL")
 	
-	//salesTotal 為針對每張圖之總銷售額
-	private Double salesTotal;
 	
-	//quaSalesTotal 為針對每張圖之總銷次數
+	private Double salesTotal;//salesTotal 為針對每張圖之總銷售額
+	
+	
 	@Column(name="Q_SAL_TOTAL")
-	private Double quaSalesTotal;
+	private Double quaSalesTotal;//quaSalesTotal 為針對每張圖之總銷次數
 //	@Column(name="SAL_MONTHLY")
 //	private Double salesMonthly;
 //	@Column(name="SAL_WEEKLY")

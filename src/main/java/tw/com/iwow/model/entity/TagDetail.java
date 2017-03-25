@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TAG_DETAILS")
+@Table(name = "TAG_DETAILS")//tag與picture 為多對多關係 透過此來分拆成一對多
 public class TagDetail {
 	@Id
 	private Long id;

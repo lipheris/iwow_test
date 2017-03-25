@@ -17,7 +17,7 @@ public class Type {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
+	private String name;//針對大項目分類名稱 如貓狗等籠統敘述
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name="TYPE_ID", referencedColumnName="ID")
 	private Set<Tag> tags;

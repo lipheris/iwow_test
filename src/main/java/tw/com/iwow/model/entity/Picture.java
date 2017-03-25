@@ -29,15 +29,14 @@ public class Picture {
 	// assort 為分類普通/ 18禁圖片
 	private Integer assort;
 	private String name;
-	@Column(name = "date_update")
-	private LocalDateTime update;
+	@Column(name = "date_update")//database column 好像禁用update 所以使用date_update
+	private LocalDateTime update; 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UP_ID")
 	private Member uploader;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
 	private Set<PicColl> picColls;
-	// visibility 為區分公開/ 私人
-	private boolean visibility;
+	private boolean visibility;// visibility 為區分公開/ 私人
 	@Column(name = "file_p")
 	private Blob file;
 	@OneToOne(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)

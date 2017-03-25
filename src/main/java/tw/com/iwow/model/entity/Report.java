@@ -11,13 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "REPORTS")
+@Table(name = "REPORTS")//簡舉
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
-	private Clob descript;
+	private Clob descript;//檢舉敘述
 	private LocalDateTime date;
 	
 	//state 為區分report 狀態為處理/未處理

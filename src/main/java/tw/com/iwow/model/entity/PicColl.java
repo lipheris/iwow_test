@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PIC_COLLS")
+@Table(name = "PIC_COLLS")//因為picture and member 有些動作互相來回 透過此table 分成一對多關係方便處理
 public class PicColl {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

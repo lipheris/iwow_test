@@ -13,7 +13,7 @@ public class MemRole {
 	@Id
 	private Long id;
 	@Column(name = "MEM_ID")
-	private Long memberId;
+	private Long memberId; 
 	@ManyToOne
 	@JoinColumn(name = "ROLE_ID")
 	private Role role;
