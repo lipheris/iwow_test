@@ -17,9 +17,9 @@ public class Donation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; // 此id為查詢各donate 紀錄
 	private LocalDateTime time; //donate time 
-	@Column(name = "DONOR_ID")	//donate的人id
+	@Column(name = "donor_id")	//donate的人id
 	private Long donorId;
-	@Column(name = "REC_ID")
+	@Column(name = "rec_id")
 	private Long receiverId; //接受donate memberid
 	private BigDecimal amount; //單次donate 金額 
 

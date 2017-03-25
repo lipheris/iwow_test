@@ -21,7 +21,7 @@ public class Tag {
 	@Column(unique = true, nullable = false)
 	private Long id;
 	private String name;	
-	@Column(name = "TYPE_ID")
+	@Column(name = "type_id")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
 	private Clob description;//針對tag新增時的說明 
 	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")

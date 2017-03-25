@@ -16,10 +16,10 @@ public class PicColl {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "PIC_ID")
+	@JoinColumn(name = "pic_id")
 	private Picture picture;
 	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "COL_ID")
+	@JoinColumn(name = "col_id")
 	private Member collector;
 
 	public Long getId() {

@@ -22,7 +22,7 @@ public class Order {
 	private Long id;
 	private LocalDateTime update;
 	private Clob description;// 針對order 補充說明
-	@Column(name="MEM_ID")
+	@Column(name="mem_id")
 	private Long memberId; //說明下訂人員
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
 	@JoinColumn(name = "ORDER_ID", referencedColumnName="ID")

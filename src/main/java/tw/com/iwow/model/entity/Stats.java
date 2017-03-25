@@ -15,13 +15,9 @@ public class Stats  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
 	private Long id;
-	@Column(name="SAL_TOTAL")
-	
-	
+	@Column(name="sal_tatal")
 	private Double salesTotal;//salesTotal 為針對每張圖之總銷售額
-	
-	
-	@Column(name="Q_SAL_TOTAL")
+	@Column(name="q_sal_total")
 	private Double quaSalesTotal;//quaSalesTotal 為針對每張圖之總銷次數
 //	@Column(name="SAL_MONTHLY")
 //	private Double salesMonthly;

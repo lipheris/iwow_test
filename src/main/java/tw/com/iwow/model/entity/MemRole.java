@@ -12,10 +12,10 @@ import javax.persistence.Table;
 public class MemRole {
 	@Id
 	private Long id;
-	@Column(name = "MEM_ID")
+	@Column(name = "mem_id")
 	private Long memberId; 
 	@ManyToOne
-	@JoinColumn(name = "ROLE_ID")
+	@JoinColumn(name = "role_id")
 	private Role role;
 
 	public Long getId() {

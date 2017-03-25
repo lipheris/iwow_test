@@ -17,7 +17,7 @@ public class OrderDetail {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "ORDER_ID")
+	@Column(name = "order_id")
 	private Long orderId; 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "SPEC_ID")
