@@ -12,39 +12,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 <style>
-
-/* .error { 
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
+.searchicon{
+	margin-left:100px;
+	margin-top:7px;
 }
 
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
-}
-
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-}
-*/
 </style>
 </head>
 <body onload='document.loginForm.username.focus();'>
@@ -79,43 +54,32 @@
 </nav>
 
 
-<!-- login -->
-	<h1>Spring Security Login Form (Database Authentication)</h1>
+<!-- login -->	
+	
+	<div class="container">
 
-	<div id="login-box">
-
-		<h2>Login with Username and Password</h2>
-
-		<c:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c:if>
-
-		<form name='loginForm'
-			action="<c:url value='/j_spring_security_check' />" method='get'>
-
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='username'></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					<td colspan='2'><input name="submit" type="submit"
-						value="login" /></td>
-				</tr>
-			</table>
-
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-
-		</form>
-	</div>
+<h2>Log In to iwowwow</h2>
+	<form action="/pixiv/fagao/book/insert" method="get">
+	
+	<div class="form-group">
+    <label for="name">Email</label>
+    <input class="form-control" type="text" name="email" id="email" maxlength="50" placeholder="email"/>
+  	</div>
+  	
+  	<div class="form-group">
+    <label for="name">Password</label>
+    <input class="form-control" type="text" name="password" id="password" maxlength="50" placeholder="password"/>
+  	</div>
+  
+		<input class="btn btn-success" type="submit" value="Log in"/>
+		<input class="btn btn-success" type="submit" value="Log in"/>
+		<input class="btn btn-success" type="submit" value="Log in"/>
+		<a class="btn btn-block btn-social btn-twitter">
+    	<span class="fa fa-twitter"></span> Sign in with Twitter
+  		</a>
+	</form>
+	
+</div>
 
 </body>
 </html>
