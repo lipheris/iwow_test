@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Columns;
-
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
@@ -29,8 +27,8 @@ public class Picture {
 	// assort 為分類普通/ 18禁圖片
 	private Integer assort;
 	private String name;
-	@Column(name = "date_update")//database column 好像禁用update 所以使用date_update
-	private LocalDateTime update; 
+	@Column(name = "date_update") // database column 好像禁用update 所以使用date_update
+	private LocalDateTime update;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "UP_ID")
 	private Member uploader;
@@ -39,16 +37,13 @@ public class Picture {
 	private boolean visibility;// visibility 為區分公開/ 私人
 	@Column(name = "file_p")
 	private Blob file;
-	@OneToOne(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "STA_ID")
 	private Stats stats;
-	@OneToOne(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "REP_ID")
-	private Report report;
-	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
-	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
 	private Set<TagDetail> tagDetails;
 
 	public Long getId() {
@@ -105,14 +100,6 @@ public class Picture {
 
 	public void setStats(Stats stats) {
 		this.stats = stats;
-	}
-
-	public Report getReport() {
-		return report;
-	}
-
-	public void setReport(Report report) {
-		this.report = report;
 	}
 
 	public Set<Spec> getSpecs() {

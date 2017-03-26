@@ -5,23 +5,29 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "REPORTS")//簡舉
+@Table(name = "REPORTS")
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
 	private Long id;
-	private Clob descript;//檢舉敘述
+	private Clob descript;// 檢舉敘述
 	private LocalDateTime date;
-	
-	//state 為區分report 狀態為處理/未處理
+
+	// state 為區分report 狀態為處理/未處理
 	private Boolean state;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@Column(nullable = false)
+	@JoinColumn(name = "PIC_ID")
+	private Picture picture;
 
 	public Long getId() {
 		return id;
@@ -55,9 +61,18 @@ public class Report {
 		this.state = state;
 	}
 
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
 	@Override
 	public String toString() {
-		return "Report [id=" + id + ", date=" + date + ", status=" + state + "]";
+		return "Report [id=" + id + ", descript=" + descript + ", date=" + date + ", state=" + state + ", picture="
+				+ picture.getId().toString() + " " + picture.getName() + "]";
 	}
 
 }
