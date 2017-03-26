@@ -1,55 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=BIG5"
+    pageEncoding="BIG5"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page session="true"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>login</title>
+<title>iwowwow</title>
 
 <script  src="https://code.jquery.com/jquery-1.12.4.js"  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="  crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<style>
-
-/* .error { 
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
+<style type="text/css">
+.searchicon{
+	margin-left:100px;
+	margin-top:7px;
 }
 
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
+.imgbox{
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:50px;
 }
 
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
+img{
+	width:30%;
+	margin:5px;
+	display:inline-block;
+	vertical-align:top;
 }
-*/
+
+.imgBtn{ 
+ 	width:100%; 
+} 
+
+ .imgForm{
+ 	width:30%;
+	margin:5px;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.buttons{
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:80px;
+}
 </style>
-</head>
-<body onload='document.loginForm.username.focus();'>
 
-<!-- banner -->
+</head>
+<body>
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -71,51 +73,37 @@
       </form>
       
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Log in</a></li>
+      </ul> 
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Sign Up</a></li>
-      </ul>       
+      </ul>           
     </div><!-- /.navbar-collapse -->
     
   </div><!-- /.container-fluid -->
 </nav>
-
-
-<!-- login -->
-	<h1>Spring Security Login Form (Database Authentication)</h1>
-
-	<div id="login-box">
-
-		<h2>Login with Username and Password</h2>
-
-		<c:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c:if>
-
-		<form name='loginForm'
-			action="<c:url value='/j_spring_security_check' />" method='get'>
-
-			<table>
-				<tr>
-					<td>User:</td>
-					<td><input type='text' name='username'></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type='password' name='password' /></td>
-				</tr>
-				<tr>
-					<td colspan='2'><input name="submit" type="submit"
-						value="login" /></td>
-				</tr>
-			</table>
-
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-
+<div class="container">
+	<div class="imgbox">
+		<h1>waterflow</h1>
+		
+		<form class="imgForm" action="/iwowwow/iwow/picture" method="get">			
+			<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg" onClick="document.form1.submit()">
 		</form>
+		
+		<img src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
+		<img src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">
+		<img src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg">
+		<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTxWjwdli7SzC13-nd9JnsNFcBPPOL8QCI8fsWcA5Vo3RUCQQ5y">
+		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">
+		<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQjXvYGODrgdGssCS2enKxCuhpU-xWC_aNwDX8q36OtmEUcV24FeA">
 	</div>
+</div>
 
+<div class="buttons">
+	<button class="btn btn-success" type="submit">LOGIN</button>
+	<button class="btn btn-info" type="submit">See More</button>
+</div>
+
+</div>
 </body>
 </html>

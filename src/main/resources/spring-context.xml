@@ -8,7 +8,7 @@
 		<property name="jndiName" value="java:comp/env/java/EEIT92"></property>
 	</bean>
 
- 	<bean id="fagaoBookController" class="tw.iamsroat.fagao.web.FagaoBookController">
+ 	<bean id="iwowController" class="tw.com.iwow.model.web.IwowController">
  	</bean>
 
 </beans>
