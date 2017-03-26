@@ -22,4 +22,9 @@ public class IwowController {
 	public String loginPage(){
 		return "iwow/login";
 	}
+	
+	@RequestMapping(value="/index_user")
+	public String index_userPage(){
+		return "iwow//index_user";
+	}
  }
