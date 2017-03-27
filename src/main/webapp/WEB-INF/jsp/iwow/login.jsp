@@ -43,19 +43,20 @@
 	background-color: #dd4b39;
 	border-color: rgba(0, 0, 0, 0.2);
 }
-
-.btn-login {
-	color: #fff;
-	background-color: #34bf49;
-	border-color: rgba(0, 0, 0, 0.2);
-}
-
 .login {
     width: 400px;
     margin: auto;
     padding: 32px 40px 24px;
     color: #71767a;
 }
+.btn-login {
+	color: #fff;
+	background-color: #34bf49;
+	border-color: rgba(0, 0, 0, 0.2);
+	text-align:center;
+	padding-right:60px;
+}
+
 </style>
 </head>
 <body onload='document.loginForm.username.focus();'>
@@ -98,7 +99,15 @@
 	<div class="login">
 
 		<h2>Log In to iwowwow</h2>
-		<form action="/pixiv/fagao/book/insert" method="get">
+		
+		<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+		
+		<form name='loginForm' action="<c:url value="/login_check?targetUrl=${targetUrl}" />" method='post'>
 
 			<div class="form-group">
 				<label for="name">Email</label> <input class="form-control" type="text" name="email" id="email" maxlength="50" placeholder="email" />
@@ -116,6 +125,10 @@
 			<a class="btn btn-block btn-lg btn-social btn-google"> 
 			<span class="fa fa-google"></span> Log in with Google
 			</a>
+			
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+			
 		</form>
 
 	</div>

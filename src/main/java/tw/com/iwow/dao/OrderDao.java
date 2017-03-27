@@ -1,8 +1,8 @@
-package tw.com.iwow.model.dao;
+package tw.com.iwow.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import tw.com.iwow.model.entity.Order;
+import tw.com.iwow.entity.Order;
 
 public interface OrderDao extends JpaRepository<Order, Long> {
 

@@ -1,4 +1,4 @@
-package tw.com.iwow.model.entity;
+package tw.com.iwow.entity;
 
 import java.sql.Clob;
 import java.time.LocalDateTime;

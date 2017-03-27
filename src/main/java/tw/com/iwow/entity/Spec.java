@@ -1,4 +1,4 @@
-package tw.com.iwow.model.entity;
+package tw.com.iwow.entity;
 
 import java.math.BigDecimal;
 import java.sql.Blob;

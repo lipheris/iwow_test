@@ -8,7 +8,7 @@
 		<property name="jndiName" value="java:comp/env/java/EEIT92"></property>
 	</bean>
 
- 	<bean id="iwowController" class="tw.com.iwow.model.web.IwowController">
+ 	<bean id="iwowController" class="tw.com.iwow.web.IwowController">
  	</bean>
 
 </beans>
