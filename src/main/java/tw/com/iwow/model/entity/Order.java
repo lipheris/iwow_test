@@ -14,20 +14,21 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="ORDERS")
+@Table(name = "ORDERS")
 public class Order {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private LocalDateTime update;
 	private Clob description;// 針對order 補充說明
-	@Column(name="mem_id")
-	private Long memberId; //說明下訂人員
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
-	@JoinColumn(name = "ORDER_ID", referencedColumnName="ID")
+	@Column(name = "mem_id")
+	private Long memberId; // 說明下訂人員
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
 	private Set<OrderDetail> orderDetails;
-	//add field total price from orderDetails?
+	// add field total price from orderDetails?
 
 	public Long getId() {
 		return id;
