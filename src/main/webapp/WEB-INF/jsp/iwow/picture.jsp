@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>photo</title>
+<title>picture</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="  crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -49,7 +49,7 @@ article{
 	margin-right:10px;
 }
 
-.mainPhoto{
+.mainPicture{
 	margin-left:auto;
 	margin-right:auto;
 	margin:20px;
@@ -171,7 +171,7 @@ article{
 	<span class="glyphicon glyphicon-shopping-cart icon" aria-hidden="true">2</span>
 	</div>
 	
-	<div class="mainPhoto">
+	<div class="mainPicture">
 	<img style="width:70%;height:70%;" src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg">
 	</div>
 	
