@@ -1,33 +1,46 @@
 package tw.com.iwow.entity;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import tw.com.iwow.entity.id.PicCollId;
+
 @Entity
-@Table(name = "PIC_COLLS")//因為picture and member 有些動作互相來回 透過此table 分成一對多關係方便處理
+@Table(name = "PIC_COLLS") // 因為picture and member 有些動作互相來回 透過此table 分成一對多關係方便處理
+@IdClass(PicCollId.class)
 public class PicColl {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "pic_id")
+	@Column(name = "PIC_ID")
+	private Long pictureId;
+	@Id
+	@Column(name = "COL_ID")
+	private Long collectorId;
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "pic_id", referencedColumnName = "ID")
 	private Picture picture;
-	@ManyToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "col_id")
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "col_id", referencedColumnName = "ID")
 	private Member collector;
 
-	public Long getId() {
-		return id;
+	public Long getPictureId() {
+		return pictureId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPictureId(Long pictureId) {
+		this.pictureId = pictureId;
+	}
+
+	public Long getCollectorId() {
+		return collectorId;
+	}
+
+	public void setCollectorId(Long collectorId) {
+		this.collectorId = collectorId;
 	}
 
 	public Picture getPicture() {

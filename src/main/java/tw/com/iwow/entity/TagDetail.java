@@ -1,33 +1,46 @@
 package tw.com.iwow.entity;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import tw.com.iwow.entity.id.TagDetailId;
+
 @Entity
-@Table(name = "TAG_DETAILS")//tag與picture 為多對多關係 透過此來分拆成一對多
+@Table(name = "TAG_DETAILS") // tag與picture 為多對多關係 透過此來分拆成一對多
+@IdClass(TagDetailId.class)
 public class TagDetail {
 	@Id
-	private Long id;
-	// use composite primary key?
-	// use joinTable?
-	@ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REFRESH)
-	@JoinColumn(name = "PIC_ID")
+	@Column(name = "PIC_ID")
+	private Long pictureId;
+	@Id
+	@Column(name = "TAG_ID")
+	private Long tagId;
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Picture picture;
-	@ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.REFRESH)
-	@JoinColumn(name = "TAG_ID")
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name = "TAG_ID", referencedColumnName = "ID")
 	private Tag tag;
 
-	public Long getId() {
-		return id;
+	public Long getPictureId() {
+		return pictureId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPictureId(Long pictureId) {
+		this.pictureId = pictureId;
+	}
+
+	public Long getTagId() {
+		return tagId;
+	}
+
+	public void setTagId(Long tagId) {
+		this.tagId = tagId;
 	}
 
 	public Picture getPicture() {
@@ -45,4 +58,5 @@ public class TagDetail {
 	public void setTag(Tag tag) {
 		this.tag = tag;
 	}
+
 }
