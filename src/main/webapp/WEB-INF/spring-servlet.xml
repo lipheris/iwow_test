@@ -22,6 +22,6 @@
 	</bean>
 
 	<mvc:annotation-driven />
-	<context:component-scan base-package="tw.com.iwow.web" />
 	
+	<context:component-scan base-package="tw.com.iwow.web" />
 </beans>

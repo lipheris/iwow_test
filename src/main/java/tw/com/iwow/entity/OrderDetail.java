@@ -19,9 +19,10 @@ public class OrderDetail {
 	private Long id;
 	@Column(name = "order_id")
 	private Long orderId; 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "SPEC_ID")
-	private Spec spec;
+	
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+//	@JoinColumn(name = "SPEC_ID")//"SPEC_ID"
+//	private Spec spec;
 
 	public Long getId() {
 		return id;
@@ -39,12 +40,12 @@ public class OrderDetail {
 		this.orderId = order;
 	}
 
-	public Spec getSpec() {
-		return spec;
-	}
-
-	public void setSpec(Spec spec) {
-		this.spec = spec;
-	}
+//	public Spec getSpec() {
+//		return spec;
+//	}
+//
+//	public void setSpec(Spec spec) {
+//		this.spec = spec;
+//	}
 
 }
