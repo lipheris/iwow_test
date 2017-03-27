@@ -6,4 +6,5 @@ import tw.com.iwow.entity.Member;
 
 public interface MemberDao extends JpaRepository<Member, Long> {
 
+	public Member findByEmail(String email);
 }
