@@ -2,10 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
 	
-	<jpa:repositories base-package="tw.com.iwow" /> 
+	<context:annotation-config/>
+	<context:component-scan base-package="tw.com.iwow" />
+	<jpa:repositories base-package="tw.com.iwow.dao" /> 
 	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -15,26 +21,30 @@
 			value="jdbc:sqlserver://softleader.com.tw:1433;databaseName=EEIT92DB" />
 		<property name="username" value="EEIT92" />
 		<property name="password" value="EEIT92" />
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
 	
-	<bean id="entityManagerFactory" 
-			class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-			<property name="dataSource" ref="dataSource"/>
-			<property name="packagesToScan" value="tw.com.iwow"/>								
-			<property name="jpaVendorAdapter">
-				<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-			</property>
-				<property name="jpaProperties">
-				<props>
-					<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
-				</props>
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="tw.com.iwow.entity,org.springframework.data.jpa.convert.threeten" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+            	<prop key="hibernate.hbm2ddl.auto">update</prop>
+            	<prop key="hibernate.hbm2ddl.import_files">initial_data.sql</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
+	</bean>										   
 	
- 	<bean id="iwowController" class="tw.com.iwow.model.IwowController"/>
+ 	<bean id="iwowController" class="tw.com.iwow.web.IwowController"/>
 
 
 

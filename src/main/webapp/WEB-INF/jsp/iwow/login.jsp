@@ -114,11 +114,12 @@
 			</div>
 
 			<div class="form-group">
-				<label for="name">Password</label> <input class="form-control" type="text" name="password" id="password" maxlength="50" placeholder="password" />
+				<label for="name">Password</label> <input class="form-control" type="password" name="password" id="password" maxlength="50" placeholder="password" />
 			</div>
 
-			<a class="btn btn-block btn-lg btn-social btn-login"> Log in 
-			</a> 
+			 
+			<input class="btn btn-block btn-lg btn-social btn-login" name="submit" type="submit"
+						value="Log in" />
 			<a class="btn btn-block btn-lg btn-social btn-facebook"> 
 			<span class="fa fa-facebook"></span> Log in with Facebook
 			</a> 

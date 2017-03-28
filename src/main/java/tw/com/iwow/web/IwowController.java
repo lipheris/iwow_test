@@ -4,27 +4,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value="/iwow")
 public class IwowController {
  	
  	//iwowwow
-	@RequestMapping(value="/index")
+	@RequestMapping(value="/iwow/index")
 	public String indexPage(){
 		return "iwow/index";
 	}
 	
-	@RequestMapping(value="/picture")
+	@RequestMapping(value="/iwow/picture")
 	public String picturePage(){
 		return "iwow/picture";
 	}
 	
-	@RequestMapping(value="/login")
-	public String loginPage(){
-		return "iwow/login";
-	}
+//	@RequestMapping(value="/login")
+//	public String loginPage(){
+//		return "iwow/login";
+//	}
 	
-	@RequestMapping(value="/index_user")
+	@RequestMapping(value="/iwow/index_user")
 	public String index_userPage(){
-		return "iwow//index_user";
+		return "iwow/index_user";
 	}
  }
