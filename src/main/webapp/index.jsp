@@ -1,0 +1,1 @@
+<script>document.location.href='${pageContext.servletContext.contextPath}/iwow/index';</script>

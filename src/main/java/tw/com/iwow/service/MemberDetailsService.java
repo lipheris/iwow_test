@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import tw.com.iwow.entity.Member;
 
-@Service("memberDetailsService")
+@Service
 public class MemberDetailsService implements UserDetailsService {
 
 	@Autowired

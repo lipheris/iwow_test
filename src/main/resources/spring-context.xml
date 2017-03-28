@@ -21,18 +21,22 @@
 			value="jdbc:sqlserver://softleader.com.tw:1433;databaseName=EEIT92DB" />
 		<property name="username" value="EEIT92" />
 		<property name="password" value="EEIT92" />
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
 	
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="tw.com.iwow.entity" />
+		<property name="packagesToScan" value="tw.com.iwow.entity,org.springframework.data.jpa.convert.threeten" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+            	<prop key="hibernate.hbm2ddl.auto">update</prop>
+            	<prop key="hibernate.hbm2ddl.import_files">initial_data.sql</prop>
 			</props>
 		</property>
 	</bean>
