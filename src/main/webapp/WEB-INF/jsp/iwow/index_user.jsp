@@ -147,22 +147,22 @@ h2 {
 				<button type="submit" class="btn btn-default">Submit</button>
 			</form>
 
-
-				
-
-<!-- 				<ul class="nav navbar-nav navbar-right"> -->
-				<sec:authorize access="hasRole('ROLE_USER')">
-					<div class="form-group">
-						<c:url value="/logout" var="logoutUrl" />
-						<form action="${logoutUrl}" method="post" id="logoutForm" class="navbar-form navbar-right">
-							<input class="btn btn-success" type="submit" value="Logout">
+				<sec:authorize access="hasRole('ROLE_USER')">					
+					<c:url value="/logout" var="logoutUrl" />
+						<form action="${logoutUrl}" method="post" id="logoutForm" >						
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
-						</form>
-					</div>
+						</form>									
+					<script>
+   						function formSubmit() {  
+   							document.getElementById("logoutForm").submit();  
+     					}  
+					</script>  
 				</sec:authorize>
-<!-- 					<li><a href="#">Log out</a></li> -->
-<!-- 				</ul> -->
+				<ul class="nav navbar-nav navbar-right" style="font-size: 15px">
+					<li><a href="javascript:formSubmit()">Logout</a></li>
+				</ul>
+
 				<ul class="nav navbar-nav navbar-right" style="font-size: 20px">
 					<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
 				</ul>
