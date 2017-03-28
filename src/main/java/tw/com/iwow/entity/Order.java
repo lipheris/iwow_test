@@ -24,7 +24,7 @@ public class Order {
 	private Clob description;// 針對order 補充說明
 	@Column(name="mem_id")
 	private Long memberId; //說明下訂人員
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ORDER_ID", referencedColumnName="ID")
 	private Set<OrderDetail> orderDetails;
 	//add field total price from orderDetails?
@@ -53,11 +53,11 @@ public class Order {
 		this.description = description;
 	}
 
-	public Set<OrderDetail> getOrderDetails() {
-		return orderDetails;
-	}
-
-	public void setOrderDetails(Set<OrderDetail> orderDetails) {
-		this.orderDetails = orderDetails;
-	}
+//	public Set<OrderDetail> getOrderDetails() {
+//		return orderDetails;
+//	}
+//
+//	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+//		this.orderDetails = orderDetails;
+//	}
 }

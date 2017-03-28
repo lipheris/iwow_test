@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.iwow.dao.MemberDao;
 import tw.com.iwow.entity.Member;
@@ -21,7 +22,7 @@ public class MemberService {
 	public Member findById(Long id) {
 		return memberDao.findOne(id);
 	}
-
+	@Transactional
 	public Member insert(Member member) {
 		return memberDao.save(member);
 	}

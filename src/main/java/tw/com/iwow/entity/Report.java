@@ -24,10 +24,10 @@ public class Report {
 
 	// state 為區分report 狀態為處理/未處理
 	private Boolean state;
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@Column(nullable = false)
-	@JoinColumn(name = "PIC_ID")
-	private Picture picture;
+//	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+//	@Column(nullable = false)
+//	@JoinColumn(name = "PIC_ID")
+//	private Picture picture;
 
 	public Long getId() {
 		return id;
@@ -61,18 +61,18 @@ public class Report {
 		this.state = state;
 	}
 
-	public Picture getPicture() {
-		return picture;
-	}
+//	public Picture getPicture() {
+//		return picture;
+//	}
+//
+//	public void setPicture(Picture picture) {
+//		this.picture = picture;
+//	}
 
-	public void setPicture(Picture picture) {
-		this.picture = picture;
-	}
-
-	@Override
-	public String toString() {
-		return "Report [id=" + id + ", descript=" + descript + ", date=" + date + ", state=" + state + ", picture="
-				+ picture.getId().toString() + " " + picture.getName() + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Report [id=" + id + ", descript=" + descript + ", date=" + date + ", state=" + state + ", picture="
+//				+ picture.getId().toString() + " " + picture.getName() + "]";
+//	}
 
 }
