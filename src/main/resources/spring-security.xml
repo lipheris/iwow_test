@@ -10,8 +10,8 @@
  		<form-login login-page="/login" authentication-failure-url="/login?error"
 					login-processing-url="/login_check" username-parameter="email"
 					password-parameter="password" />
-		<logout logout-url="/logout" logout-success-url="/login?logout"
-				delete-cookies="JSESSIONID" />
+		<logout logout-url="/logout" logout-success-url="/login?logout" 
+				delete-cookies="JSESSIONID"/>
 		<csrf />
 	</http>
 
