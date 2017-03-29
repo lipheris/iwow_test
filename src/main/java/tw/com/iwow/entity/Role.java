@@ -1,5 +1,6 @@
 package tw.com.iwow.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,17 +12,10 @@ import javax.persistence.Table;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
-	private String authority;//獲得腳色之使用權限設定
-	
-	private String test;	
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
+	@Column(name = "AUTH")
+	private String auth;
 
 	public Long getId() {
 		return id;
@@ -31,11 +25,11 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getAuthority() {
-		return authority;
+	public String getAuth() {
+		return auth;
 	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 }

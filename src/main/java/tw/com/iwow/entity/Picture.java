@@ -32,8 +32,7 @@ public class Picture {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "UP_ID")
 	private Member uploader;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
-	private Set<PicColl> picColls;
+	@Column(name = "VISIBILITY")
 	private boolean visibility;// visibility 為區分公開/ 私人
 	@Column(name = "file_p")
 	private Blob file;
