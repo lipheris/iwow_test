@@ -49,8 +49,7 @@ public class Member {
 	/*
 	 * 以上傳者身分對Picture建立@OneToMany雙向關聯，Picture為主控方
 	 */
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = { CascadeType.MERGE,
-			CascadeType.REFRESH }, mappedBy = "uploader")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "uploader")
 	private Set<Picture> picUploads;
 	/*
 	 * 以收藏者身分對Picture建立@ManyToMany單向關聯
@@ -73,13 +72,16 @@ public class Member {
 				joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
 	private Set<Role> roles;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	/*
+	 * 斗內雙方與斗內資料建立@OneToMany關聯,主控方在Donation
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donor")
 	@JoinColumn(name = "DONOR_ID", referencedColumnName = "ID")
 	private Set<Donation> donations;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "receiver")
 	@JoinColumn(name = "REC_ID", referencedColumnName = "ID")
 	private Set<Donation> recDonations;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "member")
 	private Set<GroupMem> groups;
 	public Long getId() {
 		return id;
