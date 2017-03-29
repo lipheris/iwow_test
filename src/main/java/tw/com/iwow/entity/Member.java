@@ -46,20 +46,25 @@ public class Member {
 	@Column(name = "ADDRESS")
 	private String address;
 	// private Blob photo;
+	/*
+	 * 以上傳者身分對Picture建立@OneToMany雙向關聯，Picture為主控方
+	 */
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = { CascadeType.MERGE,
 			CascadeType.REFRESH }, mappedBy = "uploader")
 	private Set<Picture> picUploads;
-	// @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade =
-	// CascadeType.ALL, mappedBy = "collector")
+	/*
+	 * 以收藏者身分對Picture建立@ManyToMany單向關聯
+	 */
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(	name = "PIC_COLLS", 
 				joinColumns = @JoinColumn(name = "COL_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
 	private Set<Picture> picColls;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
+	/*
+	 * 以下單者身分對Order建立@OneToMany雙向關聯
+	 */
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "orderMem")
 	private Set<Order> orders;
-	// private Collection<? extends GrantedAuthority> authorities;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<MemRole> memRoles;
