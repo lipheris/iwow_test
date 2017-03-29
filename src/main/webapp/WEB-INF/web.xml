@@ -3,13 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-	<display-name>iwowwow</display-name>
-	<resource-ref>
-		<description>SQLServer DB Connection</description>
-		<res-ref-name>java/EEIT92</res-ref-name>
-		<res-type>javax.sql.DataSource</res-type>
-		<res-auth>Container</res-auth>
-	</resource-ref>
+	<display-name>iwowwow</display-name>	
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
