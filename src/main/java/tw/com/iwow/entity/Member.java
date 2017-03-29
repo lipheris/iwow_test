@@ -3,7 +3,6 @@ package tw.com.iwow.entity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -81,8 +80,11 @@ public class Member {
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "receiver")
 	@JoinColumn(name = "REC_ID", referencedColumnName = "ID")
 	private Set<Donation> recDonations;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "member")
-	private Set<GroupMem> groups;
+	/*
+	 * 對Group建立@ManyToMany，主控方為Group
+	 */
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
+	private Set<Group> groups;
 	public Long getId() {
 		return id;
 	}
@@ -173,10 +175,10 @@ public class Member {
 	public void setRecDonations(Set<Donation> recDonations) {
 		this.recDonations = recDonations;
 	}
-	public Set<GroupMem> getGroups() {
+	public Set<Group> getGroups() {
 		return groups;
 	}
-	public void setGroups(Set<GroupMem> groups) {
+	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
 }

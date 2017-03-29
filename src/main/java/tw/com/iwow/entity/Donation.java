@@ -3,8 +3,10 @@ package tw.com.iwow.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DONATION")
+@Table(name = "DONATIONS")
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +23,10 @@ public class Donation {
 	private Long id; // 此id為查詢各donate 紀錄
 	@Column(name = "TIME")
 	private LocalDateTime time; // donate time
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "DONOR_ID") // donate的人id
 	private Member donor;
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@Column(name = "REC_ID")
 	private Member receiver; // 接受donate memberid
 	@Column(name = "AMOUNT")
