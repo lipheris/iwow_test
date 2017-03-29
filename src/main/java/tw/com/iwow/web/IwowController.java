@@ -26,4 +26,9 @@ public class IwowController {
 	public String index_userPage(){
 		return "iwow/index_user";
 	}
+	
+	@RequestMapping(value="/iwow/user")
+	public String userPage(){
+		return "iwow/user";
+	}
  }
