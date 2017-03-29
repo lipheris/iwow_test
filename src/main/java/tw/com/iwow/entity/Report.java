@@ -2,6 +2,7 @@ package tw.com.iwow.entity;
 
 import java.sql.Clob;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,61 +20,48 @@ import javax.persistence.Table;
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
-	private Clob descript;// 檢舉敘述
+	@Column(name = "DESC")
+	private Clob desc;// 檢舉敘述
+	@Column(name = "DATE")
 	private LocalDateTime date;
-
+	@Column(name = "STATE")
 	// state 為區分report 狀態為處理/未處理
 	private Boolean state;
-//	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-//	@Column(nullable = false)
-//	@JoinColumn(name = "PIC_ID")
-//	private Picture picture;
-
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(	name = "REP_PICS", 
+				joinColumns = @JoinColumn(name = "REP_ID", referencedColumnName = "ID"), 
+				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
+	private Set<Picture> pictures;
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Clob getDescript() {
-		return descript;
+	public Clob getDesc() {
+		return desc;
 	}
-
-	public void setDescript(Clob descript) {
-		this.descript = descript;
+	public void setDesc(Clob desc) {
+		this.desc = desc;
 	}
-
 	public LocalDateTime getDate() {
 		return date;
 	}
-
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
-
 	public Boolean getState() {
 		return state;
 	}
-
 	public void setState(Boolean state) {
 		this.state = state;
 	}
-
-//	public Picture getPicture() {
-//		return picture;
-//	}
-//
-//	public void setPicture(Picture picture) {
-//		this.picture = picture;
-//	}
-
-//	@Override
-//	public String toString() {
-//		return "Report [id=" + id + ", descript=" + descript + ", date=" + date + ", state=" + state + ", picture="
-//				+ picture.getId().toString() + " " + picture.getName() + "]";
-//	}
-
+	public Set<Picture> getPictures() {
+		return pictures;
+	}
+	public void setPictures(Set<Picture> pictures) {
+		this.pictures = pictures;
+	}
 }

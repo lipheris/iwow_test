@@ -15,14 +15,18 @@ import javax.persistence.Table;
 public class Spec {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
+	@Column(name = "ID")
 	private Long id;
-	private Integer size;//每張圖之解析度
+	@Column(name = "SIZE")
+	private Integer size;// 每張圖之解析度
 	// use enums?
-	private BigDecimal price;//單圖對應各種解析度之定價
+	@Column(name = "PRICE")
+	private BigDecimal price;// 單圖對應各種解析度之定價
+	@Column(name = "PIC_ID")
 	private Long picId;
-	@Column(name = "file_s")//database file 欄位好像不可使用file 故對應為file_s
-	private Blob file;	
+	@Column(name = "FILE_S") // database file 欄位好像不可使用file 故對應為file_s
+	private Blob file;
+
 	public Long getId() {
 		return id;
 	}

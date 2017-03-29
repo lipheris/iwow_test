@@ -2,6 +2,8 @@ package tw.com.iwow.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,8 +12,11 @@ import javax.persistence.Table;
 // Stats 為針對每張圖之統計資料 ,如購買明細/每月銷售額
 public class Stats {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
+	@Column(name = "PIC_ID")
+	private Long picId;
 	@Column(name = "SAL_TOTAL")
 	private Double salesTotal;// salesTotal 為針對每張圖之總銷售額
 	@Column(name = "Q_SAL_TOTAL")
@@ -20,21 +25,35 @@ public class Stats {
 	// private Double salesMonthly;
 	// @Column(name="SAL_WEEKLY")
 	// private Double salesWeekly;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Long getPicId() {
+		return picId;
+	}
+
+	public void setPicId(Long picId) {
+		this.picId = picId;
+	}
+
 	public Double getSalesTotal() {
 		return salesTotal;
 	}
+
 	public void setSalesTotal(Double salesTotal) {
 		this.salesTotal = salesTotal;
 	}
+
 	public Double getQuaSalesTotal() {
 		return quaSalesTotal;
 	}
+
 	public void setQuaSalesTotal(Double quaSalesTotal) {
 		this.quaSalesTotal = quaSalesTotal;
 	}
