@@ -17,10 +17,10 @@ public class IwowController {
 		return "iwow/picture";
 	}
 	
-//	@RequestMapping(value="/login")
-//	public String loginPage(){
-//		return "iwow/login";
-//	}
+	@RequestMapping(value="/iwow/login")
+	public String loginPage(){
+		return "iwow/index_user";
+	}
 	
 	@RequestMapping(value="/iwow/index_user")
 	public String index_userPage(){

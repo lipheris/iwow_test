@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tw.com.iwow.dao.MemberDao;
 import tw.com.iwow.entity.Member;
 
-@Service("memberService")
+@Service
 public class MemberService {
 	
 	@Autowired

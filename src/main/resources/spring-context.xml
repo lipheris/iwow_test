@@ -4,14 +4,20 @@
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<!-- @Component，@Repository，@Service，@Controller 自動掃描，並添加到bean工廠中去-->
+	<!--<context:annotation-config/>  可被context:component-scan取代-->
 	
-	<context:annotation-config/>
-	<context:component-scan base-package="tw.com.iwow" />
-	<jpa:repositories base-package="tw.com.iwow.dao" /> 
+	<!-- 用annotation 自動註冊bean並保證@Required,@Autowired被注入 -->
+	<context:component-scan base-package="tw.com.iwow.service" />
+	<jpa:repositories base-package="tw.com.iwow.dao" />
+	<!-- @EnableTransactionManagement annotation to be used in on @Configuration -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>   
 	
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -27,6 +33,7 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<!-- @Entity scan -->
 		<property name="packagesToScan" value="tw.com.iwow.entity,org.springframework.data.jpa.convert.threeten" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
