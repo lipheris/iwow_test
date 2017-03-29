@@ -22,8 +22,8 @@ public class Tag {
 	private String name;
 	@Column(name = "TYPE_ID")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
-	@Column(name = "DESC")
-	private Clob desc;// 針對tag新增時的說明
+	@Column(name = "DSC")
+	private Clob dsc;// 針對tag新增時的說明
 	@ManyToMany(mappedBy = "tags")
 	private Set<Picture> Pictures;
 
@@ -51,12 +51,12 @@ public class Tag {
 		this.typeId = typeId;
 	}
 
-	public Clob getDesc() {
-		return desc;
+	public Clob getDsc() {
+		return dsc;
 	}
 
-	public void setDesc(Clob desc) {
-		this.desc = desc;
+	public void setDsc(Clob dsc) {
+		this.dsc = dsc;
 	}
 
 	public Set<Picture> getPictures() {

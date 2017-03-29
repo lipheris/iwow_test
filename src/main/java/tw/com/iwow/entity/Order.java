@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,8 +24,8 @@ public class Order {
 	private Long id;
 	@Column(name = "D_UPDATE")
 	private LocalDateTime update;
-	@Column(name = "DESC")
-	private Clob desc;// 針對order 補充說明
+	@Column(name = "DSC")
+	private Clob dsc;// 針對order 補充說明
 	@Column(name = "MEM_ID")
 	private Long memId; // 說明下訂人員
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -50,12 +49,12 @@ public class Order {
 		this.update = update;
 	}
 
-	public Clob getDesc() {
-		return desc;
+	public Clob getDsc() {
+		return dsc;
 	}
 
-	public void setDesc(Clob desc) {
-		this.desc = desc;
+	public void setDsc(Clob dsc) {
+		this.dsc = dsc;
 	}
 
 	public Long getMemId() {
