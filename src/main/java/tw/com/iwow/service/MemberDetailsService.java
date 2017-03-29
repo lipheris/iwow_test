@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import tw.com.iwow.entity.MemRole;
 import tw.com.iwow.entity.Member;
+import tw.com.iwow.entity.Role;
 
 @Service
 public class MemberDetailsService implements UserDetailsService {
@@ -37,8 +37,8 @@ public class MemberDetailsService implements UserDetailsService {
 
 			try {
 				Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-				for (MemRole memRole : user.getMemRoles()) {
-					String auth = memRole.getRole().getAuthority();
+				for (Role role : user.getRoles()) {
+					String auth = role.getAuth();
 					if ("ROLE_USER".equals(auth))
 						authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 					else if ("ROLE_ADMIN".equals(auth))

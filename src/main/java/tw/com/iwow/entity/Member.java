@@ -65,9 +65,14 @@ public class Member {
 	 */
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "orderMem")
 	private Set<Order> orders;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
-	private Set<MemRole> memRoles;
+	/*
+	 * 對角色身分table建立@ManytoMany單向關聯
+	 */
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable( name = "MEM_ROLES", 
+				joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), 
+				inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
+	private Set<Role> roles;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "DONOR_ID", referencedColumnName = "ID")
 	private Set<Donation> donations;
@@ -76,5 +81,100 @@ public class Member {
 	private Set<Donation> recDonations;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
 	private Set<GroupMem> groups;
-
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public Gender getGender() {
+		return gender;
+	}
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+	public LocalDateTime getBirth() {
+		return birth;
+	}
+	public void setBirth(LocalDateTime birth) {
+		this.birth = birth;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Set<Picture> getPicUploads() {
+		return picUploads;
+	}
+	public void setPicUploads(Set<Picture> picUploads) {
+		this.picUploads = picUploads;
+	}
+	public Set<Picture> getPicColls() {
+		return picColls;
+	}
+	public void setPicColls(Set<Picture> picColls) {
+		this.picColls = picColls;
+	}
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	public Set<Donation> getDonations() {
+		return donations;
+	}
+	public void setDonations(Set<Donation> donations) {
+		this.donations = donations;
+	}
+	public Set<Donation> getRecDonations() {
+		return recDonations;
+	}
+	public void setRecDonations(Set<Donation> recDonations) {
+		this.recDonations = recDonations;
+	}
+	public Set<GroupMem> getGroups() {
+		return groups;
+	}
+	public void setGroups(Set<GroupMem> groups) {
+		this.groups = groups;
+	}
 }
