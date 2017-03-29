@@ -16,7 +16,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,10 +37,8 @@ public class Picture {
 	private String name;
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
-	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = { CascadeType.MERGE,
-			CascadeType.REFRESH })
-	@JoinColumn(name = "UP_ID")
-	private Member uploader;
+	@Column(name = "UPLOADER_ID")
+	private Long uploaderId;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
@@ -61,63 +58,83 @@ public class Picture {
 				joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Assort getAssort() {
 		return assort;
 	}
+
 	public void setAssort(Assort assort) {
 		this.assort = assort;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public LocalDateTime getUpdate() {
 		return update;
 	}
+
 	public void setUpdate(LocalDateTime update) {
 		this.update = update;
 	}
-	public Member getUploader() {
-		return uploader;
+
+	public Long getUploaderId() {
+		return uploaderId;
 	}
-	public void setUploader(Member uploader) {
-		this.uploader = uploader;
+
+	public void setUploaderId(Long uploaderId) {
+		this.uploaderId = uploaderId;
 	}
+
 	public Visibility getVisibility() {
 		return visibility;
 	}
+
 	public void setVisibility(Visibility visibility) {
 		this.visibility = visibility;
 	}
+
 	public Blob getFile() {
 		return file;
 	}
+
 	public void setFile(Blob file) {
 		this.file = file;
 	}
+
 	public Stats getStats() {
 		return stats;
 	}
+
 	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
+
 	public Set<Spec> getSpecs() {
 		return specs;
 	}
+
 	public void setSpecs(Set<Spec> specs) {
 		this.specs = specs;
 	}
+
 	public Set<Tag> getTags() {
 		return tags;
 	}
+
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}

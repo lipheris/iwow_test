@@ -3,6 +3,7 @@ package tw.com.iwow.entity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,9 +47,10 @@ public class Member {
 	private String address;
 	// private Blob photo;
 	/*
-	 * 以上傳者身分對Picture建立@OneToMany雙向關聯，Picture為主控方
+	 * 以上傳者身分對Picture建立@OneToMany單向關聯
 	 */
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "uploader")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
 	private Set<Picture> picUploads;
 	/*
 	 * 以收藏者身分對Picture建立@ManyToMany單向關聯
