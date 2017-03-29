@@ -3,14 +3,12 @@ package tw.com.iwow.entity;
 import java.sql.Clob;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,14 +16,16 @@ import javax.persistence.Table;
 public class Tag {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
+	@Column(name = "ID")
 	private Long id;
-	private String name;	
-	@Column(name = "type_id")
+	@Column(name = "NAME")
+	private String name;
+	@Column(name = "TYPE_ID")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
-	private Clob description;//針對tag新增時的說明 
-	@OneToMany(orphanRemoval=true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tag")
-	private Set<TagDetail> tagDetail;
+	@Column(name = "DESC")
+	private Clob desc;// 針對tag新增時的說明
+	@ManyToMany(mappedBy = "tags")
+	private Set<Picture> Pictures;
 
 	public Long getId() {
 		return id;
@@ -51,20 +51,20 @@ public class Tag {
 		this.typeId = typeId;
 	}
 
-	public Clob getDescription() {
-		return description;
+	public Clob getDesc() {
+		return desc;
 	}
 
-	public void setDescription(Clob description) {
-		this.description = description;
+	public void setDesc(Clob desc) {
+		this.desc = desc;
 	}
 
-	public Set<TagDetail> getTagDetail() {
-		return tagDetail;
+	public Set<Picture> getPictures() {
+		return Pictures;
 	}
 
-	public void setTagDetail(Set<TagDetail> tagDetail) {
-		this.tagDetail = tagDetail;
+	public void setPictures(Set<Picture> pictures) {
+		Pictures = pictures;
 	}
 
 }

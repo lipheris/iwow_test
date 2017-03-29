@@ -6,113 +6,119 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.com.iwow.entity.enums.Assort;
+import tw.com.iwow.entity.enums.Visibility;
 
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(unique = true, nullable = false)
+	@Column(name = "ID")
 	private Long id;
 	// assort 為分類普通/ 18禁圖片
-	private Integer assort;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "ASSORT")
+	private Assort assort;
+	@Column(name = "NAME")
 	private String name;
-	@Column(name = "date_update") // database column 好像禁用update 所以使用date_update
+	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = { CascadeType.MERGE,
+			CascadeType.REFRESH })
 	@JoinColumn(name = "UP_ID")
 	private Member uploader;
+	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
-	private boolean visibility;// visibility 為區分公開/ 私人
-	@Column(name = "file_p")
+	private Visibility visibility;// visibility 為區分公開/ 私人
+	@Column(name = "FILE_P")
 	private Blob file;
-	@Embedded
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Stats stats;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "picture")
-	private Set<TagDetail> tagDetails;
-
+	/*
+	 * 與Tag建立雙向@ManyToMany，Picture為主控方
+	 */
+	@ManyToMany
+	@JoinTable(	name = "TAG_DETAILS", 
+				joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), 
+				inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
+	private Set<Tag> tags;
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Integer getAssort() {
+	public Assort getAssort() {
 		return assort;
 	}
-
-	public void setAssort(Integer assort) {
+	public void setAssort(Assort assort) {
 		this.assort = assort;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public LocalDateTime getUpdate() {
 		return update;
 	}
-
 	public void setUpdate(LocalDateTime update) {
 		this.update = update;
 	}
-
-	public boolean isVisibility() {
+	public Member getUploader() {
+		return uploader;
+	}
+	public void setUploader(Member uploader) {
+		this.uploader = uploader;
+	}
+	public Visibility getVisibility() {
 		return visibility;
 	}
-
-	public void setVisibility(boolean visibility) {
+	public void setVisibility(Visibility visibility) {
 		this.visibility = visibility;
 	}
-
 	public Blob getFile() {
 		return file;
 	}
-
 	public void setFile(Blob file) {
 		this.file = file;
 	}
-
 	public Stats getStats() {
 		return stats;
 	}
-
 	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
-
 	public Set<Spec> getSpecs() {
 		return specs;
 	}
-
 	public void setSpecs(Set<Spec> specs) {
 		this.specs = specs;
 	}
-
-	public Set<TagDetail> getTagDetails() {
-		return tagDetails;
+	public Set<Tag> getTags() {
+		return tags;
 	}
-
-	public void setTagDetails(Set<TagDetail> tagDetails) {
-		this.tagDetails = tagDetails;
+	public void setTags(Set<Tag> tags) {
+		this.tags = tags;
 	}
 }
