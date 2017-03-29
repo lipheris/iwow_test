@@ -59,9 +59,10 @@ public class Member {
 				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
 	private Set<Picture> picColls;
 	/*
-	 * 以下單者身分對Order建立@OneToMany雙向關聯
+	 * 以下單者身分對Order建立@OneToMany單向關聯
 	 */
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "orderMem")
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<Order> orders;
 	/*
 	 * 對角色身分table建立@ManytoMany單向關聯
@@ -85,99 +86,131 @@ public class Member {
 	 */
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
 	private Set<Group> groups;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 	public Gender getGender() {
 		return gender;
 	}
+
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
+
 	public LocalDateTime getBirth() {
 		return birth;
 	}
+
 	public void setBirth(LocalDateTime birth) {
 		this.birth = birth;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public Set<Picture> getPicUploads() {
 		return picUploads;
 	}
+
 	public void setPicUploads(Set<Picture> picUploads) {
 		this.picUploads = picUploads;
 	}
+
 	public Set<Picture> getPicColls() {
 		return picColls;
 	}
+
 	public void setPicColls(Set<Picture> picColls) {
 		this.picColls = picColls;
 	}
+
 	public Set<Order> getOrders() {
 		return orders;
 	}
+
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
 	}
+
 	public Set<Role> getRoles() {
 		return roles;
 	}
+
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
 	public Set<Donation> getDonations() {
 		return donations;
 	}
+
 	public void setDonations(Set<Donation> donations) {
 		this.donations = donations;
 	}
+
 	public Set<Donation> getRecDonations() {
 		return recDonations;
 	}
+
 	public void setRecDonations(Set<Donation> recDonations) {
 		this.recDonations = recDonations;
 	}
+
 	public Set<Group> getGroups() {
 		return groups;
 	}
+
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
