@@ -46,7 +46,7 @@ public class Picture {
 	private Blob file;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
-	private Stats stats;
+	private Set<Stats> stats;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
@@ -54,9 +54,7 @@ public class Picture {
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
 	@ManyToMany
-	@JoinTable(	name = "TAG_DETAILS", 
-				joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), 
-				inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags;
 
 	public Long getId() {
@@ -115,11 +113,11 @@ public class Picture {
 		this.file = file;
 	}
 
-	public Stats getStats() {
+	public Set<Stats> getStats() {
 		return stats;
 	}
 
-	public void setStats(Stats stats) {
+	public void setStats(Set<Stats> stats) {
 		this.stats = stats;
 	}
 

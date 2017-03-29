@@ -78,10 +78,8 @@ public class Member {
 	 * 斗內雙方與斗內資料建立@OneToMany關聯,主控方在Donation
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donor")
-	@JoinColumn(name = "DONOR_ID", referencedColumnName = "ID")
 	private Set<Donation> donations;
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "receiver")
-	@JoinColumn(name = "REC_ID", referencedColumnName = "ID")
 	private Set<Donation> recDonations;
 	/*
 	 * 對Group建立@ManyToMany，主控方為Group

@@ -27,7 +27,7 @@ public class Donation {
 	@JoinColumn(name = "DONOR_ID") // donate的人id
 	private Member donor;
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@Column(name = "REC_ID")
+	@JoinColumn(name = "REC_ID")
 	private Member receiver; // 接受donate memberid
 	@Column(name = "AMOUNT")
 	private BigDecimal amount; // 單次donate 金額
