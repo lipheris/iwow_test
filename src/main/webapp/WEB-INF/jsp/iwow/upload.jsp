@@ -48,9 +48,10 @@ legend{
 	font-family:Courier;
 }
 
-/* ¿ï¾ÜÀÉ®× */
-.upload_file_btn{
-	
+/* ¶¡¶Z */
+div{
+	margin:5px;
+	margin-bottom:10px;
 }
 
 
