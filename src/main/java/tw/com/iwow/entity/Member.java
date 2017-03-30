@@ -6,8 +6,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import tw.com.iwow.entity.enums.Gender;
-
 @Entity
 @Table(name = "MEMBERS")
-
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,9 +31,9 @@ public class Member {
 	private String name;
 	@Column(name = "NICKNAME")
 	private String nickname;
-	@Enumerated(EnumType.STRING)
-	@Column(name = "GENDER")
-	private Gender gender;
+//	@Enumerated(EnumType.STRING)
+//	@Column(name = "GENDER")
+//	private Gender gender;
 	@Column(name = "BIRTH")
 	private LocalDateTime birth;
 	@Column(name = "PHONE")
@@ -69,11 +64,11 @@ public class Member {
 	/*
 	 * 對角色身分table建立@ManytoMany單向關聯
 	 */
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable( name = "MEM_ROLES", 
 				joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
-	private Set<Role> roles;
+	private Set<Role> roles ;
 	/*
 	 * 斗內雙方與斗內資料建立@OneToMany關聯,主控方在Donation
 	 */
@@ -127,13 +122,13 @@ public class Member {
 		this.nickname = nickname;
 	}
 
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
+//	public Gender getGender() {
+//		return gender;
+//	}
+//
+//	public void setGender(Gender gender) {
+//		this.gender = gender;
+//	}
 
 	public LocalDateTime getBirth() {
 		return birth;
@@ -214,4 +209,9 @@ public class Member {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+
+
+
+	
+	
 }
