@@ -24,7 +24,7 @@ public class PictureRESTful {
 		return pictureService.findAll();
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value="{id}")
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value="/{id}")
 	public Picture findPicture(@PathVariable(value="id") Long id){
 		return pictureService.findById(id);
 	}
@@ -39,7 +39,7 @@ public class PictureRESTful {
 		return pictureService.update(picture);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="{id}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
 	public void deletePicture(@PathVariable("id") Long id){
 		pictureService.delete(id);
 	}

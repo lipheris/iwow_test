@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- @Component，@Repository，@Service，@Controller 自動掃描，並添加到bean工廠中去-->
-	<!--<context:annotation-config/>  可被context:component-scan取代-->
+	<context:annotation-config/>  <!--可被context:component-scan取代-->
 	
 	<!-- 用annotation 自動註冊bean並保證@Required,@Autowired被注入 -->
 	<context:component-scan base-package="tw.com.iwow.service" />
@@ -20,7 +20,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager"/>   
 	
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<property name="url"
@@ -52,7 +52,7 @@
 	</bean>										   
 	
  	<bean id="iwowController" class="tw.com.iwow.web.IwowController"/>
-
-
+	<bean id="pictureRESTful" class="tw.com.iwow.web.PictureRESTful"/>
+	<bean id="pictureController" class="tw.com.iwow.web.PictureController"/>
 
 </beans>
