@@ -1,5 +1,8 @@
 package tw.com.iwow.web;
 
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +26,5 @@ public class PictureController {
 		model.addAttribute("pictureList", pictureList);
 		return "iwow/list";
 	}
-		
+			
 }

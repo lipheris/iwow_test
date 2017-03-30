@@ -64,7 +64,8 @@ th{
 				<td>${list.update}</td>
 				<td>${list.uploaderId}</td>
 				<td>${list.visibility}</td>
-				<td>${list.file}</td>
+<%-- 				<td><img src="${list.file}"></td> --%>
+				<td><img src="${list.file}"></td>
 				<td>${list.stats}</td>
 				<td>${list.specs}</td>
 				<td>
