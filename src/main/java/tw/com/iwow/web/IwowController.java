@@ -31,4 +31,14 @@ public class IwowController {
 	public String userPage(){
 		return "iwow/user";
 	}
+	
+	@RequestMapping(value="/iwow/search")
+	public String searchPage(){
+		return "iwow/search";
+	}
+	
+	@RequestMapping(value="/iwow/upload")
+	public String uploadPage(){
+		return "iwow/upload";
+	}
  }
