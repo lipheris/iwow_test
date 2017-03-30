@@ -4,25 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>upload</title>
+<title>report</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- jQuery datepicker必要的CSS 及JS -->
- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script>
-
-// jQuery datepicker
-$( function() {
-    $( "#datepicker" ).datepicker({ minDate: -0, maxDate: "+1Y" });
-  } );
-  
-</script>
 
 <style>
 /* banner */
@@ -31,12 +18,20 @@ $( function() {
 	margin-top: 7px;
 }
 
-/* 上傳頁面 */
-.upload_all{
+/* 檢舉頁面 */
+.report_all{
 	width:1000px;
 	margin:0 auto;
 }
 
+/* 左邊被檢舉的圖 */
+.report_img{
+	float:left;
+	margin-top:50px;
+	margin-right:40px;
+}
+
+/* 右邊表單 */
 /* fieldset */
 fieldset{
 	font-size:25px;
@@ -49,11 +44,15 @@ legend{
 }
 
 /* 間距 */
-.upload_spac{
+.report_spac{
 	margin:5px;
 	margin-bottom:10px;
 }
 
+/* 限制textarea的大小始使用者無法自由縮放 */
+textarea{
+	resize: none;
+}
 
 </style>
 </head>
@@ -111,97 +110,51 @@ legend{
 	</div>
 	<!-- /.container-fluid --> </nav>
 	
-	<!-- 上傳頁面 -->
-	<div class="upload_all">
+	<!-- 檢舉 -->
+	<div class="report_all">
 	
+	<!-- 被檢舉的圖 -->
+	<div class="report_all_left">
+	<img class="report_img" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">		
+	</div>
+	
+	<div class="report_all_right">
 	<fieldset>
-				<legend>Upload</legend>
+				<legend>Report</legend>
 	
 	<form action="#" method="post" enctype="multipart/form-data">
-	
-	<!-- 選擇檔案 -->
-	<div class="upload_spac">	
-		<input class="upload_file_btn" type="file" name="picture" id="picture" accept="image/*">
+		
+	<!-- 檢舉原因 -->
+	<div class="report_spac">
+		<label>檢舉原因：</label>
+	<div class="report_spac">	
+		<input type="radio" name="reason" value="r18" id="r18"><label for="r18">十八禁卻未標籤</label>
+	</div>
+	<div class="report_spac">	
+		<input type="radio" name="reason" value="portrait" id="portrait"><label for="portrait">違反肖像權</label>
+	</div>
+	<div class="report_spac">	
+		<input type="radio" name="reason" value="copyright" id="copyright"><label for="copyright">違反著作權法</label>
+	</div>
 	</div>
 	
-	<!-- 題目、說明文 -->
-	<div class="upload_spac">
-		<label for="title">標題：</label>
-		<input type="text" id="title" name="title" value=" ">
+	<!-- 其他原因 -->
+	<div class="report_spac">
+		<label for="other">其他：</label>
 	</div>
-	
-	<div class="upload_spac">
-		<label for="description">描述：</label>
-		<input type="text" id="description" name="description" value=" ">
-	</div>
-	
-	<!-- TAG -->
-	<div class="upload_spac">
-		<label for="tag">Tag：</label>
-		<input type="text" id="tag" name="tag" value=" ">
-	</div>
-	<div class="upload_spac">
-		<input type="checkbox" name="keytag" value="keytag" id="keytag"><label for="keytag">鎖定TAG禁止其他用戶編輯</label>
-	</div>
-	
-	<!-- 瀏覽限制 -->
-	<div class="upload_spac">
-		<label>瀏覽限制：</label>
-		<input type="radio" name="restriction" value="all" id="all"><label for="all">全年齡</label>
-		<input type="radio" name="restriction" value="r18" id="r18"><label for="r18">18禁</label>
-	</div>
-	
-	<!-- 隱私 -->
-	<div class="upload_spac">
-		<label>隱私：</label>
-		<input type="radio" name="privacy" value="public" id="public"><label for="public">所有人</label>
-		<input type="radio" name="privacy" value="friends" id="friends"><label for="friends">朋友</label>
-		<input type="radio" name="privacy" value="private" id="private"><label for="private">私人</label>
-	</div>
-	
-	<!-- 預約排程投稿 -->
-	<div class="upload_spac">
-		<label>預約投稿：</label>
-		<div>
-		<input type="checkbox" name="reservation" value="reservation" id="reservation">
-		<input type="text" id="datepicker">
-		</div>
-	</div>
-	
-	<!-- 浮水印 -->
-	<div class="upload_spac">
-		<label for="watermarks">浮水印</label>
-		<div>
-		<input type="checkbox" name="watermarks" value="watermarks" id="watermarks">
-		<input type="text" id="watermarks" name="watermarks" placeholder="sample">
-		</div>
-	</div>
-	
-	<!-- QR Code -->
-	<div class="upload_spac">
-		<label for="watermarks">QR Code</label>
-		<div>
-		<input type="checkbox" name="qr" value="qr" id="qr">
-		</div>
-	</div>
-	
-	<!-- 是否販售 -->
-	
-	<div class="upload_spac">
-		<label>是否販售</label>
-		<input type="radio" name="sale" value="yes" id="yes"><label for="yes">是</label>
-		<input type="radio" name="sale" value="no" id="no"><label for="no">否</label>
+	<div class="report_spac">
+		<textarea  rows="6" cols="50" id="other" name="other" placeholder="請輸入檢舉原因"></textarea>
 	</div>
 	
 	<!-- 送出/清除 -->
-	<div class="upload_spac">
-		<input type="submit" value="PUBLISH">
-		<input type="reset" value="CLEAN">
+	<div class="report_spac">
+		<input type="submit" value="送出">
 	</div>
 	
 	</fieldset>
 	
 	</form>
+	</div>
 	
 	</div>
 </body>

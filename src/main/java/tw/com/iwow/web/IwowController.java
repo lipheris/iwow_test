@@ -41,4 +41,9 @@ public class IwowController {
 	public String uploadPage(){
 		return "iwow/upload";
 	}
+	
+	@RequestMapping(value="/iwow/report")
+	public String reportPage(){
+		return "iwow/report";
+	}
  }
