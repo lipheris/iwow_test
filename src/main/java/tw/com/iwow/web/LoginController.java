@@ -29,7 +29,7 @@ public class LoginController {
 			@RequestParam(value="logout",required=false) String logout
 			) {
 		if(error!=null){
-			req.setAttribute("error", "pass wrong");
+			req.setAttribute("error", "password wrong");
 		}
 		if(logout!=null){
 			req.setAttribute("msg", "logout succeed");

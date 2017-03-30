@@ -1,20 +1,40 @@
 package tw.com.iwow.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import tw.com.iwow.dao.MemberDao;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/spring-context.xml"})
 public class MemberServiceTest {
+//	@Autowired
+//	private MemberService memberService;
 	
-
-	@Test
-	public void testFindById() {
-		fail("Not yet implemented");
-	}
+	@Autowired
+	private MemberDao memberDao;
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
+		try {
+			
+			memberDao.findAll();
+			//memberService.findById(new Long(1));
+			//memberService.findByMember("QQ");
+
+		} catch (Exception e) {		
+			fail("Not yet implemented");
+			
+		}
+	
 	}
 
 }
+
+
+

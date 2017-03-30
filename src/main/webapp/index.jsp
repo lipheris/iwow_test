@@ -1,1 +1,1 @@
-<script>document.location.href='${pageContext.servletContext.contextPath}/iwow/index';</script>
+<script>document.location.href='${pageContext.servletContext.contextPath}/iwow/login';</script>

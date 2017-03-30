@@ -3,25 +3,34 @@ package tw.com.iwow.entity;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DONATION")
+@Table(name = "DONATIONS")
 public class Donation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id; // 此id為查詢各donate 紀錄
-	private LocalDateTime time; //donate time 
-	@Column(name = "donor_id")	//donate的人id
-	private Long donorId;
-	@Column(name = "rec_id")
-	private Long receiverId; //接受donate memberid
-	private BigDecimal amount; //單次donate 金額 
+	@Column(name = "TIME")
+	private LocalDateTime time; // donate time
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name = "DONOR_ID") // donate的人id
+	private Member donor;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "REC_ID")
+	private Member receiver; // 接受donate memberid
+	@Column(name = "AMOUNT")
+	private BigDecimal amount; // 單次donate 金額
 
 	public Long getId() {
 		return id;
@@ -39,20 +48,20 @@ public class Donation {
 		this.time = time;
 	}
 
-	public Long getDonorId() {
-		return donorId;
+	public Member getDonor() {
+		return donor;
 	}
 
-	public void setDonorId(Long donorId) {
-		this.donorId = donorId;
+	public void setDonor(Member donor) {
+		this.donor = donor;
 	}
 
-	public Long getReceiverId() {
-		return receiverId;
+	public Member getReceiver() {
+		return receiver;
 	}
 
-	public void setReceiverId(Long receiverId) {
-		this.receiverId = receiverId;
+	public void setReceiver(Member receiver) {
+		this.receiver = receiver;
 	}
 
 	public BigDecimal getAmount() {
@@ -62,5 +71,4 @@ public class Donation {
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
-
 }

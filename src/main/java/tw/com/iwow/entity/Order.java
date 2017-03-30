@@ -14,21 +14,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
-@Table(name="ORDERS")
+@Table(name = "ORDERS")
 public class Order {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
+	@Column(name = "D_UPDATE")
 	private LocalDateTime update;
-	private Clob description;// 針對order 補充說明
-	@Column(name="mem_id")
-	private Long memberId; //說明下訂人員
+	@Column(name = "DSC")
+	private Clob dsc;// 針對order 補充說明
+	@Column(name = "MEM_ID")
+	private Long memId; // 說明下訂人員
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ORDER_ID", referencedColumnName="ID")
+	@JoinColumn(name = "ORDER_ID", referencedColumnName = "ID")
 	private Set<OrderDetail> orderDetails;
-	//add field total price from orderDetails?
 
+	// add field total price from orderDetails?
 	public Long getId() {
 		return id;
 	}
@@ -45,19 +49,28 @@ public class Order {
 		this.update = update;
 	}
 
-	public Clob getDescription() {
-		return description;
+	public Clob getDsc() {
+		return dsc;
 	}
 
-	public void setDescription(Clob description) {
-		this.description = description;
+	public void setDsc(Clob dsc) {
+		this.dsc = dsc;
 	}
 
-//	public Set<OrderDetail> getOrderDetails() {
-//		return orderDetails;
-//	}
-//
-//	public void setOrderDetails(Set<OrderDetail> orderDetails) {
-//		this.orderDetails = orderDetails;
-//	}
+	public Long getMemId() {
+		return memId;
+	}
+
+	public void setMemId(Long memId) {
+		this.memId = memId;
+	}
+
+	public Set<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
 }
