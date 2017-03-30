@@ -1,5 +1,6 @@
 package tw.com.iwow.service;
 
+import java.sql.Blob;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,4 +35,7 @@ public class PictureService {
 		return pictureDao.findAll();
 	}
 
+	public Picture getByFile(Blob file){
+		return pictureDao.findByFile(file);
+	}
 }
