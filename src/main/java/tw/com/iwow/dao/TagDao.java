@@ -7,5 +7,6 @@ import tw.com.iwow.entity.Tag;
 
 @Repository
 public interface TagDao extends JpaRepository<Tag, Long> {
-	public Tag findByName(String name);
+//	@Transactional
+//	public Tag findByName(String name);
 }
