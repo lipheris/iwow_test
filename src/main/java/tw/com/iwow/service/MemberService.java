@@ -26,7 +26,7 @@ public class MemberService {
 	public Member insert(Member member) {
 		return memberDao.save(member);
 	}
-
+	@Transactional
 	public Member update(Member member) {
 		return memberDao.save(member);
 	}

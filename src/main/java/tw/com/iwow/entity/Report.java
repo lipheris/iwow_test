@@ -22,7 +22,7 @@ public class Report {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name = "DESC")
+	@Column(name = "DSC")
 	private Clob desc;// 檢舉敘述
 	@Column(name = "DATE")
 	private LocalDateTime date;
