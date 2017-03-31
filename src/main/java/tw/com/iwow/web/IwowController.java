@@ -51,4 +51,9 @@ public class IwowController {
 	public String signupPage(){
 		return "iwow/signup";
 	}
+	
+	@RequestMapping(value="/iwow/setting_profile")
+	public String setting_profilePage(){
+		return "iwow/setting_profile";
+	}
  }
