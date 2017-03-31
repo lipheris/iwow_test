@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,8 +20,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import tw.com.iwow.entity.enums.Assort;
-import tw.com.iwow.entity.enums.Visibility;
+import tw.com.iwow.enums.Assort;
+import tw.com.iwow.enums.Visibility;
+import tw.com.iwow.enums.converter.AssortConverter;
 
 @Entity
 @Table(name = "PICTURES")
@@ -30,7 +32,7 @@ public class Picture {
 	@Column(name = "ID")
 	private Long id;
 	// assort 為分類普通/ 18禁圖片
-	@Enumerated(EnumType.STRING)
+	@Convert(converter = AssortConverter.class)
 	@Column(name = "ASSORT")
 	private Assort assort;
 	@Column(name = "NAME")
