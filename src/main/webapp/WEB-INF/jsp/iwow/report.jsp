@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>report</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -18,24 +18,24 @@
 	margin-top: 7px;
 }
 
-/* ÀËÁ|­¶­± */
+/* æª¢èˆ‰é é¢ */
 .report_all{
 	width:1000px;
 	margin:0 auto;
 }
 
-/* ¥ªÃä³QÀËÁ|ªº¹Ï */
+/* å·¦é‚Šè¢«æª¢èˆ‰çš„åœ– */
 .report_img{
 	float:left;
 	margin-top:50px;
 	margin-right:40px;
 }
 
-/* ¥kÃäªí³æ */
+/* å³é‚Šè¡¨å–® */
 /* fieldset */
 fieldset{
 	font-size:25px;
-	font-family:Microsoft JhengHei; /* ·L³n¥¿¶ÂÅé */
+	font-family:Microsoft JhengHei; /* å¾®è»Ÿæ­£é»‘é«” */
 }
 
 legend{
@@ -43,13 +43,13 @@ legend{
 	font-family:Courier;
 }
 
-/* ¶¡¶Z */
+/* é–“è· */
 .report_spac{
 	margin:5px;
 	margin-bottom:10px;
 }
 
-/* ­­¨îtextareaªº¤j¤p©l¨Ï¥ÎªÌµLªk¦Û¥ÑÁY©ñ */
+/* é™åˆ¶textareaçš„å¤§å°å§‹ä½¿ç”¨è€…ç„¡æ³•è‡ªç”±ç¸®æ”¾ */
 textarea{
 	resize: none;
 }
@@ -110,10 +110,10 @@ textarea{
 	</div>
 	<!-- /.container-fluid --> </nav>
 	
-	<!-- ÀËÁ| -->
+	<!-- æª¢èˆ‰ -->
 	<div class="report_all">
 	
-	<!-- ³QÀËÁ|ªº¹Ï -->
+	<!-- è¢«æª¢èˆ‰çš„åœ– -->
 	<div class="report_all_left">
 	<img class="report_img" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">		
 	</div>
@@ -124,31 +124,31 @@ textarea{
 	
 	<form action="#" method="post" enctype="multipart/form-data">
 		
-	<!-- ÀËÁ|­ì¦] -->
+	<!-- æª¢èˆ‰åŸå›  -->
 	<div class="report_spac">
-		<label>ÀËÁ|­ì¦]¡G</label>
+		<label>æª¢èˆ‰åŸå› ï¼š</label>
 	<div class="report_spac">	
-		<input type="radio" name="reason" value="r18" id="r18"><label for="r18">¤Q¤K¸T«o¥¼¼ĞÅÒ</label>
+		<input type="radio" name="reason" value="r18" id="r18"><label for="r18">åå…«ç¦å»æœªæ¨™ç±¤</label>
 	</div>
 	<div class="report_spac">	
-		<input type="radio" name="reason" value="portrait" id="portrait"><label for="portrait">¹H¤Ï¨v¹³Åv</label>
+		<input type="radio" name="reason" value="portrait" id="portrait"><label for="portrait">é•åè‚–åƒæ¬Š</label>
 	</div>
 	<div class="report_spac">	
-		<input type="radio" name="reason" value="copyright" id="copyright"><label for="copyright">¹H¤ÏµÛ§@Åvªk</label>
+		<input type="radio" name="reason" value="copyright" id="copyright"><label for="copyright">é•åè‘—ä½œæ¬Šæ³•</label>
 	</div>
 	</div>
 	
-	<!-- ¨ä¥L­ì¦] -->
+	<!-- å…¶ä»–åŸå›  -->
 	<div class="report_spac">
-		<label for="other">¨ä¥L¡G</label>
+		<label for="other">å…¶ä»–ï¼š</label>
 	</div>
 	<div class="report_spac">
-		<textarea  rows="6" cols="50" id="other" name="other" placeholder="½Ğ¿é¤JÀËÁ|­ì¦]"></textarea>
+		<textarea  rows="6" cols="50" id="other" name="other" placeholder="è«‹è¼¸å…¥æª¢èˆ‰åŸå› "></textarea>
 	</div>
 	
-	<!-- °e¥X/²M°£ -->
+	<!-- é€å‡º/æ¸…é™¤ -->
 	<div class="report_spac">
-		<input type="submit" value="°e¥X">
+		<input type="submit" value="é€å‡º">
 	</div>
 	
 	</fieldset>

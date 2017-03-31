@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>upload</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- jQuery datepicker¥²­nªºCSS ¤ÎJS -->
+<!-- jQuery datepickerå¿…è¦çš„CSS åŠJS -->
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -31,7 +31,7 @@ $( function() {
 	margin-top: 7px;
 }
 
-/* ¤W¶Ç­¶­± */
+/* ä¸Šå‚³é é¢ */
 .upload_all{
 	width:1000px;
 	margin:0 auto;
@@ -40,7 +40,7 @@ $( function() {
 /* fieldset */
 fieldset{
 	font-size:25px;
-	font-family:Microsoft JhengHei; /* ·L³n¥¿¶ÂÅé */
+	font-family:Microsoft JhengHei; /* å¾®è»Ÿæ­£é»‘é«” */
 }
 
 legend{
@@ -48,7 +48,7 @@ legend{
 	font-family:Courier;
 }
 
-/* ¶¡¶Z */
+/* é–“è· */
 .upload_spac{
 	margin:5px;
 	margin-bottom:10px;
@@ -111,7 +111,7 @@ legend{
 	</div>
 	<!-- /.container-fluid --> </nav>
 	
-	<!-- ¤W¶Ç­¶­± -->
+	<!-- ä¸Šå‚³é é¢ -->
 	<div class="upload_all">
 	
 	<fieldset>
@@ -119,58 +119,58 @@ legend{
 	
 	<form action="#" method="post" enctype="multipart/form-data">
 	
-	<!-- ¿ï¾ÜÀÉ®× -->
+	<!-- é¸æ“‡æª”æ¡ˆ -->
 	<div class="upload_spac">	
 		<input class="upload_file_btn" type="file" name="picture" id="picture" accept="image/*">
 	</div>
 	
-	<!-- ÃD¥Ø¡B»¡©ú¤å -->
+	<!-- é¡Œç›®ã€èªªæ˜æ–‡ -->
 	<div class="upload_spac">
-		<label for="title">¼ĞÃD¡G</label>
+		<label for="title">æ¨™é¡Œï¼š</label>
 		<input type="text" id="title" name="title" value=" ">
 	</div>
 	
 	<div class="upload_spac">
-		<label for="description">´y­z¡G</label>
+		<label for="description">æè¿°ï¼š</label>
 		<input type="text" id="description" name="description" value=" ">
 	</div>
 	
 	<!-- TAG -->
 	<div class="upload_spac">
-		<label for="tag">Tag¡G</label>
+		<label for="tag">Tagï¼š</label>
 		<input type="text" id="tag" name="tag" value=" ">
 	</div>
 	<div class="upload_spac">
-		<input type="checkbox" name="keytag" value="keytag" id="keytag"><label for="keytag">Âê©wTAG¸T¤î¨ä¥L¥Î¤á½s¿è</label>
+		<input type="checkbox" name="keytag" value="keytag" id="keytag"><label for="keytag">é–å®šTAGç¦æ­¢å…¶ä»–ç”¨æˆ¶ç·¨è¼¯</label>
 	</div>
 	
-	<!-- ÂsÄı­­¨î -->
+	<!-- ç€è¦½é™åˆ¶ -->
 	<div class="upload_spac">
-		<label>ÂsÄı­­¨î¡G</label>
-		<input type="radio" name="restriction" value="all" id="all"><label for="all">¥ş¦~ÄÖ</label>
-		<input type="radio" name="restriction" value="r18" id="r18"><label for="r18">18¸T</label>
+		<label>ç€è¦½é™åˆ¶ï¼š</label>
+		<input type="radio" name="restriction" value="all" id="all"><label for="all">å…¨å¹´é½¡</label>
+		<input type="radio" name="restriction" value="r18" id="r18"><label for="r18">18ç¦</label>
 	</div>
 	
-	<!-- Áô¨p -->
+	<!-- éš±ç§ -->
 	<div class="upload_spac">
-		<label>Áô¨p¡G</label>
-		<input type="radio" name="privacy" value="public" id="public"><label for="public">©Ò¦³¤H</label>
-		<input type="radio" name="privacy" value="friends" id="friends"><label for="friends">ªB¤Í</label>
-		<input type="radio" name="privacy" value="private" id="private"><label for="private">¨p¤H</label>
+		<label>éš±ç§ï¼š</label>
+		<input type="radio" name="privacy" value="public" id="public"><label for="public">æ‰€æœ‰äºº</label>
+		<input type="radio" name="privacy" value="friends" id="friends"><label for="friends">æœ‹å‹</label>
+		<input type="radio" name="privacy" value="private" id="private"><label for="private">ç§äºº</label>
 	</div>
 	
-	<!-- ¹w¬ù±Æµ{§ë½Z -->
+	<!-- é ç´„æ’ç¨‹æŠ•ç¨¿ -->
 	<div class="upload_spac">
-		<label>¹w¬ù§ë½Z¡G</label>
+		<label>é ç´„æŠ•ç¨¿ï¼š</label>
 		<div>
 		<input type="checkbox" name="reservation" value="reservation" id="reservation">
 		<input type="text" id="datepicker">
 		</div>
 	</div>
 	
-	<!-- ¯B¤ô¦L -->
+	<!-- æµ®æ°´å° -->
 	<div class="upload_spac">
-		<label for="watermarks">¯B¤ô¦L</label>
+		<label for="watermarks">æµ®æ°´å°</label>
 		<div>
 		<input type="checkbox" name="watermarks" value="watermarks" id="watermarks">
 		<input type="text" id="watermarks" name="watermarks" placeholder="sample">
@@ -185,15 +185,15 @@ legend{
 		</div>
 	</div>
 	
-	<!-- ¬O§_³c°â -->
+	<!-- æ˜¯å¦è²©å”® -->
 	
 	<div class="upload_spac">
-		<label>¬O§_³c°â</label>
-		<input type="radio" name="sale" value="yes" id="yes"><label for="yes">¬O</label>
-		<input type="radio" name="sale" value="no" id="no"><label for="no">§_</label>
+		<label>æ˜¯å¦è²©å”®</label>
+		<input type="radio" name="sale" value="yes" id="yes"><label for="yes">æ˜¯</label>
+		<input type="radio" name="sale" value="no" id="no"><label for="no">å¦</label>
 	</div>
 	
-	<!-- °e¥X/²M°£ -->
+	<!-- é€å‡º/æ¸…é™¤ -->
 	<div class="upload_spac">
 		<input type="submit" value="PUBLISH">
 		<input type="reset" value="CLEAN">

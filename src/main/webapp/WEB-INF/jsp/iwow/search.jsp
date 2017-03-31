@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>search</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -18,12 +18,12 @@
 	margin-top: 7px;
 }
 
-/* ·j´Mµ²ªG­¶­±  search_all*/
+/* æœå°‹çµæœé é¢  search_all*/
 .search_all{
 	width:1200px;
 	margin:0 auto;
 }
-/* ·j´Mµ²ªG¦³´X±i·Ó¤ùªº²Î­p¼Æ¾Ú */
+/* æœå°‹çµæœæœ‰å¹¾å¼µç…§ç‰‡çš„çµ±è¨ˆæ•¸æ“š */
 .search_picture{
 	float:left;
 }
@@ -33,7 +33,7 @@
 	padding-right:10px;
 }
 
-/* ¬ÛÃö·j´M(TAG) */
+/* ç›¸é—œæœå°‹(TAG) */
 .search_related{
 	float:right;
 }
@@ -46,7 +46,7 @@
 	padding-top:80px;
 }
 
-/* Image¡BAuther */
+/* Imageã€Auther */
 .search_nav{
 	clear: both;
 	float:left;
@@ -57,7 +57,7 @@
 	font-size:30px;
 }
 
-/* ¡¸¶i¶¥·j´M¡¸ */
+/* â˜†é€²éšæœå°‹â˜† */
 .search_advanced{
 	padding:20px;
 }
@@ -68,7 +68,7 @@
 	padding-right:10px;
 }
 
-/* Searchµ²ªG */
+/* Searchçµæœ */
 .search_result{
 	clear:left;
 }
@@ -79,7 +79,6 @@
 	vertical-align:top;
 }
 </style>
-
 </head>
 <body>
 	<!-- banner -->
@@ -115,20 +114,20 @@
 	<!-- /.container-fluid --> </nav>
 	
 		
-	<!-- ·j´Mµ²ªG­¶­±  -->
+	<!-- æœå°‹çµæœé é¢  -->
 	<div class="search_all">
 	
 	<div class="search_top">
-	<!-- ·j´Mµ²ªG¦³´X±i·Ó¤ùªº²Î­p¼Æ¾Ú -->
+	<!-- æœå°‹çµæœæœ‰å¹¾å¼µç…§ç‰‡çš„çµ±è¨ˆæ•¸æ“š -->
 	<div class="search_picture">
 	<span class="search_picture_stats">1,163,241</span>
 	<span class="search_picture_stats">Bird</span>
 	<span class="search_picture_stats">Picture</span>
 	</div>
 	
-	<!-- ¬ÛÃö·j´M(TAG) -->
+	<!-- ç›¸é—œæœå°‹(TAG) -->
 	<div class="search_related">
-	<span class="search_related_name">Related Searches¡G</span>
+	<span class="search_related_name">Related Searchesï¼š</span>
 	<a href="#" class="search_related_tag">nature,</a>
 	<a href="#" class="search_related_tag">wings,</a>
 	<a href="#" class="search_related_tag">animal</a>
@@ -137,21 +136,21 @@
 	
 	<!-- search_bottom -->
 	<div class="search_bottom">
-	<!-- Image¡BAuther -->
+	<!-- Imageã€Auther -->
 	<div class="search_nav">
 		<a href="#" class="search_nav_active">Image</a>
 		<p class="search_nav_slash">/</p>
 		<a href="#" class="search_nav_active">Auther</a>
 	</div>
 	
-	<!-- ¡¸¶i¶¥·j´M¡¸ -->
+	<!-- â˜†é€²éšæœå°‹â˜† -->
 	<div class="search_advanced">
 	<a href="#" class="glyphicon glyphicon-star-empty search_advanced_stats" aria-hidden="true">500</a>
 	<a href="#" class="glyphicon glyphicon-star-empty search_advanced_stats" aria-hidden="true">100</a>
 	<a href="#" class="glyphicon glyphicon-star-empty search_advanced_stats" aria-hidden="true">50</a>
 	</div>
 
-	<!-- Searchµ²ªG -->
+	<!-- Searchçµæœ -->
 	<div class="search_result">
 		<img class="search_result_picture" src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
 		<img class="search_result_picture" src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">

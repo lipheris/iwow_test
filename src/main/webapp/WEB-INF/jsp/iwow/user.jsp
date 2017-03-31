@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>user</title>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
@@ -18,13 +18,13 @@
 	margin-top: 7px;
 }
 
-/* ­Ó¤H­¶­±  user_all*/
+/* å€‹äººé é¢  user_all*/
 .user_all{
 	width:1200px;
 	margin:0 auto;
 }
 
-/* user_profile §@ªÌ·Ó¤ù»P¦W¦r */
+/* user_profile ä½œè€…ç…§ç‰‡èˆ‡åå­— */
 .user_profile{
 	float: left;
 }
@@ -39,7 +39,7 @@
 	padding-top:30px;
 }
 
-/* user_action Follow¡BAdd Friend¡BHire«ö¶s */
+/* user_action Followã€Add Friendã€HireæŒ‰éˆ• */
 .user_action{
 	float: left;
 	width:100px;
@@ -49,7 +49,7 @@
 	width:100px;
 }
 
-/* ²Î­p¼Æ¾Ú  user_stats*/
+/* çµ±è¨ˆæ•¸æ“š  user_stats*/
 .user_stats{
 	float: left;
 	margin:50px;
@@ -59,7 +59,7 @@
 	font-size:50px;
 }
 
-/* Works¡BFollowers¡BFollowing¡BLikes¡BService */
+/* Worksã€Followersã€Followingã€Likesã€Service */
 .user_nav{
 	clear: left;
 	margin:10px;
@@ -69,7 +69,7 @@
 	font-size:25px;
 }
 
-/* Works¡BFollowers¡BFollowing¡BLikes¡BServiceµ²ªG */
+/* Worksã€Followersã€Followingã€Likesã€Serviceçµæœ */
 .user_works_picture{
 	width:30%;
 	margin:5px;
@@ -77,7 +77,6 @@
 	vertical-align:top;
 }
 </style>
-
 </head>
 <body>
 	<!-- banner -->
@@ -112,26 +111,26 @@
 	</div>
 	<!-- /.container-fluid --> </nav>
 	
-	<!-- ­Ó¤H­¶­±  -->
+	<!-- å€‹äººé é¢  -->
 	<div class="user_all">
 	
-	<!-- ¤W¤è­Ó¤H¸ê°T  -->
+	<!-- ä¸Šæ–¹å€‹äººè³‡è¨Š  -->
 	<div class="user_top">
 	
-	<!-- §@ªÌ·Ó¤ù»P¦W¦r -->
+	<!-- ä½œè€…ç…§ç‰‡èˆ‡åå­— -->
 	<div class="user_profile">
 		<img class="user_profile_img" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
 		<span class="user_profile_name" >Tom</span>
 	</div>
 	
-	<!-- Follow¡BAdd Friend¡BHire«ö¶s -->
+	<!-- Followã€Add Friendã€HireæŒ‰éˆ• -->
 	<div class="user_action">
 		<button class="btn btn-primary user_action_btn" type="submit">Follow</button>
 		<button class="btn btn-success user_action_btn" type="submit">Add Friend</button>
 		<button class="btn btn-info user_action_btn" type="submit">Hire</button>
 	</div>
 	
-	<!-- ²Î­p¼Æ¾Ú -->
+	<!-- çµ±è¨ˆæ•¸æ“š -->
 	<div class="user_stats">
 		<span class="glyphicon glyphicon-eye-open user_stats_icon" aria-hidden="true">4315</span>
 		<span class="glyphicon glyphicon-star-empty user_stats_icon" aria-hidden="true">92</span>
@@ -141,9 +140,9 @@
 	
 	</div>
 	
-	<!-- ¤U¤è­Ó¤H¸ê°T -->
+	<!-- ä¸‹æ–¹å€‹äººè³‡è¨Š -->
 	<div class="user_bottom">
-	<!-- Works¡BFollowers¡BFollowing¡BLikes¡BService -->
+	<!-- Worksã€Followersã€Followingã€Likesã€Service -->
 	<div class="user_nav">
 		<a href="#" class="user_nav_active">Works</a>
 		<p class="user_nav_slash">/</p>
@@ -156,7 +155,7 @@
 		<a href="#" class="user_nav_active">Service</a>
 	</div>
 
-	<!-- Works¡BFollowers¡BFollowing¡BLikes¡BServiceµ²ªG -->
+	<!-- Worksã€Followersã€Followingã€Likesã€Serviceçµæœ -->
 	<div class="user_works">
 		<img class="user_works_picture" src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
 		<img class="user_works_picture" src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">
