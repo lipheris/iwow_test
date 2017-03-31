@@ -6,9 +6,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,8 +18,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import tw.com.iwow.entity.enums.Assort;
-import tw.com.iwow.entity.enums.Visibility;
+import tw.com.iwow.enums.Assort;
+import tw.com.iwow.enums.Visibility;
+import tw.com.iwow.enums.converter.AssortConverter;
+import tw.com.iwow.enums.converter.VisConverter;
 
 @Entity
 @Table(name = "PICTURES")
@@ -30,7 +31,7 @@ public class Picture {
 	@Column(name = "ID")
 	private Long id;
 	// assort 為分類普通/ 18禁圖片
-	@Enumerated(EnumType.STRING)
+	@Convert(converter = AssortConverter.class)
 	@Column(name = "ASSORT")
 	private Assort assort;
 	@Column(name = "NAME")
@@ -39,7 +40,7 @@ public class Picture {
 	private LocalDateTime update;
 	@Column(name = "UPLOADER_ID")
 	private Long uploaderId;
-	@Enumerated(EnumType.STRING)
+	@Convert(converter = VisConverter.class)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Column(name = "FILE_P")

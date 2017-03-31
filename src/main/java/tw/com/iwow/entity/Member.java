@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.com.iwow.enums.Gender;
+import tw.com.iwow.enums.converter.GenderConverter;
 
 @Entity
 @Table(name = "MEMBERS")
@@ -31,9 +35,9 @@ public class Member {
 	private String name;
 	@Column(name = "NICKNAME")
 	private String nickname;
-//	@Enumerated(EnumType.STRING)
-//	@Column(name = "GENDER")
-//	private Gender gender;
+	@Convert(converter = GenderConverter.class)
+	@Column(name = "GENDER")
+	private Gender gender;
 	@Column(name = "BIRTH")
 	private LocalDateTime birth;
 	@Column(name = "PHONE")
@@ -122,13 +126,13 @@ public class Member {
 		this.nickname = nickname;
 	}
 
-//	public Gender getGender() {
-//		return gender;
-//	}
-//
-//	public void setGender(Gender gender) {
-//		this.gender = gender;
-//	}
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
 
 	public LocalDateTime getBirth() {
 		return birth;
