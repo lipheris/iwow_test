@@ -129,7 +129,7 @@ legend{
 	<fieldset>
 			<legend>Sign Up</legend>
 	
-	<form action="/iwowwow/iwow/insert" method="post">
+	<form action="/iwowwow/iwow/member/insert" method="post">
 		
 	<!-- 信箱、密碼、姓名、暱稱 -->	
 	<div class="signup_spac">
