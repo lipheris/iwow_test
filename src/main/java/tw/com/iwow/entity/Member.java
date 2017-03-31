@@ -5,8 +5,9 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import tw.com.iwow.enums.Gender;
-import tw.com.iwow.enums.converter.GenderConverter;
 
 @Entity
 @Table(name = "MEMBERS")
@@ -35,7 +35,7 @@ public class Member {
 	private String name;
 	@Column(name = "NICKNAME")
 	private String nickname;
-	@Convert(converter = GenderConverter.class)
+	@Enumerated(EnumType.STRING)
 	@Column(name = "GENDER")
 	private Gender gender;
 	@Column(name = "BIRTH")
