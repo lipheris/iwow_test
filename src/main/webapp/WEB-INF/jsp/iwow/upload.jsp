@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,8 +59,8 @@ legend{
 
 </style>
 </head>
-<body>
-<!-- banner -->
+<body onload='document.logoutForm.username.focus();'>
+	<!-- banner -->
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -82,8 +84,7 @@ legend{
 				<sec:authorize access="hasRole('ROLE_USER')">					
 					<c:url value="/logout" var="logoutUrl" />
 						<form action="${logoutUrl}" method="post" id="logoutForm" >						
-							<input type="hidden" name="${_csrf.parameterName}"
-								value="${_csrf.token}" />
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 						</form>									
 					<script>
    						function formSubmit() {  
@@ -93,6 +94,14 @@ legend{
 				</sec:authorize>
 				<ul class="nav navbar-nav navbar-right" style="font-size: 15px">
 					<li><a href="javascript:formSubmit()">Logout</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right" style="font-size: 15px">
+					<li><a href="javascript:formSubmit()">Login</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right" style="font-size: 15px">
+					<li><a href="javascript:formSubmit()">Signup</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right" style="font-size: 20px">
@@ -104,12 +113,13 @@ legend{
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="#"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">Tom</a></li>
+					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="#"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
 				</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
+	
 	
 	<!-- 上傳頁面 -->
 	<div class="upload_all">
