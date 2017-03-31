@@ -46,4 +46,9 @@ public class IwowController {
 	public String reportPage(){
 		return "iwow/report";
 	}
+	
+	@RequestMapping(value="/iwow/signup")
+	public String signupPage(){
+		return "iwow/signup";
+	}
  }
