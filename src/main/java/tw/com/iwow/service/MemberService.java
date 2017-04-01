@@ -30,18 +30,31 @@ public class MemberService {
 	public Member update(Member member) {
 		Member mem=findById(member.getId());
 		if(mem!=null){
-			mem.setName(member.getName());
-			mem.setNickname(member.getNickname());
-			mem.setGender(member.getGender());
-			mem.setEmail(member.getEmail());
-			mem.setPassword(member.getPassword());
-			mem.setPhone(member.getPhone());
-			mem.setAddress(member.getAddress());
-			mem.setBirth(member.getBirth());
+			if(isNotNull(member.getName()))
+				mem.setName(member.getName());
+			if(isNotNull(member.getNickname()))
+				mem.setNickname(member.getNickname());
+			if(isNotNull(member.getGender()))
+				mem.setGender(member.getGender());
+			if(isNotNull(member.getEmail()))
+				mem.setEmail(member.getEmail());
+			if(isNotNull(member.getPassword()))
+				mem.setPassword(member.getPassword());
+			if(isNotNull(member.getPhone()))
+				mem.setPhone(member.getPhone());
+			if(isNotNull(member.getAddress()))
+				mem.setAddress(member.getAddress());
+			if(isNotNull(member.getBirth()))
+				mem.setBirth(member.getBirth());
 		}
 		return mem;
 	}
-
+	private <T> boolean isNotNull(T obj){
+		if(obj!=null)
+			return true;
+		else
+			return false;
+	}
 	public void delete(Long id) {
 		memberDao.delete(id);
 	}
