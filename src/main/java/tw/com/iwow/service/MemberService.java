@@ -28,7 +28,18 @@ public class MemberService {
 	}
 	@Transactional
 	public Member update(Member member) {
-		return memberDao.save(member);
+		Member mem=findById(member.getId());
+		if(mem!=null){
+			mem.setName(member.getName());
+			mem.setNickname(member.getNickname());
+			mem.setGender(member.getGender());
+			mem.setEmail(member.getEmail());
+			mem.setPassword(member.getPassword());
+			mem.setPhone(member.getPhone());
+			mem.setAddress(member.getAddress());
+			mem.setBirth(member.getBirth());
+		}
+		return mem;
 	}
 
 	public void delete(Long id) {
