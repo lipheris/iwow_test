@@ -13,11 +13,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<!-- SweetAlert2 -->
+<!-- <script src="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/sweetalert2/6.4.4/sweetalert2.min.css"> -->
+
 <!-- jQuery datepicker必要的CSS 及JS -->
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
+
+// swal('Hello world!');
 
 //jQuery datepicker
 $( function() {
@@ -61,7 +67,7 @@ legend{
 	<c:import url="banner.jsp" /> 
 	
 	
-	<!-- sign up -->
+	<!-- profile -->
 	<div class="profile_all">
 	
 	<fieldset>
@@ -70,14 +76,8 @@ legend{
 	<form action="/iwowwow/iwow/member/update" method="post">
 	
 	<!-- ID -->
-	<div class="profile_spac">USER ID："${member.id}"</div><input type="hidden" name="id" value="${member.id}" />	
-	
-	<!-- hidded -->
-	<input type="text" id="email" name="email" value="${member.email}" />
-	<input type="text" id="password" name="password" value="${member.password}" />
-	<input type="text" id="gender" name="gender" value="${member.gender}" />
-	<input type="text" id="birth" name="birth" value="${member.birth}" />
-		
+	<input type="hidden" name="id" value="${member.id}" />	
+			
 	<!-- 姓名、暱稱 -->	
 	
 	<div class="profile_spac">
@@ -91,19 +91,19 @@ legend{
 	</div>	
 	
 	<!-- 性別 -->
-<!-- 	<div class="profile_spac"> -->
-<!-- 		<label>性別：</label> -->
-<!-- 		<input type="radio" name="gender" value="male" id="male"><label for="all">男</label> -->
-<!-- 		<input type="radio" name="gender" value="female" id="female"><label for="r18">女</label> -->
-<!-- 	</div>	 -->
+	<div class="profile_spac">
+		<label>性別：</label>
+		<input type="radio" name="gender" value="MAN" id="MAN" checked="true"><label for="all">男</label>
+		<input type="radio" name="gender" value="WOMAN" id="WOMAN"><label for="r18">女</label>
+	</div>	
 	
 	<!-- 生日 -->
-<!-- 	<div class="profile_spac"> -->
-<!-- 		<label>生日：</label> -->
-<!-- 		<div> -->
-<%-- 		<input type="text" id="datepicker" value="${member.birth}"> --%>
-<!-- 		</div> -->
-<!-- 	</div>	 -->
+	<div class="profile_spac">
+		<label>生日：</label>
+		<div>
+		<input type="text" id="datepicker" >
+		</div>
+	</div>	
 	
 	<!-- 電話、住址  -->
 	<div class="profile_spac">
