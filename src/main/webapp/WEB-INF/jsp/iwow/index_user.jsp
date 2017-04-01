@@ -116,7 +116,7 @@ h2 {
 		<h4 style="margin: 5px;"><sec:authentication property="principal.username" /></h4>
 		
 	<form action="/iwowwow/iwow/member/getByEmail" method="get">
-		<input type="text" name="email" value="<sec:authentication property="principal.username" />"> 
+		<input type="hidden" name="email" value="<sec:authentication property="principal.username" />"> 
 		<input class="btn btn-info" type="submit" value="編輯個人資料">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
