@@ -73,10 +73,10 @@ legend{
 	<div class="profile_spac">USER ID："${member.id}"</div><input type="hidden" name="id" value="${member.id}" />	
 	
 	<!-- hidded -->
-	<input type="text" name="id" value="${member.email}" />
-	<input type="text" name="id" value="${member.password}" />
-	<input type="text" name="id" value="${member.gender}" />
-	<input type="text" name="id" value="${member.birth}" />
+	<input type="text" id="email" name="email" value="${member.email}" />
+	<input type="text" id="password" name="password" value="${member.password}" />
+	<input type="text" id="gender" name="gender" value="${member.gender}" />
+	<input type="text" id="birth" name="birth" value="${member.birth}" />
 		
 	<!-- 姓名、暱稱 -->	
 	
