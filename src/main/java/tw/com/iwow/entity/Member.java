@@ -48,21 +48,21 @@ public class Member {
 	/*
 	 * 以上傳者身分對Picture建立@OneToMany單向關聯
 	 */
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
 	private Set<Picture> picUploads;
 	/*
 	 * 以收藏者身分對Picture建立@ManyToMany單向關聯
 	 */
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(	name = "PIC_COLLS", 
+	@JoinTable(name = "PIC_COLLS", 
 				joinColumns = @JoinColumn(name = "COL_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
 	private Set<Picture> picColls;
 	/*
 	 * 以下單者身分對Order建立@OneToMany單向關聯
 	 */
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<Order> orders;
 	/*
@@ -78,7 +78,7 @@ public class Member {
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donor")
 	private Set<Donation> donations;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "receiver")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver")
 	private Set<Donation> recDonations;
 	/*
 	 * 對Group建立@ManyToMany，主控方為Group
