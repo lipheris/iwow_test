@@ -19,22 +19,27 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.google.gson.Gson;
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.PictureService;
+import tw.com.iwow.web.jsonview.Views;
 
-@Controller
+@RestController
 @RequestMapping(value = "/iwow")
 public class PictureController {
 
 	@Autowired
 	private PictureService pictureService;
-
-	@RequestMapping(value = "/list")
+	
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/list")
 	public String listPage(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		Map<Long,String>getPic=new HashMap<Long,String>();
@@ -46,12 +51,13 @@ public class PictureController {
 			String base64Encoded = new String(encodeBase64, "UTF-8");
 			System.out.println(base64Encoded);
 			getPic.put(id,base64Encoded);
-		}
-
-		model.addAttribute("pictureList", pictureList);
-		model.addAttribute("getPic", getPic);
-		return "iwow/list";
+		}		
+		Gson gson = new Gson();
+		String json = gson.toJson(getPic);
+		
+		return json;
 	}
+	
 	@InitBinder
 	public void InitBinder(WebDataBinder binder){
 		//需要額外的寫法
