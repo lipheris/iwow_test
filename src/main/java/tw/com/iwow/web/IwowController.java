@@ -63,7 +63,6 @@ public class IwowController {
 		return "iwow/setting_profile";
 	}
 	
-	
 	/*-------------------for 403 access denied page----------------*/
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accesssDenied(Model model) {
@@ -92,5 +91,6 @@ public class IwowController {
 	@RequestMapping(value="/iwow/test")
 	public String test(){
 		return "iwow/test";
+
 	}
  }

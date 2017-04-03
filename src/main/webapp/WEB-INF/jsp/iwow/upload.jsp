@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="true" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,6 +26,11 @@ $( function() {
 </script>
 
 <style>
+/* banner */
+.banner_searchicon {
+	margin-left: 100px;
+	margin-top: 7px;
+}
 
 /* 上傳頁面 */
 .upload_all{
@@ -45,79 +49,127 @@ legend{
 	font-family:Courier;
 }
 
-/* 間距 */
-.upload_spac{
-	margin:5px;
-	margin-bottom:10px;
+/* 選擇檔案 */
+.upload_file_btn{
+	
 }
 
 
 </style>
 </head>
-<body onload='document.logoutForm.username.focus();'>
-<!-- banner import -->
-	<c:import url="banner.jsp" /> 
-	
+<body>
+<!-- banner -->
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">iwowwow</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav" style="font-size: 35px">
+				<li class="active"><span class="glyphicon glyphicon-search searchicon" aria-hidden="true"></span></li>
+			</ul>
+
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+
+				<sec:authorize access="hasRole('ROLE_USER')">					
+					<c:url value="/logout" var="logoutUrl" />
+						<form action="${logoutUrl}" method="post" id="logoutForm" >						
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>									
+					<script>
+   						function formSubmit() {  
+   							document.getElementById("logoutForm").submit();  
+     					}  
+					</script>  
+				</sec:authorize>
+				<ul class="nav navbar-nav navbar-right" style="font-size: 15px">
+					<li><a href="javascript:formSubmit()">Logout</a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right" style="font-size: 20px">
+					<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right" style="font-size: 20px">
+					<li><a href="#"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="#"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">Tom</a></li>
+				</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
 	
 	<!-- 上傳頁面 -->
 	<div class="upload_all">
 	
+	<form action="<c:url value="/iwow/doUpload" />" method="post" enctype="multipart/form-data"charset=UTF-8>
 	<fieldset>
 				<legend>Upload</legend>
 	
-	<form action="#" method="post" enctype="multipart/form-data">
 	
 	<!-- 選擇檔案 -->
-	<div class="upload_spac">	
-		<input class="upload_file_btn" type="file" name="picture" id="picture" accept="image/*">
+	<div>	
+		<input class="upload_file_btn" type="file" name="pic" id="picture" accept="image/*">
 	</div>
 	
 	<!-- 題目、說明文 -->
-	<div class="upload_spac">
+	<div>
 		<label for="title">標題：</label>
-		<input type="text" id="title" name="title" value=" ">
+		<input type="text" id="title" name="name" value=" ">
 	</div>
 	
-	<div class="upload_spac">
+	<div>
 		<label for="description">描述：</label>
 		<input type="text" id="description" name="description" value=" ">
 	</div>
 	
 	<!-- TAG -->
-	<div class="upload_spac">
+	<div>
 		<label for="tag">Tag：</label>
-		<input type="text" id="tag" name="tag" value=" ">
+		<input type="text" id="tag" name="tags" value=" ">
 	</div>
-	<div class="upload_spac">
+	<div>
 		<input type="checkbox" name="keytag" value="keytag" id="keytag"><label for="keytag">鎖定TAG禁止其他用戶編輯</label>
 	</div>
 	
 	<!-- 瀏覽限制 -->
-	<div class="upload_spac">
+	<div>
 		<label>瀏覽限制：</label>
-		<input type="radio" name="restriction" value="all" id="all"><label for="all">全年齡</label>
-		<input type="radio" name="restriction" value="r18" id="r18"><label for="r18">18禁</label>
+		<input type="radio" name="assort" value="GENERAL" id="all"><label for="all">全年齡</label>
+		<input type="radio" name="assort" value="RESTRICTED" id="r18"><label for="r18">18禁</label>
 	</div>
 	
 	<!-- 隱私 -->
-	<div class="upload_spac">
+	<div>
 		<label>隱私：</label>
-		<input type="radio" name="privacy" value="public" id="public"><label for="public">所有人</label>
-		<input type="radio" name="privacy" value="friends" id="friends"><label for="friends">朋友</label>
-		<input type="radio" name="privacy" value="private" id="private"><label for="private">私人</label>
+		<input type="radio" name="visibility" value="public" id="PUBLIC"><label for="public">所有人</label>
+<!-- 		<input type="radio" name="visibility" value="friends" id="friends"><label for="friends">朋友</label>  enum暫時沒有可能要討論  -->
+		<input type="radio" name="visibility" value="private" id="PRIVATE"><label for="private">私人</label>
 	</div>
 	
 	<!-- 預約排程投稿 -->
-	<div class="upload_spac">
-		<label>預約投稿：</label>
-		<div>
-		<input type="checkbox" name="reservation" value="reservation" id="reservation">
-		<input type="text" id="datepicker">
-		</div>
-	</div>
+<!-- 	<div> -->
+<!-- 		<label>預約投稿：</label> -->
+<!-- 		<div> -->
+<!-- 		<input type="checkbox"  value="reservation" id="reservation"/> -->
+<!-- 		<input type="text" name="update"id="datepicker" value="" /> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 	
 	<!-- 浮水印 -->
-	<div class="upload_spac">
+	<div>
 		<label for="watermarks">浮水印</label>
 		<div>
 		<input type="checkbox" name="watermarks" value="watermarks" id="watermarks">
@@ -126,7 +178,7 @@ legend{
 	</div>
 	
 	<!-- QR Code -->
-	<div class="upload_spac">
+	<div>
 		<label for="watermarks">QR Code</label>
 		<div>
 		<input type="checkbox" name="qr" value="qr" id="qr">
@@ -135,20 +187,20 @@ legend{
 	
 	<!-- 是否販售 -->
 	
-	<div class="upload_spac">
+	<div>
 		<label>是否販售</label>
 		<input type="radio" name="sale" value="yes" id="yes"><label for="yes">是</label>
 		<input type="radio" name="sale" value="no" id="no"><label for="no">否</label>
 	</div>
 	
 	<!-- 送出/清除 -->
-	<div class="upload_spac">
+	<div>
 		<input type="submit" value="PUBLISH">
 		<input type="reset" value="CLEAN">
 	</div>
-	
+	  <input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
 	</fieldset>
-	
 	</form>
 	
 	</div>
