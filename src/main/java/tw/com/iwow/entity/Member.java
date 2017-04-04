@@ -1,6 +1,8 @@
 package tw.com.iwow.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -50,21 +52,21 @@ public class Member {
 	 */
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
-	private Set<Picture> picUploads;
+	private Set<Picture> picUploads = new HashSet<>();
 	/*
-	 * 以收藏者身分對Picture建立@ManyToMany單向關聯
+	 * 以收藏者身分對Picture建立@ManyToMany雙向關聯
 	 */
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "PIC_COLLS", 
 				joinColumns = @JoinColumn(name = "COL_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
-	private Set<Picture> picColls;
+	private Set<Picture> picColls = new HashSet<>();
 	/*
 	 * 以下單者身分對Order建立@OneToMany單向關聯
 	 */
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
-	private Set<Order> orders;
+	private Set<Order> orders = new HashSet<>();
 	/*
 	 * 對角色身分table建立@ManytoMany單向關聯
 	 */
@@ -72,19 +74,19 @@ public class Member {
 	@JoinTable( name = "MEM_ROLES", 
 				joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
-	private Set<Role> roles ;
+	private Set<Role> roles = new HashSet<>() ;
 	/*
 	 * 斗內雙方與斗內資料建立@OneToMany關聯,主控方在Donation
 	 */
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "donor")
-	private Set<Donation> donations;
+	private Set<Donation> donations = new HashSet<>();
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "receiver")
-	private Set<Donation> recDonations;
+	private Set<Donation> recDonations = new HashSet<>();
 	/*
 	 * 對Group建立@ManyToMany，主控方為Group
 	 */
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
-	private Set<Group> groups;
+	private Set<Group> groups = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -213,9 +215,17 @@ public class Member {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
-
-
-
-	
+	public void addPicColl(Picture picColl){
+		this.picColls.add(picColl);
+	}
+	public void removePicColl(Picture picColl){
+		this.picColls.remove(picColl);
+	}
+	public void addPicColls(Collection<Picture> picColls){
+		this.picColls.addAll(picColls);
+	}
+	public void removePicColls(Collection<Picture> picColls){
+		this.picColls.removeAll(picColls);
+	}
 	
 }
