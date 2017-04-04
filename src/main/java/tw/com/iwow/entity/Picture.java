@@ -2,6 +2,7 @@ package tw.com.iwow.entity;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -19,8 +20,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
+import tw.com.iwow.web.jsonview.Views;
 
 @Entity
 @Table(name = "PICTURES")
@@ -33,10 +37,12 @@ public class Picture {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ASSORT")
 	private Assort assort;
+	@JsonView(Views.PictureDetails.class)
 	@Column(name = "NAME")
 	private String name;
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
+	@JsonView(Views.PictureDetails.class)
 	@Column(name = "UPLOADER_ID")
 	private Long uploaderId;
 	@Enumerated(EnumType.STRING)
@@ -53,10 +59,14 @@ public class Picture {
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
-	@ManyToMany
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags;
-
+	/*
+	 * 
+	 */
+	@ManyToMany(mappedBy="picColls")
+	private Set<Member> collectors;
 	public Long getId() {
 		return id;
 	}
@@ -136,4 +146,25 @@ public class Picture {
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}
+
+	public Set<Member> getCollectors() {
+		return collectors;
+	}
+
+	public void setCollectors(Set<Member> collectors) {
+		this.collectors = collectors;
+	}
+	public void addTag(Tag tag){
+		this.tags.add(tag);
+	}
+	public void removeTag(Tag tag){
+		this.tags.remove(tag);
+	}
+	public void addTags(Collection<Tag> tags){
+		this.tags.addAll(tags);
+	}
+	public void removeTags(Collection<Tag> tags){
+		this.tags.removeAll(tags);
+	}
+	
 }

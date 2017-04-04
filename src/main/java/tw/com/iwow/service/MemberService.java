@@ -37,5 +37,5 @@ public class MemberService {
 	public Collection<Member> findAll() {
 		return memberDao.findAll();
 	}
-	
+
 }
