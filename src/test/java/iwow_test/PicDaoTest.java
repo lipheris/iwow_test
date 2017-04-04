@@ -1,6 +1,7 @@
 package iwow_test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -43,6 +44,7 @@ public class PicDaoTest {
 //		}
 //		
 //	}
+	/*
 	@Test
 	public void testPicInsert(){
 		Picture pic=new Picture();
@@ -104,20 +106,19 @@ public class PicDaoTest {
 		Set<Picture> picSet2=picDao.findByCollectorsName("testName");
 		assertEquals(picSet, picSet2);
 	}
-//	@Test
-//	public void testFindByNameAndVisibilityOrTagsNameAndVisibility(){
-//		Collection<Picture> picColl=new HashSet<>();
-//		Picture pic=new Picture();
-//		Tag tag=new Tag();
-//		Set<Tag> tagSet=new HashSet<>();
-//		pic.setName("testPic");
-//		pic.setVisibility(Visibility.PUBLIC);
-//		tag.setName("testTag");
-//		pic.setTags(tagSet);
-//		pic.addTag(tag);
-//		picDao.save(pic);
-//		picColl.add(pic);
-//		Collection<Picture> picColl2=picDao.findByNameAndVisibilityOrTagsNameAndVisibility("","testTag", Visibility.PUBLIC);
-//		assertEquals(picColl, picColl2);
-//	}
+	*/
+	@Test
+	public void testSearch(){
+		Set<Object> testSet=picDao.search("1");
+		System.out.println();
+		System.out.println();
+		System.out.println(testSet.size());
+		System.out.println();
+		System.out.println();
+		for(Object obj:testSet){
+			Long l=(Long)obj;
+			System.out.println("id="+l);
+		}
+		assertNotNull(testSet);
+	}
 }

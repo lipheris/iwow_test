@@ -4,12 +4,19 @@ import java.sql.Blob;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.enums.Visibility;
 
 public interface PictureDao extends JpaRepository<Picture, Long> {
-
+	public static final String FIND_ID_BY_SEARCH =
+			"SELECT p.id FROM Picture p "
+			+ "JOIN p.tags t "
+			+ "WHERE p.visibility = 'PUBLIC' "
+			+ "AND (p.name LIKE CONCAT('%',:param,'%') "
+			+ "OR t.name LIKE CONCAT('%',:param,'%'))";
 	public Picture findByFile(Blob file);
 	public Picture findByName(String name);
 	public Set<Picture> findByTagsName(String tagName);
@@ -17,4 +24,6 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 	public Set<Picture> findByNameOrTagsName(String name, String tagsName);
 	public Set<Picture> findByUploaderId(Long uploaderId);
 	public Set<Picture> findByCollectorsName(String collName);
+	@Query(FIND_ID_BY_SEARCH)
+	public Set<Object> search(@Param("param")String param);
 }
