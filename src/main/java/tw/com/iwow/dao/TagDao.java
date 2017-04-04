@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import tw.com.iwow.entity.Tag;
 
-@Repository
 public interface TagDao extends JpaRepository<Tag, Long> {
-//	@Transactional
-//	public Tag findByName(String name);
+	public Tag findByName(String name);
 }
