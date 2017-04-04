@@ -27,33 +27,8 @@ public class MemberService {
 		return memberDao.save(member);
 	}
 	@Transactional
-	public Member update(Member member) {
-		Member mem=findById(member.getId());
-		if(mem!=null){
-			if(isNotNull(member.getName()))
-				mem.setName(member.getName());
-			if(isNotNull(member.getNickname()))
-				mem.setNickname(member.getNickname());
-			if(isNotNull(member.getGender()))
-				mem.setGender(member.getGender());
-			if(isNotNull(member.getEmail()))
-				mem.setEmail(member.getEmail());
-			if(isNotNull(member.getPassword()))
-				mem.setPassword(member.getPassword());
-			if(isNotNull(member.getPhone()))
-				mem.setPhone(member.getPhone());
-			if(isNotNull(member.getAddress()))
-				mem.setAddress(member.getAddress());
-			if(isNotNull(member.getBirth()))
-				mem.setBirth(member.getBirth());
-		}
-		return mem;
-	}
-	private <T> boolean isNotNull(T obj){
-		if(obj!=null)
-			return true;
-		else
-			return false;
+	public Member update(Member loginMem) {
+		return memberDao.save(loginMem);
 	}
 	public void delete(Long id) {
 		memberDao.delete(id);
