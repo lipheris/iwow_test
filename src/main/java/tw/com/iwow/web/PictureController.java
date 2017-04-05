@@ -34,12 +34,10 @@ public class PictureController {
 
 	//先把Gson註解
 
-	
 
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
-
 		model.addAttribute("pictureList", pictureList);
 //		Map<Long,String>getPic=new HashMap<Long,String>();
 //		for(Picture temp:pictureList){
@@ -55,6 +53,7 @@ public class PictureController {
 //		String json = gson.toJson(getPic);
 //		return json;
 		return "/iwow/list";
+
 
 	}
 		

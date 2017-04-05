@@ -13,84 +13,76 @@
 
 <script>
 
-$.ajax({
-    type: 'GET',
-    dataType: 'json',
-    url: '/iwowwow/iwow/list',
-    async: false,    
-    success: function(json){
-        
-    		alert(json);
-           	jsondata=$.parseJSON(json); //處理字串資料轉換成JSON資料結構
-           	alert(jsondata);
-//             var t=jsondata.data;
-//             var divshow = $("#regshow");
-//             divshow.text("");// 清空數據
-//             h="<img id=\"mops\" src='data:image/jpg;base64,"+t+"' style=\"width:79px;height:30px;margin-right:-4px;\"/>";
-        
-//             divshow.append(h);                      
-        
-    },
-     error:function() {
-          
-         alert("系統數據意長,請稍後再試......");
-   
-}
+$(function() {
+		//ajax抓圖
+		$.ajax({
+			type:'GET',
+			url:'/iwowwow/iwow/listajax',
+			dataType:'json'
+		}).done(function(datas){
 
+			//datas就是一個JSON物件
+			var myDiv = $('#show');
+			//為解決這個問題，可以創建一個文檔碎片，把所有的新節點附加其上，
+			//然後把文檔碎片的内容一次性添加到document中，這個就是createDocumentFragment()的用武之處。
+			var docFragment = $(document.createDocumentFragment()); //javascript
+			$.each(datas,function(idx,photo){
+// 				var img = $('<img />').attr('src',park.Image).addClass('img-thumbnail thumb');
+// 				var a = $('<a></a>').attr('href',park.Image).html(img); //點下去可連結到大圖
+				var p="<div class=\"main_picture\"><img src='data:image/jpg;base64,"+ photo +"' /><div>";
+	
+				docFragment.append(p);
+			})
+			myDiv.append(docFragment);
+		})
 
-});
+		//ajax抓圖detail
+		$.ajax({
+			type:'GET',
+			url:'/iwowwow/iwow/pictures',
+			dataType:'json'
+		}).done(function(datas){
+			//		console.log(datas[0].name);
+			//datas就是一個JSON物件
+			var myDiv = $('#name');
+			//為解決這個問題，可以創建一個文檔碎片，把所有的新節點附加其上，
+			//然後把文檔碎片的内容一次性添加到document中，這個就是createDocumentFragment()的用武之處。
+			var docFragment = $(document.createDocumentFragment()); //javascript
+			$.each(datas,function(idx,picture){
+		//			console.log(picture.name);
+		//			console.log(picture.uploaderId);
+		//			var img = $('<img />').attr('src',park.Image).addClass('img-thumbnail thumb');
+		//			var a = $('<a></a>').attr('href',park.Image).html(img); //點下去可連結到大圖
+				var h = picture.name + ", " + picture.uploaderId;
+				
+		//		console.log(h);			
+		 		docFragment.append(h);
+			})
+		 	myDiv.append(docFragment);
+		})
 
-// window.onload = function () {
-//     document.getElementById("email").onblur = chkMail;
-// }
-
-// //Email
-// //1.不可空白 
-// function chkMail() {
-//     var theMail = document.getElementById("email").value;
-//     var theMailLen = theMail.length;
-//     var div = document.getElementById('result0');
-    
-//     if (theMailLen == "") {
-//         document.getElementById("correctmail").innerHTML = "";
-//         document.getElementById("errormail").innerHTML = "<img src='Img/error.gif' /> 請輸入信箱";
-//     } else {
-//     	document.getElementById("errormail").innerHTML = "";
-    	
-    	
-
-// //     	var xhr = new XMLHttpRequest();
-// // 		xhr.open("POST", "/iwowwow/iwow/member/checkUserEmail", true);
-// // 		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-// // 		xhr.send("email=" );
-// // 		xhr.onreadystatechange = function() {
-// // 			// 伺服器請求完成
-// // 			if (xhr.readyState == 4 && xhr.status == 200) {
-// // 				result = JSON.parse(xhr.responseText); //把JSON轉成javascript型式的物件
-// // 				console.log(result);
-// // // 				message = "帳號已存在";
-// // // 				if (result.correctEmail.length == 0) {
-// // // 					message = "帳號可用";
-// // // 				}
-// // // 				div.innerHTML = "<font color='red' size='-2'>" + message + "</font>";
-// //  			}
-// // 		}
-//     }
-// }
+ });
 
 </script>
+
+<style>
+
+
+.main_picture{ 
+ 	margin: 0 auto; 
+ 	margin: 20px; 
+ 	text-align: center; 
+ 	width:70%; 
+ } 
+ 
+
+</style>
 
 </head>
 <body>
 
- <div>
-        <label for="email">信箱：</label>
-        <input type="text" id="email" name="email">
-            <span id="errormail" style="color:red"></span>
-            <span id="correctmail" style="color:green"></span>
-            <div id='result0' style="height: 10px;"></div>
-        </div>
+    <div id="show"></div>
+    <div id="name"></div>
 
-	
 </body>
 </html>
