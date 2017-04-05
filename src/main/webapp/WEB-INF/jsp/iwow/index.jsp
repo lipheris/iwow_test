@@ -68,6 +68,18 @@ img{
 		<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTxWjwdli7SzC13-nd9JnsNFcBPPOL8QCI8fsWcA5Vo3RUCQQ5y">
 		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">
 		<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQjXvYGODrgdGssCS2enKxCuhpU-xWC_aNwDX8q36OtmEUcV24FeA">
+		
+<!-- 		以下新增20170405  -->
+		<c:forEach var="p" items="${enbase64}">
+				<form class="imgForm" action="/iwowwow/iwow/picture" method="post">
+					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="data:image/jpeg;base64,${p.value}" >
+					<input type="hidden" name="jId" value="${p.key}" >
+					<input type="hidden" name="data" value="data:image/jpeg;base64,${p.value}" >		
+<!-- 					form提交的時候 如果出現csrf的問題 則將該參數設為隱藏項 -->
+					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+				</form>			
+		</c:forEach>
+		
 	</div>
 </div>
 
