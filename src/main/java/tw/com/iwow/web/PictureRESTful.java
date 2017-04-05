@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.PictureService;
+import tw.com.iwow.web.jsonview.Views;
 
 @RestController
 @RequestMapping(value="iwow/pictures")
@@ -19,6 +22,7 @@ public class PictureRESTful {
 	@Autowired
 	private PictureService pictureService;
 	
+	@JsonView(Views.PictureDetails.class)
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"})
 	public Collection<Picture> listPictures(){
 		return pictureService.findAll();

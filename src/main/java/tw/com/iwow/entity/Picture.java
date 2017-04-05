@@ -47,6 +47,8 @@ public class Picture {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
+	@Column(name = "DESCRIPTION")
+	private String description;
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
 	public String getPictureAddress() {
@@ -165,5 +167,14 @@ public class Picture {
 	public void removeTags(Collection<Tag> tags){
 		this.tags.removeAll(tags);
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 }

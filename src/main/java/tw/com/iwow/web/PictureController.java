@@ -32,8 +32,8 @@ public class PictureController {
 	@Autowired
 	private PictureService pictureService;
 	//先把Gson註解
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/list")
-	public String listPage(Model model) throws SQLException, UnsupportedEncodingException {
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
+	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
 //		Map<Long,String>getPic=new HashMap<Long,String>();
