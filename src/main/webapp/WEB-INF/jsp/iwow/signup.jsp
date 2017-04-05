@@ -19,6 +19,29 @@
 
 <script>
 
+$(function(){
+	//AJAX驗證帳號        
+	$('#email').blur(function(){
+	    var emailVal = $('#email').val();
+	    $.get('${pageContext.servletContext.contextPath}/iwow/member/checkUserEmail', {"email":emailVal},
+	    	function(data){
+	    		$('#message').html(data);
+	    			if(data == "帳號已存在"){
+// 	    				alert("帳號已存在");
+	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-remove-sign');
+	    			} else if (data == "帳號不存在") { //帳號不存在
+// 	    				alert("帳號不存在");
+	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-ok-sign');
+	    			} else {
+	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-question-sign');
+	    			}
+	    		}
+	    	);	    		
+	   })        
+});
+
+
+
 //jQuery datepicker
 $( function() {
     $( "#datepicker" ).datepicker({
@@ -73,6 +96,7 @@ legend{
 	<div class="signup_spac">
 		<label for="email">信箱：</label>
 		<input type="text" id="email" name="email" value="">
+ 		<span id="checkicon" class="glyphicon glyphicon-question-sign"></span>
 	</div>
 	
 	<div class="signup_spac">
