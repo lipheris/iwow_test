@@ -1,6 +1,5 @@
 package tw.com.iwow.entity;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -10,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,12 +48,22 @@ public class Picture {
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Column(name = "DESCRIPTION")
 	private String description;
-	@Column(name = "FILE_P")
-	private Blob file;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	
+	
+	@Column(name = "PICTURE_ADDRESS")
+	private String pictureAddress;
+	public String getPictureAddress() {
+		return pictureAddress;
+	}
+
+	public void setPictureAddress(String pictureAddress) {
+		this.pictureAddress = pictureAddress;
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
 	/*
@@ -117,13 +125,6 @@ public class Picture {
 		this.visibility = visibility;
 	}
 
-	public Blob getFile() {
-		return file;
-	}
-
-	public void setFile(Blob file) {
-		this.file = file;
-	}
 
 	public Set<Stats> getStats() {
 		return stats;
