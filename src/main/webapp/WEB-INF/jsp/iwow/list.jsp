@@ -68,8 +68,8 @@ th {
 			</tr>
 			<!--這邊是利用兩個FOR迴圈去取值如果LIST.ID=getPic.key相等就使用-->
 			<c:forEach var="list" items="${pictureList}">
-				<c:forEach var="getPic" items="${getPic}">
-					<c:if test="${getPic.key==list.id}">
+<%-- 				<c:forEach var="getPic" items="${getPic}"> --%>
+<%-- 					<c:if test="${getPic.key==list.id}"> --%>
 						<tr>
 							<td>${list.id}</td>
 							<td>${list.assort}</td>
@@ -77,15 +77,15 @@ th {
 							<td>${list.update}</td>
 							<td>${list.uploaderId}</td>
 							<td>${list.visibility}</td>
-							<!-- 利用base64傳遞圖片字串再以img src解碼 -->
-							<td><img height='120' width='120'
-								src='data:image/jpeg;base64,${getPic.value}' /></td>
+							<!--上面是直接抓網路路徑 下面利用base64傳遞圖片字串再以img src解碼 -->
+							<td><img height='120' width='120' src='${list.pictureAddress}' /></td>
+<%-- 								src='data:image/jpeg;base64,${getPic.value}' /></td> --%>
 							<td>${list.stats}</td>
 							<td>${list.specs}</td>
 							<td></td>
 						</tr>
-					</c:if>
-				</c:forEach>
+<%-- 					</c:if> --%>
+<%-- 				</c:forEach> --%>
 			</c:forEach>
 		</table>
 

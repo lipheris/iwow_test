@@ -17,7 +17,7 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 			+ "WHERE p.visibility = 'PUBLIC' "
 			+ "AND (p.name LIKE CONCAT('%',:param,'%') "
 			+ "OR t.name LIKE CONCAT('%',:param,'%'))";
-	public Picture findByFile(Blob file);
+	public Picture findByPictureAddress(String pictureAddress);
 	public Picture findByName(String name);
 	public Set<Picture> findByTagsName(String tagName);
 	public Set<Picture> findByTagsNameAndVisibility(String tagName, Visibility vis);

@@ -1,6 +1,5 @@
 package tw.com.iwow.entity;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -48,8 +47,15 @@ public class Picture {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
-	@Column(name = "FILE_P")
-	private Blob file;
+	@Column(name = "PICTURE_ADDRESS")
+	private String pictureAddress;
+	public String getPictureAddress() {
+		return pictureAddress;
+	}
+
+	public void setPictureAddress(String pictureAddress) {
+		this.pictureAddress = pictureAddress;
+	}
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;
@@ -115,13 +121,6 @@ public class Picture {
 		this.visibility = visibility;
 	}
 
-	public Blob getFile() {
-		return file;
-	}
-
-	public void setFile(Blob file) {
-		this.file = file;
-	}
 
 	public Set<Stats> getStats() {
 		return stats;

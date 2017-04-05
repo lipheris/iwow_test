@@ -29,10 +29,10 @@ public class PictureRESTful {
 		return pictureService.findById(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, consumes={"application/json"})
-	public Picture insertPicture(@RequestBody Picture picture){
-		return pictureService.insert(picture);
-	}
+//	@RequestMapping(method=RequestMethod.POST, consumes={"application/json"})
+//	public Picture insertPicture(@RequestBody Picture picture){
+//		return pictureService.insert(picture);
+//	}
 	
 	@RequestMapping(method=RequestMethod.PUT, consumes={"application/json"})
 	public Picture updatePicture(@RequestBody Picture picture){

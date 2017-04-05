@@ -130,7 +130,7 @@ legend {
 
 	<!-- 上傳頁面 -->
 	<div class="upload_all">
-
+<!-- 把_csrf以Get的方法傳送 -->
 		<form action="<c:url value="/iwow/doUpload"/>?${_csrf.parameterName}=${_csrf.token}" method="post"
 			enctype="multipart/form-data">
 			<!-- 	<form action="/iwow_test/iwow/doUpload2 " method="post" enctype="multipart/form-data"> -->
@@ -177,9 +177,9 @@ legend {
 				<!-- 隱私 -->
 				<div>
 					<label>隱私：</label> <input type="radio" name="visibility"
-						value="public" id="PUBLIC"><label for="public">所有人</label>
+						value="PUBLIC" id="PUBLIC"><label for="public">所有人</label>
 					<!-- 		<input type="radio" name="visibility" value="friends" id="friends"><label for="friends">朋友</label>  enum暫時沒有可能要討論  -->
-					<input type="radio" name="visibility" value="private" id="PRIVATE"><label
+					<input type="radio" name="visibility" value="PRIVATE" id="PRIVATE"><label
 						for="private">私人</label>
 				</div>
 
@@ -219,7 +219,7 @@ legend {
 				</div>
 
 				<!-- 送出/清除 -->
-<%-- 				<input type="hidden" name="${_csrf.parameterName}" --%>
+<%-- 				我不需要你了<input type="hidden" name="${_csrf.parameterName}" --%>
 <%-- 					value="${_csrf.token}" /> --%>
 				<div>
 					<input type="submit" value="PUBLISH"> <input type="reset"
