@@ -18,7 +18,11 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 			+ "AND (p.name LIKE CONCAT('%',:param,'%') "
 			+ "OR t.name LIKE CONCAT('%',:param,'%')"
 			+ "OR p.uploaderId IN (SELECT m.id FROM Member m WHERE m.name LIKE CONCAT('%',:param,'%')))";
+<<<<<<< HEAD
 	public Picture findByPictureAddress(String pictureAddress);
+=======
+	public Picture findByFile(Blob file);
+>>>>>>> refs/remotes/origin/master
 	public Picture findByName(String name);
 	public Set<Picture> findByTagsName(String tagName);
 	public Set<Picture> findByTagsNameAndVisibility(String tagName, Visibility vis);

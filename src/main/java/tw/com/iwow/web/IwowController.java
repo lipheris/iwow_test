@@ -1,5 +1,11 @@
 package tw.com.iwow.web;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.PictureService;
 
 @Controller
 public class IwowController {
+	
+	
 	private PictureService picService;
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
@@ -26,7 +35,7 @@ public class IwowController {
 	public String picturePage() {
 		return "iwow/picture";
 	}
-
+	
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
 		return "iwow/index_user";
@@ -100,4 +109,5 @@ public class IwowController {
 		return "iwow/test";
 
 	}
+	
 }

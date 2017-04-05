@@ -129,7 +129,10 @@ article{
 <article>
 	<div>
 	<h1>Bird</h1>
-	<h2>small bird withpale belly and breast and patterned wing and head stands on concrete</h2>
+<!-- 	取圖片id對應description -->
+	<c:set var="key" value="${param.jId}" ></c:set>  
+        <h1><c:out value="${picMsg[key]}" /></h1>
+<!-- 	<h2>small bird withpale belly and breast and patterned wing and head stands on concrete</h2> -->
 	</div>
 	
 	<div class="icons">
@@ -140,7 +143,7 @@ article{
 	</div>
 	
 	<div class="mainPicture">
-	<img style="width:70%;height:70%;" src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg">
+	<img style="width:70%;height:70%;" src="${param.data}">
 	</div>
 	
 	<div class="bottons">
@@ -149,12 +152,14 @@ article{
 	</div>
 	
 	<div>
-	<button class="btn btn-default btn-sm" type=submit">bird</button>
-	<button class="btn btn-default btn-sm" type="submit">cute</button>
-	<button class="btn btn-default btn-sm" submit">wild</button>
-	<button class="btn btn-default btn-sm" submit">animal</button>
-	<button class="btn btn-default btn-sm" submit">fly</button>
-	<button class="btn btn-default btn-sm" submit">lovely</button>
+	<form action="/iwowwow/iwow/selectTags" method="get">
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="bird">bird</button>
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="cute">cute</button>
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="wild">wild</button>
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="animal">animal</button>
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="fly">fly</button>
+	<button class="btn btn-default btn-sm" type="submit" name="tagmark" value="lovely">lovely</button>
+	</form>
 	</div>
 	
 	<div style="margin:10px;">
