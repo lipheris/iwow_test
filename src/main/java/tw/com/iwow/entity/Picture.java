@@ -49,7 +49,6 @@ public class Picture {
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Column(name = "DESCRIPTION")
 	private String description;
-<<<<<<< HEAD
 
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
@@ -60,10 +59,7 @@ public class Picture {
 	public void setPictureAddress(String pictureAddress) {
 		this.pictureAddress = pictureAddress;
 	}
-=======
-	@Column(name = "FILE_P")
-	private Blob file;
->>>>>>> refs/remotes/origin/master
+
 	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;

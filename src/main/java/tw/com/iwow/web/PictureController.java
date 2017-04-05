@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,11 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-<<<<<<< HEAD
-=======
-
-import com.google.gson.Gson;
->>>>>>> refs/remotes/origin/master
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.enums.Assort;
@@ -35,15 +31,15 @@ public class PictureController {
 
 	@Autowired
 	private PictureService pictureService;
-<<<<<<< HEAD
+
 	//先把Gson註解
-=======
+
 	
->>>>>>> refs/remotes/origin/master
+
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
-<<<<<<< HEAD
+
 		model.addAttribute("pictureList", pictureList);
 //		Map<Long,String>getPic=new HashMap<Long,String>();
 //		for(Picture temp:pictureList){
@@ -59,20 +55,7 @@ public class PictureController {
 //		String json = gson.toJson(getPic);
 //		return json;
 		return "/iwow/list";
-=======
-		Map<Long,String>getPic=new HashMap<Long,String>();
-		for(Picture temp:pictureList){
-			Long id=temp.getId();
-			byte[] testbyte = pictureService.findById(id).getFile().getBytes(1,
-					(int) pictureService.findById(id).getFile().length());
-			byte[] encodeBase64 = Base64.encodeBase64(testbyte);
-			String base64Encoded = new String(encodeBase64, "UTF-8");
-			getPic.put(id,base64Encoded);
-		}
-		Gson gson = new Gson();
-		String json = gson.toJson(getPic);
-		return json;
->>>>>>> refs/remotes/origin/master
+
 	}
 		
 	@InitBinder

@@ -33,7 +33,7 @@ public class PictureService {
 	}
 
 	public Picture insert(Picture picture,CommonsMultipartFile file) {
-		
+		//圖片上傳到雲端的語法
 		try{
 			  // Retrieve storage account from connection-string.	和microsoft取得連線
 		    CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
