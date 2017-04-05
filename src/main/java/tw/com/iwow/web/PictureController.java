@@ -48,7 +48,7 @@ public class PictureController {
 //		}		
 //		Gson gson = new Gson();
 //		String json = gson.toJson(getPic);
-		
+//		return json;
 		return "/iwow/list";
 	}
 	

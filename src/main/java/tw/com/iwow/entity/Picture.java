@@ -49,6 +49,7 @@ public class Picture {
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Column(name = "DESCRIPTION")
 	private String description;
+
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
 	public String getPictureAddress() {

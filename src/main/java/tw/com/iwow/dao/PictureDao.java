@@ -13,10 +13,11 @@ import tw.com.iwow.enums.Visibility;
 public interface PictureDao extends JpaRepository<Picture, Long> {
 	public static final String FIND_ID_BY_SEARCH =
 			"SELECT p.id FROM Picture p "
-			+ "JOIN p.tags t "
+			+ "LEFT JOIN p.tags t "
 			+ "WHERE p.visibility = 'PUBLIC' "
 			+ "AND (p.name LIKE CONCAT('%',:param,'%') "
-			+ "OR t.name LIKE CONCAT('%',:param,'%'))";
+			+ "OR t.name LIKE CONCAT('%',:param,'%')"
+			+ "OR p.uploaderId IN (SELECT m.id FROM Member m WHERE m.name LIKE CONCAT('%',:param,'%')))";
 	public Picture findByPictureAddress(String pictureAddress);
 	public Picture findByName(String name);
 	public Set<Picture> findByTagsName(String tagName);
@@ -24,6 +25,9 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 	public Set<Picture> findByNameOrTagsName(String name, String tagsName);
 	public Set<Picture> findByUploaderId(Long uploaderId);
 	public Set<Picture> findByCollectorsName(String collName);
+	/*
+	 * 輸入關鍵字回傳圖片名稱、標籤名稱、上傳者名稱中含有關鍵字的圖片id
+	 */
 	@Query(FIND_ID_BY_SEARCH)
 	public Set<Object> search(@Param("param")String param);
 }
