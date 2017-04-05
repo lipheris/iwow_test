@@ -48,6 +48,7 @@ public class Picture {
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Column(name = "DESCRIPTION")
 	private String description;
+<<<<<<< HEAD
 	
 	
 	@Column(name = "PICTURE_ADDRESS")
@@ -61,6 +62,20 @@ public class Picture {
 	}
 	
 	@OneToMany(cascade = CascadeType.ALL)
+=======
+
+	@Column(name = "PICTURE_ADDRESS")
+	private String pictureAddress;
+	public String getPictureAddress() {
+		return pictureAddress;
+	}
+
+	public void setPictureAddress(String pictureAddress) {
+		this.pictureAddress = pictureAddress;
+	}
+
+	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+>>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;
 	@OneToMany(cascade = CascadeType.ALL)
