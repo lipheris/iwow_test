@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,14 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.google.gson.Gson;
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.PictureService;
-import tw.com.iwow.web.jsonview.Views;
 
 @RestController
 @RequestMapping(value = "/iwow")
@@ -39,8 +36,8 @@ public class PictureController {
 	@Autowired
 	private PictureService pictureService;
 	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/list")
-	public String listPage(Model model) throws SQLException, UnsupportedEncodingException {
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
+	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		Map<Long,String>getPic=new HashMap<Long,String>();
 		for(Picture temp:pictureList){
@@ -49,15 +46,13 @@ public class PictureController {
 					(int) pictureService.findById(id).getFile().length());
 			byte[] encodeBase64 = Base64.encodeBase64(testbyte);
 			String base64Encoded = new String(encodeBase64, "UTF-8");
-			System.out.println(base64Encoded);
 			getPic.put(id,base64Encoded);
-		}		
+		}
 		Gson gson = new Gson();
 		String json = gson.toJson(getPic);
-		
 		return json;
 	}
-	
+		
 	@InitBinder
 	public void InitBinder(WebDataBinder binder){
 		//需要額外的寫法
