@@ -15,6 +15,7 @@
 	margin-top: 7px;
 }
 </style>
+<script type="text/javascript" src="../../js/search.js"></script>
 </head>
 <body onload='document.logoutForm.username.focus();'>
 	<!-- banner -->
@@ -31,11 +32,11 @@
 				<li class="active"><span class="glyphicon glyphicon-search searchicon" aria-hidden="true"></span></li>
 			</ul>
 
-			<form class="navbar-form navbar-left">
+			<form class="navbar-form navbar-left" id="search">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" class="form-control" placeholder="Search" id="searchContext">
 				</div>
-				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="submit" class="btn btn-default" id="searchButton">Submit</button>
 			</form>
 
 				<sec:authorize access="hasRole('ROLE_USER')">					

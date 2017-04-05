@@ -8,61 +8,68 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import tw.com.iwow.service.PictureService;
 
 @Controller
 public class IwowController {
- 	
- 	//iwowwow
-	@RequestMapping(value="/iwow/index")
-	public String indexPage(){
+	private PictureService picService;
+	// iwowwow
+	@RequestMapping(value = "/iwow/index")
+	public String indexPage() {
 		return "iwow/index";
 	}
-	
-	@RequestMapping(value="/iwow/picture")
-	public String picturePage(){
+
+	@RequestMapping(value = "/iwow/picture")
+	public String picturePage() {
 		return "iwow/picture";
 	}
-	
-	@RequestMapping(value="/iwow/login")
-	public String loginPage(){
+
+	@RequestMapping(value = "/iwow/login")
+	public String loginPage() {
 		return "iwow/index_user";
 	}
-	
-	@RequestMapping(value="/iwow/index_user")
-	public String index_userPage(){
+
+	@RequestMapping(value = "/iwow/index_user")
+	public String index_userPage() {
 		return "iwow/index_user";
 	}
-	
-	@RequestMapping(value="/iwow/user")
-	public String userPage(){
+
+	@RequestMapping(value = "/iwow/user")
+	public String userPage() {
 		return "iwow/user";
 	}
-	
-	@RequestMapping(value="/iwow/search")
-	public String searchPage(){
+
+	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
+	public String searchPage(@RequestParam(value="searchContext")String param, Model model) {
+		if(param.isEmpty()||param==null)
+			return "iwow/index";
+		
 		return "iwow/search";
 	}
-	
-	@RequestMapping(value="/iwow/upload")
-	public String uploadPage(){
+
+	@RequestMapping(value = "/iwow/upload")
+	public String uploadPage() {
 		return "iwow/upload";
 	}
-	
-	@RequestMapping(value="/iwow/report")
-	public String reportPage(){
+
+	@RequestMapping(value = "/iwow/report")
+	public String reportPage() {
 		return "iwow/report";
 	}
-	
-	@RequestMapping(value="/iwow/signup")
-	public String signupPage(){
+
+	@RequestMapping(value = "/iwow/signup")
+	public String signupPage() {
 		return "iwow/signup";
 	}
-	
-	@RequestMapping(value="/iwow/setting_profile")
-	public String setting_profilePage(){
+
+	@RequestMapping(value = "/iwow/setting_profile")
+	public String setting_profilePage() {
 		return "iwow/setting_profile";
 	}
-	
+
 	/*-------------------for 403 access denied page----------------*/
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public String accesssDenied(Model model) {
@@ -87,10 +94,10 @@ public class IwowController {
 		return "/iwow/admin";
 
 	}
-	
-	@RequestMapping(value="/iwow/test")
-	public String test(){
+
+	@RequestMapping(value = "/iwow/test")
+	public String test() {
 		return "iwow/test";
 
 	}
- }
+}
