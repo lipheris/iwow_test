@@ -1,15 +1,11 @@
 package tw.com.iwow.web;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,45 +15,49 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import com.google.gson.Gson;
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.PictureService;
-import tw.com.iwow.web.jsonview.Views;
 
-@RestController
+
+//restController不適用SpringMVC先使用一般Controller
+@Controller
 @RequestMapping(value = "/iwow")
 public class PictureController {
 
 	@Autowired
 	private PictureService pictureService;
+
+	//先把Gson註解
+
 	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/list")
-	public String listPage(Model model) throws SQLException, UnsupportedEncodingException {
+
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
+	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
-		Map<Long,String>getPic=new HashMap<Long,String>();
-		for(Picture temp:pictureList){
-			Long id=temp.getId();
-			byte[] testbyte = pictureService.findById(id).getFile().getBytes(1,
-					(int) pictureService.findById(id).getFile().length());
-			byte[] encodeBase64 = Base64.encodeBase64(testbyte);
-			String base64Encoded = new String(encodeBase64, "UTF-8");
-			System.out.println(base64Encoded);
-			getPic.put(id,base64Encoded);
-		}		
-		Gson gson = new Gson();
-		String json = gson.toJson(getPic);
-		
-		return json;
+
+		model.addAttribute("pictureList", pictureList);
+//		Map<Long,String>getPic=new HashMap<Long,String>();
+//		for(Picture temp:pictureList){
+//			Long id=temp.getId();
+//			byte[] testbyte = pictureService.findById(id).getFile().getBytes(1,
+//					(int) pictureService.findById(id).getFile().length());
+//			byte[] encodeBase64 = Base64.encodeBase64(testbyte);
+//			String base64Encoded = new String(encodeBase64, "UTF-8");
+//			System.out.println(base64Encoded);
+//			getPic.put(id,base64Encoded);
+//		}		
+//		Gson gson = new Gson();
+//		String json = gson.toJson(getPic);
+//		return json;
+		return "/iwow/list";
+
 	}
-	
+		
 	@InitBinder
 	public void InitBinder(WebDataBinder binder){
 		//需要額外的寫法
@@ -90,14 +90,16 @@ public class PictureController {
 					e.printStackTrace();
 				}
 				picture.setUpdate(LocalDateTime.now());
-				System.out.println("-------------------------------------------");
-				Blob blob = new javax.sql.rowset.serial.SerialBlob(pic.getBytes());
-				picture.setFile(blob);
+				//直接把路徑寫死	要記得寫.jsp
+				picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+picture.getName().trim()+".jpg");
+//				Blob blob = new javax.sql.rowset.serial.SerialBlob(pic.getBytes());
+//				picture.setFile(blob);
 //				System.out.println(name);
 				// picture.setName(aFile.getOriginalFilename());
 				// uploadFile.setData(aFile.getBytes());
-				pictureService.insert(picture);
-
+				
+				pictureService.insert(picture,pic);
+				
 			
 		return "redirect:/iwow/list";
 	}
