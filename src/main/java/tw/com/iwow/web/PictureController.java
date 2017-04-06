@@ -41,9 +41,6 @@ public class PictureController {
 	@Autowired
 	private MemberService memberService;
 
-<<<<<<< HEAD
-	
-
 /*----單張圖片超連結-----*/
 /*前端請求----<a href="<c:url value="/iwow/indexPicture/${list.id}"/>"><img src='${list.pictureAddress}' /></a>---*/	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/indexPicture/{id}")
@@ -56,18 +53,9 @@ public class PictureController {
 	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
-=======
 
-	@RequestMapping(method=RequestMethod.GET, value = "/list")
-	public String listAJAX(Model model){
-
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 		return "/iwow/list";
 
 
@@ -79,11 +67,8 @@ public class PictureController {
 				
 				DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
 				LocalDate ld=LocalDate.parse(update, dtf);				
-<<<<<<< HEAD
 				LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);	
-=======
-				LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
+
 				try {
 					picture.setVisibility(Visibility.valueOf(visibility));
 				} catch (Exception e) {
@@ -93,15 +78,11 @@ public class PictureController {
 					picture.setAssort(Assort.valueOf(assort));				
 				} catch (Exception e) {
 					e.printStackTrace();
-<<<<<<< HEAD
+
 				}
 				picture.setUpdate(ldt);
 				pictureService.insert(picture,pic);		
-=======
-				}	
-				picture.setUpdate(ldt);
-				pictureService.insert(picture,pic);
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
+
 		return "redirect:/iwow/list";
 	}
 
