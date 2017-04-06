@@ -26,9 +26,10 @@ public class MemberService {
 	}
 	@Transactional
 	public Member insert(Member member) {
+		System.out.println(member);
 		//準備存放錯誤訊息的Map物件
 		Map<String,String> errorMsg = new HashMap<String,String>(); //存放錯誤訊息
-		
+
 		//檢查使用者輸入的資料
 		if(member.getEmail().trim().length() == 0 || member.getEmail() == null){
 			errorMsg.put("error", "error");
@@ -59,8 +60,6 @@ public class MemberService {
 			return null;
 		}
 		
-		//將日期資料轉型
-
 		return memberDao.save(member);
 	}
 	@Transactional

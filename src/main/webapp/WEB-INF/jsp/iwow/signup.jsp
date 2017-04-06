@@ -151,7 +151,7 @@ legend{
 	<div class="signup_spac">
 		<label>生日：</label>
 		<div>
-		<input type="text" id="datepicker">
+		<input type="text" id="datepicker" name="birth" value="">
 		</div>
 	</div>	
 	
