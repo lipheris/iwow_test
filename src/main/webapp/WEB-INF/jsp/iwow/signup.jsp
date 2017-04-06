@@ -16,41 +16,65 @@
 <!-- jQuery datepicker必要的CSS 及JS -->
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+<!-- sweetalert -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
 <script>
-
 $(function(){
+	//檢查密碼
+ 	document.getElementById("password").onblur = chkPwd;
+	
 	//AJAX驗證帳號        
 	$('#email').blur(function(){
 	    var emailVal = $('#email').val();
+	    
 	    $.get('${pageContext.servletContext.contextPath}/iwow/member/checkUserEmail', {"email":emailVal},
 	    	function(data){
 	    		$('#message').html(data);
 	    			if(data == "帳號已存在"){
-// 	    				alert("帳號已存在");
-	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-remove-sign');
+ 	    				//alert("帳號已存在");
+	    				$('#errormail').addClass('glyphicon glyphicon-remove-sign');
+	    				$('#correctmail').removeClass();
+	    				document.getElementById("errormail").innerHTML = "";
 	    			} else if (data == "帳號不存在") { //帳號不存在
-// 	    				alert("帳號不存在");
-	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-ok-sign');
+ 	    				//alert("帳號不存在");
+	    				$('#errormail').removeClass();
+	    				$('#correctmail').addClass('glyphicon glyphicon-ok-sign');
+	    				document.getElementById("errormail").innerHTML = "";
 	    			} else {
-	    				$('#checkicon').removeClass().addClass('glyphicon glyphicon-question-sign');
+	    				//使用者沒輸入信箱，信箱不可為空白
+	    				$('#errormail').removeClass();
+	    				$('#correctmail').removeClass();
+	    				document.getElementById("errormail").innerHTML = "信箱不可為空白";
 	    			}
 	    		}
 	    	);	    		
-	   })        
+	   })
 });
 
-
-
-//jQuery datepicker
-$( function() {
-    $( "#datepicker" ).datepicker({
-      yearRange:"-100:+0",
-   	  maxDate:new Date() ,
-      changeMonth: true,
-      changeYear: true
-    });
-  } );
+//檢查密碼  1.不可空白
+	function chkPwd() {
+		var thePwd = document.getElementById("password").value;
+		var thePwdLen = thePwd.length;
+		
+		if (thePwdLen == "") {
+	        document.getElementById("errorpwd").innerHTML = "密碼不可為空白";
+	    } else {
+	    	document.getElementById("errorpwd").innerHTML = "";
+	    }
+	}
+		
+	//jQuery datepicker
+	$( function() {
+	    $( "#datepicker" ).datepicker({
+	      yearRange:"-100:+0",
+	   	  maxDate:new Date() ,
+	      changeMonth: true,
+	      changeYear: true
+	    });
+	  } );
 </script>
 
 <style>
@@ -62,7 +86,7 @@ $( function() {
 }
 
 /* fieldset */
-fieldset{
+fieldset, .btnsubmit{
 	font-size:25px;
 	font-family:Microsoft JhengHei; /* 微軟正黑體 */
 }
@@ -95,30 +119,32 @@ legend{
 	<!-- 信箱、密碼、姓名、暱稱 -->	
 	<div class="signup_spac">
 		<label for="email">信箱：</label>
-		<input type="text" id="email" name="email" value="">
- 		<span id="checkicon" class="glyphicon glyphicon-question-sign"></span>
+		<input type="text" id="email" name="email" placeholder="請輸入信箱" value=${param.email}>
+ 		<span id ="errormail" style="color:red"></span>
+        <span id="correctmail" style="color:green"></span>
 	</div>
 	
 	<div class="signup_spac">
 		<label for="password">密碼：</label>
-		<input type="password" id="password" name="password" value="">
+		<input type="password" id="password" name="password" placeholder="請輸入密碼">
+		<span id ="errorpwd" style="color:red"></span>
 	</div>
 	
 	<div class="signup_spac">
 		<label for="name">姓名：</label>
-		<input type="text" id="name" name="name" value="">
+		<input type="text" id="name" name="name" value="${param.name}">
 	</div>
 	
 	<div class="signup_spac">
 		<label for="nickname">暱稱：</label>
-		<input type="text" id="nickname" name="nickname" value="">
+		<input type="text" id="nickname" name="nickname" value="${param.nickname}">
 	</div>	
 	
 	<!-- 性別 -->
 	<div class="signup_spac">
 		<label>性別：</label>
-		<input type="radio" name="gender" value="male" id="male"><label for="all">男</label>
-		<input type="radio" name="gender" value="female" id="female"><label for="r18">女</label>
+		<input type="radio" name="gender" value="MAN" id="MAN"><label for="all">男</label>
+		<input type="radio" name="gender" value="WOMAN" id="WOMAN"><label for="r18">女</label>
 	</div>	
 	
 	<!-- 生日 -->
@@ -132,17 +158,17 @@ legend{
 	<!-- 電話、住址  -->
 	<div class="signup_spac">
 		<label for="phone">連絡電話：</label>
-		<input type="text" id="phone" name="phone" value="">
+		<input type="text" id="phone" name="phone" value="${param.phone}">
 	</div>	
 	
 	<div class="signup_spac">
 		<label for="address">住址：</label>
-		<input type="text" id="address" name="address" value="">
+		<input type="text" id="address" name="address" value="${param.address}">
 	</div>	
 		
 	<!-- 送出/清除 -->
 	<div class="signup_spac">
-		<input type="submit" value="送出">
+		<input type="submit" class="btn btn-success btnsubmit" value="送出">
 	</div>
 	
 	</fieldset>
@@ -152,6 +178,18 @@ legend{
 	</form>
 	
 	</div>	
+	
+	<script>
+	$(function(){
+		 if("${errorMsg.error}" != ""){
+			 swal({ 
+				  title: "註冊失敗！", 
+				  text: "請再檢查是否有資料輸入錯誤", 
+				  type: "error"
+				});
+		 }
+	});
+	</script>
 	
 </body>
 </html>
