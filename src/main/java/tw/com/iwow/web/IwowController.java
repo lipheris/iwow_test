@@ -114,5 +114,10 @@ public class IwowController {
 		return "iwow/test";
 
 	}
+	
+	@RequestMapping(value = "/iwow/collectionlist")
+	public String collectionlist(){
+		return "iwow/collectionlist";
+	}
 
 }
