@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "TAGS")
 public class Tag {
@@ -18,6 +20,7 @@ public class Tag {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
+	@Expose
 	@Column(name = "NAME")
 	private String name;
 	@Column(name = "TYPE_ID")

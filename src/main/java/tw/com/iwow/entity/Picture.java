@@ -78,6 +78,7 @@ public class Picture {
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
+	@Expose
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags;
