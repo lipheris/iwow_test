@@ -61,7 +61,7 @@ img{
 		
 		<c:forEach var="list" items="${pictureList}">
 						<tr>
-							<td><a href="<c:url value="/iwow/indexPicture/${list.id}"/>"><img src='${list.pictureAddress}' /></a></td>												
+							<td><a href="<c:url value="/iwow/picture/${list.id}"/>"><img src='${list.pictureAddress}' /></a></td>												
 						</tr>
 		</c:forEach>
 		

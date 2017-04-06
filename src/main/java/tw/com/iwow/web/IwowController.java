@@ -38,7 +38,7 @@ public class IwowController {
 
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
-		return "iwow/index_user";
+		return "redirect:index";
 	}
 
 	@RequestMapping(value = "/iwow/index_user")
