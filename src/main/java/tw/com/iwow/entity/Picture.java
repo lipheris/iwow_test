@@ -60,10 +60,10 @@ public class Picture {
 		this.pictureAddress = pictureAddress;
 	}
 
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
 	/*
