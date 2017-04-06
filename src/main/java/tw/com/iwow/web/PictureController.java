@@ -34,11 +34,14 @@ public class PictureController {
 	@Autowired
 	private PictureService pictureService;
 
+
 	@RequestMapping(method=RequestMethod.GET, value = "/list")
 	public String listAJAX(Model model){
+
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
 		return "/iwow/list";
+
 
 	}
 
