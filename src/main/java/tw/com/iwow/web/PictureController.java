@@ -43,11 +43,11 @@ public class PictureController {
 
 /*----單張圖片超連結-----*/
 /*前端請求----<a href="<c:url value="/iwow/indexPicture/${list.id}"/>"><img src='${list.pictureAddress}' /></a>---*/	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/indexPicture/{id}")
+	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/picture/{id}")
 	public String pictureAJAX(@PathVariable(value="id") Long id, Model model) throws SQLException, UnsupportedEncodingException {
 		String pictureAd = pictureService.getById(id).getPictureAddress();	
 		model.addAttribute("pictureAd",pictureAd);
-		return "/iwow/index_user";		
+		return "/iwow/picture";		
 	}
 
 	
