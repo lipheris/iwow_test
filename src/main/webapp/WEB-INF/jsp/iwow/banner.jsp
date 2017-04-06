@@ -1,13 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="true" %> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>banner</title>
-
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags"%>
+<script src='<c:url value="/temp/js/search.js"/>'></script>
 <style>
 /* banner */
 .searchicon {
@@ -15,9 +7,6 @@
 	margin-top: 7px;
 }
 </style>
-<script type="text/javascript" src="../../js/search.js"></script>
-</head>
-<body onload='document.logoutForm.username.focus();'>
 	<!-- banner -->
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -32,12 +21,13 @@
 				<li class="active"><span class="glyphicon glyphicon-search searchicon" aria-hidden="true"></span></li>
 			</ul>
 
-			<form class="navbar-form navbar-left" id="search">
+			<form class="navbar-form navbar-left" id="searchForm" action="search" method="get">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search" id="searchContext">
+					<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="searchCtx"/>
 				</div>
-				<button type="submit" class="btn btn-default" id="searchButton">Submit</button>
-			</form>
+				<button type="button" class="btn btn-default" id="searchBtn">Submit</button>
+			</form>    
+
 
 				<sec:authorize access="hasRole('ROLE_USER')">					
 					<c:url value="/logout" var="logoutUrl" />
@@ -77,7 +67,4 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
-
-
-</body>
-</html>
+	
