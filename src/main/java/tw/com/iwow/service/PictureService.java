@@ -36,7 +36,7 @@ public class PictureService {
 	@Autowired
 	private MemberDao memberDao;
 
-	public Picture findById(Long id) {
+	public Picture getById(Long id) {
 		return pictureDao.findOne(id);
 	}
 

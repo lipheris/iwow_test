@@ -1,5 +1,6 @@
 package tw.com.iwow.web;
 
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,13 +17,16 @@ import com.google.gson.Gson;
 import tw.com.iwow.service.PictureService;
 
 @Controller
-public class IwowController {
+public class IwowController {	
+
 	@Autowired
 	private PictureService picService;
 
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
-	public String indexPage() {
+	public String indexPage(Model model) {
+		Collection<Picture> pictures=picService.findAll();
+		model.addAttribute("pictureList", pictures);
 		return "iwow/index";
 	}
 
@@ -33,7 +37,7 @@ public class IwowController {
 
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
-		return "iwow/index_user";
+		return "redirect:index";
 	}
 
 	@RequestMapping(value = "/iwow/index_user")
