@@ -2,7 +2,7 @@ package tw.com.iwow.web;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Set;
@@ -29,8 +29,7 @@ import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
 
 
-//restController不適用SpringMVC
-//先把Gson註解
+
 @Controller
 @RequestMapping(value = "/iwow")
 public class PictureController {
@@ -56,37 +55,19 @@ public class PictureController {
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-//		Map<Long,String>getPic=new HashMap<Long,String>();
-//		for(Picture temp:pictureList){
-//			Long id=temp.getId();
-//			byte[] testbyte = pictureService.findById(id).getFile().getBytes(1,
-//					(int) pictureService.findById(id).getFile().length());
-//			byte[] encodeBase64 = Base64.encodeBase64(testbyte);
-//			String base64Encoded = new String(encodeBase64, "UTF-8");
-//			System.out.println(base64Encoded);
-//			getPic.put(id,base64Encoded);
-//		}		
-//		Gson gson = new Gson();
-//		String json = gson.toJson(getPic);
-//		return json;
+
 		return "/iwow/list";
 
 
 	}
-		
-/*
- * Picture排程需要有時間
- * picture寫在參數內可以自動接收到form表單的傳入的值
- * 但是localdatetime、enum、file無法自動塞還需額外寫參數取出
- */
+
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult, String name,String tag,
 			String update, String visibility,String assort, @RequestParam CommonsMultipartFile pic) throws Exception {
-				System.out.println("-------------------------------------------");
-				System.out.println(name+update+visibility+assort+tag+picture);
+				
 				DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
-//				LocalDate ld=LocalDate.parse(update, dtf);				沒有時分秒適用
-//				LocalDateTime ldt = LocalDateTime.parse(update,dtf);	要有時分秒
+				LocalDate ld=LocalDate.parse(update, dtf);				
+				LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);	
 				try {
 					picture.setVisibility(Visibility.valueOf(visibility)); 	//set要用emun的形式
 				} catch (Exception e) {
@@ -97,18 +78,8 @@ public class PictureController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				picture.setUpdate(LocalDateTime.now());
-				//直接把路徑寫死	要記得寫.jsp
-				picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+picture.getName().trim()+".jpg");
-//				Blob blob = new javax.sql.rowset.serial.SerialBlob(pic.getBytes());
-//				picture.setFile(blob);
-//				System.out.println(name);
-				// picture.setName(aFile.getOriginalFilename());
-				// uploadFile.setData(aFile.getBytes());
-				
-				pictureService.insert(picture,pic);
-				
-			
+				picture.setUpdate(ldt);
+				pictureService.insert(picture,pic);		
 		return "redirect:/iwow/list";
 	}
 

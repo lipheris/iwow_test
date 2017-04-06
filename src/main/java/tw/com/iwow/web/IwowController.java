@@ -1,10 +1,7 @@
 package tw.com.iwow.web;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.Collection;
 
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,19 +12,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.PictureService;
 
 @Controller
-public class IwowController {
-	
-	
+public class IwowController {	
+	@Autowired
 	private PictureService picService;
+	
+
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
-	public String indexPage() {
+	public String indexPage(Model model) {
+		Collection<Picture> pictures=picService.findAll();
+		model.addAttribute("pictureList", pictures);
 		return "iwow/index";
 	}
 
@@ -55,7 +54,7 @@ public class IwowController {
 	public String searchPage(@RequestParam(value="searchContext")String param, Model model) {
 		if(param.isEmpty()||param==null)
 			return "iwow/index";
-		
+		model.addAttribute("resultId", picService.search(param));
 		return "iwow/search";
 	}
 
