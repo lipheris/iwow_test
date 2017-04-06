@@ -91,12 +91,7 @@ public class PictureService {
 		}
 		picture.addTag(tag);
 	}
-	public Set<Long> search(String param){
-		Set<Long> result = new HashSet<>();
-		Set<Object> temp = pictureDao.search(param);
-		for(Object obj:temp){
-			result.add((Long)obj);
-		}
-		return result;
+	public Set<Picture> search(String param){
+		return pictureDao.search(param);
 	}
 }
