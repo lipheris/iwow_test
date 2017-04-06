@@ -41,14 +41,15 @@ public class PictureController {
 	@Autowired
 	private MemberService memberService;
 
-/*----單張圖片超連結-----*/
-/*前端請求----<a href="<c:url value="/iwow/indexPicture/${list.id}"/>"><img src='${list.pictureAddress}' /></a>---*/	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/picture/{id}")
-	public String pictureAJAX(@PathVariable(value="id") Long id, Model model) throws SQLException, UnsupportedEncodingException {
-		String pictureAd = pictureService.getById(id).getPictureAddress();	
-		model.addAttribute("pictureAd",pictureAd);
-		return "/iwow/picture";		
-	}
+	/*----單張圖片超連結-----*/
+	/*前端請求----<a href="<c:url value="/iwow/picture/${list.id}"/>"><img src='${list.pictureAddress}' /></a>---*/	
+		@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/picture/{id}")
+		public String pictureAJAX(@PathVariable(value="id") Long id, Model model) throws SQLException, UnsupportedEncodingException {
+			String pictureAd = pictureService.getById(id).getPictureAddress();	
+			model.addAttribute("pictureAd",pictureAd);
+			model.addAttribute("pictureId",id);
+			return "/iwow/picture";
+		}
 
 	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
@@ -86,50 +87,4 @@ public class PictureController {
 		return "redirect:/iwow/list";
 	}
 
-	
-	
-	// CollectionList頁面
-		@RequestMapping("/collectionlist")
-		public String wishListPage(HttpServletRequest request, Model model){
-			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.findById(Id);
-			Set<Picture> collectionList = member.getPicColls();
-			model.addAttribute("collectionList", collectionList);
-			model.addAttribute("member", member);
-			return "/iwow/collectionlist";
-		}
-		
-		
-		//insert Collection
-		@RequestMapping("/collect/picture/{picId}")
-		@ResponseBody
-		public Boolean wishListInsert(@PathVariable Long picId, HttpServletRequest request, Model model){
-			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.findById(Id);
-			Picture picture = pictureService.getById(picId);
-			Set<Picture> pictures = member.getPicColls();
-			if(pictures.contains(picture)){
-				return false;
-			}
-			pictures.add(picture);
-			member.setPicColls(pictures);
-			memberService.update(member);
-			return true;
-		}
-		
-		//delete Collection
-		@RequestMapping("/collect/picture/delete")
-		@ResponseBody
-		public Integer wishListDelete(@RequestParam Long picId, HttpServletRequest request, Model model){
-			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.findById(Id);
-			Set<Picture> pictures = member.getPicColls();
-			Picture picture = pictureService.getById(picId);
-			if(pictures.contains(picture)){
-				pictures.remove(picture);
-				member.setPicColls(pictures);
-				memberService.update(member);
-			}
-			return pictures.size();
-		}
 }
