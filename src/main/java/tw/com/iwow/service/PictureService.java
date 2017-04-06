@@ -1,8 +1,11 @@
 package tw.com.iwow.service;
 
+import java.security.Principal;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -11,6 +14,7 @@ import com.microsoft.azure.storage.blob.CloudBlobClient;
 import com.microsoft.azure.storage.blob.CloudBlobContainer;
 import com.microsoft.azure.storage.blob.CloudBlockBlob;
 
+import tw.com.iwow.dao.MemberDao;
 import tw.com.iwow.dao.PictureDao;
 import tw.com.iwow.dao.TagDao;
 import tw.com.iwow.entity.Picture;
@@ -27,6 +31,8 @@ public class PictureService {
 	private PictureDao pictureDao;
 	@Autowired
 	private TagDao tagDao;
+	@Autowired
+	private MemberDao memberDao;
 
 	public Picture findById(Long id) {
 		return pictureDao.findOne(id);
@@ -35,6 +41,9 @@ public class PictureService {
 	public Picture insert(Picture picture,CommonsMultipartFile file) {
 		//圖片上傳到雲端的語法
 		try{
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String currentPrincipalName = authentication.getName();
+			Long uploaderId = memberDao.findByEmail(currentPrincipalName).getId();
 			  // Retrieve storage account from connection-string.	和microsoft取得連線
 		    CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
@@ -45,8 +54,10 @@ public class PictureService {
 		    CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
 		    // Create or overwrite the "myimage.jpg" blob with contents from a local file.	存取為什麼檔案
-		    CloudBlockBlob blob = container.getBlockBlobReference(picture.getName().trim()+".jpg");
+		    CloudBlockBlob blob = container.getBlockBlobReference(picture.getName().trim()+uploaderId+".jpg");
 		    blob.upload(file.getInputStream(), file.getSize());
+		    picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+picture.getName().trim()+uploaderId+".jpg");
+		    picture.setUploaderId(uploaderId);
 			return pictureDao.save(picture);
 		}catch(Exception e){
 			e.printStackTrace();
