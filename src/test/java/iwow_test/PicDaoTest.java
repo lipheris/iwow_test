@@ -109,15 +109,14 @@ public class PicDaoTest {
 	*/
 	@Test
 	public void testSearch(){
-		Set<Object> testSet=picDao.search("1");
+		Set<Picture> testSet=picDao.search("1");
 		System.out.println();
 		System.out.println();
 		System.out.println(testSet.size());
 		System.out.println();
 		System.out.println();
-		for(Object obj:testSet){
-			Long l=(Long)obj;
-			System.out.println("id="+l);
+		for(Picture pic:testSet){
+			System.out.println("id="+pic.getId());
 		}
 		assertNotNull(testSet);
 	}

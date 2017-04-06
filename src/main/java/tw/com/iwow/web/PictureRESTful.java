@@ -30,7 +30,7 @@ public class PictureRESTful {
 	
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value="/{id}")
 	public Picture findPicture(@PathVariable(value="id") Long id){
-		return pictureService.findById(id);
+		return pictureService.getById(id);
 	}
 	
 //	@RequestMapping(method=RequestMethod.POST, consumes={"application/json"})

@@ -49,7 +49,7 @@ img{
 </style>
 
 </head>
-<body onload='document.logoutForm.username.focus();'>
+<body >
 	<!-- banner import -->
 	<c:import url="banner.jsp" /> 
 	
@@ -58,25 +58,27 @@ img{
 	<div class="imgbox">
 		<h1>waterflow</h1>
 		
+		
+		<c:forEach var="list" items="${pictureList}">
+						<tr>
+							<td><a href="<c:url value="/iwow/picture/${list.id}"/>"><img src='${list.pictureAddress}' /></a></td>												
+						</tr>
+		</c:forEach>
+		
 		<form class="imgForm" action="/iwowwow/iwow/picture" method="get">			
 			<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg" onClick="document.form1.submit()">
 		</form>
 		
-		<img src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
-		<img src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">
-		<img src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg">
-		<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTxWjwdli7SzC13-nd9JnsNFcBPPOL8QCI8fsWcA5Vo3RUCQQ5y">
-		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">
-		<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQjXvYGODrgdGssCS2enKxCuhpU-xWC_aNwDX8q36OtmEUcV24FeA">
 		
-<!-- 		以下新增20170405  -->
-		<c:forEach var="p" items="${enbase64}">
-				<form class="imgForm" action="/iwowwow/iwow/picture" method="post">
-					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="data:image/jpeg;base64,${p.value}" >
-					<input type="hidden" name="jId" value="${p.key}" >
-					<input type="hidden" name="data" value="data:image/jpeg;base64,${p.value}" >		
-<!-- 					form提交的時候 如果出現csrf的問題 則將該參數設為隱藏項 -->
-					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+		
+	<c:forEach var="p" items="${picMsg}">
+<%-- 	<c:url value='/iwow/picture/{p.id}' /> --%>
+<!-- 				<form class="imgForm" action="/iwowwow/iwow/picture/{p.id}" method="get"> -->
+				<form class="imgForm" action="<c:url value='/iwow/picture/${p.id}' />" method="post">
+					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="${p.pictureAddress}" >
+					<input type="hidden" name="jId" value="${p.id}" >
+					<input type="hidden" name="data" value="${p.pictureAddress}" >	
+					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>	
 				</form>			
 		</c:forEach>
 		
