@@ -52,13 +52,13 @@ public class MemberController {
 		if(tempMen == null){
 			Map<String,String> errorMsg = new HashMap<String,String>();
 			errorMsg.put("error", "error");
-			model.addAttribute("errorMsg",errorMsg);
+			model.addAttribute("errorMsg",errorMsg); //signup頁面的javascript可抓這裡的資訊判斷是否註冊失敗
 			return "/iwow/signup";
 		} 
 
 		Map<String,String> correctMsg = new HashMap<String,String>(); 
 		correctMsg.put("correct", "correct");
-		model.addAttribute("correctMsg",correctMsg);
+		model.addAttribute("correctMsg",correctMsg);  //index_user頁面的javascript可抓這裡的資訊判斷是否註冊成功
 		
 		return "redirect:/iwow/index_user";
 	}
