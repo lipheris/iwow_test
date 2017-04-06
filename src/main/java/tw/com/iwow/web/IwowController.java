@@ -1,13 +1,9 @@
 package tw.com.iwow.web;
 
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.apache.commons.codec.binary.Base64;
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +24,7 @@ import tw.com.iwow.service.PictureService;
 public class IwowController {
 	@Autowired
 	private PictureService picService;
+
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
 	public String indexPage() {
@@ -38,7 +35,7 @@ public class IwowController {
 	public String picturePage() {
 		return "iwow/picture";
 	}
-	
+
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
 		return "iwow/index_user";
@@ -55,9 +52,9 @@ public class IwowController {
 	}
 
 	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
-	public String searchPage(@RequestParam(value="searchCtx")String param, Model model) {
+	public String searchPage(@RequestParam(value = "searchCtx") String param, Model model) {
 		System.out.println("123");
-		if(param.isEmpty()||param==null)
+		if (param.isEmpty() || param == null)
 			return "iwow/index";
 		model.addAttribute("resultId", picService.search(param));
 		return "iwow/search";
@@ -113,5 +110,5 @@ public class IwowController {
 		return "iwow/test";
 
 	}
-	
+
 }
