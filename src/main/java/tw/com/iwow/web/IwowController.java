@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.PictureService;
 
 @Controller
@@ -54,7 +56,10 @@ public class IwowController {
 //		System.out.println("123");
 		if (param.isEmpty() || param == null)
 			return null;
-		Gson gson=new Gson();
+		Gson gson=new GsonBuilder()
+				.excludeFieldsWithoutExposeAnnotation()
+				.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
+				.create();
 		model.addAttribute("result", gson.toJson(picService.search(param)));
 		return "/iwow/search";
 	}

@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
@@ -28,6 +30,7 @@ import tw.com.iwow.web.jsonview.Views;
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -36,20 +39,26 @@ public class Picture {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ASSORT")
 	private Assort assort;
+	@Expose
 	@JsonView(Views.PictureDetails.class)
 	@Column(name = "NAME")
 	private String name;
+	@Expose
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
+	@Expose
+	@SerializedName("uploader_id")
 	@JsonView(Views.PictureDetails.class)
 	@Column(name = "UPLOADER_ID")
 	private Long uploaderId;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
+	@Expose
 	@Column(name = "DESCRIPTION")
 	private String description;
-
+	@Expose
+	@SerializedName("picture_address")
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
 	public String getPictureAddress() {

@@ -92,7 +92,7 @@ public class PictureController {
 		@RequestMapping("/collectionlist")
 		public String wishListPage(HttpServletRequest request, Model model){
 			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.getById(Id);
+			Member member = memberService.findById(Id);
 			Set<Picture> collectionList = member.getPicColls();
 			model.addAttribute("collectionList", collectionList);
 			model.addAttribute("member", member);
@@ -105,7 +105,7 @@ public class PictureController {
 		@ResponseBody
 		public Boolean wishListInsert(@PathVariable Long picId, HttpServletRequest request, Model model){
 			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.getById(Id);
+			Member member = memberService.findById(Id);
 			Picture picture = pictureService.getById(picId);
 			Set<Picture> pictures = member.getPicColls();
 			if(pictures.contains(picture)){
@@ -122,7 +122,7 @@ public class PictureController {
 		@ResponseBody
 		public Integer wishListDelete(@RequestParam Long picId, HttpServletRequest request, Model model){
 			Long Id = (Long)request.getSession().getAttribute("Id");
-			Member member = memberService.getById(Id);
+			Member member = memberService.findById(Id);
 			Set<Picture> pictures = member.getPicColls();
 			Picture picture = pictureService.getById(picId);
 			if(pictures.contains(picture)){
