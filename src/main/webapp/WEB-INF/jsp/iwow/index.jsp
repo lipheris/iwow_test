@@ -69,14 +69,14 @@ img{
 		<img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRpLzfMG2-bYjQhJ-Yz6KNBKE3H0NkYnWGJOJF3cE1Z0nzFKTP6">
 		<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQjXvYGODrgdGssCS2enKxCuhpU-xWC_aNwDX8q36OtmEUcV24FeA">
 		
-<!-- 		以下新增20170405  -->
-		<c:forEach var="p" items="${enbase64}">
-				<form class="imgForm" action="/iwowwow/iwow/picture" method="post">
-					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="data:image/jpeg;base64,${p.value}" >
-					<input type="hidden" name="jId" value="${p.key}" >
-					<input type="hidden" name="data" value="data:image/jpeg;base64,${p.value}" >		
-<!-- 					form提交的時候 如果出現csrf的問題 則將該參數設為隱藏項 -->
-					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+	<c:forEach var="p" items="${picMsg}">
+<%-- 	<c:url value='/iwow/picture/{p.id}' /> --%>
+<!-- 				<form class="imgForm" action="/iwowwow/iwow/picture/{p.id}" method="get"> -->
+				<form class="imgForm" action="<c:url value='/iwow/picture/${p.id}' />" method="post">
+					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="${p.pictureAddress}" >
+					<input type="hidden" name="jId" value="${p.id}" >
+					<input type="hidden" name="data" value="${p.pictureAddress}" >	
+					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>	
 				</form>			
 		</c:forEach>
 		

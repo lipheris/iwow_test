@@ -130,9 +130,10 @@ article{
 	<div>
 	<h1>Bird</h1>
 <!-- 	取圖片id對應description -->
-	<c:set var="key" value="${param.jId}" ></c:set>  
-        <h1><c:out value="${picMsg[key]}" /></h1>
-<!-- 	<h2>small bird withpale belly and breast and patterned wing and head stands on concrete</h2> -->
+<%-- 	<c:set var="key" name="key" value="${param.jId}" ></c:set>   --%>
+<%--         <h1><c:out value="${picMsg[key]}" /></h1> --%>
+	<h1><c:out value="${picMsgs}" /></h1>
+
 	</div>
 	
 	<div class="icons">
