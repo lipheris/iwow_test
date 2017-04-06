@@ -1,7 +1,7 @@
 package tw.com.iwow.web;
 
-import java.util.Collection;
 
+import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,9 +19,9 @@ import tw.com.iwow.service.PictureService;
 
 @Controller
 public class IwowController {	
+
 	@Autowired
 	private PictureService picService;
-	
 
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
@@ -34,7 +35,7 @@ public class IwowController {
 	public String picturePage() {
 		return "iwow/picture";
 	}
-	
+
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
 		return "iwow/index_user";
@@ -51,8 +52,9 @@ public class IwowController {
 	}
 
 	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
-	public String searchPage(@RequestParam(value="searchContext")String param, Model model) {
-		if(param.isEmpty()||param==null)
+	public String searchPage(@RequestParam(value = "searchCtx") String param, Model model) {
+		System.out.println("123");
+		if (param.isEmpty() || param == null)
 			return "iwow/index";
 		model.addAttribute("resultId", picService.search(param));
 		return "iwow/search";
@@ -108,5 +110,5 @@ public class IwowController {
 		return "iwow/test";
 
 	}
-	
+
 }
