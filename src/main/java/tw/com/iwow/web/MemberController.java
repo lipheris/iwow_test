@@ -1,33 +1,38 @@
 package tw.com.iwow.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import tw.com.iwow.entity.Member;
 import tw.com.iwow.service.MemberService;
 
-@Controller
 @RequestMapping(value="/iwow/member")
+@RestController
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
 	
-//	@RequestMapping(value="/edit")
-//	public String editPage(Model model, Member form){
-//		Long id = form.getId();
-//		Member member = memberService.findById(id);
-//		model.addAttribute("member",member);
-//		return "iwow/setting_profile";
-//	}
+	@RequestMapping(value="/checkUserEmail")
+	public String checkUserEmail(Member form){
+		String UserEmail = form.getEmail(); //取得使用者輸入的Email		
+		if(UserEmail != null && UserEmail.trim().length() != 0){ //檢查使用者輸入的Email不為null與空白
+			Member member = memberService.getByEmail(UserEmail); //測試使用者輸入的email是否可抓取資料庫內的資料
+			if(member == null){ //如果member為null代表資料庫內沒該筆email，帳號可註冊
+				return "帳號不存在";	
+			} else {
+				return "帳號已存在";
+			}//如果member不為null代表資料庫內有該筆email的資料，帳號不可註冊				
+		}
+		return null;
+	}
 	
 	@RequestMapping(value="/getByEmail")
 	public String getdByEmailPage(Model model, Member form){
-		String email = form.getEmail();
-		System.out.println(email);
-		Member member = memberService.getByEmail(email);
+		String email = form.getEmail(); //取得使用者輸入的email(securrity的username)
+		Member member = memberService.getByEmail(email); //從資料庫內抓取該email的資料
 		model.addAttribute("member",member);
 		return "iwow/setting_profile";
 	}

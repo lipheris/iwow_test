@@ -191,6 +191,13 @@
 			<version>2.8.0</version>
 		</dependency>
 
+<!-- https://mvnrepository.com/artifact/com.microsoft.azure/azure-storage -->
+	<dependency>
+    	<groupId>com.microsoft.azure</groupId>
+    	<artifactId>azure-storage</artifactId>
+    	<version>4.3.0</version>
+	</dependency>
+
 
 	</dependencies>
 
