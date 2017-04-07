@@ -184,43 +184,17 @@ legend {
 				</div>
 
 				<!-- 預約排程投稿 -->
-				<!-- 	<div> -->
-				<!-- 		<label>預約投稿：</label> -->
-				<!-- 		<div> -->
-				<!-- 		<input type="checkbox"  value="reservation" id="reservation"/> -->
-				<!-- 		<input type="text" name="update"id="datepicker" value="" /> -->
-				<!-- 		</div> -->
-				<!-- 	</div> -->
-
-				<!-- 浮水印 -->
-				<div>
-					<label for="watermarks">浮水印</label>
 					<div>
-						<input type="checkbox" name="watermarks" value="watermarks"
-							id="watermarks"> <input type="text" id="watermarks"
-							name="watermarks" placeholder="sample">
+						<label>預約投稿：</label>
+						<div>
+						<input type="checkbox"  value="reservation" id="reservation"/>
+						<input type="text" name="update"id="datepicker" value="" />
+						</div>
 					</div>
-				</div>
 
-				<!-- QR Code -->
-				<div>
-					<label for="watermarks">QR Code</label>
-					<div>
-						<input type="checkbox" name="qr" value="qr" id="qr">
-					</div>
-				</div>
-
-				<!-- 是否販售 -->
-
-				<div>
-					<label>是否販售</label> <input type="radio" name="sale" value="yes"
-						id="yes"><label for="yes">是</label> <input type="radio"
-						name="sale" value="no" id="no"><label for="no">否</label>
-				</div>
 
 				<!-- 送出/清除 -->
-<%-- 				我不需要你了<input type="hidden" name="${_csrf.parameterName}" --%>
-<%-- 					value="${_csrf.token}" /> --%>
+
 				<div>
 					<input type="submit" value="PUBLISH"> <input type="reset"
 						value="CLEAN">
