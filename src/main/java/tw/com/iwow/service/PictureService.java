@@ -1,9 +1,11 @@
 package tw.com.iwow.service;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -56,9 +58,10 @@ public class PictureService {
 		    CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
 		    // Create or overwrite the "myimage.jpg" blob with contents from a local file.	存取為什麼檔案
-		    CloudBlockBlob blob = container.getBlockBlobReference(picture.getName().trim()+uploaderId+".jpg");
+		    String name = LocalDateTime.now().toString()+UUID.randomUUID().toString();	//只要UUID.randomUUID Java可以自動產生出一組亂碼
+		    CloudBlockBlob blob = container.getBlockBlobReference(name+uploaderId+".jpg");
 		    blob.upload(file.getInputStream(), file.getSize());
-		    picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+picture.getName().trim()+uploaderId+".jpg");
+		    picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+name+uploaderId+".jpg");
 		    picture.setUploaderId(uploaderId);
 			return pictureDao.save(picture);
 		}catch(Exception e){
@@ -91,7 +94,12 @@ public class PictureService {
 		}
 		picture.addTag(tag);
 	}
-	public Set<Picture> search(String param){
-		return pictureDao.search(param);
+	public Set<Long> search(String param){
+		Set<Long> result = new HashSet<>();
+//		Set<Object> temp = pictureDao.search(param);
+//		for(Object obj:temp){
+//			result.add((Long)obj);
+//		}
+		return result;
 	}
 }

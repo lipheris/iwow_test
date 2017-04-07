@@ -55,7 +55,7 @@ public class PictureController {
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/list";
+		return "/iwow/listupdate";
 	}
 
 	/*-------------------index page 接圖用----------------*/
@@ -83,29 +83,33 @@ public class PictureController {
 	// }
 
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult, String name,
-			String tag, String update, String visibility, String assort, @RequestParam CommonsMultipartFile pic)
+	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult,
+			String tag, String update ,@RequestParam CommonsMultipartFile pic)
 			throws Exception {
 
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate ld = LocalDate.parse(update, dtf);
 		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
-
-		try {
-			picture.setVisibility(Visibility.valueOf(visibility));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			picture.setAssort(Assort.valueOf(assort));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		picture.setUpdate(ldt);
 		pictureService.insert(picture, pic);
 
 		return "redirect:/iwow/listajax";
 	}
-
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
+	public String deletePicture(Model model,Long id){
+		pictureService.delete(id);
+		Collection<Picture> pictureList = pictureService.findAll();
+		model.addAttribute("pictureList", pictureList);
+		return "/iwow/listupdate";
+	}@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
+	public String updatePicture(Model model,String picName,String visibility,String assort,Long id) throws SQLException, UnsupportedEncodingException {
+		Picture pic=pictureService.getById(id);
+		pic.setName(picName);
+		pic.setVisibility(Visibility.valueOf(visibility));
+		pic.setAssort(Assort.valueOf(assort));
+		pictureService.update(pic);
+		Collection<Picture> pictureList = pictureService.findAll();
+		model.addAttribute("pictureList", pictureList);
+		return "/iwow/listupdate";
+	}
 }
