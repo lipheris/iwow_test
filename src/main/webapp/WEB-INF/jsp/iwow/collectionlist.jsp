@@ -32,8 +32,10 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- sweetalert -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
 
 
 
@@ -268,14 +270,23 @@ h2 {
 
 			$.ajax({
 				url : "/iwowwow/iwow/member/collect/picture/delete",
-				data : {"picId" : picId},
+				data : {"picId" : picId },
 				type : 'get',
 				success : function(response) {
-					if (response == true) {
-						console.log(response);
-					}
+					if (response) {
+						swal({
+							type : 'success',
+							text : '刪除成功!',
+							showConfirmButton : false,
+							customClass : 'swal',
+							timer : 1000,
+							
+						});
+						
+						document.location.href='${pageContext.servletContext.contextPath}/iwow/member/collectionlist';
+					} 
 				}
-			}); 
+			});
 		};
 	</script>
 

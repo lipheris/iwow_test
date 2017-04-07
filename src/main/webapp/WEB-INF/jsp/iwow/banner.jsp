@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags"%>
-<script src='<c:url value="/temp/js/search.js"/>'></script>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<script src='<c:url value="/js/banner_search.js"/>'></script>
 <style>
 /* banner */
 .searchicon {
@@ -21,7 +22,7 @@
 				<li class="active"><span class="glyphicon glyphicon-search searchicon" aria-hidden="true"></span></li>
 			</ul>
 
-			<form class="navbar-form navbar-left" id="searchForm" action="search" method="get">
+			<form class="navbar-form navbar-left" id="searchForm" action='<c:url value="/iwow/search" />' method="get">
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="searchCtx"/>
 				</div>
