@@ -1,5 +1,7 @@
 package tw.com.iwow.web;
 
+import java.util.Collection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,16 +11,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.PictureService;
 
 @Controller
-public class IwowController {
+public class IwowController {	
+
+	@Autowired
 	private PictureService picService;
+
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
-	public String indexPage() {
+	public String indexPage(Model model) {
+		Collection<Picture> pictures=picService.findAll();
+		model.addAttribute("pictureList", pictures);
 		return "iwow/index";
 	}
 
@@ -29,7 +39,7 @@ public class IwowController {
 
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
-		return "iwow/index_user";
+		return "redirect:index";
 	}
 
 	@RequestMapping(value = "/iwow/index_user")
@@ -41,13 +51,17 @@ public class IwowController {
 	public String userPage() {
 		return "iwow/user";
 	}
-
 	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
-	public String searchPage(@RequestParam(value="searchContext")String param, Model model) {
-		if(param.isEmpty()||param==null)
-			return "iwow/index";
-		
-		return "iwow/search";
+	public String searchPage(@RequestParam(value = "searchCtx") String param, Model model) {
+//		System.out.println("123");
+		if (param.isEmpty() || param == null)
+			return null;
+		Gson gson=new GsonBuilder()
+				.excludeFieldsWithoutExposeAnnotation()
+				.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
+				.create();
+		model.addAttribute("result", gson.toJson(picService.search(param)));
+		return "/iwow/search";
 	}
 
 	@RequestMapping(value = "/iwow/upload")
@@ -100,4 +114,10 @@ public class IwowController {
 		return "iwow/test";
 
 	}
+	
+	@RequestMapping(value = "/iwow/collectionlist")
+	public String collectionlist(){
+		return "iwow/collectionlist";
+	}
+
 }

@@ -12,6 +12,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+<!-- jQuery datepicker必要的CSS 及JS -->
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- sweetalert -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+
+<script>
+$(function(){
+	 if("${correctMsg.correct}" != ""){
+		 swal({ 
+			  title: "註冊成功！", 
+			  text: "恭喜您註冊成功！", 
+			  type: "success"
+			});
+	 }
+});
+</script>
+
 <style>
 
 img {
@@ -115,7 +135,7 @@ h2 {
 		<img src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
 		<h4 style="margin: 5px;"><sec:authentication property="principal.username" /></h4>
 		
-	<form action="/iwowwow/iwow/member/getByEmail" method="get">
+	<form action="/iwowwow/iwow/member/edit" method="get">
 		<input type="hidden" name="email" value="<sec:authentication property="principal.username" />"> 
 		<input class="btn btn-info" type="submit" value="編輯個人資料">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -173,24 +193,8 @@ h2 {
 	</div>
 
 	<div class="fans">
-		<h3 class="member_mark">Fans</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
+		<h3 class="member_mark">Collections</h3>
+		<a href="<c:url value="/iwow/member/collectionlist"/>"><p class="more">MORE</p></a>
 	</div>
 
 	<div class="groups">
@@ -212,8 +216,7 @@ h2 {
 	<!-- example01 -->
 	<div class="main_picture_item">
 		<div class="main_picture">
-			<img style="width: 70%;"
-				src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg">
+			<img style="width: 70%;" src="${pictureAd}">
 		</div>
 
 		<div class="main_picture_panter_detail_all">

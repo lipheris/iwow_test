@@ -19,6 +19,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	<mvc:resources mapping="/temp/**" location="/temp/" />
 	<!-- 啟用MVC架構註解，@RequestMapping。 -->
 	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="true">

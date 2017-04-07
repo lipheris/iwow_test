@@ -1,6 +1,5 @@
 package tw.com.iwow.entity;
 
-import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -21,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
@@ -29,6 +30,7 @@ import tw.com.iwow.web.jsonview.Views;
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -37,28 +39,46 @@ public class Picture {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ASSORT")
 	private Assort assort;
+	@Expose
 	@JsonView(Views.PictureDetails.class)
 	@Column(name = "NAME")
 	private String name;
+	@Expose
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
+	@Expose
+	@SerializedName("uploader_id")
 	@JsonView(Views.PictureDetails.class)
 	@Column(name = "UPLOADER_ID")
 	private Long uploaderId;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
-	@Column(name = "FILE_P")
-	private Blob file;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Expose
+	@Column(name = "DESCRIPTION")
+	private String description;
+	@Expose
+	@SerializedName("picture_address")
+	@Column(name = "PICTURE_ADDRESS")
+	private String pictureAddress;
+	public String getPictureAddress() {
+		return pictureAddress;
+	}
+
+	public void setPictureAddress(String pictureAddress) {
+		this.pictureAddress = pictureAddress;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Stats> stats;
-	@OneToMany(orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs;
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
+	@Expose
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags;
@@ -115,13 +135,6 @@ public class Picture {
 		this.visibility = visibility;
 	}
 
-	public Blob getFile() {
-		return file;
-	}
-
-	public void setFile(Blob file) {
-		this.file = file;
-	}
 
 	public Set<Stats> getStats() {
 		return stats;
@@ -166,5 +179,14 @@ public class Picture {
 	public void removeTags(Collection<Tag> tags){
 		this.tags.removeAll(tags);
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	
 }

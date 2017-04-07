@@ -1,13 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="true" %> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>banner</title>
-
+<%@ taglib prefix="c" uri="http://www.springframework.org/tags"%>
+<script src='<c:url value="/temp/js/search.js"/>'></script>
 <style>
 /* banner */
 .searchicon {
@@ -15,15 +7,12 @@
 	margin-top: 7px;
 }
 </style>
-<script type="text/javascript" src="../../js/search.js"></script>
-</head>
-<body onload='document.logoutForm.username.focus();'>
 	<!-- banner -->
 	<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">iwowwow</a>
+			<a class="navbar-brand" href="/iwowwow/iwow/index">iwowwow</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,12 +21,13 @@
 				<li class="active"><span class="glyphicon glyphicon-search searchicon" aria-hidden="true"></span></li>
 			</ul>
 
-			<form class="navbar-form navbar-left" id="search">
+			<form class="navbar-form navbar-left" id="searchForm" action="search" method="get">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search" id="searchContext">
+					<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="searchCtx"/>
 				</div>
-				<button type="submit" class="btn btn-default" id="searchButton">Submit</button>
-			</form>
+				<button type="button" class="btn btn-default" id="searchBtn">Submit</button>
+			</form>    
+
 
 				<sec:authorize access="hasRole('ROLE_USER')">					
 					<c:url value="/logout" var="logoutUrl" />
@@ -71,13 +61,10 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="#"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
+					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="<c:url value="/iwow/index_user"/>"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
 				</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
-
-
-</body>
-</html>
+	
