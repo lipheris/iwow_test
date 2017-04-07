@@ -160,7 +160,7 @@ article {
 	</div>
 
 	<div class="mainPicture">
-		<img style="width: 70%; height: 70%;" src="${pictureAd}">
+		<img style="width: 70%; height: 70%;" src="${param.data}">
 	</div>
 
 	<div class="bottons">
