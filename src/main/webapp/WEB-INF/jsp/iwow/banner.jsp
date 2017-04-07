@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://www.springframework.org/tags"%>
-<script src='<c:url value="/temp/js/search.js"/>'></script>
+<script src='<c:url value="/js/search.js"/>'></script>
 <style>
 /* banner */
 .searchicon {
