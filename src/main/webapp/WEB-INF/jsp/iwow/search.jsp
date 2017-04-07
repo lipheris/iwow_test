@@ -123,11 +123,14 @@
 		<script type="text/javascript">
 		var rs=$("#search_result");
 		$.each(${result},function(index,picture){
+			var link = $("<a></a>").attr("href","picture/"+picture.id)
+									.appendTo(rs);
 			var pic = $("<img>").attr("src",picture.picture_address)
-								.addClass("search_result_picture");
-			rs.append(pic);
+								.addClass("search_result_picture")
+								.appendTo(link);
 		});
 		</script>
+<!-- 		<a href="tw.yahoo.com"><img src=""></a> -->
 <!-- 		<img class="search_result_picture" src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu"> -->
 <!-- 		<img class="search_result_picture" src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$"> -->
 <!-- 		<img class="search_result_picture" src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg"> -->
