@@ -10,6 +10,8 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">var result = ${result};</script>
+<script type="text/javascript" src='<c:url value="/js/search_result.js" />'></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
@@ -120,16 +122,6 @@
 
 	<!-- Search結果 -->
 	<div class="search_result" id="search_result">
-		<script type="text/javascript">
-		var rs=$("#search_result");
-		$.each(${result},function(index,picture){
-			var link = $("<a></a>").attr("href","picture/"+picture.id)
-									.appendTo(rs);
-			var pic = $("<img>").attr("src",picture.picture_address)
-								.addClass("search_result_picture")
-								.appendTo(link);
-		});
-		</script>
 <!-- 		<a href="tw.yahoo.com"><img src=""></a> -->
 <!-- 		<img class="search_result_picture" src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu"> -->
 <!-- 		<img class="search_result_picture" src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$"> -->
