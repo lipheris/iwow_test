@@ -105,7 +105,7 @@ public class PictureController {
 		picture.setUpdate(ldt);
 		pictureService.insert(picture, pic);
 
-		return "redirect:/iwow/list";
+		return "redirect:/iwow/listajax";
 	}
 
 }
