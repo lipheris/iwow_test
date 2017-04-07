@@ -193,10 +193,8 @@ h2 {
 	</div>
 
 	<div class="fans">
-		<h3 class="member_mark">Fans</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>		
-		<a href="#"><p class="more">MORE</p></a>
+		<h3 class="member_mark">Collections</h3>
+		<a href="<c:url value="/iwow/member/collectionlist"/>"><p class="more">MORE</p></a>
 	</div>
 
 	<div class="groups">

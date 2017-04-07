@@ -57,27 +57,13 @@ img{
 <div class="container">
 	<div class="imgbox">
 		<h1>waterflow</h1>
-		
-		
-		<c:forEach var="list" items="${pictureList}">
-						<tr>
-							<td><a href="<c:url value="/iwow/picture/${list.id}"/>"><img src='${list.pictureAddress}' /></a></td>												
-						</tr>
-		</c:forEach>
-		
-		<form class="imgForm" action="/iwowwow/iwow/picture" method="get">			
-			<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="https://upload.wikimedia.org/wikipedia/commons/3/32/House_sparrow04.jpg" onClick="document.form1.submit()">
-		</form>
-		
-		
+					
 		
 	<c:forEach var="p" items="${picMsg}">
-<%-- 	<c:url value='/iwow/picture/{p.id}' /> --%>
-<!-- 				<form class="imgForm" action="/iwowwow/iwow/picture/{p.id}" method="get"> -->
 				<form class="imgForm" action="<c:url value='/iwow/picture/${p.id}' />" method="post">
 					<input class="imgBtn" type="image" name="imgBtn" id="imgBtn" src="${p.pictureAddress}" >
-					<input type="hidden" name="jId" value="${p.id}" >
-					<input type="hidden" name="data" value="${p.pictureAddress}" >	
+					<input type="hidden" name="picId" value="${p.id}" >
+					<input type="hidden" name="picAdr" value="${p.pictureAddress}" >	
 					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>	
 				</form>			
 		</c:forEach>

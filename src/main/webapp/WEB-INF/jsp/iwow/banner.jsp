@@ -61,7 +61,7 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="#"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
+					<li><a style="padding: 0px; padding-top: 10px; margin-right: 10px;" href="<c:url value="/iwow/index_user"/>"><img style="width: 32px; margin-right: 5px;" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
 				</ul>
 		</div>
 		<!-- /.navbar-collapse -->

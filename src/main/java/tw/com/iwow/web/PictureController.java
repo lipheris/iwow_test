@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 
@@ -30,8 +31,6 @@ import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
 
-
-
 @Controller
 @RequestMapping(value = "/iwow")
 public class PictureController {
@@ -42,47 +41,69 @@ public class PictureController {
 	private MemberService memberService;
 
 	/*----單張圖片超連結-----*/
-	/*前端請求----<a href="<c:url value="/iwow/picture/${list.id}"/>"><img src='${list.pictureAddress}' /></a>---*/	
-		@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/picture/{id}")
-		public String pictureAJAX(@PathVariable(value="id") Long id, Model model) throws SQLException, UnsupportedEncodingException {
-			String pictureAd = pictureService.getById(id).getPictureAddress();	
-			model.addAttribute("pictureAd",pictureAd);
-			model.addAttribute("pictureId",id);
-			return "/iwow/picture";
-		}
+	@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST}, produces = {
+			"application/json" }, value = "/picture/{id}")
+	public String pictureAJAX(@PathVariable(value = "id") Long id, Model model)
+			throws SQLException, UnsupportedEncodingException {
+		String pictureAd = pictureService.getById(id).getPictureAddress();
+		model.addAttribute("pictureAd", pictureAd);
+		model.addAttribute("pictureId", id);
+		return "/iwow/picture";
+	}
 
-	
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value = "/listajax")
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/listajax")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
-
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
 		return "/iwow/list";
-
-
 	}
 
+	/*-------------------index page 接圖用----------------*/
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String methodPost(Model model) throws Exception {
+		Collection<Picture> pictureList = pictureService.findAll();
+		Collection<Picture> picsT = new ArrayList<Picture>();
+		for (Picture pics : pictureList) {
+			if (pics.getPictureAddress() != null) {
+				picsT.add(pics);
+			}
+		}
+		model.addAttribute("picMsg", picsT);
+		return "iwow/index";
+	}
+
+	/*-------------------picture page 對應圖for description----------------*/
+	// @RequestMapping(value = "/picture/{id}", method = RequestMethod.POST)
+	// public String picturePage(Model model,@RequestParam(name="picId") String
+	// jId){
+	// Picture pic = pictureService.getById(Long.valueOf(jId));
+	// String picNmae=pic.getName();
+	// model.addAttribute("picMsgs", picNmae);
+	// return "iwow/picture";
+	// }
+
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
-	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult, String name,String tag,
-			String update, String visibility,String assort, @RequestParam CommonsMultipartFile pic) throws Exception {
-				
-				DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
-				LocalDate ld=LocalDate.parse(update, dtf);				
-				LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);	
+	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult, String name,
+			String tag, String update, String visibility, String assort, @RequestParam CommonsMultipartFile pic)
+			throws Exception {
 
-				try {
-					picture.setVisibility(Visibility.valueOf(visibility));
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				try {
-					picture.setAssort(Assort.valueOf(assort));				
-				} catch (Exception e) {
-					e.printStackTrace();
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		LocalDate ld = LocalDate.parse(update, dtf);
+		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
 
-				}
-				picture.setUpdate(ldt);
-				pictureService.insert(picture,pic);		
+		try {
+			picture.setVisibility(Visibility.valueOf(visibility));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			picture.setAssort(Assort.valueOf(assort));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		picture.setUpdate(ldt);
+		pictureService.insert(picture, pic);
 
 		return "redirect:/iwow/list";
 	}

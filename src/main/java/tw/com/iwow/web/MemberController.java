@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -92,7 +93,7 @@ public class MemberController {
 	
 	// CollectionList頁面
 		@RequestMapping("/collectionlist")
-		public String wishListPage( Model model) {
+		public String collectionListPage( Model model) {
 			String currentPrincipalName = SecurityContextHolder.getContext().getAuthentication().getName();
 			Long Id = memberService.getByEmail(currentPrincipalName).getId();
 			Member member = memberService.findById(Id);
@@ -105,10 +106,9 @@ public class MemberController {
 		// insert Collection
 		@RequestMapping("/collect/picture/{picId}")
 		@ResponseBody
-		public Boolean wishListInsert(@PathVariable Long picId, Model model) {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			String currentPrincipalName = authentication.getName();
-			Long Id = memberService.getByEmail(currentPrincipalName).getId();
+		public Boolean collectionListInsert(@PathVariable Long picId, Model model) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+			Long Id = memberService.getByEmail(authentication.getName()).getId();
 			Member member = memberService.findById(Id);
 			Picture picture = pictureService.getById(picId);
 			Set<Picture> pictures = member.getPicColls();
@@ -122,18 +122,19 @@ public class MemberController {
 		}
 
 		// delete Collection
-		@RequestMapping("/collect/picture/delete")
+		@RequestMapping(value="/collect/picture/delete",method = RequestMethod.GET)
 		@ResponseBody
-		public Integer wishListDelete(@RequestParam Long picId, HttpServletRequest request, Model model) {
-			Long Id = (Long) request.getSession().getAttribute("Id");
+		public Boolean collectionListDelete(@RequestParam("picId") Long picId,Model model) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+			Long Id = memberService.getByEmail(authentication.getName()).getId();
 			Member member = memberService.findById(Id);
 			Set<Picture> pictures = member.getPicColls();
 			Picture picture = pictureService.getById(picId);
 			if (pictures.contains(picture)) {
 				pictures.remove(picture);
 				member.setPicColls(pictures);
-				memberService.update(member);
+				memberService.update(member);			
 			}
-			return pictures.size();
+			return true;
 		}
 }

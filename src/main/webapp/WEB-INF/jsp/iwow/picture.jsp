@@ -147,9 +147,6 @@ article {
 	<article>
 	<div>
 	<h1>Bird</h1>
-<!-- 	取圖片id對應description -->
-<%-- 	<c:set var="key" name="key" value="${param.jId}" ></c:set>   --%>
-<%--         <h1><c:out value="${picMsg[key]}" /></h1> --%>
 	<h1><c:out value="${picMsgs}" /></h1>
 
 	</div>
