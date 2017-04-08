@@ -215,6 +215,19 @@ public class Member {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+	
+	public void addGroup(Group group){
+		this.groups.add(group);
+	}
+	public void removeGroup(Group group){
+		this.groups.remove(group);
+	}
+	public void addGroups(Collection<Group> groups){
+		this.groups.addAll(groups);
+	}
+	public void removeGroups(Collection<Group> groups){
+		this.groups.removeAll(groups);
+	}
 	public void addPicColl(Picture picColl){
 		this.picColls.add(picColl);
 	}

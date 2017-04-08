@@ -28,8 +28,9 @@ import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
 
-@RequestMapping(value="/iwow/member")
+
 @Controller
+@RequestMapping(value="/iwow/member")
 @SessionAttributes(names={"correctMsg"})
 public class MemberController {
 	
@@ -115,8 +116,7 @@ public class MemberController {
 			if (pictures.contains(picture)) {
 				return false;
 			}
-			pictures.add(picture);
-			member.setPicColls(pictures);
+			member.addPicColl(picture);
 			memberService.update(member);
 			return true;
 		}
@@ -131,10 +131,11 @@ public class MemberController {
 			Set<Picture> pictures = member.getPicColls();
 			Picture picture = pictureService.getById(picId);
 			if (pictures.contains(picture)) {
-				pictures.remove(picture);
-				member.setPicColls(pictures);
+				member.removePicColl(picture);
 				memberService.update(member);			
 			}
 			return true;
 		}
+
+		
 }
