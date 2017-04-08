@@ -2,6 +2,7 @@ package tw.com.iwow.entity;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -61,6 +64,7 @@ public class Picture {
 	@SerializedName("picture_address")
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
+
 	public String getPictureAddress() {
 		return pictureAddress;
 	}
@@ -69,24 +73,25 @@ public class Picture {
 		this.pictureAddress = pictureAddress;
 	}
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
+	private Stats stats = new Stats(this);
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
-	private Set<Stats> stats;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
-	private Set<Spec> specs;
+	private Set<Spec> specs = new HashSet<>();
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
 	@Expose
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
-	private Set<Tag> tags;
+	private Set<Tag> tags = new HashSet<>();
 	/*
 	 * 
 	 */
-	@ManyToMany(mappedBy="picColls")
-	private Set<Member> collectors;
+	@ManyToMany(mappedBy = "picColls")
+	private Set<Member> collectors = new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -135,12 +140,11 @@ public class Picture {
 		this.visibility = visibility;
 	}
 
-
-	public Set<Stats> getStats() {
+	public Stats getStats() {
 		return stats;
 	}
 
-	public void setStats(Set<Stats> stats) {
+	public void setStats(Stats stats) {
 		this.stats = stats;
 	}
 
@@ -160,24 +164,39 @@ public class Picture {
 		this.tags = tags;
 	}
 
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+	}
+
+	public void removeTag(Tag tag) {
+		this.tags.remove(tag);
+	}
+
+	public void addTags(Collection<Tag> tags) {
+		this.tags.addAll(tags);
+	}
+
+	public void removeTags(Collection<Tag> tags) {
+		this.tags.removeAll(tags);
+	}
+
 	public Set<Member> getCollectors() {
 		return collectors;
 	}
 
 	public void setCollectors(Set<Member> collectors) {
+		this.stats.setLikes(Long.valueOf((long)collectors.size()));
 		this.collectors = collectors;
 	}
-	public void addTag(Tag tag){
-		this.tags.add(tag);
+
+	public void addCollector(Member collector) {
+		this.stats.addLikes();
+		this.collectors.add(collector);
 	}
-	public void removeTag(Tag tag){
-		this.tags.remove(tag);
-	}
-	public void addTags(Collection<Tag> tags){
-		this.tags.addAll(tags);
-	}
-	public void removeTags(Collection<Tag> tags){
-		this.tags.removeAll(tags);
+
+	public void removeCollector(Member collector) {
+		if (this.collectors.contains(collector))
+			this.collectors.remove(collector);
 	}
 
 	public String getDescription() {
@@ -187,6 +206,5 @@ public class Picture {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 }
