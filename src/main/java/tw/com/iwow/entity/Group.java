@@ -1,5 +1,6 @@
 package tw.com.iwow.entity;
 
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -51,5 +52,18 @@ public class Group {
 
 	public void setMembers(Set<Member> members) {
 		this.members = members;
+	}
+	
+	public void addMember(Member member){
+		this.members.add(member);
+	}
+	public void removeMember(Member member){
+		this.members.remove(member);
+	}
+	public void addMembers(Collection<Member> members){
+		this.members.addAll(members);
+	}
+	public void removeMembers(Collection<Member> members){
+		this.members.removeAll(members);
 	}
 }

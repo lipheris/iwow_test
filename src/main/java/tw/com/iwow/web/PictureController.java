@@ -60,6 +60,7 @@ public class PictureController {
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String methodPost(Model model) throws Exception {
 		Collection<Picture> pictureList = pictureService.findAll();
+		//處理null
 		Collection<Picture> picsT = new ArrayList<Picture>();
 		for (Picture pics : pictureList) {
 			if (pics.getPictureAddress() != null) {
@@ -70,15 +71,6 @@ public class PictureController {
 		return "iwow/index";
 	}
 
-	/*-------------------picture page 對應圖for description----------------*/
-	// @RequestMapping(value = "/picture/{id}", method = RequestMethod.POST)
-	// public String picturePage(Model model,@RequestParam(name="picId") String
-	// jId){
-	// Picture pic = pictureService.getById(Long.valueOf(jId));
-	// String picNmae=pic.getName();
-	// model.addAttribute("picMsgs", picNmae);
-	// return "iwow/picture";
-	// }
 
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult,
