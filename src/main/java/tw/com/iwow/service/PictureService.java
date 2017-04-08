@@ -27,10 +27,9 @@ import tw.com.iwow.entity.Tag;
 @Service
 public class PictureService {
 
-    private static final String storageConnectionString =
-			"DefaultEndpointsProtocol=https;AccountName=iwowblob;AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA==" +
-					"AccountName=iwowblob;" +
-					"AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA==";
+	private static final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=iwowblob;AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA=="
+			+ "AccountName=iwowblob;"
+			+ "AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA==";
 	@Autowired
 	private PictureDao pictureDao;
 	@Autowired
@@ -42,29 +41,49 @@ public class PictureService {
 		return pictureDao.findOne(id);
 	}
 
-	public Picture insert(Picture picture,CommonsMultipartFile file) {
-		//圖片上傳到雲端的語法
-		try{
+	public Picture insert(Picture picture, CommonsMultipartFile pic, String[] tags) {
+		Set<Tag> temptags = new HashSet<Tag>();
+		Collection<Tag> tagsSQL = tagDao.findAll();
+		for (String tag : tags) {
+			Tag temptag = new Tag();
+			for (Tag tagSQL : tagsSQL) {
+				if (tagSQL.getName().equals(tag)) {
+					temptags.add(tagSQL);
+					break;
+				}
+			}
+		}
+		picture.setTags(temptags);
+		return insert(picture, pic);
+	}
+
+	public Picture insert(Picture picture, CommonsMultipartFile pic) {
+		// 圖片上傳到雲端的語法
+		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
 			Long uploaderId = memberDao.findByEmail(currentPrincipalName).getId();
-			  // Retrieve storage account from connection-string.	和microsoft取得連線
-		    CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+			// Retrieve storage account from connection-string. 和microsoft取得連線
+			CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-		    // Create the blob client.
-		    CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+			// Create the blob client. 說明我們是要上傳圖片的
+			CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-		    // Retrieve reference to a previously created container.		選擇到哪一個container
-		    CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+			// Retrieve reference to a previously created container.
+			// 選擇到哪一個container
+			CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-		    // Create or overwrite the "myimage.jpg" blob with contents from a local file.	存取為什麼檔案
-		    String name = LocalDateTime.now().toString()+UUID.randomUUID().toString();	//只要UUID.randomUUID Java可以自動產生出一組亂碼
-		    CloudBlockBlob blob = container.getBlockBlobReference(name+uploaderId+".jpg");
-		    blob.upload(file.getInputStream(), file.getSize());
-		    picture.setPictureAddress("https://iwowblob.blob.core.windows.net/mycontainer/"+name+uploaderId+".jpg");
-		    picture.setUploaderId(uploaderId);
+			// Create or overwrite the "myimage.jpg" blob with contents from a
+			// local file. 存取為什麼檔案
+			String name = LocalDateTime.now().toString() + UUID.randomUUID().toString(); // 只要UUID.randomUUID
+																							// Java可以自動產生出一組亂碼
+			CloudBlockBlob blob = container.getBlockBlobReference(name + uploaderId + ".jpg");
+			blob.upload(pic.getInputStream(), pic.getSize());
+			picture.setPictureAddress(
+					"https://iwowblob.blob.core.windows.net/mycontainer/" + name + uploaderId + ".jpg");
+			picture.setUploaderId(uploaderId);
 			return pictureDao.save(picture);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -95,7 +114,8 @@ public class PictureService {
 		picture.addTag(tag);
 
 	}
-	public Set<Picture> search(String param){
+
+	public Set<Picture> search(String param) {
 		return pictureDao.search(param);
 	}
 }

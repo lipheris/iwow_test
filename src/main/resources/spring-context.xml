@@ -54,6 +54,7 @@
 	<bean id="pictureRESTful" class="tw.com.iwow.web.PictureRESTful" />
 	<bean id="pictureController" class="tw.com.iwow.web.PictureController" />
 	<bean id="memberController" class="tw.com.iwow.web.MemberController" />
+	<bean id="tagController" class="tw.com.iwow.web.TagController" />
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 </beans>

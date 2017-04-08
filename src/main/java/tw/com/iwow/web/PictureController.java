@@ -8,9 +8,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import tw.com.iwow.entity.Member;
 import tw.com.iwow.entity.Picture;
+import tw.com.iwow.entity.Tag;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.MemberService;
@@ -84,15 +82,19 @@ public class PictureController {
 
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult,
-			String tag, String update ,@RequestParam CommonsMultipartFile pic)
-			throws Exception {
-
+			String update ,@RequestParam CommonsMultipartFile pic,String[] tags)
+			 {
+		
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate ld = LocalDate.parse(update, dtf);
 		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
 		picture.setUpdate(ldt);
-		pictureService.insert(picture, pic);
-
+		
+		if(tags==null){
+			pictureService.insert(picture, pic);
+		}else{
+		pictureService.insert(picture, pic,tags);
+		}
 		return "redirect:/iwow/listajax";
 	}
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")

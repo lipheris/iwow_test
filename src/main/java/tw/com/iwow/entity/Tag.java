@@ -1,6 +1,7 @@
 package tw.com.iwow.entity;
 
 import java.sql.Clob;
+import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ public class Tag {
 	@Column(name = "TYPE_ID")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
 	@Column(name = "DSC")
-	private Clob dsc;// 針對tag新增時的說明
+	private String dsc;// 針對tag新增時的說明
 	@ManyToMany(mappedBy = "tags")
 	private Set<Picture> Pictures;
 
@@ -54,11 +55,11 @@ public class Tag {
 		this.typeId = typeId;
 	}
 
-	public Clob getDsc() {
+	public String getDsc() {
 		return dsc;
 	}
 
-	public void setDsc(Clob dsc) {
+	public void setDsc(String dsc) {
 		this.dsc = dsc;
 	}
 
@@ -69,5 +70,16 @@ public class Tag {
 	public void setPictures(Set<Picture> pictures) {
 		Pictures = pictures;
 	}
-
+	public void addTag(Picture picture){
+		this.Pictures.add(picture);
+	}
+	public void removeTag(Picture picture){
+		this.Pictures.remove(picture);
+	}
+	public void addTags(Collection<Picture> pictures){
+		this.Pictures.addAll(pictures);
+	}
+	public void removeTags(Collection<Picture> pictures){
+		this.Pictures.removeAll(pictures);
+	}
 }
