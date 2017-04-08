@@ -152,7 +152,7 @@ article {
 	</div>
 
 	<div class="icons">
-		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true">4315</span>
+		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true" id="views">4315</span>
 		<span class="glyphicon glyphicon-star-empty icon" aria-hidden="true">92</span>
 		<a class="glyphicon glyphicon-star-empty icon" aria-hidden="true" data-picId="${pictureId}"
 			onClick="save_click($(this))">13</a> 
