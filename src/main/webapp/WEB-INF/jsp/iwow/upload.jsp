@@ -148,18 +148,18 @@ legend {
 				<!-- 題目、說明文 -->
 				<div>
 					<label for="title">標題：</label> <input type="text" id="title"
-						name="name" value=" ">
+						name="name" value="">
 				</div>
 
 				<div>
 					<label for="description">描述：</label> <input type="text"
-						id="description" name="description" value=" ">
+						id="description" name="description" value="">
 				</div>
 
 				<!-- TAG -->
 				<div>
 					<label for="tag">Tag：</label> <input type="text" id="tag"
-						name="tags" value=" ">
+						name="tags" value="">
 				</div>
 				<div>
 					<input type="checkbox" name="keytag" value="keytag" id="keytag"><label
@@ -169,7 +169,7 @@ legend {
 				<!-- 瀏覽限制 -->
 				<div>
 					<label>瀏覽限制：</label> <input type="radio" name="assort"
-						value="GENERAL" id="all"><label for="all">全年齡</label> <input
+						value="GENERAL" id="all"checked><label for="all">全年齡</label> <input
 						type="radio" name="assort" value="RESTRICTED" id="r18"><label
 						for="r18">18禁</label>
 				</div>
@@ -177,7 +177,7 @@ legend {
 				<!-- 隱私 -->
 				<div>
 					<label>隱私：</label> <input type="radio" name="visibility"
-						value="PUBLIC" id="PUBLIC"><label for="public">所有人</label>
+						value="PUBLIC" id="PUBLIC"checked><label for="public">所有人</label>
 					<!-- 		<input type="radio" name="visibility" value="friends" id="friends"><label for="friends">朋友</label>  enum暫時沒有可能要討論  -->
 					<input type="radio" name="visibility" value="PRIVATE" id="PRIVATE"><label
 						for="private">私人</label>
