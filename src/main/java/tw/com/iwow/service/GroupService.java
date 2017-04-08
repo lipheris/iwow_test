@@ -3,12 +3,14 @@ package tw.com.iwow.service;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import tw.com.iwow.dao.GroupDao;
 import tw.com.iwow.entity.Group;
-import tw.com.iwow.entity.Member;
 
+@Service
 public class GroupService {
+	
 	@Autowired GroupDao groupDao;
 	@Autowired MemberService memberService;
 	
@@ -16,7 +18,18 @@ public class GroupService {
 		return groupDao.save(group);
 	}
 	
-	public Set<Group> getById(Long id){
-		return memberService.findById(id).getGroups();		
+	public void delete(Long id){
+		 groupDao.delete(id);
 	}
+	public Group getByName(String name){
+		return groupDao.findByName(name);
+	}
+	
+	public Set<Group> getById(Long memid){
+		return memberService.findById(memid).getGroups();		
+	}
+	
+	
+	
+	
 }
