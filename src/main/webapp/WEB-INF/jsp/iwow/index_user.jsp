@@ -96,10 +96,10 @@ h2 {
 
 	<!-- aside -->
 	<aside>
-	<!-- userPro import -->
-	<c:import url="userPro.jsp" /> 
-	<!-- userSocial import -->
-	<c:import url="userSocial.jsp" /> 
+	<!-- user_profile import -->
+	<c:import url="user_profile.jsp" /> 
+	<!-- user_social import -->
+	<c:import url="user_social.jsp" /> 
 	</aside>
 	<!-- aside -->
 
