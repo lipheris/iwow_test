@@ -36,11 +36,6 @@ article {
 	width: 70%;
 }
 
-.userPro, .shopPro {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
 
 .icons, .bottons {
 	text-align: right;
@@ -85,64 +80,17 @@ article {
 
 	<!-- aside -->
 	<aside>
-	<div class="userPro" style="margin-bottom: 30px;">
-		<img
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
-		<h4 style="margin: 5px;">Tom</h4>
-		<button class="btn btn-info" type="submit">Follow</button>
-	</div>
-
-	<div class="shopPro" style="margin-bottom: 30px;">
-		<h3 style="margin-bottom: 0px;">Shopping</h3>
-		<h4 style="display: inline-block;">7.00$</h4>
-		<span style="display: inline-block; margin-left: 7px;"
-			class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-	</div>
-
-	<div style="width: 100%; margin-left: 0px;" class="row">
-		<div class="input-group">
-			<input type="text" class="form-control" placeholder="Add a comment">
-			<span class="input-group-btn">
-				<button class="btn btn-default glyphicon glyphicon-comment"
-					type="button"></button>
-			</span>
-		</div>
-		<!-- /input-group -->
-	</div>
-	<!-- /.row --> <img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Aprl
-		14</p>
-	<p>How delicious it look!</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Aprl
-		05</p>
-	<p>yummy</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		28</p>
-	<p>So Cute</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		05</p>
-	<p>WOW</p>
-
+	<!-- picture_painter import-->
+	<c:import url="picture_painter.jsp" /> 
+	
+	<!-- picture_shop.jsp import-->
+	<c:import url="picture_shop.jsp.jsp" /> 
+	
+	<!-- picture_comment import-->
+	<c:import url="picture_comment.jsp" /> 
 
 	</aside>
+	<!-- aside -->
 
 	<article>
 	<div>
