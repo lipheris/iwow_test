@@ -8,8 +8,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
-	<!-- @Component，@Repository，@Service，@Controller 自動掃描，並添加到bean工廠中去 -->
-	<context:annotation-config />  <!--可被context:component-scan取代 -->
+	<!-- @Component，@Repository，@Service，@Controller 自動掃描加到bean工廠去  可@Autowired-->
+	<!-- <context:annotation-config />  被下面取代  -->
 
 	<!-- 用annotation 自動註冊bean並保證@Required,@Autowired被注入 -->
 	<context:component-scan base-package="tw.com.iwow.service" />
@@ -50,11 +50,7 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<bean id="iwowController" class="tw.com.iwow.web.IwowController" />
-	<bean id="pictureRESTful" class="tw.com.iwow.web.PictureRESTful" />
-	<bean id="pictureController" class="tw.com.iwow.web.PictureController" />
-	<bean id="memberController" class="tw.com.iwow.web.MemberController" />
-	<bean id="tagController" class="tw.com.iwow.web.TagController" />
+
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 </beans>
