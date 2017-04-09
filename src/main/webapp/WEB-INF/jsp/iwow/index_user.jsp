@@ -36,7 +36,11 @@ $(function(){
 img {
 	width: 30%;
 }
-
+aside {
+	margin-left: 50px;
+	width: 15%;
+	float: left;
+}
 article {
 	margin-left: 25%;
 	width: 70%;
@@ -90,9 +94,14 @@ h2 {
 	<!-- banner import -->
 	<c:import url="banner.jsp" /> 
 
-	<!-- aside import-->
-	<c:import url="user_profile.jsp" /> 
-
+	<!-- aside -->
+	<aside>
+	<!-- userPro import -->
+	<c:import url="userPro.jsp" /> 
+	<!-- userSocial import -->
+	<c:import url="userSocial.jsp" /> 
+	</aside>
+	<!-- aside -->
 
 	<article>
 	<div>
