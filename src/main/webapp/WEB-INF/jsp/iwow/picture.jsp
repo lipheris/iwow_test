@@ -73,103 +73,23 @@ article {
 </head>
 <body>
 	<!-- banner import -->
-	<c:import url="banner.jsp" />
+	<c:import url="label/banner.jsp" />
 
 
 	<!-- aside -->
 	<aside>
 	<!-- picture_painter import-->
-	<c:import url="picture_painter.jsp" /> 
+	<c:import url="label/picture_painter.jsp" /> 
 	
 	<!-- picture_shop.jsp import-->
-	<c:import url="picture_shop.jsp" /> 
+	<c:import url="label/picture_shop.jsp" /> 
 	
 	<!-- picture_comment import-->
-	<c:import url="picture_comment.jsp" /> 
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Aprl
-		05</p>
-	<p>yummy</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		28</p>
-	<p>So Cute</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		05</p>
-	<p>WOW</p>
+	<c:import url="label/picture_comment.jsp" /> 
 
 	</aside>
 	<!-- aside -->
-
-	<article>
-	<div>
-	<h1>Bird</h1>
-	<h1><c:out value="${picMsgs}" /></h1>
-
-	</div>
-
-	<div class="icons">
-		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true" id="views">4315</span>
-		<span class="glyphicon glyphicon-star-empty icon" aria-hidden="true">92</span>
-		<a class="glyphicon glyphicon-star-empty icon" aria-hidden="true" data-picId="${pictureId}"
-			onClick="save_click($(this))">13</a> 
-		<span class="glyphicon glyphicon-shopping-cart icon" aria-hidden="true">2</span>
-	</div>
-
-	<div class="mainPicture">
-		<img style="width: 70%; height: 70%;" src="${pictureAd}">
-	</div>
-
-	<div class="bottons">
-		<button class="btn btn-primary" type="submit">FB</button>
-		<button class="btn btn-success" type="submit">DONATE</button>
-	</div>
-
-<!-- tag -->
-	<div>
-		<form action="/iwowwow/iwow/selectTags" method="get">
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="bird">bird</button>
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="cute">cute</button>
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="wild">wild</button>
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="animal">animal</button>
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="fly">fly</button>
-			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
-				value="lovely">lovely</button>
-		</form>
-	</div>
-
-<!-- related pic -->
-	<div style="margin: 10px;">
-		<img class="related"
-			src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
-		<img class="related"
-			src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">
-		<img class="related"
-			src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg">
-	</div>
-
-	<div class="relatedBtn">
-		<button class="btn btn-success" type="submit">See Related</button>
-	</div>
-	</article>
+<c:import url="picture_article.jsp" />
 	<script>
 		function save_click(a) {
 
