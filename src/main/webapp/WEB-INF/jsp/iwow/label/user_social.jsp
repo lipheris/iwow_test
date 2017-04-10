@@ -75,7 +75,7 @@ img {
 
 	<div class="groups">
 		<h3 class="member_mark">Group</h3>
-		<a href="#"><p class="group">Draw Together</p></a> <a href="#"><p
-				class="group">Draw Together</p></a> <a href="#"><p class="group">Draw
-				Together</p></a> <a href="#"><p class="more">+CREAT</p></a>
+		<a href="<c:url value="/iwow/group"/>"><p class="more">MORE</p></a> 
+		<a href="<c:url value="/iwow/group/groupAdd"/>"><p class="more">CREATE</p></a>
 	</div>
+	

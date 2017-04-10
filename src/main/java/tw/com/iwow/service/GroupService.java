@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.iwow.dao.GroupDao;
 import tw.com.iwow.entity.Group;
@@ -27,6 +28,15 @@ public class GroupService {
 	
 	public Set<Group> getById(Long memid){
 		return memberService.findById(memid).getGroups();		
+	}
+	@Transactional
+	public Group update(Group group){
+		Group temp=groupDao.findOne(group.getId());
+		if(temp!=null){
+			if(!(group.getMembers().isEmpty()))				
+			temp.setMembers(group.getMembers());
+		}
+		return temp;
 	}
 	
 	

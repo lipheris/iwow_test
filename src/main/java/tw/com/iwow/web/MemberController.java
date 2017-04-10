@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import tw.com.iwow.dao.RoleDao;
 import tw.com.iwow.entity.Member;
 import tw.com.iwow.entity.Picture;
+import tw.com.iwow.entity.Role;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
 
@@ -38,6 +38,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private PictureService pictureService;
+	@Autowired
+	private RoleDao roleDao;
 	
 	@RequestMapping(value="/checkUserEmail")
 	@ResponseBody
@@ -59,17 +61,19 @@ public class MemberController {
 		String email = form.getEmail(); //取得使用者輸入的email(securrity的username)
 		Member member = memberService.getByEmail(email); //從資料庫內抓取該email的資料
 	 	model.addAttribute("editMember",member);
-	 	return "iwow/setting_profile";
+	 	return "iwow/member/memberEdit";
 	 }
 		
 	@RequestMapping(value="/insert")
 	public String insert(Member member,BindingResult bindingResult, Model model,String birth){
 		
-		System.out.println(birth);
 		DateTimeFormatter dtf =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate ld=LocalDate.parse(birth, dtf);				
 		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
 		member.setBirth(ldt);
+		Set<Role> roles =member.getRoles();
+		roles.add(roleDao.findOne(new Long(1)));
+		member.setRoles(roles);
 		Member tempMen = memberService.insert(member);
 		if(tempMen == null){
 			Map<String,String> errorMsg = new HashMap<String,String>();
@@ -101,7 +105,7 @@ public class MemberController {
 			Set<Picture> collectionList = member.getPicColls();
 			model.addAttribute("collectionList", collectionList);
 			model.addAttribute("member", member);
-			return "/iwow/collectionlist";
+			return "/iwow/member/collectionIndex";
 		}
 
 		// insert Collection

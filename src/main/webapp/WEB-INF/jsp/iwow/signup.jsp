@@ -103,9 +103,9 @@ legend{
 }
 </style>
 </head>
-<body onload='document.logoutForm.username.focus();'>
+<body>
 <!-- banner import -->
-	<c:import url="banner.jsp" /> 
+<%-- 	<c:import url="banner.jsp" />  --%>
 	
 	
 	<!-- sign up -->

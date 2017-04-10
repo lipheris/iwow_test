@@ -90,16 +90,16 @@ h2 {
 }
 </style>
 </head>
-<body onload='document.logoutForm.username.focus();'>
+<body>
 	<!-- banner import -->
-	<c:import url="banner.jsp" /> 
+	<c:import url="../label/banner.jsp" /> 
 
 	<!-- aside -->
 	<aside>
 	<!-- user_profile import -->
-	<c:import url="user_profile.jsp" /> 
+	<c:import url="../label/user_profile.jsp" /> 
 	<!-- user_social import -->
-	<c:import url="user_social.jsp" /> 
+	<c:import url="../label/user_social.jsp" /> 
 	</aside>
 	<!-- aside -->
 

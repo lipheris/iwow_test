@@ -34,10 +34,10 @@ public class LoginController {
 			@RequestParam(value="logout",required=false) String logout
 			) {
 		if(error!=null){
-			req.setAttribute("error", "password wrong");
+			req.setAttribute("error", "帳號密碼錯誤");
 		}
 		if(logout!=null){
-			req.setAttribute("msg", "logout succeed");
+			req.setAttribute("msg", "成功登出!!");
 		}
 		return "/iwow/login";
 	}
