@@ -77,7 +77,6 @@ public class Picture {
 		this.pictureAddress = pictureAddress;
 	}
 
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 	private Stats stats = new Stats(this);
