@@ -133,89 +133,14 @@ h2 {
 </head>
 <body>
 	<!-- banner import -->
-	<c:import url="banner.jsp" />
+	<c:import url="../label/banner.jsp" />
 
 	<!-- aside -->
 	<aside>
-	<div class="userPro" style="margin-bottom: 30px;">
-		<img
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
-		<h4 style="margin: 5px;">
-			<sec:authentication property="principal.username" />
-		</h4>
+	<c:import url="../label/user_profile.jsp"/>
+	<c:import url="../label/user_social.jsp"/>
 
-		<form action="/iwowwow/iwow/member/edit" method="get">
-			<input type="hidden" name="email"
-				value="<sec:authentication property="principal.username" />">
-			<input class="btn btn-info" type="submit" value="編輯個人資料"> <input
-				type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		</form>
-	</div>
-
-	<div class="icons">
-		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true">4315</span>
-		<span class="glyphicon glyphicon-star-empty icon" aria-hidden="true">92</span>
-		<span class="glyphicon glyphicon-heart-empty icon" aria-hidden="true">13</span>
-		<span class="glyphicon glyphicon-shopping-cart icon"
-			aria-hidden="true">2</span>
-	</div>
-
-	<div class="friends">
-		<h3 class="member_mark">Friends</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="followings">
-		<h3 class="member_mark">Following</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="fans">
-		<h3 class="member_mark">Fans</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="groups">
-		<h3 class="member_mark">Group</h3>
-		<a href="#"><p class="group">Draw Together</p></a> <a href="#"><p
-				class="group">Draw Together</p></a> <a href="#"><p class="group">Draw
-				Together</p></a> <a href="#"><p class="more">+CREAT</p></a>
-	</div>
-
+	
 	</aside>
 
 	<article>

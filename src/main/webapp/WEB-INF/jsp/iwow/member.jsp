@@ -76,7 +76,7 @@
 </head>
 <body onload='document.logoutForm.username.focus();'>
 <!-- banner import -->
-	<c:import url="banner.jsp" /> 
+	<c:import url="label/banner.jsp" /> 
 	
 	
 	<!-- 個人頁面  -->

@@ -27,7 +27,7 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<c:import url="../banner.jsp" />
+	<c:import url="../label/banner.jsp" />
 
 	<form accept-charset="UTF-8" action="<c:url value="/iwow/group/create"/>" method="get">
 

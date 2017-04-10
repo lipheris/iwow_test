@@ -61,7 +61,7 @@ public class MemberController {
 		String email = form.getEmail(); //取得使用者輸入的email(securrity的username)
 		Member member = memberService.getByEmail(email); //從資料庫內抓取該email的資料
 	 	model.addAttribute("editMember",member);
-	 	return "iwow/setting_profile";
+	 	return "iwow/member/memberEdit";
 	 }
 		
 	@RequestMapping(value="/insert")
@@ -105,7 +105,7 @@ public class MemberController {
 			Set<Picture> collectionList = member.getPicColls();
 			model.addAttribute("collectionList", collectionList);
 			model.addAttribute("member", member);
-			return "/iwow/collectionlist";
+			return "/iwow/member/collectionIndex";
 		}
 
 		// insert Collection

@@ -73,43 +73,19 @@ article {
 </head>
 <body>
 	<!-- banner import -->
-	<c:import url="banner.jsp" />
+	<c:import url="label/banner.jsp" />
 
 
 	<!-- aside -->
 	<aside>
 	<!-- picture_painter import-->
-	<c:import url="picture_painter.jsp" /> 
+	<c:import url="label/picture_painter.jsp" /> 
 	
 	<!-- picture_shop.jsp import-->
-	<c:import url="picture_shop.jsp" /> 
+	<c:import url="label/picture_shop.jsp" /> 
 	
 	<!-- picture_comment import-->
-	<c:import url="picture_comment.jsp" /> 
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Aprl
-		05</p>
-	<p>yummy</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		28</p>
-	<p>So Cute</p>
-
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		05</p>
-	<p>WOW</p>
+	<c:import url="label/picture_comment.jsp" /> 
 
 	</aside>
 	<!-- aside -->

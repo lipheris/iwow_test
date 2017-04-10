@@ -37,23 +37,19 @@ public class IwowController {
 		return "iwow/picture";
 	}
 
+	/*登出後重新導向登入頁面*/
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
 		return "redirect:index";
 	}
-
-	@RequestMapping(value = "/iwow/index_user")
-	public String index_userPage() {
-		return "iwow/index_user";
-	}
-
-	@RequestMapping(value = "/iwow/user")
+	
+	@RequestMapping(value = "/iwow/member")
 	public String userPage() {
-		return "iwow/user";
+		return "iwow/member";
 	}
+	
 	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
 	public String searchPage(@RequestParam(value = "searchCtx") String param, Model model) {
-//		System.out.println("123");
 		if (param.isEmpty() || param == null)
 			return null;
 		Gson gson=new GsonBuilder()
@@ -61,7 +57,7 @@ public class IwowController {
 				.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
 				.create();
 		model.addAttribute("result", gson.toJson(picService.search(param)));
-		return "/iwow/search";
+		return "/iwow/picture/search";
 	}
 
 	@RequestMapping(value = "/iwow/upload")
@@ -100,19 +96,23 @@ public class IwowController {
 
 	}
 
+	
+	/*以下合併或待修改*/
+	@RequestMapping(value = "/iwow/index_user")
+	public String index_userPage() {
+		return "iwow/old/index_user";
+	}
+	
 	@RequestMapping(value = "/iwow/admin", method = RequestMethod.GET)
 	public String adminPage(Model model) {
-
 		model.addAttribute("title", "Spring Security Login Form - Database Authentication");
 		model.addAttribute("message", "This page is for ROLE_ADMIN only!");
 		return "/iwow/admin";
-
 	}
 
 	@RequestMapping(value = "/iwow/test")
 	public String test() {
 		return "iwow/test";
-
 	}
 	
 	@RequestMapping(value = "/iwow/collectionlist")
