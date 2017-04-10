@@ -82,7 +82,7 @@ article {
 	<c:import url="picture_painter.jsp" /> 
 	
 	<!-- picture_shop.jsp import-->
-	<c:import url="picture_shop.jsp.jsp" /> 
+	<c:import url="picture_shop.jsp" /> 
 	
 	<!-- picture_comment import-->
 	<c:import url="picture_comment.jsp" /> 
