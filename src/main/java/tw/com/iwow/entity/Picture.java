@@ -22,14 +22,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.web.jsonview.Views;
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
@@ -73,9 +77,11 @@ public class Picture {
 		this.pictureAddress = pictureAddress;
 	}
 
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
 	private Stats stats = new Stats(this);
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs = new HashSet<>();
@@ -89,6 +95,7 @@ public class Picture {
 	/*
 	 * 
 	 */
+	@JsonIgnore
 	@ManyToMany(mappedBy = "picColls")
 	private Set<Member> collectors = new HashSet<>();
 
@@ -185,7 +192,7 @@ public class Picture {
 	}
 
 	public void setCollectors(Set<Member> collectors) {
-		this.stats.setLikes(Long.valueOf((long)collectors.size()));
+		this.stats.setLikes(Long.valueOf((long) collectors.size()));
 		this.collectors = collectors;
 	}
 

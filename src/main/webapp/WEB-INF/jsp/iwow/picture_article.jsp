@@ -1,9 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript">
-	var pic_id = (${picId})
-</script>
-<script type="text/javascript"
-	src='<c:url value="/js/picture_article.js" />'></script>
+<script type="text/javascript">var pic_id = ${picId}</script>
+<script type="text/javascript" src='<c:url value="/js/picture_article.js" />'></script>
 <article>
 		<div id="pic_info">
 			<h1 id="pic_name"></h1>

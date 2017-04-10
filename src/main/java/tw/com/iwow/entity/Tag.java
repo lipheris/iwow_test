@@ -1,6 +1,5 @@
 package tw.com.iwow.entity;
 
-import java.sql.Clob;
 import java.util.Collection;
 import java.util.Set;
 
@@ -12,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
-
+@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
 @Entity
 @Table(name = "TAGS")
 public class Tag {
@@ -70,16 +71,20 @@ public class Tag {
 	public void setPictures(Set<Picture> pictures) {
 		Pictures = pictures;
 	}
-	public void addTag(Picture picture){
+
+	public void addTag(Picture picture) {
 		this.Pictures.add(picture);
 	}
-	public void removeTag(Picture picture){
+
+	public void removeTag(Picture picture) {
 		this.Pictures.remove(picture);
 	}
-	public void addTags(Collection<Picture> pictures){
+
+	public void addTags(Collection<Picture> pictures) {
 		this.Pictures.addAll(pictures);
 	}
-	public void removeTags(Collection<Picture> pictures){
+
+	public void removeTags(Collection<Picture> pictures) {
 		this.Pictures.removeAll(pictures);
 	}
 }

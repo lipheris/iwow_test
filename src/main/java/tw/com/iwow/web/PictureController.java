@@ -39,13 +39,10 @@ public class PictureController {
 	private MemberService memberService;
 
 	/*----單張圖片超連結-----*/
-	@RequestMapping(method = {RequestMethod.GET,RequestMethod.POST}, produces = {
-			"application/json" }, value = "/picture/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
 	public String pictureAJAX(@PathVariable(value = "id") Long id, Model model)
 			throws SQLException, UnsupportedEncodingException {
-		String pictureAd = pictureService.getById(id).getPictureAddress();
-		model.addAttribute("pictureAd", pictureAd);
-		model.addAttribute("pictureId", id);
+		model.addAttribute("picId", id);
 		return "/iwow/picture";
 	}
 
