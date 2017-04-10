@@ -24,7 +24,7 @@
 
 			<form class="navbar-form navbar-left" id="searchForm" action='<c:url value="/iwow/search" />' method="get">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="searchCtx"/>
+					<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="ctx"/>
 				</div>
 				<button type="button" class="btn btn-default" id="searchBtn">Submit</button>
 			</form>    

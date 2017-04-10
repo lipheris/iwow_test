@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -37,28 +36,14 @@ $(function(){
 img {
 	width: 30%;
 }
-
 aside {
 	margin-left: 50px;
 	width: 15%;
 	float: left;
-	/*  background-color:pink;  */
 }
-
 article {
 	margin-left: 25%;
 	width: 70%;
-}
-
-.userPro, .shopPro {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-
-.icons, .bottons {
-	text-align: right;
-	margin-top: 30px;
 }
 
 .icon {
@@ -74,26 +59,6 @@ article {
 
 h2 {
 	display: inline;
-}
-
-.member { /*左邊的friends, followings, fans 小圖*/
-	width: 20%;
-	margin-bottom: 5px;
-}
-
-.friends, .followings, .fans {
-	margin: 0 auto;
-	text-align: center;
-}
-
-.more {
-	text-align: right;
-	margin-right: 8%;
-}
-
-.member_mark, .group {
-	text-align: left;
-	margin-left: 8%;
 }
 
 .main_picture_panter_img_profile {
@@ -131,80 +96,12 @@ h2 {
 
 	<!-- aside -->
 	<aside>
-	<div class="userPro" style="margin-bottom: 30px;">
-		<img src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
-		<h4 style="margin: 5px;"><sec:authentication property="principal.username" /></h4>
-		
-	<form action="/iwowwow/iwow/member/edit" method="get">
-		<input type="hidden" name="email" value="<sec:authentication property="principal.username" />"> 
-		<input class="btn btn-info" type="submit" value="編輯個人資料">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	</form>
-	</div>
-
-	<div class="icons">
-		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true">4315</span>
-		<span class="glyphicon glyphicon-star-empty icon" aria-hidden="true">92</span>
-		<span class="glyphicon glyphicon-heart-empty icon" aria-hidden="true">13</span>
-		<span class="glyphicon glyphicon-shopping-cart icon"
-			aria-hidden="true">2</span>
-	</div>
-
-	<div class="friends">
-		<h3 class="member_mark">Friends</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="followings">
-		<h3 class="member_mark">Following</h3>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><img class="member"
-			src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"></a>
-		<a href="#"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="fans">
-		<h3 class="member_mark">Collections</h3>
-		<a href="<c:url value="/iwow/member/collectionlist"/>"><p class="more">MORE</p></a>
-	</div>
-
-	<div class="groups">
-		<h3 class="member_mark">Group</h3>
-		<a href="#"><p class="group">Draw Together</p></a> <a href="#"><p
-				class="group">Draw Together</p></a> <a href="#"><p class="group">Draw
-				Together</p></a> <a href="#"><p class="more">+CREAT</p></a>
-	</div>
-
+	<!-- user_profile import -->
+	<c:import url="user_profile.jsp" /> 
+	<!-- user_social import -->
+	<c:import url="user_social.jsp" /> 
 	</aside>
+	<!-- aside -->
 
 	<article>
 	<div>

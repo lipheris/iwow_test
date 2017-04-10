@@ -66,4 +66,9 @@ public class Group {
 	public void removeMembers(Collection<Member> members){
 		this.members.removeAll(members);
 	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", name=" + name + ", members=" + members + "]";
+	}
 }

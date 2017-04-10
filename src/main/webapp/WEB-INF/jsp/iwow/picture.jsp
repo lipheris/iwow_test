@@ -111,9 +111,95 @@ article {
 		05</p>
 	<p>WOW</p>
 
-
 	</aside>
-	<!-- article -->
-	<c:import url="picture_article.jsp" />
+	<!-- aside -->
+
+	<article>
+	<div>
+	<h1>Bird</h1>
+	<h1><c:out value="${picMsgs}" /></h1>
+
+	</div>
+
+	<div class="icons">
+		<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true" id="views">4315</span>
+		<span class="glyphicon glyphicon-star-empty icon" aria-hidden="true">92</span>
+		<a class="glyphicon glyphicon-star-empty icon" aria-hidden="true" data-picId="${pictureId}"
+			onClick="save_click($(this))">13</a> 
+		<span class="glyphicon glyphicon-shopping-cart icon" aria-hidden="true">2</span>
+	</div>
+
+	<div class="mainPicture">
+		<img style="width: 70%; height: 70%;" src="${pictureAd}">
+	</div>
+
+	<div class="bottons">
+		<button class="btn btn-primary" type="submit">FB</button>
+		<button class="btn btn-success" type="submit">DONATE</button>
+	</div>
+
+<!-- tag -->
+	<div>
+		<form action="/iwowwow/iwow/selectTags" method="get">
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="bird">bird</button>
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="cute">cute</button>
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="wild">wild</button>
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="animal">animal</button>
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="fly">fly</button>
+			<button class="btn btn-default btn-sm" type="submit" name="tagmark"
+				value="lovely">lovely</button>
+		</form>
+	</div>
+
+<!-- related pic -->
+	<div style="margin: 10px;">
+		<img class="related"
+			src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu">
+		<img class="related"
+			src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$">
+		<img class="related"
+			src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg">
+	</div>
+
+	<div class="relatedBtn">
+		<button class="btn btn-success" type="submit">See Related</button>
+	</div>
+	</article>
+	<script>
+		function save_click(a) {
+
+			var picId = $(a).attr('data-picId');
+			$.ajax({			
+				url : '/iwowwow/iwow/member/collect/picture/' + picId,
+				dataType : 'json',
+				contextType : 'application/json; charset=utf-8;',
+				success : function(response) {
+					if (response == true) {
+						swal({
+							type : 'success',
+							text : '收藏成功!',
+							showConfirmButton : false,
+							customClass : 'swal',
+							timer : 1000,
+						});
+					} else {
+						swal({
+							type : 'info',
+							text : '已經收藏過囉!',
+							showConfirmButton : false,
+							customClass : 'swal',
+							timer : 1000,
+						});
+					}
+				}
+			});
+
+		}
+	</script>
 </body>
 </html>

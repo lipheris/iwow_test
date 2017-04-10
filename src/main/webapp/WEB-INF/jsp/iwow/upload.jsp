@@ -158,8 +158,11 @@ legend {
 
 				<!-- TAG -->
 				<div>
-					<label for="tag">Tag：</label> <input type="text" id="tag"
-						name="tags" value="">
+					<label for="tag">Tag：</label><input type="checkbox" id="tag"
+						name="tags" value="bird">bird<input type="checkbox" id="tag"
+						name="tags" value="cat">cat<input type="checkbox" id="tag"
+						name="tags" value="animal">animal<input type="checkbox" id="tag"
+						name="tags" value="views">views
 				</div>
 				<div>
 					<input type="checkbox" name="keytag" value="keytag" id="keytag"><label
