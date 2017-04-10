@@ -102,7 +102,7 @@ var result = (${result})
 </head>
 <body>
 	<!-- banner import -->
-	<c:import url="banner.jsp" />
+	<c:import url="../label/banner.jsp" />
 
 
 	<!-- 搜尋結果頁面  -->
