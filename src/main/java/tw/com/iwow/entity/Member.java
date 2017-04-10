@@ -54,7 +54,7 @@ public class Member {
 	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
 	private Set<Picture> picUploads = new HashSet<>();
 	/*
-	 * 以收藏者身分對Picture建立@ManyToMany雙向關聯
+	 * 以收藏者身分對Picture建立@ManyToMany雙向關聯,主控方在Member
 	 */
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "PIC_COLLS", 
@@ -68,7 +68,7 @@ public class Member {
 	@JoinColumn(name = "MEM_ID", referencedColumnName = "ID")
 	private Set<Order> orders = new HashSet<>();
 	/*
-	 * 對角色身分table建立@ManytoMany單向關聯
+	 * 對角色身分table建立@ManytoMany單向關聯,主控方在Member
 	 */
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable( name = "MEM_ROLES", 
@@ -216,18 +216,15 @@ public class Member {
 		this.groups = groups;
 	}
 	
-	public void addGroup(Group group){
-		this.groups.add(group);
+	public void addRole(Role role){
+		this.roles.add(role);
 	}
-	public void removeGroup(Group group){
-		this.groups.remove(group);
+	
+	public void removeRole(Role role){
+		this.roles.remove(role);
 	}
-	public void addGroups(Collection<Group> groups){
-		this.groups.addAll(groups);
-	}
-	public void removeGroups(Collection<Group> groups){
-		this.groups.removeAll(groups);
-	}
+
+
 	public void addPicColl(Picture picColl){
 		this.picColls.add(picColl);
 	}
