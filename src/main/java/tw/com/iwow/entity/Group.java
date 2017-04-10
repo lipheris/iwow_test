@@ -1,6 +1,7 @@
 package tw.com.iwow.entity;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,7 +29,7 @@ public class Group {
 	@JoinTable(	name = "GROUP_MEMS", 
 				joinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"), 
 				inverseJoinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"))
-	private Set<Member> members;
+	private Set<Member> members=new HashSet<Member>();
 
 	public Long getId() {
 		return id;
