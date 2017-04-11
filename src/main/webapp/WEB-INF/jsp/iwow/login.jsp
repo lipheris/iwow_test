@@ -50,12 +50,18 @@
     padding: 32px 40px 24px;
     color: #71767a;
 }
-.btn-login {
+.btn-login,.btn-signup {
 	color: #fff;
 	background-color: #34bf49;
 	border-color: rgba(0, 0, 0, 0.2);
 	text-align:center;
 	padding-right:60px;
+}
+.or_text{
+	font-weight: bold;
+    text-align: center;
+    color: #b9c1c7;
+    margin:20px;
 }
 .error {
 	padding: 15px;
@@ -166,19 +172,22 @@
 			</div>
 
 			 
-			<input class="btn btn-block btn-lg btn-social btn-login" name="submit" type="submit"
-						value="Log in" />
+			<input class="btn btn-block btn-lg btn-social btn-login" name="submit" type="submit" value="Log in" />
+
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			
+			</form>
+			
+			<div class="or_text">or</div>
+			
+			<a class="btn btn-block btn-lg btn-social btn-signup" href="/iwowwow/iwow/signup">Sign up</a>
+			
 			<a class="btn btn-block btn-lg btn-social btn-facebook"> 
 			<span class="fa fa-facebook"></span> Log in with Facebook
 			</a> 
 			<a class="btn btn-block btn-lg btn-social btn-google"> 
 			<span class="fa fa-google"></span> Log in with Google
 			</a>
-			
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-			
-		</form>
 
 	</div>
 
