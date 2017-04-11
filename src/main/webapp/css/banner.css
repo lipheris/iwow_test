@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Pattaya|Work+Sans:400,200,300);
+/*  banner底色 */
+.navbar-inverse{
+	background-image: -webkit-linear-gradient(top,#6AC5AC 0,#6AC5AC 100%); */
+}
+/*  banner字體顏色 */
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+.navbar-inverse .navbar-nav>li>a {
+	font-family: "Work Sans", sans-serif;
+    color: white;
+}
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
+     text-shadow: 0 0px 0 rgba(0,0,0,.25);
+}
+/*  banner border */
+.navbar {
+    border-width: 0px 0px 20px 0px;
+    border-style: solid;
+    border-color: white;
+}
+/* banner 高度 */
+.navbar-inverse {
+     padding:10px;
+}
+/* logo */
+.navbar-brand {
+	font-family:Ribeye;
+    font-size: 30px;
+}
+/* search */
+.form-control{
+	border-radius:4px 0px 0px 4px;
+	float: left;
+	margin:0px;
+	font-family: "Work Sans";
+}
+.btn{
+	border-radius:0px 4px 4px 0px;
+}
+.glyphicon {
+    position: static;
+}
+.navbar-form{
+	margin-top:15px;
+	margin-right:200px;
+}

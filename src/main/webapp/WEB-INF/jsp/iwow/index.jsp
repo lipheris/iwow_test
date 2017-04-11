@@ -25,18 +25,11 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<!-- 圖片排版 -->
-<link rel="stylesheet" href="<c:url value="/css/main.css"/>" />	
-<!-- 瀑布流 -->
-<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
-<script src="https://unpkg.com/masonry-layout@4.1.1/dist/masonry.pkgd.min.js"></script>
-<style>
-#main{
-	margin-top:80px;
-}
-</style>
+<!-- index.css -->
+<link rel="stylesheet" href="<c:url value="/css/index.css"/>" />
 
 </head>
+
 <body>
 	<!-- banner import -->
 	<c:import url="label/banner.jsp" />
