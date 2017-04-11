@@ -84,7 +84,7 @@ public class PictureController {
 		}else{
 		pictureService.insert(picture, pic,tags);
 		}
-		return "redirect:/iwow/listajax";
+		return "redirect:/iwow/old/list";
 	}
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
 	public String deletePicture(Model model,Long id){

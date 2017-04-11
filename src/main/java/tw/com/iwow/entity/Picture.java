@@ -32,39 +32,45 @@ import com.google.gson.annotations.SerializedName;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.web.jsonview.Views;
-@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "picture_uuid")
 @Entity
 @Table(name = "PICTURES")
 public class Picture {
 	@Expose
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 	// assort 為分類普通/ 18禁圖片
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Enumerated(EnumType.STRING)
 	@Column(name = "ASSORT")
 	private Assort assort;
 	@Expose
-	@JsonView(Views.PictureDetails.class)
+	@JsonView(value = { Views.PictureDetails.class, Views.ShowPicture.class, Views.ShowTag.class})
 	@Column(name = "NAME")
 	private String name;
 	@Expose
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
 	@Expose
 	@SerializedName("uploader_id")
-	@JsonView(Views.PictureDetails.class)
+	@JsonView(value = { Views.PictureDetails.class, Views.ShowPicture.class, Views.ShowTag.class})
 	@Column(name = "UPLOADER_ID")
 	private Long uploaderId;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
 	@Expose
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "DESCRIPTION")
 	private String description;
 	@Expose
 	@SerializedName("picture_address")
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "PICTURE_ADDRESS")
 	private String pictureAddress;
 
@@ -75,7 +81,7 @@ public class Picture {
 	public void setPictureAddress(String pictureAddress) {
 		this.pictureAddress = pictureAddress;
 	}
-
+	@JsonView(Views.ShowPicture.class)
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private Stats stats;// = new Stats(this);
@@ -87,6 +93,7 @@ public class Picture {
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
 	@Expose
+	@JsonView(Views.ShowPicture.class)
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
 	@JoinTable(name = "TAG_DETAILS", joinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
 	private Set<Tag> tags = new HashSet<>();

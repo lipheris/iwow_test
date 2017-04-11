@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import tw.com.iwow.entity.Tag;
 import tw.com.iwow.service.PictureService;
 import tw.com.iwow.service.TagService;
+import tw.com.iwow.web.jsonview.Views;
 
 @RestController
 @RequestMapping(value = "/iwow/tags")
@@ -42,6 +45,7 @@ public class TagController {
 		tagService.delete(id);
 		return "redirect:/iwow/tags/";
 	}
+	@JsonView(Views.ShowTag.class)
 	@RequestMapping(method=RequestMethod.GET, produces="application/json", value="/{id}")
 	public Tag findTag(@PathVariable(value="id")Long id){
 		return tagService.getById(id);

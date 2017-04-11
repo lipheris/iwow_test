@@ -12,25 +12,34 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
-@JsonIdentityInfo(generator=ObjectIdGenerators.UUIDGenerator.class, property="@UUID")
+
+import tw.com.iwow.web.jsonview.Views;
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "tag_uuid")
 @Entity
 @Table(name = "TAGS")
 public class Tag {
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 	@Expose
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "NAME")
 	private String name;
+	@JsonView(Views.ShowTag.class)
 	@Column(name = "TYPE_ID")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
+	@JsonView(Views.ShowTag.class)
 	@Column(name = "DSC")
 	private String dsc;// 針對tag新增時的說明
+	@JsonView(Views.ShowTag.class)
 	@ManyToMany(mappedBy = "tags")
-	private Set<Picture> Pictures;
+	private Set<Picture> pictures;
 
 	public Long getId() {
 		return id;
@@ -65,26 +74,26 @@ public class Tag {
 	}
 
 	public Set<Picture> getPictures() {
-		return Pictures;
+		return pictures;
 	}
 
 	public void setPictures(Set<Picture> pictures) {
-		Pictures = pictures;
+		pictures = pictures;
 	}
 
 	public void addTag(Picture picture) {
-		this.Pictures.add(picture);
+		this.pictures.add(picture);
 	}
 
 	public void removeTag(Picture picture) {
-		this.Pictures.remove(picture);
+		this.pictures.remove(picture);
 	}
 
 	public void addTags(Collection<Picture> pictures) {
-		this.Pictures.addAll(pictures);
+		this.pictures.addAll(pictures);
 	}
 
 	public void removeTags(Collection<Picture> pictures) {
-		this.Pictures.removeAll(pictures);
+		this.pictures.removeAll(pictures);
 	}
 }

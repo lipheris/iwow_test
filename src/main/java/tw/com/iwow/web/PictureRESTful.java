@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import tw.com.iwow.entity.Picture;
+import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.PictureService;
 import tw.com.iwow.web.jsonview.Views;
 
@@ -27,10 +28,14 @@ public class PictureRESTful {
 	public Collection<Picture> listPictures(){
 		return pictureService.findAll();
 	}
-	
+	@JsonView(Views.ShowPicture.class)
 	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value="/{id}")
 	public Picture findPicture(@PathVariable(value="id") Long id){
-		return pictureService.getById(id);
+		Picture result = pictureService.getById(id);
+		if(result.getVisibility() == Visibility.PRIVATE)
+			return null;
+		else
+			return result;
 	}
 	
 //	@RequestMapping(method=RequestMethod.POST, consumes={"application/json"})
