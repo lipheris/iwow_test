@@ -25,81 +25,26 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="<c:url value="/css/animate.css"/>">
-<script
-	src="https://unpkg.com/masonry-layout@4.1.1/dist/masonry.pkgd.min.js"></script>
-<style>
-#prodDiv {
-	margin-top: 50px;
-}
-
- .portfolio-item {
-	margin-bottom: 30px; 
-	padding: 0 5px 0 5px;
- } 
-
- .prodContent { 
- 	padding: 5px 5px 20px 10px; 
- 	overflow: hidden;	
- 	height: 230px; 
- } 
-
-.imgbox {
-	width: 1000px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 50px;
-}
-
-img {
- 	width: 250px;
-	margin: 5px;
-	float: left;
-	/* 	display: inline-block; */
-	/* 	vertical-align: top; */
-}
-
-.imgBtn {
-	width: 100%;
-}
-
-.imgForm {
-	width: 30%;
-	margin: 5px;
-	display: inline-block;
-	vertical-align: top;
-}
-
-.buttons {
-	text-align: center;
-	margin-top: 30px;
-	margin-bottom: 80px;
-}
-</style>
+<!-- index.css -->
+<link rel="stylesheet" href="<c:url value="/css/index.css"/>" />
 
 </head>
+
 <body>
 	<!-- banner import -->
 	<c:import url="label/banner.jsp" />
 
-	<div class="buttons">
-		<button class="btn btn-success" type="submit">LOGIN</button>
-		<button class="btn btn-info" type="submit">See More</button>
-	</div>
-
-	<div class="container">
-		<div class="imgbox">
-			<h1>waterflow</h1>
-
-			<div id="prodDiv" class="row">
-				<c:import url="masonry.jsp" />
+	<div id="main">
+		<div class="inner">
+			<div class="columns">
+			<c:forEach var="item" items="${picMsg}">
+				<div class="image fit">
+					<a href="<c:url value="/iwow/picture/${item.id}"/>"><img src='${item.pictureAddress}' /></a>
+				</div>
+				</c:forEach>
 			</div>
-			<!-- #prodDiv -->
-
-
 		</div>
 	</div>
-
 
 </body>
 </html>

@@ -48,14 +48,16 @@ public class PictureService {
 	public Picture insert(Picture picture, CommonsMultipartFile pic, String[] tags) {
 		Set<Tag> temptags = new HashSet<Tag>();
 		Collection<Tag> tagsSQL = tagDao.findAll();
-		for (String tag : tags) {
-			Tag temptag = new Tag();
+		test: for (String tag : tags) {
+			Tag temp = new Tag();
 			for (Tag tagSQL : tagsSQL) {
 				if (tagSQL.getName().equals(tag)) {
 					temptags.add(tagSQL);
-					break;
+					continue test;
 				}
 			}
+			temp.setName(tag);
+			temptags.add(temp);
 		}
 		picture.setTags(temptags);
 		return insert(picture, pic);

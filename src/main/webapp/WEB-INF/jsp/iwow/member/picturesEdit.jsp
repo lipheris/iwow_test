@@ -9,6 +9,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><sec:authentication property="principal.username" />
 	List</title>
+<script src="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css"></script>
+<script src="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css"></script>
+<script src="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css"></script>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"
 	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
@@ -58,7 +62,7 @@ th {
 		</h1>
 
 
-		<table class="table table-striped">
+		<table id="example" class="table table-striped">
 			<tr>
 				<th>id</th>
 				<th>assort</th>
@@ -67,6 +71,7 @@ th {
 				<th>uploaderId</th>
 				<th>visibility</th>
 				<th>file</th>
+				<th>tags</th>
 				<th>stats</th>
 				<th>specs</th>
 				<th>刪除</th>
@@ -111,8 +116,11 @@ th {
 							</select></td>
 						</c:otherwise>
 					</c:choose>
-
+					
 					<td><img height='120' width='120' src='${list.pictureAddress}' /></td>
+					<td><a href="<c:url value="/iwow/tags?id=${list.id}"/>">編輯</a>
+					<c:forEach var="tag" items="${list.tags}">${tag.name}</c:forEach>
+					</td>
 					<td>${list.stats}</td>
 					<td>${list.specs}</td>
 					<td><a href="<c:url value="/iwow/delete?id=${list.id}"/>">測試</a></td>
@@ -124,5 +132,10 @@ th {
 		</table>
 
 	</div>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
 </body>
 </html>

@@ -46,11 +46,11 @@ public class PictureController {
 		return "/iwow/picture";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/listajax")
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/list")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/listupdate";
 	}
 
 	/*-------------------index page 接圖用----------------*/
@@ -84,14 +84,14 @@ public class PictureController {
 		}else{
 		pictureService.insert(picture, pic,tags);
 		}
-		return "redirect:/iwow/old/list";
+		return "redirect:/iwow/member/picturesEdit";
 	}
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
 	public String deletePicture(Model model,Long id){
 		pictureService.delete(id);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/picturesEdit";
 	}@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
 	public String updatePicture(Model model,String picName,String visibility,String assort,Long id) throws SQLException, UnsupportedEncodingException {
 		Picture pic=pictureService.getById(id);
@@ -101,6 +101,6 @@ public class PictureController {
 		pictureService.update(pic);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/picturesEdit";
 	}
 }

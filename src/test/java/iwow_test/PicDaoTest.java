@@ -81,27 +81,27 @@ public class PicDaoTest {
 	 * System.out.println(); for(Picture pic:testSet){
 	 * System.out.println("id="+pic.getId()); } assertNotNull(testSet); }
 	 */
-	@Test
-	public void testStats() {
-		Picture pic = new Picture();
-		picDao.save(pic);
-		System.out.println("\n\npic.getId()=" + pic.getId() + "\n\n");
-		System.out.println("\n\nstats.getId()=" + pic.getStats().getId() + "\n\n");
-		assertEquals(pic.getId(), pic.getStats().getId());
-	}
+//	@Test
+//	public void testStats() {
+//		Picture pic = new Picture();
+//		picDao.save(pic);
+//		System.out.println("\n\npic.getId()=" + pic.getId() + "\n\n");
+//		System.out.println("\n\nstats.getId()=" + pic.getStats().getId() + "\n\n");
+//		assertEquals(pic.getId(), pic.getStats().getId());
+//	}
 
-	@Test
-	public void testStats2() {
-		Picture pic = new Picture();
-		Stats stats = pic.getStats();
-		picDao.save(pic);
-		Member mem = new Member();
-		Member mem2 = new Member();
-		 pic.addCollector(mem);
-		 pic.addCollector(mem2);
-		// pic.getStats().setLikes(pic.getCollectors().size());
-		assertEquals(Long.valueOf(2), stats.getLikes());
-		picDao.delete(pic);
-		assertNotNull(mem);
-	}
+//	@Test
+//	public void testStats2() {
+//		Picture pic = new Picture();
+//		Stats stats = pic.getStats();
+//		picDao.save(pic);
+//		Member mem = new Member();
+//		Member mem2 = new Member();
+//		 pic.addCollector(mem);
+//		 pic.addCollector(mem2);
+//		// pic.getStats().setLikes(pic.getCollectors().size());
+//		assertEquals(Long.valueOf(2), stats.getLikes());
+//		picDao.delete(pic);
+//		assertNotNull(mem);
+//	}
 }
