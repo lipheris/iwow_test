@@ -24,7 +24,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.google.gson.annotations.Expose;
@@ -77,10 +76,9 @@ public class Picture {
 		this.pictureAddress = pictureAddress;
 	}
 
-	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn(name = "ID", referencedColumnName = "ID")
-	private Stats stats = new Stats(this);
+	@PrimaryKeyJoinColumn
+	private Stats stats;// = new Stats(this);
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")

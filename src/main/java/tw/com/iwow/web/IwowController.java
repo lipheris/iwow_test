@@ -49,7 +49,7 @@ public class IwowController {
 	}
 	
 	@RequestMapping(value = "/iwow/search", method = RequestMethod.GET)
-	public String searchPage(@RequestParam(value = "searchCtx") String param, Model model) {
+	public String searchPage(@RequestParam(value = "ctx") String param, Model model) {
 		if (param.isEmpty() || param == null)
 			return null;
 		Gson gson=new GsonBuilder()
@@ -62,7 +62,7 @@ public class IwowController {
 
 	@RequestMapping(value = "/iwow/upload")
 	public String uploadPage() {
-		return "iwow/upload";
+		return "iwow/member/pictureUpload";
 	}
 
 	@RequestMapping(value = "/iwow/report")
