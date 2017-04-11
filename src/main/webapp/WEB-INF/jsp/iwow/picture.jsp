@@ -15,7 +15,7 @@
 <!-- Sweet Alert 2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
-
+<script type="text/javascript">var pic_id = ${picId}</script>
 
 <style>
 img {
@@ -89,37 +89,9 @@ article {
 
 	</aside>
 	<!-- aside -->
-<c:import url="picture_article.jsp" />
-	<script>
-		function save_click(a) {
-
-			var picId = $(a).attr('data-picId');
-			$.ajax({			
-				url : '/iwowwow/iwow/member/collect/picture/' + picId,
-				dataType : 'json',
-				contextType : 'application/json; charset=utf-8;',
-				success : function(response) {
-					if (response == true) {
-						swal({
-							type : 'success',
-							text : '收藏成功!',
-							showConfirmButton : false,
-							customClass : 'swal',
-							timer : 1000,
-						});
-					} else {
-						swal({
-							type : 'info',
-							text : '已經收藏過囉!',
-							showConfirmButton : false,
-							customClass : 'swal',
-							timer : 1000,
-						});
-					}
-				}
-			});
-
-		}
-	</script>
+	<article>
+		<c:import url="picture_article.jsp" />
+		<script type="text/javascript" src='<c:url value="/js/picture_article.js" />'></script>
+	</article>
 </body>
 </html>
