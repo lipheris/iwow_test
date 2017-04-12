@@ -3,6 +3,7 @@ package tw.com.iwow.service;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,6 +39,8 @@ public class PictureService {
 	private TagDao tagDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private PicDescriptionDao picDescriptionDao;
 	private Gson gson=new GsonBuilder()
 			.excludeFieldsWithoutExposeAnnotation()
 			.serializeNulls().setDateFormat("yyyy-MM-dd HH:mm:ss:SSS")
@@ -125,11 +128,20 @@ public class PictureService {
 	public Set<Picture> search(String param) {
 		return pictureDao.search(param);
 	}
-
-	public String searchReturnJson(String param) {
+	public String searchReturnJson(String param){
 		return gson.toJson(this.search(param));
 	}
+	public PicsDesccription insertText(PicsDesccription picsDesccription) {
+		return picDescriptionDao.save(picsDesccription);
+	}
 
+	public List<PicsDesccription> getbyPicId(Long picId){
+		return picDescriptionDao.findByPicId(picId);
+	}
+	
+	public List<PicsDesccription> getbyPicIdSort(Long picId,Sort sort){
+		return picDescriptionDao.findByPicId(picId,sort);
+	}
 	public Set<Picture> getRelatedPicture(Long id) {
 		Set<Picture> result = new HashSet<>();
 		Picture picture = this.getById(id);
