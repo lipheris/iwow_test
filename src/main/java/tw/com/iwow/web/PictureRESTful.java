@@ -17,39 +17,45 @@ import tw.com.iwow.service.PictureService;
 import tw.com.iwow.web.jsonview.Views;
 
 @RestController
-@RequestMapping(value="iwow/pictures")
+@RequestMapping(value = "iwow/pictures")
 public class PictureRESTful {
-	
+
 	@Autowired
 	private PictureService pictureService;
-	
+
 	@JsonView(Views.PictureDetails.class)
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"})
-	public Collection<Picture> listPictures(){
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" })
+	public Collection<Picture> listPictures() {
 		return pictureService.findAll();
 	}
+
 	@JsonView(Views.ShowPicture.class)
-	@RequestMapping(method=RequestMethod.GET, produces={"application/json"}, value="/{id}")
-	public Picture findPicture(@PathVariable(value="id") Long id){
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/{id}")
+	public Picture findPicture(@PathVariable(value = "id") Long id) {
 		Picture result = pictureService.getById(id);
-		if(result.getVisibility() == Visibility.PRIVATE)
+		if (result.getVisibility() == Visibility.PRIVATE)
 			return null;
 		else
 			return result;
 	}
-	
-//	@RequestMapping(method=RequestMethod.POST, consumes={"application/json"})
-//	public Picture insertPicture(@RequestBody Picture picture){
-//		return pictureService.insert(picture);
-//	}
-	
-	@RequestMapping(method=RequestMethod.PUT, consumes={"application/json"})
-	public Picture updatePicture(@RequestBody Picture picture){
+
+	@JsonView(Views.ShowPicture.class)
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/{id}/related_pictures")
+	public Collection<Picture> findRelatedPicture(@PathVariable(value = "id") Long id) {
+		return pictureService.getRelatedPicture(id);
+	}
+	// @RequestMapping(method=RequestMethod.POST, consumes={"application/json"})
+	// public Picture insertPicture(@RequestBody Picture picture){
+	// return pictureService.insert(picture);
+	// }
+
+	@RequestMapping(method = RequestMethod.PUT, consumes = { "application/json" })
+	public Picture updatePicture(@RequestBody Picture picture) {
 		return pictureService.update(picture);
 	}
-	
-	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
-	public void deletePicture(@PathVariable("id") Long id){
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+	public void deletePicture(@PathVariable("id") Long id) {
 		pictureService.delete(id);
 	}
 }

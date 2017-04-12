@@ -23,10 +23,7 @@
 
 <!-- related pic -->
 <div style="margin: 10px;" id="pic_related">
-<!-- 	<img class="related" id="pic_related" src="http://d2fbmjy3x0sdua.cloudfront.net/sites/default/files/styles/engagement_card/public/sfw_apa_2013_28342_232388_briankushner_blue_jay_kk_high.jpg?itok=ttMfUhUu"> -->
-<!-- 	<img class="related" id="pic_related" src="http://s7d2.scene7.com/is/image/PetSmart/ARFEAT-CaringForYourBird-20160818?$CL0601$"> -->
-<!-- 	<img class="related" id="pic_related" src="https://s-media-cache-ak0.pinimg.com/originals/28/ca/6d/28ca6dc83ab41cfb2f90c867ebb31383.jpg"> -->
-	<div class="relatedBtn">
-		<button class="btn btn-success" type="submit">See Related</button>
+	<div class="relatedBtn" id="pic_related_button">
+		<button class="btn btn-success" type="button">See Related</button>
 	</div>
 </div>

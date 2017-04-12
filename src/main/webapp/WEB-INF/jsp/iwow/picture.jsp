@@ -91,7 +91,7 @@ article {
 	</aside>
 	<!-- aside -->
 	<article>
-		<c:import url="picture_article.jsp" />
+		<c:import url="label/picture_article.jsp" />
 		<script type="text/javascript" src='<c:url value="/js/picture_article.js" />'></script>
 	</article>
 </body>

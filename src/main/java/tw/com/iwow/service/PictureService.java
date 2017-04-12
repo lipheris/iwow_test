@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
@@ -124,7 +125,17 @@ public class PictureService {
 	public Set<Picture> search(String param) {
 		return pictureDao.search(param);
 	}
-	public String searchReturnJson(String param){
+
+	public String searchReturnJson(String param) {
 		return gson.toJson(this.search(param));
+	}
+
+	public Set<Picture> getRelatedPicture(Long id) {
+		Set<Picture> result = new HashSet<>();
+		Picture picture = this.getById(id);
+		for (Tag tag : picture.getTags())
+			result.addAll(tag.getPictures());
+		result.remove(picture);
+		return result;
 	}
 }
