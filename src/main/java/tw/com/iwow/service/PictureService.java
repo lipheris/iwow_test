@@ -134,7 +134,7 @@ public class PictureService {
 	public String searchReturnJson(String param){
 		return gson.toJson(this.search(param));
 	}
-<<<<<<< HEAD
+
 	public PicsDesccription insertText(PicsDesccription picsDesccription) {
 		return picDescriptionDao.save(picsDesccription);
 	}
@@ -153,18 +153,6 @@ public class PictureService {
 			result.addAll(tag.getPictures());
 		result.remove(picture);
 		return result;
-=======
-	
-	public PicsDesccription insertText(PicsDesccription picsDesccription) {
-		return picDescriptionDao.save(picsDesccription);
-	}
 
-	public List<PicsDesccription> getbyPicId(Long picId){
-		return picDescriptionDao.findByPicId(picId);
-	}
-	
-	public List<PicsDesccription> getbyPicIdSort(Long picId,Sort sort){
-		return picDescriptionDao.findByPicId(picId,sort);
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 	}
 }
