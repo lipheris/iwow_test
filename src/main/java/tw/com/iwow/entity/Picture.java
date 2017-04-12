@@ -89,6 +89,10 @@ public class Picture {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Set<Spec> specs = new HashSet<>();
+	// 20170407 add for picture description
+		@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+		@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
+		private Set<PicsDesccription> picsDesc;
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */

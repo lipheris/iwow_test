@@ -21,7 +21,7 @@ public class Report {
 	@Column(name = "ID")
 	private Long id;
 	@Column(name = "DSC")
-	private Clob desc;// 檢舉敘述
+	private String desc;// 檢舉敘述
 	@Column(name = "DATE")
 	private LocalDateTime date;
 	@Column(name = "STATE")
@@ -39,11 +39,13 @@ public class Report {
 		this.id = id;
 	}
 
-	public Clob getDesc() {
+	
+
+	public String getDesc() {
 		return desc;
 	}
 
-	public void setDesc(Clob desc) {
+	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
