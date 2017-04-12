@@ -17,7 +17,8 @@ $(function() {
 				insert_tags(this_picture.tags);
 			}
 		}
-	})
+	});
+	
 	$.getJSON("/iwowwow/iwow/pictures/" + pic_id + "/related_pictures", function (data){
 		related_pictures = data;
 		$.each(related_pictures, function(related_picture_index, related_picture) {
@@ -31,6 +32,7 @@ $(function() {
 			}
 		});
 	});
+	
 	$("div[id='pic_related_button']").click(function(){
 		$(this).css("visibility", "hidden");
 		$.each(related_pictures, function(related_picture_index, related_picture) {
