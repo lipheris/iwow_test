@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -56,11 +57,10 @@ public class Picture {
 	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "DATE_UPDATE") // database column 好像禁用update 所以使用date_update
 	private LocalDateTime update;
-	@Expose
-	@SerializedName("uploader_id")
-	@JsonView(value = { Views.PictureDetails.class, Views.ShowPicture.class, Views.ShowTag.class})
-	@Column(name = "UPLOADER_ID")
-	private Long uploaderId;
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
+	private Member uploader;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "VISIBILITY")
 	private Visibility visibility;// visibility 為區分公開/ 私人
@@ -140,12 +140,12 @@ public class Picture {
 		this.update = update;
 	}
 
-	public Long getUploaderId() {
-		return uploaderId;
+	public Member getUploader() {
+		return uploader;
 	}
 
-	public void setUploaderId(Long uploaderId) {
-		this.uploaderId = uploaderId;
+	public void setUploader(Member uploader) {
+		this.uploader = uploader;
 	}
 
 	public Visibility getVisibility() {

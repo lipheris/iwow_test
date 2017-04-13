@@ -38,7 +38,7 @@ public class PictureRESTful {
 		else
 			return result;
 	}
-
+	
 	@JsonView(Views.ShowPicture.class)
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/{id}/related_pictures")
 	public Collection<Picture> findRelatedPicture(@PathVariable(value = "id") Long id) {

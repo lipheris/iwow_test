@@ -1,29 +1,28 @@
-var this_picture;
 var stats_div=$("div[id='pic_icons']");
 var tags_div=$("div[id='pic_tags']");
 var related_pictures_div = $("div[id='pic_related']");
 var related_pictures;
-var repeated_pictures_id = [this_picture_id];
+var repeated_pictures_id = [picture_id];
 
-$(function() {
-	
-	$.getJSON("/iwowwow/iwow/pictures/" + this_picture_id, function (picture){
-		if(picture != null){
-			this_picture = picture;
-			show_picture_article(this_picture);
-			search_related_picture();
-			if (this_picture.stats != null) {
-				insert_stats(this_picture.stats);
-			}
-			if( this_picture.tags != null ){
-				insert_tags(this_picture.tags);
-			}
-		}else{
-//			$("#pic_name").text("權限不足");
-			location.href="../../403";
-		}
+$(function() {	
+	$.when(load_picture).done(function(){
+		set_picture_info();
+		search_related_picture();
 	});
 });
+
+function set_picture_info(){
+	if (picture != null){
+		show_picture_article(picture);
+		if (picture.stats != null)
+			insert_stats(picture.stats);
+		if (picture.tags != null)
+			insert_tags(picture.tags);
+	}else{
+	//		$("#pic_name").text("權限不足");
+	//		location.href="../../403";
+	}
+}
 
 function show_picture_article(picture) {
 	$("#pic_name").text(picture.name);
@@ -53,7 +52,7 @@ function insert_stats(stats) {
 }
 
 function search_related_picture(){
-	$.getJSON("/iwowwow/iwow/pictures/" + this_picture_id + "/related_pictures", function (data){
+	$.getJSON("/iwowwow/iwow/pictures/" + picture_id + "/related_pictures", function (data){
 		related_pictures = data;
 		$.each(related_pictures, function(related_picture_index, related_picture) {
 			if(!repeated_pictures_id.some(function(id){
@@ -75,7 +74,7 @@ function search_related_picture(){
 function print_related_picture(related_picture){
 	repeated_pictures_id.push(related_picture.id);
 	var show_picture = $("<a></a>")
-		.attr("href", "/iwowwow/iwow/picture?id=" + related_picture.id)
+		.attr("href", "/iwowwow/iwow/picture/" + related_picture.id)
 		.appendTo(related_pictures_div);
 	$("<img />").addClass("related")
 		.attr({"id":"pic_related", "name":"pic_related", "src":related_picture.pictureAddress})

@@ -80,6 +80,7 @@ article {
 		<aside>
 		<!-- picture_painter import-->
 		<c:import url="label/picture_painter.jsp" /> 
+		<script type="text/javascript" src='<c:url value="/js/picture_painter.js" />'></script>
 		
 		<!-- picture_shop.jsp import-->
 		<c:import url="label/picture_shop.jsp" /> 
