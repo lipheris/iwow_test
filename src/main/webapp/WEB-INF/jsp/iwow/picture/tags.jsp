@@ -61,7 +61,7 @@ th {
 		<table class="table table-striped">
 			<tr>
 				<th>name</th>
-				<th>描述</th>
+<!-- 				<th>描述</th> -->
 				<th>刪除</th>
 				<th>修改</th>
 				<th></th>
@@ -72,7 +72,7 @@ th {
 				<form action="<c:url value="/iwow/tags/update"/>" method="get">
 					<tr>
 						<td><input name="name" type="text" value="${list.name}" /></td>
-						<td><input name="dsc" type="text" value="${list.dsc}" /></td>
+<%-- 						<td><input name="dsc" type="text" value="${list.dsc}" /></td> --%>
 						<td><a
 							href="<c:url value="/iwow/tags/delete?id=${param.id}&tagId=${list.id}"/>">測試</a></td>
 						<td><input type="submit" value="測試" /></td>
@@ -86,7 +86,7 @@ th {
 		<c:if test="${fn:length(tags)<4}">
 		<input type="hidden" name="id"value="${param.id}">
 		名稱<input type="text" name="name"/>
-		描述<input type="text" name="dsc">
+<!-- 		描述<input type="text" name="dsc"> -->
 		<input type="submit" value="送出">
 		</c:if>
 		</form>

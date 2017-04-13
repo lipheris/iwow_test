@@ -53,6 +53,9 @@ public class PictureUploadStorage {
 		    // Output the stack trace.
 		    e.printStackTrace();
 		}
+		
+	}
+	public static void runSample2(){
 		try
 		{
 		    // Retrieve storage account from connection-string.
@@ -62,7 +65,7 @@ public class PictureUploadStorage {
 		    CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
 		    // Retrieve reference to a previously created container.
-		    CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+		    CloudBlobContainer container = blobClient.getContainerReference("testpic");
 
 		    // Define the path to a local file.
 		    final String filePath = "E:\\1003.jpg";
@@ -71,6 +74,8 @@ public class PictureUploadStorage {
 		    CloudBlockBlob blob = container.getBlockBlobReference("myimage.jpg");
 		    File source = new File(filePath);
 		    blob.upload(new FileInputStream(source), source.length());
+		    CloudBlockBlob blob2 = container.getBlockBlobReference("myimage2.jpg");
+		    blob2.uploadFromFile(filePath);
 		}
 		catch (Exception e)
 		{
@@ -78,11 +83,8 @@ public class PictureUploadStorage {
 		    e.printStackTrace();
 		}
 	}
-	public static void getImg(){
-		
-	}
 	public static void main(String[] args){
-		runSample();
+		runSample2();
 	}
 	
 	

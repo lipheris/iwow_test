@@ -27,7 +27,7 @@ public class TagController {
 	@Autowired
 	private PictureService pictureService;
 
-	@RequestMapping(value = "/")
+	@RequestMapping
 	public String getAll(Model model,Long id) {
 		Collection<Tag> tags = tagService.getAll();
 		if (id == null) {
@@ -61,9 +61,13 @@ public class TagController {
 	public String insert(Model model,Long id ,Tag tag){
 		Picture picture=pictureService.getById(id);
 		Set<Tag> tags=picture.getTags();
-		tags.add(tag);
+		System.out.println(tag.getName());
+		if(tagService.getTag(tag.getName())!=null){
+		tags.add(tagService.getTag(tag.getName()));}
+		else{tags.add(tag);}
 		picture.setTags(tags);
 		pictureService.update(picture);
+		
 		
 		return "redirect:/iwow/picture/tags?id="+id;
 	}

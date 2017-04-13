@@ -34,9 +34,9 @@ public class Tag {
 	@JsonView(Views.ShowTag.class)
 	@Column(name = "TYPE_ID")
 	private Long typeId;// typeId 因設定標籤考自訂 增訂type 欄位做大項分類以便增加query
-	@JsonView(Views.ShowTag.class)
-	@Column(name = "DSC")
-	private String dsc;// 針對tag新增時的說明
+//	@JsonView(Views.ShowTag.class)
+//	@Column(name = "DSC")
+//	private String dsc;// 針對tag新增時的說明
 	@JsonView(Views.ShowTag.class)
 	@ManyToMany(mappedBy = "tags")
 	private Set<Picture> pictures;
@@ -65,13 +65,13 @@ public class Tag {
 		this.typeId = typeId;
 	}
 
-	public String getDsc() {
-		return dsc;
-	}
-
-	public void setDsc(String dsc) {
-		this.dsc = dsc;
-	}
+//	public String getDsc() {
+//		return dsc;
+//	}
+//
+//	public void setDsc(String dsc) {
+//		this.dsc = dsc;
+//	}
 
 	public Set<Picture> getPictures() {
 		return pictures;

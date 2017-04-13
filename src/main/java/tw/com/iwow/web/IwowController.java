@@ -17,13 +17,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.iwow.entity.Picture;
+import tw.com.iwow.entity.Tag;
 import tw.com.iwow.service.PictureService;
+import tw.com.iwow.service.TagService;
 
 @Controller
 public class IwowController {
 
 	@Autowired
 	private PictureService picService;
+	@Autowired
+	private TagService tagservice;
 
 	// iwowwow
 	@RequestMapping(value = "/iwow/index")
@@ -64,7 +68,9 @@ public class IwowController {
 	}
 
 	@RequestMapping(value = "/iwow/upload")
-	public String uploadPage() {
+	public String uploadPage(Model model) {
+		Collection<Tag> tags = tagservice.getTagFive();
+		model.addAttribute("tags", tags);
 		return "iwow/member/pictureUpload";
 	}
 

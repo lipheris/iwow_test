@@ -259,6 +259,7 @@ legend {
 					".remove_field_write",
 					function(e) { //user click on remove text
 						e.preventDefault();
+						$(this).next('input').remove();
 						$(this).closest('input').remove();
 						x--;
 					})
