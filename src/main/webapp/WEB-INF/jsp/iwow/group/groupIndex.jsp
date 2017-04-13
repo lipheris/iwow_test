@@ -38,79 +38,9 @@ article {
 	width: 70%;
 }
 
-.userPro, .shopPro {
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
 
-.icons, .bottons {
-	text-align: right;
-	margin-top: 30px;
-}
 
-.icon {
-	font-size: 20px;
-	margin-right: 10px;
-}
 
-.main_picture {
-	margin: 0 auto;
-	margin: 20px;
-	text-align: center;
-}
-
-h2 {
-	display: inline;
-}
-
-.member { /*左邊的friends, followings, fans 小圖*/
-	width: 20%;
-	margin-bottom: 5px;
-}
-
-.friends, .followings, .fans {
-	margin: 0 auto;
-	text-align: center;
-}
-
-.more {
-	text-align: right;
-	margin-right: 8%;
-}
-
-.member_mark, .group {
-	text-align: left;
-	margin-left: 8%;
-}
-
-.main_picture_panter_img_profile {
-	display: inline-block;
-	width: 200px;
-}
-
-.main_picture_panter_img_profile_picture {
-	display: inline;
-}
-
-.main_picture_panter_img_profile_nickname {
-	display: inline;
-	font-size: 28px;
-}
-
-.main_picture_icons {
-	display: inline-block;
-	margin-left: 49%;
-}
-
-.main_picture_panter_detail_all {
-	width: 68%;
-	margin: 0 auto;
-}
-
-.main_picture_item {
-	margin-bottom: 100px;
-}
 </style>
 </head>
 <body>
@@ -139,7 +69,6 @@ h2 {
 		<div>
 			${group.name}
 		</div>
-	
 	</c:forEach>
 	</div>
 	

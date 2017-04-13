@@ -4,4 +4,6 @@ public class Views {
 	public static class PictureDetails{}
 	public static class ShowPicture{}
 	public static class ShowTag{}
+	public static class ShowGroups{}
+	public static class MemberDetails{}
 }

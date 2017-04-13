@@ -67,9 +67,8 @@ public class TagController {
 		else{tags.add(tag);}
 		picture.setTags(tags);
 		pictureService.update(picture);
-		
-		
-		return "redirect:/iwow/picture/tags?id="+id;
+
+		return "redirect:/iwow/picture/tags?id=" + id;
 	}
 	@JsonView(Views.ShowTag.class)
 	@RequestMapping(method=RequestMethod.GET, produces="application/json", value="/{id}")

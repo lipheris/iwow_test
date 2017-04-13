@@ -1,5 +1,6 @@
 package tw.com.iwow.service;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,12 @@ public class GroupService {
 		return groupDao.save(group);
 	}
 	
-	public void delete(Long id){
-		 groupDao.delete(id);
+	public void delete(String name){
+		Long id = groupDao.findByName(name).getId();
+		groupDao.delete(id);
+	}
+	public Set<Group> search(String name){
+		return groupDao.search(name);
 	}
 	public Group getByName(String name){
 		return groupDao.findByName(name);
@@ -29,13 +34,15 @@ public class GroupService {
 	public Set<Group> getById(Long memid){
 		return memberService.findById(memid).getGroups();		
 	}
+	
+	public Collection<Group> findAll(){
+		return groupDao.findAll();
+	}
+	
 	@Transactional
 	public Group update(Group group){
-		Group temp=groupDao.findOne(group.getId());
-		if(temp!=null){
-			if(!(group.getMembers().isEmpty()))				
-			temp.setMembers(group.getMembers());
-		}
+		Group temp=groupDao.findOne(group.getId());		
+		temp.setMembers(group.getMembers());		
 		return temp;
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
@@ -133,7 +134,7 @@ public class PictureService {
 	public String searchReturnJson(String param){
 		return gson.toJson(this.search(param));
 	}
-	
+
 	public PicsDesccription insertText(PicsDesccription picsDesccription) {
 		return picDescriptionDao.save(picsDesccription);
 	}
@@ -144,5 +145,14 @@ public class PictureService {
 	
 	public List<PicsDesccription> getbyPicIdSort(Long picId,Sort sort){
 		return picDescriptionDao.findByPicId(picId,sort);
+	}
+	public Set<Picture> getRelatedPicture(Long id) {
+		Set<Picture> result = new HashSet<>();
+		Picture picture = this.getById(id);
+		for (Tag tag : picture.getTags())
+			result.addAll(tag.getPictures());
+		result.remove(picture);
+		return result;
+
 	}
 }

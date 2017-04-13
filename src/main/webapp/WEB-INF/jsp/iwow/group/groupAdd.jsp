@@ -21,16 +21,23 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
+
+<style>
+
+aside {
+	margin-top:100px;
+	margin-left: 50px;
+	width: 15%;
+	float: left;
+	/*  background-color:pink;  */
+}
+
+</style>
 </head>
 <body>
 	<c:import url="../label/banner.jsp" />
-
+<aside>
 	<form accept-charset="UTF-8" action="<c:url value="/iwow/group/create"/>" method="get">
-
 		<div>
 			<label for="groupName"> 社團名稱 </label>
 			<div>
@@ -39,5 +46,39 @@
 			</div>		
 		</div>
 	</form>
+	
+	<form class="navbar-form navbar-left" id="searchForm" action='<c:url value="/iwow/group/search" />' method="get">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="ctx"/>
+							<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchBtn"></button>
+						</div>
+				</form>
+</aside>
+
+<script>
+$(function() {
+	$("#searchBtn").click(doSearch);
+})
+function doSearch(ctx) {
+	var ctx = document.getElementById("searchCtx").value;
+	if (ctx != "") {
+		document.getElementById("searchForm").submit();
+	}
+}
+
+$(function() {
+	$.getJSON("/iwowwow/iwow/pictures/" + pic_id, function (picture){
+		this_picture = picture;
+		if(this_picture != null){
+			show_picture_article(this_picture);
+			if (this_picture.stats != null) {
+				insert_stats(this_picture.stats);
+			}
+			if( this_picture.tags != null ){
+				insert_tags(this_picture.tags);
+			}
+		}
+	});
+</script>
 </body>
 </html>
