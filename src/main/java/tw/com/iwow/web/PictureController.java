@@ -44,9 +44,7 @@ public class PictureController {
 	private ReportService reportService;
 	/*----單張圖片超連結-----*/
 	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
-	public String pictureAJAX(@PathVariable(value = "id") Long id, Model model)
-			throws SQLException, UnsupportedEncodingException {
-		model.addAttribute("picId", id);
+	public String picturePage()throws SQLException, UnsupportedEncodingException {
 		return "/iwow/picture";
 	}
 

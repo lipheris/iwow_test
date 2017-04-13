@@ -15,8 +15,7 @@
 <!-- Sweet Alert 2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
-<!-- 讀取model attribute -->
-<script type="text/javascript">var pic_id = ${picId}</script>
+<script type="text/javascript" src='<c:url value="/js/picture.js" />'></script>
 
 <style>
 img {
