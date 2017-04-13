@@ -9,8 +9,8 @@
 	<span 	class="glyphicon glyphicon-shopping-cart icon" aria-hidden="true" id="shopping_cart"></span>
 </div>
 
-<div class="mainPicture" id="pic_show">
-	<img style="width: 70%; height: 70%;" id="pic_show" src="">
+<div class="mainPicture" id="picture_img">
+<!-- 	<img style="width: 70%; height: 70%;" id="pic_show" src=""> -->
 </div>
 
 <div class="bottons" id="pic_buttons">
@@ -23,7 +23,7 @@
 
 <!-- related pic -->
 <div style="margin: 10px;" id="pic_related">
-	<div class="relatedBtn" id="pic_related_button">
-		<button class="btn btn-success" type="button">See Related</button>
-	</div>
+<!-- 	<div class="relatedBtn" id="pic_related_button"> -->
+<!-- 		<button class="btn btn-success" type="button">See Related</button> -->
+<!-- 	</div> -->
 </div>

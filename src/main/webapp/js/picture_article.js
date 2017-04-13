@@ -1,6 +1,6 @@
 var this_picture;
-var tags_div=$("div[id='pic_tags']");
 var stats_div=$("div[id='pic_icons']");
+var tags_div=$("div[id='pic_tags']");
 var related_pictures_div = $("div[id='pic_related']");
 var related_pictures;
 var repeated_pictures_id = [pic_id];
@@ -27,6 +27,10 @@ $(function() {
 			},related_picture.id)){
 				show_repeated_picture(related_picture);
 				if(related_picture_index == 2){
+					
+					$("<div></div>").addClass("relatedBtn").attr("id", "pic_related_button")
+					.append('<button class="btn btn-success" type="button">See Related</button>')
+					.appendTo(related_pictures_div);
 					return false;
 				}
 			}
@@ -34,7 +38,7 @@ $(function() {
 	});
 	
 	$("div[id='pic_related_button']").click(function(){
-		$(this).css("visibility", "hidden");
+		$(this).css("display", "none");
 		$.each(related_pictures, function(related_picture_index, related_picture) {
 			if(!repeated_pictures_id.some(function(id){
 				return this == id;
@@ -46,8 +50,10 @@ $(function() {
 });
 
 function show_picture_article(picture) {
-	$("#pic_info > #pic_name").text(picture.name);
-	$("img[id='pic_show']").attr("src", picture.pictureAddress);
+	$("#pic_name").text(picture.name);
+	var picture_img = $("<img />").attr({"id":"picture_img", "src": picture.pictureAddress}).css({"width": "70%", "height": "70%"});
+	var picture_link= $("<a></a>").attr({"href":picture.pictureAddress,"data-lightbox":"picture",'data-title':picture.name})
+		.append(picture_img).appendTo("div[id='picture_img']");
 }
 
 function insert_tags(tags) {
@@ -73,10 +79,8 @@ function show_repeated_picture(related_picture){
 	repeated_pictures_id.push(related_picture.id);
 	var show_picture = $("<a></a>")
 		.attr("href", "/iwowwow/iwow/picture?id=" + related_picture.id)
-		.prependTo(related_pictures_div);
-	$("<img>").addClass("related")
-		.attr("id", "pic_related")
-		.attr("name", "pic_related")
-		.attr("src", related_picture.pictureAddress)
-		.prependTo(show_picture);
+		.appendTo(related_pictures_div);
+	$("<img />").addClass("related")
+		.attr({"id":"pic_related", "name":"pic_related", "src":related_picture.pictureAddress})
+		.appendTo(show_picture);
 }
