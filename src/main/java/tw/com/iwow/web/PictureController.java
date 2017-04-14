@@ -8,9 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -31,11 +29,13 @@ import org.springframework.web.servlet.ModelAndView;
 import tw.com.iwow.entity.PicsDescription;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.entity.Report;
+import tw.com.iwow.entity.Tag;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
 import tw.com.iwow.service.ReportService;
+import tw.com.iwow.service.TagService;
 
 @Controller
 @RequestMapping(value = "/iwow")
@@ -48,6 +48,8 @@ public class PictureController {
 	private MemberService memberService;
 	@Autowired
 	private ReportService reportService;
+	@Autowired
+	private TagService tagService;
 	/*----單張圖片超連結-----*/
 	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
 	public String picturePage(@PathVariable(value = "id") Long id, Model model)throws SQLException, UnsupportedEncodingException {
@@ -55,11 +57,11 @@ public class PictureController {
 		return "/iwow/picture";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/list")
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/member/picturesedit")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/member/listupdate";
+		return "/iwow/member/picturesEdit";
 	}
 
 	/*-------------------index page 接圖用----------------*/
@@ -77,7 +79,12 @@ public class PictureController {
 		return "iwow/index";
 	}
 
-
+	@RequestMapping(value = "/member/upload")
+	public String uploadPage(Model model) {
+		Collection<Tag> tags = tagService.getTagFive();
+		model.addAttribute("tags", tags);
+		return "iwow/member/pictureUpload";
+	}
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult,
 			String update ,@RequestParam CommonsMultipartFile pic,String[] tags)
