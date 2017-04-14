@@ -22,6 +22,8 @@ public class PicsDescription {
 	private Long id;
 	@Column(name = "MEM_ID")
 	private Long memId;
+	@Column(name = "USERNAME")
+	private String username;
 	@Column(name = "NOTE")
 	private String note;
 	@Column(name = "NOTE_UPDATE") 
@@ -60,6 +62,12 @@ public class PicsDescription {
 	}
 	public void setPicture(Picture picture) {
 		this.picture = picture;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

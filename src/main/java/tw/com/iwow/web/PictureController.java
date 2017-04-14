@@ -8,7 +8,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -114,14 +116,16 @@ public class PictureController {
 	/*-------------------insert picture description----------------*/
 	@RequestMapping(value = "/insertDescription", method = RequestMethod.GET)
 	public String picturePage(Model model,@RequestParam(name="getId") Long picId, String typein,PicsDescription picsDescription,Picture picture){ 	 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+		
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
 		 Long memid = memberService.getByEmail(authentication.getName()).getId();
-		 
+		 String username=memberService.findById(memid).getName();
 		 picture.setId(picId); 
 		 picsDescription.setNote(typein);
 		 picsDescription.setNoteUpdate(LocalDateTime.now());
 		 picsDescription.setPicture(picture);
 		 picsDescription.setMemId(memid);
+		 picsDescription.setUsername(username);
 		 
 		 pictureService.insertText(picsDescription);
 		 
@@ -129,8 +133,7 @@ public class PictureController {
 		 List<PicsDescription> pics=pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
 		 model.addAttribute("pictexts", pics);
 		 
-		 String username=memberService.findById(memid).getName();
-		 model.addAttribute("username", username);
+		 
 	 return "redirect:/iwow/picture/"+picId;
 	 }
 	 
@@ -161,14 +164,11 @@ public class PictureController {
 	 public String getOnloadComment(Model model,
 			 @PathVariable(value = "getId")Long id,
 			 PicsDescription picsDescription,Picture picture){
-		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
-		 Long memid = memberService.getByEmail(authentication.getName()).getId();
+
 		 picture.setId(id);
 		 List<PicsDescription> pics=pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
 		 model.addAttribute("pictexts", pics);
-		 
-		 String username=memberService.findById(memid).getName();
-		 model.addAttribute("username", username);
+		
 		
 	 return "redirect:/iwow/picture/"+id;
 	
