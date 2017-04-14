@@ -50,13 +50,15 @@ public class PictureController {
 	private ReportService reportService;
 	@Autowired
 	private TagService tagService;
+	
 	/*----單張圖片超連結-----*/
 	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
 	public String picturePage(@PathVariable(value = "id") Long id, Model model)throws SQLException, UnsupportedEncodingException {
 		model.addAttribute("picId", id);
 		return "/iwow/picture";
 	}
-
+	
+	/*多張圖片修改*/
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/member/picturesedit")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
@@ -79,12 +81,15 @@ public class PictureController {
 		return "iwow/index";
 	}
 
+	
 	@RequestMapping(value = "/member/upload")
 	public String uploadPage(Model model) {
 		Collection<Tag> tags = tagService.getTagFive();
 		model.addAttribute("tags", tags);
 		return "iwow/member/pictureUpload";
 	}
+	
+	/*執行上傳圖片*/
 	@RequestMapping(value = "/doUpload", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public String handleFileUpload(ModelAndView model, Picture picture, BindingResult bindingResult,
 			String update ,@RequestParam CommonsMultipartFile pic,String[] tags)
@@ -102,13 +107,18 @@ public class PictureController {
 		}
 		return "redirect:/iwow/member/picturesEdit";
 	}
+	
+	/*圖片刪除*/
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
 	public String deletePicture(Model model,Long id){
 		pictureService.delete(id);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
 		return "/iwow/member/picturesEdit";
-	}@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
+	}
+	
+	/**/
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
 	public String updatePicture(Model model,String picName,String visibility,String assort,Long id) throws SQLException, UnsupportedEncodingException {
 		Picture pic=pictureService.getById(id);
 		pic.setName(picName);
