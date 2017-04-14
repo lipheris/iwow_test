@@ -24,7 +24,7 @@
 	<c:import url="label/banner.jsp" />
 	
 	
-<div id="shade">	
+<div id="fixed">	
 	<div id="main">
 		<div class="inner">
 			<div class="columns">
