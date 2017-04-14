@@ -25,7 +25,7 @@ public class Order {
 	@Column(name = "D_UPDATE")
 	private LocalDateTime update;
 	@Column(name = "DSC")
-	private Clob dsc;// 針對order 補充說明
+	private String dsc;// 針對order 補充說明
 	@Column(name = "MEM_ID")
 	private Long memId; // 說明下訂人員
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -49,11 +49,11 @@ public class Order {
 		this.update = update;
 	}
 
-	public Clob getDsc() {
+	public String getDsc() {
 		return dsc;
 	}
 
-	public void setDsc(Clob dsc) {
+	public void setDsc(String dsc) {
 		this.dsc = dsc;
 	}
 

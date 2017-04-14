@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.iwow.dao.MemberDao;
+import tw.com.iwow.dao.RoleDao;
 import tw.com.iwow.entity.Member;
 
 @Service
@@ -16,7 +17,8 @@ public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
-
+	@Autowired
+	private RoleDao roleDao;
 	public Member getByEmail(String email) {
 		return memberDao.findByEmail(email);
 	}
