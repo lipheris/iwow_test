@@ -16,14 +16,14 @@
 }
 /*  banner border */
 .navbar {
-    border-width: 0px 0px 20px 0px;
+    border-width: 0px 0px 10px 0px;
     border-style: solid;
     border-color: white;
 }
 /* banner 高度 */
-.navbar-inverse {
-     padding:10px;
-}
+/* .navbar-inverse { */
+/*      padding:10px; */
+/* } */
 /* logo */
 .navbar-brand {
 	font-family:Ribeye;
@@ -36,7 +36,7 @@
 	margin:0px;
 	font-family: "Work Sans";
 }
-.btn{
+.glyphicon-search{
 	border-radius:0px 4px 4px 0px;
 }
 .glyphicon {
@@ -45,4 +45,9 @@
 .navbar-form{
 	margin-top:15px;
 	margin-right:200px;
+}
+/* banner跟menu的位置上下關係(banner在menu之下) */
+.banner{
+	position:fixed;
+	z-index:1;
 }
