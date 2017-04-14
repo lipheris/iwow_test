@@ -1,6 +1,5 @@
 package tw.com.iwow.entity;
 
-import java.sql.Clob;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;

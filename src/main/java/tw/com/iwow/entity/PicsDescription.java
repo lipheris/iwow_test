@@ -4,14 +4,17 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PICS_DESCRIPTION")//複合主鑑 對MEMBER 一對多 對PICTURE 一對多
-public class PicsDesccription {
+@Table(name = "PICS_DESCRIPTION")
+public class PicsDescription {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +22,13 @@ public class PicsDesccription {
 	private Long id;
 	@Column(name = "MEM_ID")
 	private Long memId;
-	@Column(name = "PIC_ID")
-	private Long picId;
 	@Column(name = "NOTE")
 	private String note;
 	@Column(name = "NOTE_UPDATE") 
 	private LocalDateTime noteUpdate;
-	
+	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
+	private Picture picture;
 	
 	public Long getId() {
 		return id;
@@ -39,12 +42,7 @@ public class PicsDesccription {
 	public void setMemId(Long memId) {
 		this.memId = memId;
 	}
-	public Long getPicId() {
-		return picId;
-	}
-	public void setPicId(Long picId) {
-		this.picId = picId;
-	}
+	
 	public String getNote() {
 		return note;
 	}
@@ -57,11 +55,13 @@ public class PicsDesccription {
 	public void setNoteUpdate(LocalDateTime noteUpdate) {
 		this.noteUpdate = noteUpdate;
 	}
-	@Override
-	public String toString() {
-		return "PicsDesccription [id=" + id + ", memId=" + memId + ", picId=" + picId + ", note=" + note
-				+ ", noteUpdate=" + noteUpdate + "]";
+	public Picture getPicture() {
+		return picture;
 	}
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+	
 	
 	
 }

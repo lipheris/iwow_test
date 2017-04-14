@@ -26,7 +26,8 @@ import tw.com.iwow.dao.MemberDao;
 import tw.com.iwow.dao.PicDescriptionDao;
 import tw.com.iwow.dao.PictureDao;
 import tw.com.iwow.dao.TagDao;
-import tw.com.iwow.entity.PicsDesccription;
+import tw.com.iwow.entity.Member;
+import tw.com.iwow.entity.PicsDescription;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.entity.Tag;
 
@@ -75,7 +76,7 @@ public class PictureService {
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			String currentPrincipalName = authentication.getName();
-			Long uploaderId = memberDao.findByEmail(currentPrincipalName).getId();
+			Member uploader = memberDao.findByEmail(currentPrincipalName);
 			// Retrieve storage account from connection-string. 和microsoft取得連線
 			CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
@@ -90,11 +91,11 @@ public class PictureService {
 			// local file. 存取為什麼檔案
 			String name = LocalDateTime.now().toString() + UUID.randomUUID().toString(); // 只要UUID.randomUUID
 																							// Java可以自動產生出一組亂碼
-			CloudBlockBlob blob = container.getBlockBlobReference(name + uploaderId + ".jpg");
+			CloudBlockBlob blob = container.getBlockBlobReference(name + uploader.getId() + ".jpg");
 			blob.upload(pic.getInputStream(), pic.getSize());
 			picture.setPictureAddress(
-					"https://iwowblob.blob.core.windows.net/mycontainer/" + name + uploaderId + ".jpg");
-			picture.setUploaderId(uploaderId);
+					"https://iwowblob.blob.core.windows.net/mycontainer/" + name + uploader.getId() + ".jpg");
+			picture.setUploader(uploader);
 			return pictureDao.save(picture);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,16 +136,12 @@ public class PictureService {
 		return gson.toJson(this.search(param));
 	}
 
-	public PicsDesccription insertText(PicsDesccription picsDesccription) {
-		return picDescriptionDao.save(picsDesccription);
+	public PicsDescription insertText(PicsDescription picsDescription) {
+		return picDescriptionDao.save(picsDescription);
 	}
 
-	public List<PicsDesccription> getbyPicId(Long picId){
-		return picDescriptionDao.findByPicId(picId);
-	}
-	
-	public List<PicsDesccription> getbyPicIdSort(Long picId,Sort sort){
-		return picDescriptionDao.findByPicId(picId,sort);
+	public List<PicsDescription> getbyPicIdSort(Picture picture,Sort sort){
+		return picDescriptionDao.findByPicture(picture,sort);
 	}
 	public Set<Picture> getRelatedPicture(Long id) {
 		Set<Picture> result = new HashSet<>();

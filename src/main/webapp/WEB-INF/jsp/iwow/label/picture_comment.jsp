@@ -7,7 +7,7 @@
 <script type="text/javascript">
 function toInsertDescription(){
 var txt = document.getElementById("getContext").value;
-alert(txt);
+
 window.location.href="/iwowwow/iwow/insertDescription?getId=${picId}&typein="+txt;
 }
 </script>
@@ -30,8 +30,8 @@ window.location.href="/iwowwow/iwow/insertDescription?getId=${picId}&typein="+tx
 	<c:if test='${not empty "${pictexts}"}'>
 		<c:forEach var="px" items="${pictexts}">
 		<img style="float: left; margin: 3px; margin-top: 10px;" src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-		<h4 style="display: inline-block; margin-bottom: 0px;">${px.memId}</h4>
-		<p style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Aprl 14</p>
+		<h4 style="display: inline-block; margin-bottom: 0px;">${username}</h4>
+		<p style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">${px.noteUpdate}</p>
 		<p>${px.note}</p>
 		</c:forEach>
 	</c:if>
@@ -52,19 +52,5 @@ window.location.href="/iwowwow/iwow/insertDescription?getId=${picId}&typein="+tx
 		05</p>
 	<p>yummy</p>
 
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		28</p>
-	<p>So Cute</p>
 
-	<img style="float: left; margin: 3px; margin-top: 10px;"
-		src="http://www.rd.com/wp-content/uploads/sites/2/2016/02/12-13-things-you-didnt-know-about-cats-no-chocolate.jpg">
-	<h4 style="display: inline-block; margin-bottom: 0px;">cat01</h4>
-	<p
-		style="display: inline-block; margin-bottom: 0px; margin-left: 10px;">Mar
-		05</p>
-	<p>WOW</p>
 

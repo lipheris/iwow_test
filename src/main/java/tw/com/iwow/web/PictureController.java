@@ -13,6 +13,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import tw.com.iwow.entity.PicsDesccription;
+import tw.com.iwow.entity.PicsDescription;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.entity.Report;
 import tw.com.iwow.enums.Assort;
@@ -34,6 +37,7 @@ import tw.com.iwow.service.ReportService;
 
 @Controller
 @RequestMapping(value = "/iwow")
+@SessionAttributes(names={"pictexts","username"})
 public class PictureController {
 
 	@Autowired
@@ -44,7 +48,8 @@ public class PictureController {
 	private ReportService reportService;
 	/*----單張圖片超連結-----*/
 	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
-	public String picturePage()throws SQLException, UnsupportedEncodingException {
+	public String picturePage(@PathVariable(value = "id") Long id, Model model)throws SQLException, UnsupportedEncodingException {
+		model.addAttribute("picId", id);
 		return "/iwow/picture";
 	}
 
@@ -107,34 +112,65 @@ public class PictureController {
 	}
 	
 	/*-------------------insert picture description----------------*/
-	 @RequestMapping(value = "/insertDescription", method = RequestMethod.GET)
-	 public String picturePage(Model model,@RequestParam(name="getId") Long picId,@RequestParam(name="typein") String typein
-			 ){
-//		 System.out.println(typein);
-		 PicsDesccription data= new PicsDesccription();
-		 	data.setNote(typein);
-		 	data.setPicId(picId);
-		 	data.setMemId(new Long(123));	
-		 pictureService.insertText(data);
+	@RequestMapping(value = "/insertDescription", method = RequestMethod.GET)
+	public String picturePage(Model model,@RequestParam(name="getId") Long picId, String typein,PicsDescription picsDescription,Picture picture){ 	 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+		 Long memid = memberService.getByEmail(authentication.getName()).getId();
+		 
+		 picture.setId(picId); 
+		 picsDescription.setNote(typein);
+		 picsDescription.setNoteUpdate(LocalDateTime.now());
+		 picsDescription.setPicture(picture);
+		 picsDescription.setMemId(memid);
+		 
+		 pictureService.insertText(picsDescription);
 		 
 
-		 List<PicsDesccription> pic=pictureService.getbyPicIdSort(picId, new Sort(Direction.DESC,"id"));//有sort
-		 model.addAttribute("pictexts", pic);
-	 return "/iwow/picture";
+		 List<PicsDescription> pics=pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
+		 model.addAttribute("pictexts", pics);
+		 
+		 String username=memberService.findById(memid).getName();
+		 model.addAttribute("username", username);
+	 return "redirect:/iwow/picture/"+picId;
 	 }
 	 
 	 /*-------------------sendEport----------------*/
 	 @RequestMapping(value = "/sendEport", method = RequestMethod.GET)
 	 public String sendEport(Model model,@RequestParam(name="reportId") Long picId){
-		
-	 return "/iwow/sendReport";
+		                                                     
+		 System.out.println(picId);
+		 model.addAttribute("picId", picId);
+	 return "/iwow/admin/report";
 	 }
 	 
 	 /*-------------------接收檢舉page----------------*/
 	 @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
-	 public String insertReport(Model model,@RequestParam(name="textReport") String textReport,@RequestParam(name="pid") Long picId){
+	 public String insertReport(Model model,String reason,@RequestParam(name="textReport") String textReport,@RequestParam(name="reportId") Long picId,Report report, Picture picture){
 
-		 reportService.insert(new Report(), textReport, picId);
+		 	picture.setId(picId);
+			report.setDesc(reason+" "+textReport);
+			report.setDate(LocalDateTime.now());
+			report.setState(false);;
+			report.setPicture(picture);
+		 
+		 reportService.insert(report);
 	 return "redirect:/iwow/index";
+	 }
+	 /*-------------------先行讀取Comment----------------*/
+	 @RequestMapping(value = "/getOnloadComment/{getId}", method = RequestMethod.GET)
+	 public String getOnloadComment(Model model,
+			 @PathVariable(value = "getId")Long id,
+			 PicsDescription picsDescription,Picture picture){
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+		 Long memid = memberService.getByEmail(authentication.getName()).getId();
+		 picture.setId(id);
+		 List<PicsDescription> pics=pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
+		 model.addAttribute("pictexts", pics);
+		 
+		 String username=memberService.findById(memid).getName();
+		 model.addAttribute("username", username);
+		
+	 return "redirect:/iwow/picture/"+id;
+	
 	 }
 }
