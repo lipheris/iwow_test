@@ -22,17 +22,12 @@
 		<c:import url="lightbox/menu_group.jsp" />
 		<!-- pop up start -->
 
-			<h1 class="logo"><a href="index.html#home">Onassis</a></h1>
-			<a href="#" onClick="jsLightbox('res-profile-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">修改個人資料</span></a>
-			<a href="#" onClick="jsLightbox('res-friends-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">好友</span></a>
-			<a href="#" onClick="jsLightbox('res-follow-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">追隨中</span></a>
-			<a href="#" onClick="jsLightbox('res-fans-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">粉絲</span></a>
-			<a href="#" onClick="jsLightbox('res-group-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">群組</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-profile-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">修改個人資料</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-friends-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">好友</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-follow-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">追隨中</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-fans-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">粉絲</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-group-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">群組</span></a>
 
-			<a href="#"><i class="icon-facebook"></i></a>
-			<a href="#"><i class="icon-twitter"></i></a>
-			<a href="#"><i class="icon-dribbble"></i></a>
-			<a href="#"><i class="icon-envelope"></i></a>
 		</div>
 		
 		<!-- Menu button -->

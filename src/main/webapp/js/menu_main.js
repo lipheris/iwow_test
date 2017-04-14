@@ -1,12 +1,11 @@
 ;(function(){
 
-			// Menu settings
-			$('#menuToggle, .menu-close').on('click', function(){
-				$('#menuToggle').toggleClass('active');
-				$('body').toggleClass('body-push-toleft');
-				$('#theMenu').toggleClass('menu-open');
-			});
-
+	// Menu settings
+	$('#menuToggle, .menu-close').on('click', function(){
+		$('#menuToggle').toggleClass('active');
+		$('body').toggleClass('body-push-toleft');
+		$('#theMenu').toggleClass('menu-open');
+	});
 
 })(jQuery)
 
@@ -15,18 +14,32 @@ var shade = 0 ;
 	$(document).ready(function(){
     $('#menuToggle').click(function(){
     	if (shade == 0){
+    		$('html, body').css('overflowY', 'hidden');
         	$('body').append('<div id="modalShade"></div>');
         	$('#modalShade').css('opacity', 0.7).fadeIn();
         	shade=1;
+        	//滾動控制事件	
+//    		$('body').bind("DOMMouseScroll", function(){			
+//    			return false;
+//    		}).bind("mousewheel", function(){
+//    			return false;			
+//    		});	
+
     	} else {
+        	$('html, body').css('overflowY', 'auto');
         	$('#modalShade').remove();
         	shade=0;
+        	
+        	//滾動控制事件	
+//    		$('body').unbind("DOMMouseScroll").unbind("mousewheel");
+        	
     	}
     });
 });
+
 	
 /* lightbox */
-	function jsLightbox(name, targetWidth, width, height) {		
+	function jsLightbox(name, targetWidth, width, height) {	
 
 		jQuery("."+name).css("display","block");
         jQuery("."+name+"-bg").fadeIn('slow');
@@ -75,13 +88,13 @@ var shade = 0 ;
 	jQuery("."+name+" #js-lightbox-close, #js-lightbox-bg").click(function() {
         jQuery("."+name+"-bg").fadeOut('slow');
 		jQuery("."+name).fadeOut('slow');
-        jQuery("html, body").css("overflow-y", "auto");
+//        jQuery("html, body").css("overflow-y", "auto");
     });
     jQuery(document).keyup(function(e) {
         if (e.keyCode == 27) {
             jQuery("."+name+"-bg").fadeOut('slow');
 			jQuery("."+name).fadeOut('slow');
-            jQuery("html, body").css("overflow-y", "auto");
+//            jQuery("html, body").css("overflow-y", "auto");
         }
     });
 }
