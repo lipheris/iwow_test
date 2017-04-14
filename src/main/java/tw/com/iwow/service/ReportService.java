@@ -17,20 +17,12 @@ public class ReportService {
 	@Autowired
 	private ReportDao reportDao;
 	
-	public Report insert(Report report,String desc,Long picId){
-		Picture picture=new Picture();
-		picture.setId(picId);
-		Report data=new Report();
-		data.setDesc(desc);
-		data.setDate(LocalDateTime.now());
-		data.setState(false);
-		data.setPicture(picture);
-
-		return reportDao.save(data);
-	}
-	
-	public Report updateReportHandle(Report report,Long picId){
+	public Report insert(Report report) {
 		return reportDao.save(report);
-		
+	}
+
+	public Report updateReportHandle(Report report, Long picId) {
+		return reportDao.save(report);
+
 	}
 }

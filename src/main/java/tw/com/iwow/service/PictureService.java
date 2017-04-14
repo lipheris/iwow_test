@@ -27,7 +27,7 @@ import tw.com.iwow.dao.PicDescriptionDao;
 import tw.com.iwow.dao.PictureDao;
 import tw.com.iwow.dao.TagDao;
 import tw.com.iwow.entity.Member;
-import tw.com.iwow.entity.PicsDesccription;
+import tw.com.iwow.entity.PicsDescription;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.entity.Tag;
 
@@ -136,16 +136,12 @@ public class PictureService {
 		return gson.toJson(this.search(param));
 	}
 
-	public PicsDesccription insertText(PicsDesccription picsDesccription) {
-		return picDescriptionDao.save(picsDesccription);
+	public PicsDescription insertText(PicsDescription picsDescription) {
+		return picDescriptionDao.save(picsDescription);
 	}
 
-	public List<PicsDesccription> getbyPicId(Long picId){
-		return picDescriptionDao.findByPicId(picId);
-	}
-	
-	public List<PicsDesccription> getbyPicIdSort(Long picId,Sort sort){
-		return picDescriptionDao.findByPicId(picId,sort);
+	public List<PicsDescription> getbyPicIdSort(Picture picture,Sort sort){
+		return picDescriptionDao.findByPicture(picture,sort);
 	}
 	public Set<Picture> getRelatedPicture(Long id) {
 		Set<Picture> result = new HashSet<>();

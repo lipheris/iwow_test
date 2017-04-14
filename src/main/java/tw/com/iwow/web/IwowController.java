@@ -67,12 +67,7 @@ public class IwowController {
 		return "/iwow/picture/search";
 	}
 
-	@RequestMapping(value = "/iwow/upload")
-	public String uploadPage(Model model) {
-		Collection<Tag> tags = tagservice.getTagFive();
-		model.addAttribute("tags", tags);
-		return "iwow/member/pictureUpload";
-	}
+
 
 	@RequestMapping(value = "/iwow/report")
 	public String reportPage() {

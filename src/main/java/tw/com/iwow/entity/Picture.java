@@ -92,7 +92,7 @@ public class Picture {
 	// 20170407 add for picture description
 		@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
-		private Set<PicsDesccription> picsDesc;
+		private Set<PicsDescription> picsDesc;
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
