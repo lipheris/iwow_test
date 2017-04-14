@@ -19,17 +19,15 @@ function set_picture_info(){
 		if (picture.tags != null)
 			insert_tags(picture.tags);
 	}else{
-	//		$("#pic_name").text("權限不足");
+			$("#pic_name").text("權限不足");
 	//		location.href="../../403";
 	}
 }
 
 function show_picture_article(picture) {
 	$("#pic_name").text(picture.name);
-	var picture_img = $("<img />").attr({"id":"picture_img", "src": picture.pictureAddress}).css({"width": "70%", "height": "70%"});
-//	var picture_link= $("<a></a>").attr({"href":picture.pictureAddress,"data-lightbox":"picture",'data-title':picture.name})
-//		.append(picture_img).appendTo("div[id='picture_img']");
-	picture_img.appendTo("div[id='picture_img']");
+	var picture_img = $("img[id='picture_img']").attr({ "src": picture.pictureAddress}).css({"width": "70%", "height": "70%"});
+//	var picture_link= picture_img.parent().attr({"href":picture.pictureAddress,"data-lightbox":"picture",'data-title':picture.name});
 }
 
 function insert_tags(tags) {
