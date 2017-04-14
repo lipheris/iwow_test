@@ -25,12 +25,12 @@
 					<span class="icon-bar"></span>
 				</button>
 				
-	<!-- logo -->
-	<a class="navbar-brand" href="/iwowwow/iwow/index">iwowwow</a>
-	<!-- logo -->
+		<!-- logo -->
+			<a class="navbar-brand" href="/iwowwow/iwow/index">iwowwow</a>
+		<!-- logo -->
 			
 			</div>
-	<!-- Collect the nav links, forms, and other content for toggling -->
+		<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="top-navbar-1">
 				<ul class="nav navbar-nav navbar-right">
 				<!-- search -->
@@ -42,20 +42,22 @@
 					</form>
 				<!-- search -->	
 
-			<ul class="nav navbar-nav navbar-right scroll-link" style="font-size: 20px;">
+			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
 				<li><a href="javascript:formSubmit()">Logout</a></li>
 			</ul>
 			
-			<ul class="nav navbar-nav navbar-right scroll-link" style="font-size: 20px;">
+			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
 				<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
 			</ul>
 
-			<ul class="nav navbar-nav navbar-right scroll-link" style="font-size: 20px;">
+			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
 				<li><a href="#"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
 			</ul>
 			
-			<ul class="nav navbar-nav navbar-right scroll-link">
-				<li><a style="padding: 0px; padding-top: 5px; margin-right: 10px;font-size:20px; color:#FFCCCC;" href="<c:url value="/iwow/index_user"/>"><img style="width: 40px; margin-right: 5px; " src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png"><sec:authentication property="principal.username" /></a></li>
+			<ul class="nav navbar-nav navbar-right scroll-link user_icon">
+				<li><a class="user_name" href="<c:url value="/iwow/index_user"/>">
+				<img class="user_img" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
+				<sec:authentication property="principal.username" /></a></li>
 			</ul>
 
 				<sec:authorize access="hasRole('ROLE_USER')">					
