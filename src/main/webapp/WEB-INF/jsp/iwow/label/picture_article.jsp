@@ -31,11 +31,7 @@ window.location.href="/iwowwow/iwow/sendEport?reportId=${picId}";
 <div class="bottons" id="pic_buttons">
 	<button class="btn btn-primary" type="submit" id="pic_buttons">FB</button>
 	<button class="btn btn-success" type="submit" id="pic_buttons">DONATE</button>
-<<<<<<< HEAD
-	<button class="btn btn-danger"  type="submit" onclick="reportDetail()">æª¢è</button>
-=======
 	<button class="btn btn-danger"  type="submit" onclick="reportDetail()">檢舉</button>
->>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 </div>
 
 <!-- tag -->
