@@ -37,15 +37,6 @@ public class IwowController {
 		return "iwow/index";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/iwow/picture")
-	public String picturePage(@RequestParam(value = "id", required = false, defaultValue = "-1") Long id, Model model) {
-		if (id == -1l) {
-			return indexPage(model);
-		}
-		model.addAttribute("picId", id);
-		return "iwow/picture";
-	}
-
 	/* 登出後重新導向登入頁面 */
 	@RequestMapping(value = "/iwow/login")
 	public String loginPage() {
@@ -67,26 +58,9 @@ public class IwowController {
 		return "/iwow/picture/search";
 	}
 
-	@RequestMapping(value = "/iwow/upload")
-	public String uploadPage(Model model) {
-		Collection<Tag> tags = tagservice.getTagFive();
-		model.addAttribute("tags", tags);
-		return "iwow/member/pictureUpload";
-	}
-
 	@RequestMapping(value = "/iwow/report")
 	public String reportPage() {
 		return "iwow/report";
-	}
-
-	@RequestMapping(value = "/iwow/signup")
-	public String signupPage() {
-		return "iwow/signup";
-	}
-
-	@RequestMapping(value = "/iwow/setting_profile")
-	public String setting_profilePage() {
-		return "iwow/setting_profile";
 	}
 
 	/*-------------------for 403 access denied page----------------*/
@@ -105,7 +79,24 @@ public class IwowController {
 
 	}
 
-	/* 以下合併或待修改 */
+	/*--------------------- 以下合併或待修改------------------------ */
+	
+	/*馬哥首頁未完成*/
+	@RequestMapping(method = RequestMethod.GET, value = "/iwow/picture")
+	public String picturePage(@RequestParam(value = "id", required = false, defaultValue = "-1") Long id, Model model) {
+		if (id == -1l) {
+			return indexPage(model);
+		}
+		model.addAttribute("picId", id);
+		return "iwow/picture";
+	}
+	
+	/*發糕未完成*/
+	@RequestMapping(value = "/iwow/signup")
+	public String signupPage() {
+		return "iwow/signup";
+	}
+	
 	@RequestMapping(value = "/iwow/index_user")
 	public String index_userPage() {
 		return "iwow/old/index_user";

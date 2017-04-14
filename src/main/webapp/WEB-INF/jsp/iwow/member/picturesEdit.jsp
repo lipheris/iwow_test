@@ -101,7 +101,7 @@ th {
 
 					<td><input name="picName" type="text" value="${list.name}"/></td>
 					<td>${list.update}</td>
-					<td>${list.uploaderId}</td>
+					<td>${list.uploader}</td>
 					<c:choose>
 						<c:when test="${list.visibility eq 'PRIVATE'}">
 							<td><select name="visibility">

@@ -59,7 +59,7 @@ fieldset {
 
 legend {
 	font-size: 40px;
-	font-family: Courier;
+	font-family: Courier;  
 }
 
 /* 選擇檔案 */

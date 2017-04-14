@@ -20,7 +20,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -83,8 +82,8 @@ public class Picture {
 	}
 	@JsonView(Views.ShowPicture.class)
 	@OneToOne(cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private Stats stats;// = new Stats(this);
+	@JoinColumn(name = "STATS")
+	private Stats stats = new Stats(this);
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
@@ -92,7 +91,7 @@ public class Picture {
 	// 20170407 add for picture description
 		@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
-		private Set<PicsDesccription> picsDesc;
+		private Set<PicsDescription> picsDesc;
 	/*
 	 * 與Tag建立雙向@ManyToMany，Picture為主控方
 	 */
