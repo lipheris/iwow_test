@@ -1,4 +1,3 @@
-@import url(font-awesome.min.css);
 @import url(https://fonts.googleapis.com/css?family=Pattaya|Work+Sans:400,200,300);
 
 /*
@@ -371,7 +370,7 @@
 			display: inline-block;
 			text-decoration: none;
 			border-radius: 50% 50% 0 0;
-			background: #e74c3c;
+			background: black;
 			width: 3em;
 			height: 3em;
 			margin-bottom: -1.75em;
@@ -402,7 +401,7 @@
 			-ms-flex-pack: center;
 			position: relative;
 			z-index: 10003;
-			background: #e74c3c;
+			background: black;
 			padding: 2em;
 			height: 20em;
 		}
@@ -483,3 +482,7 @@
 		#main{
 			margin-top:80px;
 		}
+		
+#footer{
+	z-index:3
+}
