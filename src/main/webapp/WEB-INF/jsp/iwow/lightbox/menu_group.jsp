@@ -4,6 +4,7 @@
 .social{
 	margin-top:40px;
 	font-family:Microsoft JhengHei;
+	text-align:left;
 }
 /* search */
 #search{
