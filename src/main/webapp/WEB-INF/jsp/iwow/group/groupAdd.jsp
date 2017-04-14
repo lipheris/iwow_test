@@ -47,38 +47,42 @@ aside {
 		</div>
 	</form>
 	
-	<form class="navbar-form navbar-left" id="searchForm" action='<c:url value="/iwow/group/search" />' method="get">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search" id="searchCtx" name="ctx"/>
-							<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchBtn"></button>
-						</div>
-				</form>
+<%-- 	<form class="navbar-form navbar-left" id="searchForm" action='<c:url value="/iwow/group" />' method="get"> --%>
+				<div class="form-group" id="search">
+					<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchBtn"></button>
+				</div>				
+				<div id="group_info">
+				</div>
+<!-- </form> -->
 </aside>
 
 <script>
-$(function() {
-	$("#searchBtn").click(doSearch);
-})
-function doSearch(ctx) {
-	var ctx = document.getElementById("searchCtx").value;
-	if (ctx != "") {
-		document.getElementById("searchForm").submit();
-	}
-}
+var group_info_div = $("div[id='group_info']");
 
 $(function() {
-	$.getJSON("/iwowwow/iwow/pictures/" + pic_id, function (picture){
-		this_picture = picture;
-		if(this_picture != null){
-			show_picture_article(this_picture);
-			if (this_picture.stats != null) {
-				insert_stats(this_picture.stats);
-			}
-			if( this_picture.tags != null ){
-				insert_tags(this_picture.tags);
-			}
-		}
+	$("div[id='search']").click(function(){
+		$.getJSON("/iwowwow/iwow/group",function (groups){
+			group_info_div.empty();
+			$.each(groups,function(idx,group){				
+				$("<button></button>")
+				.text(group.name)
+				.click(function() {
+				location.href = "/iwowwow/iwow/group/update?name=" + group.name;
+			})
+				.appendTo(group_info_div);
+				
+				$("<p></p>")
+				.text(group.members[0].name)
+				.appendTo(group_info_div);
+				
+				$("</br>")
+				.appendTo(group_info_div);								
+			})											
+		});		
 	});
+});
+	
+
 </script>
 </body>
 </html>

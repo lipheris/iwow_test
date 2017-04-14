@@ -30,7 +30,13 @@ public class Group {
 	
 	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
 	@Column(name = "NAME")
-	private String name; // group name, ex:line 群組EEIT92的名字
+	private String name; 
+	
+	@Column(name="PHOTO_ADDRESS")
+	private String photoAd;
+		
+	@Column(name="GROUP_CREATOR")
+	private Long memid;
 	
 	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
@@ -53,6 +59,22 @@ public class Group {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPhotoAd() {
+		return photoAd;
+	}
+
+	public void setPhotoAd(String photoAd) {
+		this.photoAd = photoAd;
+	}
+	
+	public Long getMemid() {
+		return memid;
+	}
+
+	public void setMemid(Long memid) {
+		this.memid = memid;
 	}
 
 	public Set<Member> getMembers() {
