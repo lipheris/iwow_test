@@ -20,11 +20,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import tw.com.iwow.enums.Gender;
 import tw.com.iwow.web.jsonview.Views;
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "member_uuid" )
 @Entity
 @Table(name = "MEMBERS")
 public class Member {
@@ -93,7 +95,13 @@ public class Member {
 	 */
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "members")
 	private Set<Group> groups = new HashSet<>();
-
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "followings")
+	private Set<Member> followers = new HashSet<>();
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable( name = "FOLLOW_RELATION", 
+				joinColumns = @JoinColumn(name = "FOLLOWING", referencedColumnName = "ID"), 
+				inverseJoinColumns = @JoinColumn(name = "FOLLOWER", referencedColumnName = "ID"))
+	private Set<Member> followings = new HashSet<>();
 	public Long getId() {
 		return id;
 	}
@@ -251,5 +259,26 @@ public class Member {
 	public void setPhotoAddr(String photoAddr) {
 		this.photoAddr = photoAddr;
 	}
-	
+
+	public Set<Member> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(Set<Member> followers) {
+		this.followers = followers;
+	}
+
+	public Set<Member> getFollowings() {
+		return followings;
+	}
+
+	public void setFollowings(Set<Member> followings) {
+		this.followings = followings;
+	}
+	public void addFollowing(Member following){
+		this.followings.add(following);
+	}
+	public void removeFollowing(Member following){
+		this.followings.remove(following);
+	}
 }
