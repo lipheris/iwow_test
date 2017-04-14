@@ -30,7 +30,7 @@
 			<div class="columns">
 			<c:forEach var="item" items="${picMsg}">
 				<div class="image fit">
-					<a href="<c:url value="/iwow/picture/${item.id}"/>"><img src='${item.pictureAddress}' /></a>
+					<a href="<c:url value="/iwow/picture/${item.id}"/>" title="${item.description}"><img src='${item.pictureAddress}' /></a>
 				</div>
 				</c:forEach>
 			</div>

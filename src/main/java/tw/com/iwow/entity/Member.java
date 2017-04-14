@@ -20,11 +20,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import tw.com.iwow.enums.Gender;
+import tw.com.iwow.web.jsonview.Views;
 
 @Entity
 @Table(name = "MEMBERS")
 public class Member {
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -35,6 +39,7 @@ public class Member {
 	private String password;
 	@Column(name = "NAME")
 	private String name;
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
 	@Column(name = "NICKNAME")
 	private String nickname;
 	@Enumerated(EnumType.STRING)
@@ -46,12 +51,13 @@ public class Member {
 	private String phone;
 	@Column(name = "ADDRESS")
 	private String address;
-	// private Blob photo;
+	@JsonView(Views.ShowPicUploader.class)
+	@Column(name = "PHOTO_ADDR")
+	private String photoAddr;
 	/*
-	 * 以上傳者身分對Picture建立@OneToMany單向關聯
+	 * 以上傳者身分對Picture建立@OneToMany雙向關聯
 	 */
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "UPLOADER_ID", referencedColumnName = "ID")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="uploader")
 	private Set<Picture> picUploads = new HashSet<>();
 	/*
 	 * 以收藏者身分對Picture建立@ManyToMany雙向關聯,主控方在Member
@@ -236,6 +242,14 @@ public class Member {
 	}
 	public void removePicColls(Collection<Picture> picColls){
 		this.picColls.removeAll(picColls);
+	}
+
+	public String getPhotoAddr() {
+		return photoAddr;
+	}
+
+	public void setPhotoAddr(String photoAddr) {
+		this.photoAddr = photoAddr;
 	}
 	
 }

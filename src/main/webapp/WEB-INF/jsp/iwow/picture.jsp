@@ -15,7 +15,7 @@
 <!-- Sweet Alert 2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
-<script type="text/javascript">var pic_id = ${picId}</script>
+<script type="text/javascript" src='<c:url value="/js/picture.js" />'></script>
 
 <style>
 img {
@@ -75,23 +75,26 @@ article {
 	<!-- banner import -->
 	<c:import url="label/banner.jsp" />
 
-
-	<!-- aside -->
-	<aside>
-	<!-- picture_painter import-->
-	<c:import url="label/picture_painter.jsp" /> 
+	<div style="margin-top:150px;">
+		<!-- aside -->
+		<aside>
+		<!-- picture_painter import-->
+		<c:import url="label/picture_painter.jsp" /> 
+		<script type="text/javascript" src='<c:url value="/js/picture_painter.js" />'></script>
+		
+		<!-- picture_shop.jsp import-->
+		<c:import url="label/picture_shop.jsp" /> 
+		
+		<!-- picture_comment import-->
+		<c:import url="label/picture_comment.jsp" /> 
 	
-	<!-- picture_shop.jsp import-->
-	<c:import url="label/picture_shop.jsp" /> 
+		</aside>
+		<!-- aside -->
+		<article>
+			<c:import url="label/picture_article.jsp" />
+			<script type="text/javascript" src='<c:url value="/js/picture_article.js" />'></script>
+		</article>
+	</div>
 	
-	<!-- picture_comment import-->
-	<c:import url="label/picture_comment.jsp" /> 
-
-	</aside>
-	<!-- aside -->
-	<article>
-		<c:import url="picture_article.jsp" />
-		<script type="text/javascript" src='<c:url value="/js/picture_article.js" />'></script>
-	</article>
 </body>
 </html>

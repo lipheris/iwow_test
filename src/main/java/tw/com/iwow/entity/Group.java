@@ -16,6 +16,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import tw.com.iwow.web.jsonview.Views;
+
 @Entity
 @Table(name = "GROUPS")
 public class Group {
@@ -23,8 +27,12 @@ public class Group {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
+	
+	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
 	@Column(name = "NAME")
 	private String name; // group name, ex:line 群組EEIT92的名字
+	
+	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(	name = "GROUP_MEMS", 
 				joinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"), 
@@ -56,11 +64,17 @@ public class Group {
 	}
 	
 	public void addMember(Member member){
+		if (!(this.members.contains(member)))
 		this.members.add(member);
+//		if(member.getGroups()!=this)
+//			member.setGroups(this);
+		
 	}
 	public void removeMember(Member member){
-		this.members.remove(member);
+		if (this.members.contains(member))
+			this.members.remove(member);
 	}
+	
 	public void addMembers(Collection<Member> members){
 		this.members.addAll(members);
 	}

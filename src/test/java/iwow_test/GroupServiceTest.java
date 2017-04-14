@@ -6,6 +6,7 @@ import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,13 @@ public class GroupServiceTest {
 	
 	@Test
 	public void test() {
+//		Group group=groupDao.findByName("EEIT92");
+//		groupDao.delete(group);
+		groupDao.search("EIT9");
+	}
+	
+	
+	public void test2() {
 		Group group = new Group();
 		group.setName("cat");
 		groupDao.save(group);	

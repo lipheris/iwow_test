@@ -33,8 +33,8 @@
 	$(function() {
 		$("#datepicker").datepicker({
 			minDate : -0,
-			maxDate : "+1Y"
-		});
+			maxDate : "+1Y",
+		}).datepicker("setDate", "0");
 	});
 </script>
 
@@ -130,11 +130,12 @@ legend {
 
 	<!-- 上傳頁面 -->
 	<div class="upload_all">
-<!-- 把_csrf以Get的方法傳送 -->
-		<form action="<c:url value="/iwow/doUpload"/>?${_csrf.parameterName}=${_csrf.token}" method="post"
-			enctype="multipart/form-data">
+		<!-- 把_csrf以Get的方法傳送 -->
+		<form
+			action="<c:url value="/iwow/doUpload"/>?${_csrf.parameterName}=${_csrf.token}"
+			method="post" enctype="multipart/form-data">
 			<!-- 	<form action="/iwow_test/iwow/doUpload2 " method="post" enctype="multipart/form-data"> -->
-			
+
 			<fieldset>
 				<legend>Upload</legend>
 
@@ -157,12 +158,20 @@ legend {
 				</div>
 
 				<!-- TAG -->
+				<label for="tag">建議：</label>
+				<div id="suggest">
+					<c:forEach var="tags" items="${tags}">
+						<input type="button" class="add_field_button" name=""
+							value="${tags.name}">
+					</c:forEach>
+				</div>
 				<div>
-					<label for="tag">Tag：</label><input type="checkbox" id="tag"
-						name="tags" value="bird">bird<input type="checkbox" id="tag"
-						name="tags" value="cat">cat<input type="checkbox" id="tag"
-						name="tags" value="animal">animal<input type="checkbox" id="tag"
-						name="tags" value="views">views
+					<div>
+						Tags:
+						<div class="input_fields_wrap">
+							<input type="text" id="tagtext" name="tagtext">
+						</div>
+					</div>
 				</div>
 				<div>
 					<input type="checkbox" name="keytag" value="keytag" id="keytag"><label
@@ -172,28 +181,28 @@ legend {
 				<!-- 瀏覽限制 -->
 				<div>
 					<label>瀏覽限制：</label> <input type="radio" name="assort"
-						value="GENERAL" id="all"checked><label for="all">全年齡</label> <input
-						type="radio" name="assort" value="RESTRICTED" id="r18"><label
+						value="GENERAL" id="all" checked><label for="all">全年齡</label>
+					<input type="radio" name="assort" value="RESTRICTED" id="r18"><label
 						for="r18">18禁</label>
 				</div>
 
 				<!-- 隱私 -->
 				<div>
 					<label>隱私：</label> <input type="radio" name="visibility"
-						value="PUBLIC" id="PUBLIC"checked><label for="public">所有人</label>
+						value="PUBLIC" id="PUBLIC" checked><label for="public">所有人</label>
 					<!-- 		<input type="radio" name="visibility" value="friends" id="friends"><label for="friends">朋友</label>  enum暫時沒有可能要討論  -->
 					<input type="radio" name="visibility" value="PRIVATE" id="PRIVATE"><label
 						for="private">私人</label>
 				</div>
 
 				<!-- 預約排程投稿 -->
+				<div>
+					<label>預約投稿：</label>
 					<div>
-						<label>預約投稿：</label>
-						<div>
-						<input type="checkbox"  value="reservation" id="reservation"/>
-						<input type="text" name="update"id="datepicker" value="" />
-						</div>
+						<input type="checkbox" value="reservation" id="reservation" /> <input
+							type="text" name="update" id="datepicker" value="" />
 					</div>
+				</div>
 
 
 				<!-- 送出/清除 -->
@@ -205,7 +214,56 @@ legend {
 
 			</fieldset>
 		</form>
-
+		<script type="text/javascript">
+			var max_fields = 5; //maximum input boxes allowed
+			var wrapper = $(".input_fields_wrap"); //Fields wrapper
+			var add_button = (".add_field_button"); //Add button ID
+			var x = 1; //initlal text box count
+			
+			$('#suggest').on(
+					"click",".add_field_button",function(e) { //on add input button click
+						e.preventDefault();
+						if (x < max_fields) { //max input box allowed
+							x++; //text box increment
+							$(this).closest('input').remove();
+							$(wrapper).append(
+									'<input type="button" class="remove_field"  name="tags" value="'
+											+ $(this).attr("value") + '" ><input type="hidden" name="tags"class="remove_field" value="'
+											+ $(this).attr("value") + '" >'); //add input box
+						}
+					});
+			$(wrapper).on(
+					"click",
+					".remove_field",function(e) { //user click on remove text
+						e.preventDefault();
+						$("#suggest").append(
+								'<input type="button" class="add_field_button" name="" value="'
+										+ $(this).attr("value") + '" >'); //add input box
+						$(this).next('input').remove();
+						$(this).closest('input').remove();
+						x--;
+					})
+			$('input[name=tagtext]').change(
+					function() {
+						if (x < max_fields) { //max input box allowed
+							x++; //text box increment
+							$(wrapper).append(
+									'<input type="button" class="remove_field_write"  value="'
+											+ $('input[name=tagtext]').val() + '" ><input type="hidden" name="tags"class="remove_field" value="'
+											+ $('input[name=tagtext]').val()+ '" >'); //add input box
+						}
+						$('input[name=tagtext]').val("");
+					});
+			$(wrapper).on(
+					"click",
+					".remove_field_write",
+					function(e) { //user click on remove text
+						e.preventDefault();
+						$(this).next('input').remove();
+						$(this).closest('input').remove();
+						x--;
+					})
+		</script>
 	</div>
 </body>
 </html>

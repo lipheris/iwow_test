@@ -8,10 +8,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.com.iwow.entity.PicsDesccription;
 import tw.com.iwow.entity.Picture;
-import tw.com.iwow.entity.Tag;
+import tw.com.iwow.entity.Report;
 import tw.com.iwow.enums.Assort;
 import tw.com.iwow.enums.Visibility;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
+import tw.com.iwow.service.ReportService;
 
 @Controller
 @RequestMapping(value = "/iwow")
@@ -37,20 +40,19 @@ public class PictureController {
 	private PictureService pictureService;
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private ReportService reportService;
 	/*----單張圖片超連結-----*/
 	@RequestMapping(method = RequestMethod.GET, value = "/picture/{id}")
-	public String pictureAJAX(@PathVariable(value = "id") Long id, Model model)
-			throws SQLException, UnsupportedEncodingException {
-		model.addAttribute("picId", id);
+	public String picturePage()throws SQLException, UnsupportedEncodingException {
 		return "/iwow/picture";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/listajax")
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/list")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/listupdate";
 	}
 
 	/*-------------------index page 接圖用----------------*/
@@ -84,14 +86,14 @@ public class PictureController {
 		}else{
 		pictureService.insert(picture, pic,tags);
 		}
-		return "redirect:/iwow/listajax";
+		return "redirect:/iwow/member/picturesEdit";
 	}
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
 	public String deletePicture(Model model,Long id){
 		pictureService.delete(id);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/picturesEdit";
 	}@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
 	public String updatePicture(Model model,String picName,String visibility,String assort,Long id) throws SQLException, UnsupportedEncodingException {
 		Picture pic=pictureService.getById(id);
@@ -101,6 +103,38 @@ public class PictureController {
 		pictureService.update(pic);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/listupdate";
+		return "/iwow/member/picturesEdit";
 	}
+	
+	/*-------------------insert picture description----------------*/
+	 @RequestMapping(value = "/insertDescription", method = RequestMethod.GET)
+	 public String picturePage(Model model,@RequestParam(name="getId") Long picId,@RequestParam(name="typein") String typein
+			 ){
+//		 System.out.println(typein);
+		 PicsDesccription data= new PicsDesccription();
+		 	data.setNote(typein);
+		 	data.setPicId(picId);
+		 	data.setMemId(new Long(123));	
+		 pictureService.insertText(data);
+		 
+
+		 List<PicsDesccription> pic=pictureService.getbyPicIdSort(picId, new Sort(Direction.DESC,"id"));//有sort
+		 model.addAttribute("pictexts", pic);
+	 return "/iwow/picture";
+	 }
+	 
+	 /*-------------------sendEport----------------*/
+	 @RequestMapping(value = "/sendEport", method = RequestMethod.GET)
+	 public String sendEport(Model model,@RequestParam(name="reportId") Long picId){
+		
+	 return "/iwow/sendReport";
+	 }
+	 
+	 /*-------------------接收檢舉page----------------*/
+	 @RequestMapping(value = "/insertReport", method = RequestMethod.POST)
+	 public String insertReport(Model model,@RequestParam(name="textReport") String textReport,@RequestParam(name="pid") Long picId){
+
+		 reportService.insert(new Report(), textReport, picId);
+	 return "redirect:/iwow/index";
+	 }
 }
