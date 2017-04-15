@@ -51,8 +51,14 @@ aside {
 				<div class="form-group" id="search">
 					<button type="button" class="btn btn-default glyphicon glyphicon-search" id="searchBtn"></button>
 				</div>				
+				
 				<div id="group_info">
+					<h1 id="group_name"></h1>
+					<h1 id="group_create_name"></h1>
+					<img id="group_img">
 				</div>
+				
+			
 <!-- </form> -->
 </aside>
 
@@ -62,25 +68,38 @@ var group_info_div = $("div[id='group_info']");
 $(function() {
 	$("div[id='search']").click(function(){
 		$.getJSON("/iwowwow/iwow/group",function (groups){
+			console.log(groups);
 			group_info_div.empty();
-			$.each(groups,function(idx,group){				
-				$("<button></button>")
-				.text(group.name)
-				.click(function() {
-				location.href = "/iwowwow/iwow/group/update?name=" + group.name;
-			})
-				.appendTo(group_info_div);
+			$.each(groups,function(idx,group){	
+				console.log(show_group(group))								
 				
-				$("<p></p>")
-				.text(group.members[0].name)
-				.appendTo(group_info_div);
+// 				$("<button></button>")
+// 				.text(group.name)
+// 				.click(function() {
+// 				location.href = "/iwowwow/iwow/group/update?name=" + group.name;								
+// 			})					
+// 				.appendTo(group_info_div);
+
+// 				$("<img>")
+// 				.attr("src", group.photoAd)
+// 				.appendTo(group_info_div);
+// 				$("<p></p>")
+// 				.text(group.members[0].name)
+// 				.appendTo(group_info_div);
 				
-				$("</br>")
-				.appendTo(group_info_div);								
+				
+// 				$("</br>")
+// 				.appendTo(group_info_div);								
 			})											
 		});		
 	});
 });
+
+function show_group(group) {
+	$("#group_info > #group_name").text(group.name);
+// 	$("#group_info > #group_create_name").text(group.memid);
+// 	$("img[id='group_img']").attr("src", group.photoAd);
+}
 	
 
 </script>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
 .social {
 	margin-top: 40px;
@@ -37,6 +37,7 @@
 	margin-right: 5px;
 }
 </style>
+<script src='<c:url value="/js/group.js"/>'></script>
 
 <!-- 群組   group-->
 <div id="js-lightbox-bg" class="res-group-popup-bg"></div>
@@ -48,44 +49,37 @@
 	</div>
 
 	<!-- social -->
-	<div class="social">
+	<div class="social" id="social">
 
 		<!-- search	-->
 		<nav class="navbar navbar-light bg-faded justify-content-between">
-			<form class="form-inline" id="searchForm" action='<c:url value="/iwow/group/search" />' method="get">
+			<form class="form-inline" id="searchForm"
+				action='<c:url value="/iwow/group/search" />' method="get">
 				<div class="form-group">
-					<input type="text" class="form-control mr-sm-2" placeholder="Search Group" id="searchCtx" name="ctx" />
-					<button type="button" class="btn btn-default glyphicon glyphicon-search my-2 my-sm-0" id="searchBtn"></button>
+					<input type="text" class="form-control mr-sm-2"
+						placeholder="Search Group" id="searchCtx" name="ctx" />
+					<button type="button"
+						class="btn btn-default glyphicon glyphicon-search my-2 my-sm-0"
+						id="searchBtn"></button>
 				</div>
 			</form>
 		</nav>
+		<div id="findAllBtn">
+			<button type="button"
+				class="btn btn-default glyphicon glyphicon-search" id="findAllBtn"></button>
+		</div>
 
 
 		<!-- social box -->
-		<!-- 		1 -->
-		<div id="group_info">
-			<h1 id="group_name"></h1>
-			<h1 id="pic_author_name"></h1>
-		</div>
-		
-		<div class="mainGroup" id="group_img">
-			<a><img id = "group_img" /></a>
-		</div>
-		
-		<div class="social_box">
-			<img class="social_box_img"
-				src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg">
-			<span class="social_box_name">我想下班</span>
-
-			<button type="button" class="btn btn-danger social_box_btn">退出</button>
-			<button type="button" class="btn btn-info social_box_btn">加入</button>
-
-		</div>
-
+		<div 	id = "boxs">
+		</div> 
 		<!-- social box end -->
+				
+<!-- 			<button type="button" class="btn btn-danger social_box_btn">退出</button> -->
+<!-- 			<button type="button" class="btn btn-info social_box_btn">加入</button> -->
 	</div>
 
 	<div class="res-group js-lightbox-group"></div>
 </div>
 
-<script src='<c:url value="/js/banner_search.js"/>'></script>
+
