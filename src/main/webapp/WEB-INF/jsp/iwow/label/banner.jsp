@@ -55,7 +55,7 @@
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right scroll-link user_icon">
-				<li><a class="user_name" href="<c:url value="/iwow/index_user"/>">
+				<li><a class="user_name" href="<c:url value="/iwow/member"/>">
 				<img class="user_img" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
 				<sec:authentication property="principal.username" /></a></li>
 			</ul>
