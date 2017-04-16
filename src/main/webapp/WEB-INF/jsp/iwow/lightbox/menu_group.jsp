@@ -38,6 +38,7 @@
 }
 </style>
 <script src='<c:url value="/js/group.js"/>'></script>
+<script src='<c:url value="/js/banner_search.js"/>'></script>
 
 <!-- 群組   group-->
 <div id="js-lightbox-bg" class="res-group-popup-bg"></div>
