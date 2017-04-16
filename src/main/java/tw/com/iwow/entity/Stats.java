@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,9 +18,10 @@ public class Stats {
 	@Column(name = "ID")
 	private Long id;
 	@OneToOne(mappedBy = "stats")
+	@JoinColumn(name = "PIC_ID")
 	private Picture pic;
 	@Column(name = "VIEWS")
-	private Long views;
+	private Long views = 0L;
 	@Column(name = "LIKES")
 	private Long likes = 0L;
 	@Column(name = "REVIEWS")
@@ -27,12 +29,16 @@ public class Stats {
 	@Column(name = "SCORES")
 	private Long scores = 0L;
 	@Column(name = "SAL_TOTAL")
-	private Double salesTotal;// salesTotal 為針對每張圖之總銷售額
+	private Double salesTotal = 0.0;// salesTotal 為針對每張圖之總銷售額
 	@Column(name = "Q_SAL_TOTAL")
-	private Double quaSalesTotal;// quaSalesTotal 為針對每張圖之總銷次數
+	private Double quaSalesTotal = 0.0;// quaSalesTotal 為針對每張圖之總銷次數
 
 	public Stats(Picture pic) {
 		this.pic = pic;
+	}
+
+	public Stats() {
+		super();
 	}
 
 	public Long getId() {
