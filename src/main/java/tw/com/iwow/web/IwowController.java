@@ -1,6 +1,7 @@
 package tw.com.iwow.web;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -8,7 +9,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import tw.com.iwow.entity.Picture;
-import tw.com.iwow.entity.Tag;
 import tw.com.iwow.service.PictureService;
 import tw.com.iwow.service.TagService;
 
@@ -108,11 +107,16 @@ public class IwowController {
 	public String collectionlist() {
 		return "iwow/collectionlist";
 	}
+	
 	// 新增admin manager
-			@RequestMapping(value = "/iwow/admin/manager")
-			public String adminPageforReport() {
-				return "/iwow/admin/manager";
-			}
-		
+	@RequestMapping(value = "/iwow/admin/manager")
+	public String adminPageforReport() {
+		return "/iwow/admin/manager";
+	}
 
+	//donation測試頁面導向
+	@RequestMapping(value = "/iwow/donationTest")
+	public String donationTest() {
+		return "/iwow/donationTest";
+	}
 }
