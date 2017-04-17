@@ -118,5 +118,11 @@ public class IwowController {
 	public String collectionlist() {
 		return "iwow/collectionlist";
 	}
+	// 新增admin manager
+			@RequestMapping(value = "/iwow/admin/manager")
+			public String adminPageforReport() {
+				return "/iwow/admin/manager";
+			}
+		
 
 }

@@ -3,6 +3,7 @@ package tw.com.iwow.service;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,8 @@ public class ReportService {
 	public Report updateReportHandle(Report report, Long picId) {
 		return reportDao.save(report);
 
+	}
+	public List<Report> getReportAll(){
+		return reportDao.findAll();
 	}
 }

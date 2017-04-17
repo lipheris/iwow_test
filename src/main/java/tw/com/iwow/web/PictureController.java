@@ -190,4 +190,13 @@ public class PictureController {
 	 return "redirect:/iwow/picture/"+id;
 	
 	 }
+	 /*-------------------先行讀取report 以便修改----------------*/
+	 @RequestMapping(value = "/admin/manager", method = RequestMethod.GET)
+	 public String manager(Model model){
+
+//		System.out.println("test report page");
+		List<Report> reportAll=reportService.getReportAll();
+		model.addAttribute("reportAll", reportAll);
+	 return "/iwow/admin/manager";
+	 }
 }
