@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,9 +89,12 @@ public class GroupController {
 		return "/iwow/group/groupIndex";
 	}
 	
-	@RequestMapping(value="/search")
-	public String search(){	
-		return "/iwow/group/groupAdd";
+	/*Group 關鍵字搜尋*/
+	@JsonView(Views.ShowGroups.class)
+	@RequestMapping(method = RequestMethod.GET,produces = { "application/json" },value="/search")
+	@ResponseBody
+	public Set<Group> search(@RequestParam(value="ctx",required = false) String param){			
+		return groupService.search("ctx");
 	}
 	
 	@RequestMapping(value="/add")
@@ -117,6 +121,7 @@ public class GroupController {
 		
 	/*Group新增會員*/
 	@RequestMapping(value="/update",method = RequestMethod.GET)
+	@ResponseBody
 	public Boolean addMember(@RequestParam(value="name",required = false) String name){		
 		Group temp = groupService.getByName(name);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
@@ -127,7 +132,22 @@ public class GroupController {
 			return true;
 		}
 		return false;
-	}			
+	}
+	
+	/*Group刪除會員*/
+	@RequestMapping(value="/exit",method=RequestMethod.GET)
+	@ResponseBody
+	public Boolean removeMember(@RequestParam(value="name",required = false) String name){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+		Member member = memberService.getByEmail(authentication.getName());
+		Group temp = groupService.getByName(name);
+		if(temp!=null){
+			temp.removeMember(member);
+			groupService.update(temp);
+			return true;
+		}
+		return false;
+	}
 	
 	/*Group刪除*/
 	@RequestMapping(method=RequestMethod.DELETE, value="/{name}")
