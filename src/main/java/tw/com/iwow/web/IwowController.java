@@ -81,16 +81,6 @@ public class IwowController {
 
 	/*--------------------- 以下合併或待修改------------------------ */
 	
-	/*馬哥首頁未完成*/
-	@RequestMapping(method = RequestMethod.GET, value = "/iwow/picture")
-	public String picturePage(@RequestParam(value = "id", required = false, defaultValue = "-1") Long id, Model model) {
-		if (id == -1l) {
-			return indexPage(model);
-		}
-		model.addAttribute("picId", id);
-		return "iwow/picture";
-	}
-	
 	/*發糕未完成*/
 	@RequestMapping(value = "/iwow/signup")
 	public String signupPage() {
@@ -118,5 +108,11 @@ public class IwowController {
 	public String collectionlist() {
 		return "iwow/collectionlist";
 	}
+	// 新增admin manager
+			@RequestMapping(value = "/iwow/admin/manager")
+			public String adminPageforReport() {
+				return "/iwow/admin/manager";
+			}
+		
 
 }
