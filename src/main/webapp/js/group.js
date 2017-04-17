@@ -1,17 +1,16 @@
 //var all_groups_div = $("div[id='pic_related']");
 //var all_groups;
 //var member_id = [mem_id];
-var group_info_div=$("div[id='group_info']");
-var social_box_div=$("div[id='social_box']");
+//var group_info_div=$("div[id='group_info']");
+//var social_box_div=$("div[id='social_box']");
 $(function(){
 		
 	$("div[id='findAllBtn']").click(function(){
 		var boxs_div=$("div[id='boxs']");
 		$(boxs_div).empty();
-			$.getJSON("/iwowwow/iwow/group",function (groups){								
+			$.getJSON("/iwowwow/iwow/group/find_groups",function (groups){								
 				$.each(groups,function(idx,group){
-					
-					
+									
 					var social_box_div=$("<div></div>")
 					 .addClass("social_box")
 					 .attr("id","social_box")
@@ -29,6 +28,16 @@ $(function(){
 					$("<button>")
 					.addClass("btn btn-danger social_box_btn")
 					.text("退出")
+					.click(function() {										
+							$.get("/iwowwow/iwow/group/exit",{"name":group.name},
+									function(data){																												
+											if(data=="true")
+												$(social_box_div).empty();	
+									}
+							   );
+							})
+						//location.href = "/iwowwow/iwow/group/exit?name=" + group.name;
+					
 					.appendTo(social_box_div);
 					
 					$(social_box_div).appendTo(boxs_div)

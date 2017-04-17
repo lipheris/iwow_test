@@ -107,6 +107,7 @@ public class IwowController {
 	public String collectionlist() {
 		return "iwow/collectionlist";
 	}
+<<<<<<< HEAD
 	
 	// 新增admin manager
 	@RequestMapping(value = "/iwow/admin/manager")
@@ -119,5 +120,13 @@ public class IwowController {
 	public String donationTest() {
 		return "/iwow/donationTest";
 	}
+=======
+	// 新增admin manager
+			@RequestMapping(value = "/iwow/admin/manager")
+			public String adminPageforReport() {
+				return "/iwow/admin/manager";
+			}
+		
+>>>>>>> branch 'master' of https://github.com/FaGao/iwow_test.git
 
 }
