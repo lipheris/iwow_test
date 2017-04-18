@@ -14,6 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import tw.com.iwow.web.jsonview.Views;
+
 @Entity
 @Table(name = "DONATIONS")
 public class Donation {
@@ -21,14 +25,21 @@ public class Donation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id; // 此id為查詢各donate 紀錄
+	
+	@JsonView(value = {Views.MemberDonor.class})
 	@Column(name = "TIME")
 	private LocalDateTime time; // donate time
+	
+	@JsonView(value = {Views.MemberDonor.class})
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-	@JoinColumn(name = "DONOR_ID") // donate的人id
-	private Member donor;
+	@JoinColumn(name = "DONOR_ID")
+	private Member donor; // donate的人id
+	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "REC_ID")
 	private Member receiver; // 接受donate memberid
+	
+	@JsonView(value = {Views.MemberDonor.class, Views.MemberDetails.class})
 	@Column(name = "AMOUNT")
 	private BigDecimal amount; // 單次donate 金額
 
