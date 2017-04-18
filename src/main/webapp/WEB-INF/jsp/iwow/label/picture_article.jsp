@@ -9,10 +9,11 @@
 <script src='<c:url value="/js/sweetalert.min.js"/>'></script>
 
 <style>
-.icons{
+.icons {
 	margin-top: 50px;
 }
 </style>
+
 <script type="text/javascript">
 	function reportDetail() {
 		window.location.href = "/iwowwow/iwow/sendEport?reportId=${picId}";
@@ -49,6 +50,7 @@
 		</a>
 	</div>
 </div>
+
 
 <div class="mainPicture" id="picture_img">
 	<a><img id="picture_img" /></a>

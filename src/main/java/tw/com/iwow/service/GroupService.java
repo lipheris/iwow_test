@@ -1,14 +1,21 @@
 package tw.com.iwow.service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.microsoft.azure.storage.CloudStorageAccount;
+import com.microsoft.azure.storage.blob.CloudBlobClient;
+import com.microsoft.azure.storage.blob.CloudBlobContainer;
+import com.microsoft.azure.storage.blob.CloudBlockBlob;
 
 import tw.com.iwow.dao.GroupDao;
 import tw.com.iwow.entity.Group;
@@ -61,26 +68,25 @@ public class GroupService {
 		return groupDao.save(group);
 	}
 	
-//	@Transactional
-//	public Group uploadPhoto(Picture picture, CommonsMultipartFile photo){
-//		try{
-//		CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
-//	    CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
-//	    CloudBlobContainer container = blobClient.getContainerReference("abencontainer");
-//	    String name = LocalDateTime.now().toString() + UUID.randomUUID().toString();
-//	    CloudBlockBlob blob = container.getBlockBlobReference(name + uploader.getId() + ".jpg");
-//		blob.upload(pic.getInputStream(), pic.getSize());
-//		picture.setPictureAddress(
-//				"https://iwowblob.blob.core.windows.net/mycontainer/" + name + uploader.getId() + ".jpg");
-//		picture.setUploader(uploader);
-//		return pictureDao.save(picture);
-//		}
-//		catch (Exception e)
-//		{
-//		    e.printStackTrace();
-//		}
-//		return null;
-//	}
+	@Transactional
+	public Group uploadPhoto(Group group, CommonsMultipartFile photo){
+		try{
+		CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+	    CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+	    CloudBlobContainer container = blobClient.getContainerReference("abencontainer");
+	    String name = LocalDateTime.now().toString() + UUID.randomUUID().toString();
+	    CloudBlockBlob blob = container.getBlockBlobReference(name + ".jpg");
+		blob.upload(photo.getInputStream(), photo.getSize());
+		group.setPhotoAd(
+				"https://eeit9230.blob.core.windows.net/abencontainer/" + name + ".jpg");	
+		return groupDao.save(group);
+		}
+		catch (Exception e)
+		{
+		    e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	

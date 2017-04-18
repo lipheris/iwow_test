@@ -13,7 +13,7 @@ public interface GroupDao extends JpaRepository<Group, Long> {
 	public static final String  FIND_RELATED_BY_NAME=
 			"SELECT g FROM Group g"			
 			+" WHERE g.name LIKE CONCAT ('%',:groupname,'%')";
-			// 注意空格 
+			// 注意空格 					
 	
 	public Group findByName(String name);
 	

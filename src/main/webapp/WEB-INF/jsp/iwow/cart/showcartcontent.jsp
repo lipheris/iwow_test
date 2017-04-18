@@ -5,37 +5,296 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page session="true"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"
+	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<!-- Sweet Alert 2 -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
+<script type="text/javascript" src='<c:url value="/js/picture.js" />'></script>
+
+<style class="cp-pen-styles">
+.d {
+	margin-top: 100px;
+	margin-left: 150px;
+	margin-right: 150px;
+}
+
+.product-image {
+	float: left;
+	width: 20%;
+}
+
+.dscs {
+	inline-display: block;
+	width: 12%
+}
+
+.product-details {
+	float: left;
+	width: 37%;
+}
+
+.product-price {
+	float: left;
+	width: 12%;
+}
+
+.product-quantity {
+	float: left;
+	width: 10%;
+}
+
+.product-removal {
+	float: left;
+	width: 9%;
+}
+
+.product-line-price {
+	float: left;
+	width: 12%;
+	text-align: right;
+}
+
+/* This is used as the traditional .clearfix class */
+.group:before, .shopping-cart:before, .column-labels:before, .product:before,
+	.totals-item:before, .group:after, .shopping-cart:after, .column-labels:after,
+	.product:after, .totals-item:after {
+	content: '';
+	display: table;
+}
+
+.group:after, .shopping-cart:after, .column-labels:after, .product:after,
+	.totals-item:after {
+	clear: both;
+}
+
+.group, .shopping-cart, .column-labels, .product, .totals-item {
+	zoom: 1;
+}
+
+.product .product-price:before, .product .product-line-price:before,
+	.totals-value:before {
+	content: '$';
+}
+
+/* Body/Header stuff */
+body {
+	padding: 0px 30px 30px 20px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light",
+		"Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 100;
+}
+
+h1 {
+	font-weight: 100;
+}
+
+label {
+	color: #aaa;
+}
+
+.shopping-cart {
+	margin-top: -45px;
+}
+
+/* Column headers */
+.column-labels label {
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.column-labels .product-image, .column-labels .product-details,
+	.column-labels .product-removal {
+	text-indent: -9999px;
+}
+
+/* Product entries */
+.product {
+	margin-bottom: 20px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.product .product-image {
+	text-align: center;
+}
+
+.product .product-image img {
+	width: 200px;
+}
+
+.product .product-details .product-title {
+	margin-right: 20px;
+	margin-left: 30px;
+	font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+	font-size: 20px;
+}
+
+.product .product-details .product-description {
+	margin: 5px 20px 5px 30px;
+	line-height: 1.4em;
+}
+
+.product .product-quantity input {
+	width: 40px;
+}
+
+.product .remove-product {
+	border: 0;
+	padding: 4px 8px;
+	background-color: #c66;
+	color: #fff;
+	font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+	font-size: 12px;
+	border-radius: 3px;
+}
+
+.product .remove-product:hover {
+	background-color: #a44;
+}
+
+/* Totals section */
+.totals .totals-item {
+	float: right;
+	clear: both;
+	width: 20%;
+	inline-display: block;
+}
+
+.totals .totals-item label {
+	float: left;
+	clear: both;
+	width: 79%;
+	text-align: right;
+}
+
+.totals .totals-item .totals-value {
+	float: right;
+	width: 21%;
+	text-align: right;
+}
+
+.totals .totals-item-total {
+	font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.checkout {
+	float: right;
+	border: 0;
+	margin-top: -45px;
+	padding: 6px 25px;
+	background-color: #6b6;
+	color: #fff;
+	font-size: 25px;
+	border-radius: 3px;
+}
+
+.giveup {
+	float: right;
+	border: 0;
+	margin-top: -45px;
+	margin-right: 20px;
+	padding: 6px 25px;
+	background-color: #6b6;
+	color: #fff;
+	font-size: 25px;
+	border-radius: 3px;
+}
+
+.end {
+	float: center;
+}
+
+.checkout:hover {
+	background-color: #494;
+}
+
+/* Make adjustments for tablet */
+@media screen and (max-width: 650px) {
+	.shopping-cart {
+		margin: 0;
+		padding-top: 20px;
+		border-top: 1px solid #eee;
+	}
+	.column-labels {
+		display: none;
+	}
+	.product-image {
+		float: right;
+		width: auto;
+	}
+	.product-image img {
+		margin: 0 0 10px 10px;
+	}
+	.product-details {
+		float: none;
+		margin-bottom: 10px;
+		width: auto;
+	}
+	.product-price {
+		clear: both;
+		width: 70px;
+	}
+	.product-quantity {
+		width: 100px;
+	}
+	.product-quantity input {
+		margin-left: 20px;
+	}
+	.product-quantity:before {
+		content: 'x';
+	}
+	.product-removal {
+		width: auto;
+	}
+	.product-line-price {
+		float: right;
+		width: 70px;
+	}
+}
+/* Make more adjustments for phone */
+@media screen and (max-width: 350px) {
+	.product-removal {
+		float: right;
+	}
+	.product-line-price {
+		float: right;
+		clear: left;
+		width: auto;
+		margin-top: 10px;
+	}
+	.product .product-line-price:before {
+		content: 'Item Total: $';
+	}
+	.totals .totals-item label {
+		width: 60%;
+	}
+	.totals .totals-item .totals-value {
+		width: 40%;
+	}
+}
+</style>
+</head>
+
 <script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
 <script>
-	// 	$(function() {
-	// 		var buyIds =  GetCookie("car");
-	// 		var buyIdArray = buyIds.split(",");
-	// 	});
-
-	// 	function getCookieVal(offset) {
-	// 		var endstr = document.cookie.indexOf (";", offset);
-	// 		if (endstr == -1)
-	// 		endstr = document.cookie.length;
-	// 		return unescape(document.cookie.substring(offset, endstr));
-	// 	}
-
-	// 	function GetCookie (name) {
-	// 		var arg = name + "=";
-	// 		var alen = arg.length;
-	// 		var clen = document.cookie.length;
-	// 		var i = 0;
-	// 		while (i < clen) {
-	// 			var j = i + alen;
-	// 			if (document.cookie.substring(i, j) == arg){
-	// 				return getCookieVal (j);
-	// 			}
-	// 			i = document.cookie.indexOf(" ", i) + 1;
-	// 			if (i == 0)
-	// 				break;
-	// 		}
-	// 		return null;
-	// 	}
-
 	function DelCookie(name)
 	//删除Cookie
 	{
@@ -50,70 +309,67 @@
 
 <html>
 <body>
+	<c:import url="../label/banner.jsp" />
 
-	<TABLE border='1' width="684">
-		<TR>
-			<TD colspan='2'>
-				<TABLE width="500">
-					<TR height='18'>
-						<TD width="270">&nbsp;</TD>
-						<TD width="150" align='left'><FONT size='+2'>購物清單</FONT></TD>
-					</TR>
-				</TABLE>
-			</TD>
-		</TR>
-		
-		<form id='form1' method="GET" action="<c:url value='/iwow/cart/process' />">
+	<div class="d">
+		<h1>Shopping Cart</h1>
+		<div class="shopping-cart">
 
-			<font size='-1' face='標楷體, Arial'>
-				<TABLE border='1'>
-					<TR>
-						<TH width="200">圖片</TH>
-						<TH width="280">圖片名稱</TH>
-						<TH width="70">圖片價格</TH>
-						<TH width="110">修改</TH>
-					</TR>
-					<c:set var="totalAmount" value="0"/>
-					<c:forEach var="list" items="${picMsg}">
-						<TR height='16'>
-							<TD align='center'><img height='120' width='120'
-								src='${list.pictureAddress}' name="id" value="${list.id}"></TD>
-							<TD>${list.name}</TD>
-							<TD>$100</TD>
-							<TD align='center'><a
-								href="<c:url value="/iwow/cart/delpic?picId=${list.id}"/>"><Input
-									type="button" name="delete" value="刪除"></a></TD>
-							<c:set var="totalAmount" value="${totalAmount + 100}"/>
-						</TR>
-					</c:forEach>
-	
-					<TR height='16'>
-						<TD colspan='2' align='right'>合計金額：</TD>
-						<TD align='right'>${totalAmount}元</TD>
-					</TR>
-	
-				</TABLE>
-			</font>
-	
-			<div>
-	
-				<h3>
-					補充說明:
-					<textarea rows=5 name="DSC" cols=70></textarea>
-				</h3>
-	
+			<div class="column-labels">
+				<label class="product-image">Image</label> <label
+					class="product-details">Product</label> <label
+					class="product-price">Price</label> 
+					<label class="product-quantity">Quantity</label>
+				<label class="product-removal">Remove</label> <label
+					class="product-line-price">Total</label>
 			</div>
-	
-			<TABLE border='1' width="684">
-				<TR>
-					<TD width="260" align='center'>
-						<a href="javascript:;" onclick="document.getElementById('form1').submit();">送出訂單</a>
-					</TD>
-					<TD width="260" align='center'><A
-						href="<c:url value='/iwow/cart/giveup' />" onClick="return Abort();">放棄購物</A></TD>
-				</TR>
-			</TABLE>
-		
+			<c:set var="totalAmount" value="0" />
+			<c:forEach var="list" items="${picMsg}">
+				<div class="product">
+					<div class="product-image">
+						<img src='${list.pictureAddress}' name="id" value="${list.id}">
+					</div>
+					<div class="product-details">
+						<div class="product-title">${list.name}</div>
+						<p class="product-description">The best dog bones of all time.
+							Holy crap. Your dog will be begging for these things! I got
+							curious once and ate one myself. I'm a fan.</p>
+					</div>
+					<div class="product-price">100</div>
+					<div class="product-quantity">
+						<input type="number" value="1" min="1" max="1">
+					</div>
+					<div class="product-removal">
+						<a href="<c:url value="/iwow/picture/delpic?picId=${list.id}"/>">Remove</a>
+					</div>
+					<div class="product-line-price">100</div>
+				</div>
+				<c:set var="totalAmount" value="${totalAmount + 100}" />
+			</c:forEach>
+			<div class="totals">
+				<div class="totals-item">
+					<label>Subtotal</label>
+					<div class="totals-value" id="cart-subtotal">${totalAmount}</div>
+				</div>
+			</div>
+
+		</div>
+		<form id='form1' method="GET"
+			action="<c:url value='/iwow/picture/process' />">
+			<div class="dscs">
+				<h4>Description</h4>
+				<textarea rows=4 name="DSC" cols=70></textarea>
+			</div>
 		</form>
+			<div class="end">
+				<a href="javascript:;"
+					onclick="document.getElementById('form1').submit();"><button
+						class="checkout">Checkout</button></a> 
+				<a href="<c:url value='/iwow/picture/giveup' />" onClick="return Abort();">
+				<button class="giveup">Give up</button></a>
+			</div>
+		
+
+	</div>
 </body>
 </html>

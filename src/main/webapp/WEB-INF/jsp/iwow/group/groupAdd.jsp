@@ -37,11 +37,13 @@ aside {
 <body>
 	<c:import url="../label/banner.jsp" />
 <aside>
-	<form accept-charset="UTF-8" action="<c:url value="/iwow/group/create"/>" method="get">
+	<form accept-charset="UTF-8" action="<c:url value="/iwow/group/create"/>?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 		<div>
 			<label for="groupName"> 社團名稱 </label>
 			<div>
 				<input id="groupName" name="name" placeholder="請輸入groupName" type="text" />
+				<input class="upload_file_btn" type="file" name="photo" id="photo"
+						accept="image/*">
 				<input type="submit" value="Send">
 			</div>		
 		</div>

@@ -29,4 +29,7 @@ public class ReportService {
 	public List<Report> getReportAll(){
 		return reportDao.findAll();
 	}
+	public void delete(Long id){
+		reportDao.delete(id);
+	}
 }

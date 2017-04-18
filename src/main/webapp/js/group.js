@@ -4,7 +4,49 @@
 //var group_info_div=$("div[id='group_info']");
 //var social_box_div=$("div[id='social_box']");
 $(function(){
-		
+	/*Search*/
+	$("button[id='searchBtn']").click(function(){		
+		var boxs_div=$("div[id='boxs']");
+		var ctx = document.getElementById("searchCtx").value;
+		$(boxs_div).empty();
+			$.getJSON("/iwowwow/iwow/group/search?ctx="+ctx,function (groups){
+				$.each(groups,function(idx,group){
+									
+					var social_box_div=$("<div></div>")
+					 .addClass("social_box")
+					 .attr("id","social_box")
+					
+					$("<img>")		
+					.addClass("social_box_img")
+					.attr("src", group.photoAd)
+					.appendTo(social_box_div);
+										
+					$("<span>")
+					.addClass("social_box_name")
+					.text(group.name)
+					.appendTo(social_box_div);
+					
+					$("<button>")
+					.addClass("btn btn-info social_box_btn")
+					.text("加入")
+					.click(function() {										
+							$.get("/iwowwow/iwow/group/update",{"name":group.name},
+									function(data){																												
+											if(data=true)
+												$(social_box_div).remove();	
+									}
+							   );
+							})
+					
+					.appendTo(social_box_div);
+					
+					$(social_box_div).appendTo(boxs_div);								
+				})														
+		});
+				
+	});
+
+	/*FindAll*/
 	$("div[id='findAllBtn']").click(function(){
 		var boxs_div=$("div[id='boxs']");
 		$(boxs_div).empty();
@@ -32,7 +74,7 @@ $(function(){
 							$.get("/iwowwow/iwow/group/exit",{"name":group.name},
 									function(data){																												
 											if(data=="true")
-												$(social_box_div).empty();	
+												$(social_box_div).remove();	
 									}
 							   );
 							})
