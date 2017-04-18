@@ -132,25 +132,25 @@ public class ShoppingCartController {
 
 		} else {
 
-			return "redirect:/iwow/picture/listpic";
+			return "redirect:/iwow/index";
 		}
 
 	}
 
 	// 顯示圖片-------------------------------------------------------------------------
-	@RequestMapping(value = "/listpic", method = RequestMethod.GET)
-	public String methodPost(@CookieValue(value = "buyCar", required = false) String buyCarCookie,
-			HttpServletResponse response, Model model) throws Exception {
-
-		Collection<Picture> picsT = pictureService.findAll();
-		model.addAttribute("picMsg", picsT);
-
-		if (StringUtils.isEmpty(buyCarCookie)) {
-			response.addCookie(new Cookie("buyCar", null));
-		}
-
-		return "/iwow/cart/testpic";
-	}
+//	@RequestMapping(value = "/listpic", method = RequestMethod.GET)
+//	public String methodPost(@CookieValue(value = "buyCar", required = false) String buyCarCookie,
+//			HttpServletResponse response, Model model) throws Exception {
+//
+//		Collection<Picture> picsT = pictureService.findAll();
+//		model.addAttribute("picMsg", picsT);
+//
+//		if (StringUtils.isEmpty(buyCarCookie)) {
+//			response.addCookie(new Cookie("buyCar", null));
+//		}
+//
+//		return "/iwow/cart/testpic";
+//	}
 
 	// 放棄購物車----------------------------------------------------------------------
 	@RequestMapping(value = "/giveup", method = RequestMethod.GET)
@@ -159,7 +159,7 @@ public class ShoppingCartController {
 
 		response.addCookie(new Cookie("buyCar", null));
 
-		return "redirect:/iwow/picture/listpic";
+		return "redirect:/iwow/index";
 	}
 
 	// 加入購物車暫存頁面---------------------------------------------------------------
@@ -205,7 +205,7 @@ public class ShoppingCartController {
 			return "/iwow/cart/showorderdetail";
 		} else {
 
-			return "redirect:/iwow/picture/listpic";
+			return "redirect:/iwow/picture/index";
 		}
 
 	}

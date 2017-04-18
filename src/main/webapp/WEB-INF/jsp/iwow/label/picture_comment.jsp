@@ -8,7 +8,8 @@
 <style>
 .message{
     display:inline-block;width:300px;position: absolute;top:370px;border-radius: 5px 5px 5px 5px; 
-    left: 20px;height:400px;border:1px solid #ddd;overflow: scroll;
+    left: 20px;height:400px;border:1px solid #ddd;overflow: scroll;margin-top: 30px;
+    
 }
 .display{
 	

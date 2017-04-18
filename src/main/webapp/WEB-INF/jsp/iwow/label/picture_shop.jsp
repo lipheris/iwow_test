@@ -9,7 +9,6 @@
 	text-align: center;
 }
 
-
 #msg {
 	position: fixed;
 	top: 300px;
@@ -93,14 +92,7 @@ $(function() {
 					carMoney = parseInt(0);
 				}
 
-				carMoney = carMoney.toString().replace("$", "");
-				$("#carMoney").text(
-						'$' + (parseInt(money) + parseInt(carMoney)));
-
-				carCnt = carCnt.toString().replace("(", "");
-				carCnt = carCnt.toString().replace(")", "");
-				$("#carCnt").text('(' + (parseInt(carCnt) + 1) + ')');
-
+				
 			});
 });
 

@@ -32,7 +32,7 @@
 	<span class="glyphicon glyphicon-eye-open icon" aria-hidden="true"
 		id="views"></span> <span class="glyphicon glyphicon-star-empty icon"
 		aria-hidden="true" id="likes"></span>
-	<p align="center">
+	<p align="right">
 		$<span>100</span>
 	</p>
 	<div id="cart-val">
