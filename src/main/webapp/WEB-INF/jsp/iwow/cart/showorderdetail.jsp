@@ -338,7 +338,7 @@ label {
 
 		</div>
 		<form id='form1' method="GET"
-			action="<c:url value='/iwow/cart/process' />">
+			action="<c:url value='/iwow/picture/process' />">
 			<div class="dscs">
 				<div class="panel panel-success">
 					<div class=" panel-heading">
@@ -350,7 +350,7 @@ label {
 		</form>
 
 		<div class="end">
-			<a href="<c:url value='/iwow/cart/orderlistdetail' />">
+			<a href="<c:url value='/iwow/picture/orderlistdetail' />">
 				<button class="Details">Order Details</button>
 			</a>
 		</div>

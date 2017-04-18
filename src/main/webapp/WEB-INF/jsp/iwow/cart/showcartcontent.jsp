@@ -340,7 +340,7 @@ label {
 						<input type="number" value="1" min="1" max="1">
 					</div>
 					<div class="product-removal">
-						<a href="<c:url value="/iwow/cart/delpic?picId=${list.id}"/>">Remove</a>
+						<a href="<c:url value="/iwow/picture/delpic?picId=${list.id}"/>">Remove</a>
 					</div>
 					<div class="product-line-price">100</div>
 				</div>
@@ -355,7 +355,7 @@ label {
 
 		</div>
 		<form id='form1' method="GET"
-			action="<c:url value='/iwow/cart/process' />">
+			action="<c:url value='/iwow/picture/process' />">
 			<div class="dscs">
 				<h4>Description</h4>
 				<textarea rows=4 name="DSC" cols=70></textarea>
@@ -365,7 +365,7 @@ label {
 				<a href="javascript:;"
 					onclick="document.getElementById('form1').submit();"><button
 						class="checkout">Checkout</button></a> 
-				<a href="<c:url value='/iwow/cart/giveup' />" onClick="return Abort();">
+				<a href="<c:url value='/iwow/picture/giveup' />" onClick="return Abort();">
 				<button class="giveup">Give up</button></a>
 			</div>
 		

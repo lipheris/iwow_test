@@ -49,10 +49,10 @@
 			<tbody>
 			<c:forEach var="anOrderBean" varStatus="stat" items="${orders}">
 				<tr>
-					<td><a href='<c:url value='/iwow/cart/getalldetail?id=${anOrderBean.id}' />'>
+					<td><a href='<c:url value='/iwow/picture/getalldetail?id=${anOrderBean.id}' />'>
 							${anOrderBean.id} </a></td>
 					<td>${anOrderBean.update}</td>
-					<td><a href="<c:url value='/iwow/cart/download?id=${anOrderBean.id}' />">Picture Download</a></td>
+					<td><a href="<c:url value='/iwow/picture/download?id=${anOrderBean.id}' />">Picture Download</a></td>
 				</tr>
 			</c:forEach>
 			</tbody>

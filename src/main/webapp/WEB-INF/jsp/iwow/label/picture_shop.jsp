@@ -152,7 +152,7 @@ function SetCookie(name, value) {
 	<div class="picture_shop.jsp" style="margin-bottom: 30px;">
 		<h3 style="margin-bottom: 0px;" align="center">Shopping</h3>
 		<div class="m-sidebar">
-			<a href="/iwowwow/iwow/cart/showcartcontent">
+			<a href="/iwowwow/iwow/picture/showcartcontent">
 				<div class="cart" align="center">
 					<i id="end"><img src="../../images/car.gif"></i> <span
 						id="carCnt"></span> <span id="carMoney"></span>

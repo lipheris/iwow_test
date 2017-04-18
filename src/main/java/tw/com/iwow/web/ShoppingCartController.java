@@ -41,7 +41,7 @@ import tw.com.iwow.service.OrderService;
 import tw.com.iwow.service.PictureService;
 
 @Controller
-@RequestMapping(value = "/iwow/cart")
+@RequestMapping(value = "/iwow/picture")
 public class ShoppingCartController {
 	private static final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=iwowblob;AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA=="
 			+ "AccountName=iwowblob;"
@@ -73,7 +73,7 @@ public class ShoppingCartController {
 			response.addCookie(new Cookie("buyCar", buyCarCookie));
 		}
 
-		return "redirect:/iwow/cart/showcartcontent";
+		return "redirect:/iwow/picture/showcartcontent";
 	}
 
 	// 訂單明細-------------------------------------------------------------------------
@@ -81,7 +81,7 @@ public class ShoppingCartController {
 	public String orderDetail(Model model, OrderDetail od, Order ob, OrderService orderService) {
 		ob = orderService.getOrder(od.getId());
 
-		return "redirect:/iwow/cart/testpic";
+		return "redirect:/iwow/picture/testpic";
 
 	}
 
@@ -132,7 +132,7 @@ public class ShoppingCartController {
 
 		} else {
 
-			return "redirect:/iwow/cart/listpic";
+			return "redirect:/iwow/picture/listpic";
 		}
 
 	}
@@ -159,7 +159,7 @@ public class ShoppingCartController {
 
 		response.addCookie(new Cookie("buyCar", null));
 
-		return "redirect:/iwow/cart/listpic";
+		return "redirect:/iwow/picture/listpic";
 	}
 
 	// 加入購物車暫存頁面---------------------------------------------------------------
@@ -205,7 +205,7 @@ public class ShoppingCartController {
 			return "/iwow/cart/showorderdetail";
 		} else {
 
-			return "redirect:/iwow/cart/listpic";
+			return "redirect:/iwow/picture/listpic";
 		}
 
 	}
@@ -253,12 +253,12 @@ public class ShoppingCartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/iwow/cart/orderlistdetail";
+		return "redirect:/iwow/picture/orderlistdetail";
 	}
 
 	@RequestMapping(value = "/orderconfirm")
 	public String orderconfirm() {
-		return "/iwow/cart/orderconfirm";
+		return "/iwow/picture/orderconfirm";
 	}
 
 	@RequestMapping(value = "/orderlist")
@@ -279,7 +279,7 @@ public class ShoppingCartController {
 	
 	@RequestMapping(value = "/testpic")
 	public String testpic() {
-		return "/iwow/cart/testpic";
+		return "/iwow/picture/testpic";
 	}
 	
 }
