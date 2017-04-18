@@ -38,16 +38,16 @@ public class PaiPictureServiceTest {
 //		reportService.insertTest(report, picture);		
 //	}
 //	@Test
-	public void testReportInsert() {	
-		Report report=new Report();
-		Picture picture=new Picture();
-		picture.setId(new Long(158));
-		report.setDesc("test");
-		report.setDate(LocalDateTime.now());
-		report.setState(false);
-		report.setPicture(picture);
-		reportService.insert(report);		
-	}
+//	public void testReportInsert() {	
+//		Report report=new Report();
+//		Picture picture=new Picture();
+//		picture.setId(new Long(158));
+//		report.setDesc("test");
+//		report.setDate(LocalDateTime.now());
+//		report.setState(false);
+//		report.setPicture(picture);
+//		reportService.insert(report);		
+//	}
 	
 //	@Test
 //	public void testGetDec() {	
@@ -60,12 +60,17 @@ public class PaiPictureServiceTest {
 //		pictureService.insertText(picsDescription);
 //	}
 	
+//	@Test
+//	public void testGetDec2() {	
+//		Picture picture =pictureService.getById(new Long(158));
+//		
+//		
+//		pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
+//	}
 	@Test
-	public void testGetDec2() {	
-		Picture picture =pictureService.getById(new Long(158));
-		
-		
-		pictureService.getbyPicIdSort(picture, new Sort(Direction.DESC,"id"));
+	public void testDelete(){
+		pictureService.deleteText(new Long(79));
+//		reportService.delete(new Long(14));
 	}
 
 }

@@ -150,6 +150,9 @@ public class PictureService {
 			result.addAll(tag.getPictures());
 		result.remove(picture);
 		return result;
-
 	}
+	public void deleteText(Long id) {
+		picDescriptionDao.delete(id);;
+	}
+	
 }

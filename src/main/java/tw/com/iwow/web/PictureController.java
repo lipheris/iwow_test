@@ -44,7 +44,7 @@ import tw.com.iwow.service.TagService;
 
 @Controller
 @RequestMapping(value = "/iwow")
-@SessionAttributes(names = { "pictexts", "username" })
+@SessionAttributes(names = { "pictexts", "username","tx" })
 public class PictureController {
 
 	@Autowired
@@ -217,4 +217,28 @@ public class PictureController {
 		model.addAttribute("reportAll", reportAll);
 		return "/iwow/admin/manager";
 	}
+	/*---------------處理report 留言後刪除----------------*/
+	 @RequestMapping(value = "/admin/deleteManager", method = RequestMethod.GET)
+	 public String deleteManager(@RequestParam(name="reportId") String[] id){
+		 for(String e:id){
+
+			 reportService.delete(Long.parseLong(e));
+		 }
+	 return "redirect:/iwow/admin/manager";
+	 }
+	 
+	 /*---------------作者刪除圖片留言----------------*/
+	 @RequestMapping(value = "/admin/deleteComment", method = RequestMethod.GET)
+	 public String deleteComment(Model model,@RequestParam(name="getId") Long picId,@RequestParam("commentId") Long commentId){	
+		 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
+		 Long memid = memberService.getByEmail(authentication.getName()).getId();//登入id
+		 Long aothorId=pictureService.getById(picId).getUploader().getId();
+		 
+		 if(memid == aothorId){
+			 pictureService.deleteText(commentId);
+		 }else{
+			 model.addAttribute("tx", "非作者無法刪除 有問題請洽管理員");
+		 }					 
+	 return "redirect:/iwow/getOnloadComment/"+picId;
+	 }
 }

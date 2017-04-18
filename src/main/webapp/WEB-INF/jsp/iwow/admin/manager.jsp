@@ -137,6 +137,7 @@ tr:hover {background-color:#FF0000}
                             <table width="100%" class="table_report_text table-bordered table-striped" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                    	<th></th>
                                         <th>Id</th>
                                         <th>Date</th>
                                         <th>處理狀態</th>
@@ -150,6 +151,7 @@ tr:hover {background-color:#FF0000}
                                     <c:if test='${not empty "${reportAll}"}'>
 										<c:forEach var="ra" items="${reportAll}">
 										<tr>
+										<td><input type="checkbox" value="${ra.id}" name="getCheched"></td>
 										<td>${ra.id}</td>
 										<td>${ra.date}</td>
 										<td>${ra.state}</td>
@@ -189,6 +191,24 @@ tr:hover {background-color:#FF0000}
         });
     });
     function move() {
+//     	  先連線至delete controller
+//     window.location.href="/iwowwow/iwow/admin/deleteManager";
+    //取checkbox 值
+	var obj=document.getElementsByName("getCheched");
+	var selected=[];
+ 	for(var i=0;i<obj.length;i++){
+ 		if (obj[i].checked) {
+ 	          selected.push(obj[i].value);
+ 	    }
+ 	}
+ 	
+ 	
+ 	//ajax
+    var xhr=new XMLHttpRequest();
+    if(xhr!=null){
+    	xhr.open('GET','/iwowwow/iwow/admin/deleteManager?reportId='+selected,true);
+    	xhr.send();
+    }
     	  var elem = document.getElementById("myBar");   
     	  var width = 10;
     	  var id = setInterval(frame, 10);
