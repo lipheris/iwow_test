@@ -253,7 +253,7 @@ public class ShoppingCartController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "/iwow/cart/ThanksForOrdering";
+		return "redirect:/iwow/cart/orderlistdetail";
 	}
 
 	@RequestMapping(value = "/orderconfirm")

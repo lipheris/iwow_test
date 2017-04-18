@@ -294,7 +294,7 @@
 			<div class="m-sidebar">
 				<a href="/iwowwow/iwow/cart/showcartcontent">
 					<div class="cart">
-						<i id="end"><img src="../../images/car.jpg" width=50px></i><span
+						<i id="end"><img src="../../images/car.gif" width=50px></i><span
 							id="carCnt"></span> <span id="carMoney"></span>
 					</div>
 				</a>
