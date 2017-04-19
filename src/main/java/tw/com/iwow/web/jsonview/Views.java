@@ -7,4 +7,5 @@ public class Views {
 	public static class ShowGroups{}
 	public static class ShowPicUploader{}
 	public static class MemberDetails{}
+	public static class MemberDonor{}
 }
