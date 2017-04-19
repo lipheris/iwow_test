@@ -52,6 +52,13 @@ public class PictureService {
 	public Picture getById(Long id) {
 		return pictureDao.findOne(id);
 	}
+	public Collection<Picture> getByUploaderId(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String currentPrincipalName = authentication.getName();
+		Member uploader = memberDao.findByEmail(currentPrincipalName);
+		Long id=uploader.getId();
+		return pictureDao.findByUploaderId(id);
+	}
 
 	public Picture insert(Picture picture, CommonsMultipartFile pic, String[] tags) {
 		Set<Tag> temptags = new HashSet<Tag>();

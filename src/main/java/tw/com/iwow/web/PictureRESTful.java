@@ -58,4 +58,9 @@ public class PictureRESTful {
 	public void deletePicture(@PathVariable("id") Long id) {
 		pictureService.delete(id);
 	}
+	@JsonView(Views.ShowPicture.class)
+	@RequestMapping(method = RequestMethod.GET, value = "/edit", produces = { "application/json" })
+	public Collection<Picture> memberPictures() {
+		return pictureService.getByUploaderId();
+	}
 }
