@@ -117,8 +117,9 @@ $(function(){
 						var form = (event.target.form), 
 							id = $(form.id).val(), 
 							assort = $(form.assort).val(),
-							picName = $(form.picName).val(),
+							picName = $(form.name).val(),
 							visibility = $(form.visibility).val()
+							console.log(picName)
 						url = "/iwowwow/iwow/member/update";
 						$.get(url, {
 							"assort" : assort,
