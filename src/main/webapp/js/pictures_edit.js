@@ -266,14 +266,12 @@ $(function(){
 								.appendTo(social_box_div);
 							tagtemp=false;
 						})
-					temp=2;
+					temp=1;
 				}
-				else{
-					temp1
-				}
+//				else{
+//					temp1
+//				}
 			})
-					
-					
 					$(social_box_div).appendTo(boxs_div)
 									
 				})											

@@ -63,22 +63,8 @@ height:170px;
 
 		<!-- search	-->
 		<nav class="navbar navbar-light bg-faded justify-content-between">
-			<form class="form-inline" id="searchForm"
-				action='<c:url value="/iwow/picture/search" />' method="get">
-				<div class="form-group">
-					<input type="text" class="form-control mr-sm-2"
-						placeholder="Search Group" id="searchCtx" name="ctx" />
-					<button type="button"
-						class="btn btn-default glyphicon glyphicon-search my-2 my-sm-0"
-						id="searchBtn"></button>
-				</div>
-			</form>
-		</nav>
-		<div id="findAllBtn">
-			<button type="button"
-				class="btn btn-default glyphicon glyphicon-search" id="findAllBtn"></button>
-		</div>
 		<div id = "boxs">
 		</div> 
+		</nav>
 		</div>
 </div>
