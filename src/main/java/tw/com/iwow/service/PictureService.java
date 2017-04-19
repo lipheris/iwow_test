@@ -29,6 +29,7 @@ import tw.com.iwow.dao.TagDao;
 import tw.com.iwow.entity.Member;
 import tw.com.iwow.entity.PicsDescription;
 import tw.com.iwow.entity.Picture;
+import tw.com.iwow.entity.Stats;
 import tw.com.iwow.entity.Tag;
 
 @Service
@@ -103,7 +104,12 @@ public class PictureService {
 			picture.setPictureAddress(
 					"https://iwowblob.blob.core.windows.net/mycontainer/" + name + uploader.getId() + ".jpg");
 			picture.setUploader(uploader);
-			return pictureDao.save(picture);
+			Stats stat = new Stats();
+//			statsDao.save(stat);
+			picture.setStats(stat);
+			stat.setPic(picture);
+			pictureDao.save(picture);
+			return picture;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

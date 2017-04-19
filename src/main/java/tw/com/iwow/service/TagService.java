@@ -25,7 +25,7 @@ public class TagService {
 		Tag tag = tagDao.findOne(id);
 		Collection<Picture> pictures = pictureDao.findAll();
 		tag.removeTags(pictures);
-		tagDao.delete(tag);
+//		tagDao.delete(tag);
 	}
 
 	public void delete(Long tagid, Long id) {
@@ -33,7 +33,7 @@ public class TagService {
 		Picture picture = pictureDao.findOne(id);
 		picture.removeTag(tag);
 		pictureDao.save(picture);
-		tagDao.delete(tagid);
+//		tagDao.delete(tagid);
 
 	}
 
