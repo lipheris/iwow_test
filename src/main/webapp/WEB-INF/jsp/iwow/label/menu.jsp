@@ -20,14 +20,23 @@
 		<c:import url="lightbox/menu_follow.jsp" />
 		<c:import url="lightbox/menu_fans.jsp" />
 		<c:import url="lightbox/menu_group.jsp" />
+		<c:import url="lightbox/menu_picturesedit.jsp" />
 		<!-- pop up start -->
+		
+<!-- 		編輯個人資料 -->
+<!-- 		<form action="/iwowwow/iwow/member/edit" method="get"> -->
+<%-- 			<input type="hidden" name="email" value="<sec:authentication property="principal.username" />">  --%>
+<!-- 			<input class="btn btn-info" type="submit" value="編輯個人資料"> -->
+<%-- 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+<!-- 		</form> -->
+<!-- 	編輯個人資料 -->
 
 			<a href='javascript:' onClick="jsLightbox('res-profile-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">修改個人資料</span></a>
 			<a href='javascript:' onClick="jsLightbox('res-friends-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">好友</span></a>
 			<a href='javascript:' onClick="jsLightbox('res-follow-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">追隨中</span></a>
 			<a href='javascript:' onClick="jsLightbox('res-fans-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">粉絲</span></a>
 			<a href='javascript:' onClick="jsLightbox('res-group-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">群組</span></a>
-
+			<a href="#" onClick="jsLightbox('res-picturesedit-popup', 500, 400, 385)"  class="smoothScroll" id="pictures_edit"><span class="menu_text">修改圖片</span></a>
 		</div>
 		
 		<!-- Menu button -->
