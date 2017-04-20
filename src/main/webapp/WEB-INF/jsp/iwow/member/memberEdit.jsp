@@ -2,24 +2,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="true" %>   
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>setting profile</title>
-
-<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- jQuery datepicker必要的CSS 及JS -->
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-
-// swal('Hello world!');
 
 //jQuery datepicker
 $( function() {
@@ -33,36 +21,18 @@ $( function() {
 </script>
 
 <style>
-
-/* 修改個人資料頁面 */
 .profile_all{
-	width:1000px;
-	margin:0 auto;
+	margin-top:40px;
+	margin-left:20px;
+	font-family:Microsoft JhengHei;
+	text-align:left;
 }
-
-/* fieldset */
-fieldset{
-	font-size:25px;
-	font-family:Microsoft JhengHei; /* 微軟正黑體 */
-}
-
-legend{
-	font-size:40px;
-	font-family:Courier;
-}
-
 /* 間距 */
 .profile_spac{
-	margin:5px;
 	margin-bottom:10px;
 }
 </style>
-</head>
-<body onload='document.logoutForm.username.focus();'>
-<!-- banner import -->
-	<c:import url="../label/banner.jsp" /> 
-	
-	
+
 	<!-- profile -->
 	<div class="profile_all">
 	
@@ -112,8 +82,6 @@ legend{
 		<input type="text" id="address" name="address" value="${editMember.address}">
 	</div>	
 
-
-
 	<!-- 送出/清除 -->
 	<div class="profile_spac">
 		<input type="submit" value="送出">
@@ -126,6 +94,3 @@ legend{
 	</form>
 	
 	</div>	
-	
-</body>
-</html>
