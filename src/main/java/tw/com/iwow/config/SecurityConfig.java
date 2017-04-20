@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.antMatchers("/iwow/admin")
 				.hasRole("ADMIN")
-			.antMatchers("/login*", "/signup")
+			.antMatchers("/login*", "/iwow/signup","/js/**","/css/**")
 				.permitAll()
 			.anyRequest()
 				.hasRole("USER")
@@ -46,7 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.tokenValiditySeconds(86400)
 		.and()
 			.csrf()
-		.and()
+			.ignoringAntMatchers("/chat/**")
+            .and()
+            .headers()
+            // allow same origin to frame our site to support iframe SockJS
+            .frameOptions().sameOrigin()
+            .and()
 			.exceptionHandling()
 			.accessDeniedPage("/403");
 	}
@@ -57,5 +62,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.userDetailsService(memberDetailsService);
 		
 	}
+
 
 }
