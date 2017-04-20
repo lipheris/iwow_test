@@ -21,16 +21,16 @@ public class Role {
 	@Column(name = "AUTH")
 	private String auth;
 	
-	@ManyToMany(fetch = FetchType.LAZY,mappedBy = "roles")
-	private Set<Member> members ;
+//	@ManyToMany(fetch = FetchType.LAZY,mappedBy = "roles")
+//	private Set<Member> members ;
 
-	public Set<Member> getMembers() {
-		return members;
-	}
-
-	public void setMembers(Set<Member> members) {
-		this.members = members;
-	}
+//	public Set<Member> getMembers() {
+//		return members;
+//	}
+//
+//	public void setMembers(Set<Member> members) {
+//		this.members = members;
+//	}
 
 	public Long getId() {
 		return id;
