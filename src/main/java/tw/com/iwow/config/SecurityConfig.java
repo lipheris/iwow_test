@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.authorizeRequests()
 			.antMatchers("/iwow/admin")
 				.hasRole("ADMIN")
-			.antMatchers("/login*", "/signup")
+			.antMatchers("/login*", "/iwow/signup" ,"/js/**" ,"/css/**" ,"/images/**")
 				.permitAll()
 			.anyRequest()
 				.hasRole("USER")
