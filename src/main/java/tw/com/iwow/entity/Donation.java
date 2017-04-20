@@ -39,7 +39,7 @@ public class Donation {
 	@JoinColumn(name = "REC_ID")
 	private Member receiver; // 接受donate memberid
 	
-	@JsonView(value = {Views.MemberDonor.class, Views.MemberDetails.class})
+	@JsonView(value = {Views.MemberDonor.class, Views.MemDetails.class})
 	@Column(name = "AMOUNT")
 	private BigDecimal amount; // 單次donate 金額
 

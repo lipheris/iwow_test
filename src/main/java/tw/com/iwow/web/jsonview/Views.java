@@ -6,7 +6,7 @@ public class Views {
 	public static class ShowTag{}
 	public static class ShowGroups{}
 	public static class ShowPicUploader{}
-	public static class MemberDetails{}
+	public static class MemDetails{}
 	public static class MemberDonor{}
 	public static class UserDetails{}
 }
