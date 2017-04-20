@@ -18,10 +18,10 @@
 
 <body>
 	<!-- banner import -->
-	<c:import url="label/menu.jsp" />
-
-	<!-- banner import -->
 	<c:import url="label/banner.jsp" />
+	
+	<!-- menu import -->
+	<c:import url="label/menu.jsp" />
 	
 	
 <div id="fixed">	

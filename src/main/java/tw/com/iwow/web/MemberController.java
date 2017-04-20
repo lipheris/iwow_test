@@ -21,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import tw.com.iwow.dao.RoleDao;
 import tw.com.iwow.entity.Member;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.entity.Role;
 import tw.com.iwow.service.MemberService;
 import tw.com.iwow.service.PictureService;
+import tw.com.iwow.web.jsonview.Views;
 
 
 @Controller
@@ -54,6 +57,13 @@ public class MemberController {
 			}//如果member不為null代表資料庫內有該筆email的資料，帳號不可註冊				
 		}
 		return null;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/user_profile")
+	@JsonView(Views.UserDetails.class)
+	@ResponseBody
+	public Member userProfile(){
+		return memberService.getByUser();
 	}
 	
 	@RequestMapping(value="/edit")

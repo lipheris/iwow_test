@@ -1,51 +1,44 @@
-@import url(https://fonts.googleapis.com/css?family=Pattaya|Work+Sans:400,200,300);
+ @import url(https://fonts.googleapis.com/css?family=Pattaya|Work+Sans:400,200,300);
 /*  banner底色 */
 .navbar-inverse{
-	background-image: -webkit-linear-gradient(top,#6AC5AC 0,#6AC5AC 100%); */
+	background-image: -webkit-linear-gradient(top,#6AC5AC 0,#6AC5AC 100%); 
 }
-/*  banner字體顏色 */
-.navbar-inverse .navbar-brand {
-    color: white;
+/*  logo css */
+.logo_css{
+    color: white !important;
+    font-family:Ribeye !important;
+    font-size: 30px !important;
+    margin-top:5px !important;
 }
 .navbar-inverse .navbar-nav>li>a {
 	font-family: "Work Sans", sans-serif;
-    color: white;
+	color:white !important;
 }
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
-     text-shadow: 0 0px 0 rgba(0,0,0,.25);
+     text-shadow: 0 0px 0 rgba(0,0,0,.25) !important;
 }
 /*  banner border */
-.navbar {
-    border-width: 0px 0px 10px 0px;
-    border-style: solid;
-    border-color: white;
+.banner_css {
+    border-width: 0px 0px 10px 0px !important;
+    border-style: solid !important;
+    border-color: white !important;
 }
-/* banner 高度 */
-/* .navbar-inverse { */
-/*      padding:10px; */
-/* } */
-/* logo */
-.navbar-brand {
-	font-family:Ribeye;
-    font-size: 30px;
-    margin-top:5px;
-}
+
 /* search */
-.form-control{
-	border-radius:4px 0px 0px 4px;
-	float: left;
-	margin:0px;
-	font-family: "Work Sans";
+#searchCtx{
+	border-radius:4px 0px 0px 4px !important;
+	float: left !important;
+	margin:0px !important;
+	font-family: "Work Sans" !important;
 }
-.glyphicon-search{
-	border-radius:0px 4px 4px 0px;
+#searchBtn{
+	border-radius:0px 4px 4px 0px  !important;
+	position: static !important;
 }
-.glyphicon {
-    position: static;
-}
-.navbar-form{
-	margin-top:17px;
-	margin-right:200px;
+
+#searchForm{
+	margin-top:17px !important;
+	margin-right:200px !important;
 }
 /* banner跟menu的位置上下關係(banner在menu之下) */
 .banner{
@@ -54,18 +47,26 @@
 }
 /* banner_icon */
 .banner_icon{
-	font-size: 20px;
-	margin-top:8px;
+	font-size: 20px !important;
+	margin-top:8px !important;
 }
 /* user_img */
 .user_img{
 	width: 35px; 
+	height: 35px; 
 	border-radius:100px;
+	float:left;
+	margin-right:10px;
 }
 /* user_name */
 .user_name{
-	padding: 0px;
-	padding-top: 5px;
-	margin-right: 10px;
+	width:160px;
+/* 	padding: 0px; */
+/* 	padding-top: 50px; */
 	font-size: 20px;
+}
+
+/* user_nickname */
+.user_nickname{
+	font-family:Microsoft JhengHei;
 }
