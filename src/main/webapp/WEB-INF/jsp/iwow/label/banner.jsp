@@ -50,7 +50,7 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
-				<li><a href="#"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+				<li><a href="<c:url value="/iwow/member/upload" />"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right scroll-link user_icon">
