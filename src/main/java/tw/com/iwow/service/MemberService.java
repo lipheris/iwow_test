@@ -5,12 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.iwow.dao.MemberDao;
 import tw.com.iwow.dao.RoleDao;
 import tw.com.iwow.entity.Member;
+import tw.com.iwow.security.MemberDetails;
 
 @Service
 public class MemberService {
@@ -25,6 +28,15 @@ public class MemberService {
 
 	public Member findById(Long id) {
 		return memberDao.findOne(id);
+	}
+	
+	//藉由security取得登入者的個人資料
+	public Member getByUser(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userName = authentication.getName();
+//		Object principal=authentication.getPrincipal();
+//		Long memberid = ((MemberDetails) principal).getId();
+		return memberDao.findByEmail(userName);		
 	}
 
 	@Transactional
