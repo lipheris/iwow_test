@@ -4,18 +4,17 @@
 <script src='<c:url value="/js/banner_search.js"/>'></script>
 <!-- logo字體 -->
 <link href="https://fonts.googleapis.com/css?family=Ribeye" rel="stylesheet">
-<!-- banner.css -->
-<link rel="stylesheet" href="<c:url value="/css/banner.css"/>" />
 
 <!-- bootstrap&JQuery -->
 <script src='<c:url value="/js/jquery-3.2.1.min.js"/>'></script>
 <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
 
-<script src='<c:url value="/js/menu_main.js"/>'></script>
+<!-- banner.css -->
+<link rel="stylesheet" href="<c:url value="/css/banner.css"/>" />
 
 <!-- Top menu -->
 <div class="banner">
-	<nav class="navbar navbar-inverse navbar-fixed-top navbar-no-bg" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-no-bg banner_css" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
@@ -26,7 +25,7 @@
 				</button>
 				
 		<!-- logo -->
-			<a class="navbar-brand" href="/iwowwow/iwow/index">iwowwow</a>
+			<a class="navbar-brand logo_css" href="/iwowwow/iwow/index">iwowwow</a>
 		<!-- logo -->
 			
 			</div>
@@ -56,8 +55,9 @@
 			
 			<ul class="nav navbar-nav navbar-right scroll-link user_icon">
 				<li><a class="user_name" href="<c:url value="/iwow/member"/>">
-				<img class="user_img" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
-				<sec:authentication property="principal.username" /></a></li>
+				<img class="user_img">
+					<span class="user_nickname"></span></a></li>
+<%-- 				<sec:authentication property="principal.username" /></a></li> --%>
 			</ul>
 
 				<sec:authorize access="hasRole('ROLE_USER')">					
@@ -66,10 +66,10 @@
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					</form>									
 				<script>
-     					function formSubmit() {   
-      						document.getElementById("logoutForm").submit();  
-        				}   
- 				</script>   
+      					function formSubmit() {   
+       						document.getElementById("logoutForm").submit();  
+         				}   
+  				</script>    
 			</sec:authorize>
 				
 				</ul>
@@ -77,5 +77,13 @@
 		</div>
 	</nav>
 </div>	
-	
-	<script src='<c:url value="/js/menu_main.js"/>'></script>
+
+<script>
+//抓取登入者的資料（暱稱、頭像
+$(function(){
+	$.getJSON('/iwowwow/iwow/member/user_profile',function(user_profile){
+  			var user_pic = $(".user_img").attr("src",user_profile.photoAddr);
+			$(".user_nickname").html("<p>" + user_profile.nickname + "</p>");
+	})
+});
+</script>
