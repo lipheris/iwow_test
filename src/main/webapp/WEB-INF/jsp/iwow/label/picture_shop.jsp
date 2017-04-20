@@ -34,7 +34,6 @@
 }
 
 </style>
-<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
 <script src="../../js/jquery.fly.min.js"></script>
 <script>
 $(function() {
