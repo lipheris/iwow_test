@@ -23,7 +23,7 @@
 		<c:import url="lightbox/menu_picturesedit.jsp" />
 		<c:import url="lightbox/menu_upgradeAuthority.jsp"/>
 		<!-- pop up start -->
-		
+
 <!-- 		編輯個人資料 -->
 <!-- 		<form action="/iwowwow/iwow/member/edit" method="get"> -->
 <%-- 			<input type="hidden" name="email" value="<sec:authentication property="principal.username" />">  --%>
