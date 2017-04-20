@@ -2,7 +2,7 @@ $(function(){
 		
 	$("a[id='pictures_edit']").on(type="click",function(){
 		
-		var boxs_div=$("div[id='boxs']");
+		var boxs_div=$("div[id='pictures_boxs']");
 		$(boxs_div).empty();
 			$.getJSON("/iwowwow/iwow/pictures/edit",function (pictures){								
 				$.each(pictures,function(idx,picture){
@@ -35,7 +35,7 @@ $(function(){
 					.attr("name", "name")
 					.attr("value", picture.name)
 					.appendTo(social_box_form)
-					.before("姓名:")
+					.before("圖片名稱:")
 					.after("<div></div>");
 					if(picture.assort=='RESTRICTED'){
 						var cell1=$("<option></option>")
@@ -74,10 +74,10 @@ $(function(){
 					}
 					if(picture.visibility=='PRIVATE'){
 						var cell1=$("<option></option>")
-						.attr("value", "GENERAL")
+						.attr("value", "PUBLIC")
 						.text("公開");
 						var cell2=$("<option></option>")
-						.attr("value", "RESTRICTED")
+						.attr("value", "PRIVATE")
 						.attr("selected", "true")
 						.text("私人")
 					$("<select></select>")
@@ -89,11 +89,11 @@ $(function(){
 					.after("<div></div>");
 					}else{
 						var cell1=$("<option></option>")
-						.attr("value", "GENERAL")
+						.attr("value", "PUBLIC")
 						.attr("selected", "true")
 						.text("公開")
 						var cell2=$("<option></option>")
-						.attr("value", "RESTRICTED")
+						.attr("value", "PRIVATE")
 						.text("私人")
 					$("<select></select>")
 					.addClass("picture_box_visibility")
@@ -120,7 +120,7 @@ $(function(){
 							picName = $(form.name).val(),
 							visibility = $(form.visibility).val()
 							console.log(picName)
-						url = "/iwowwow/iwow/member/update";
+						url = "/iwowwow/iwow/update";
 						$.get(url, {
 							"assort" : assort,
 							"picName" : picName,
@@ -147,9 +147,9 @@ $(function(){
 						var id = $(event.target).attr('data-picId');
 						event.preventDefault();
 						var test=$(id);
-						url = "/iwowwow/iwow/member/delete";
+						url = "/iwowwow/iwow/delete";
 						console.log(id)
-						$.get(url, {
+						$.getJSON(url, {
 							"id" : id
 						}, function() {
 							$(event.target).parent().parent().remove();
@@ -168,6 +168,11 @@ $(function(){
 						$.getJSON(url, {
 							"id" : id
 						}, function(tags) {
+							$("<div>Tags:</div>")
+							.addClass("tag_div")
+							.attr("id","tag_div")
+							.appendTo(social_box_div);
+							
 							var tags_box_div=$("<lable></lable>")
 							.addClass("tag_box")
 							.attr("id","tag_box")

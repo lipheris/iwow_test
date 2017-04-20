@@ -63,7 +63,7 @@ height:170px;
 
 		<!-- search	-->
 		<nav class="navbar navbar-light bg-faded justify-content-between">
-		<div id = "boxs">
+		<div id = "pictures_boxs">
 		</div> 
 		</nav>
 		</div>

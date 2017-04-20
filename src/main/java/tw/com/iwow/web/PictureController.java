@@ -122,7 +122,7 @@ public class PictureController {
 		} else {
 			pictureService.insert(picture, pic, tags);
 		}
-		return "redirect:/iwow/member/picturesEdit";
+		return "redirect:/iwow/index";
 	}
 
 	/* 圖片刪除 */
@@ -141,6 +141,7 @@ public class PictureController {
 	@ResponseBody
 	public Boolean updatePicture(Model model, String picName, String visibility, String assort, Long id)
 			throws SQLException, UnsupportedEncodingException {
+		System.out.println(picName+" "+visibility+" "+assort+" "+id);
 		Picture pic = pictureService.getById(id);
 		pic.setName(picName);
 		pic.setVisibility(Visibility.valueOf(visibility));

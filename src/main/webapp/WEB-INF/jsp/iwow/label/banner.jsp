@@ -7,6 +7,7 @@
 <!-- banner.css -->
 <link rel="stylesheet" href="<c:url value="/css/banner.css"/>" />
 
+
 <!-- bootstrap&JQuery -->
 <script src='<c:url value="/js/jquery-3.2.1.min.js"/>'></script>
 <script src='<c:url value="/js/bootstrap.min.js"/>'></script>
@@ -51,7 +52,7 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
-				<li><a href="#"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
+				<li><a href="<c:url value="/iwow/member/upload" />"><span class="glyphicon glyphicon-cloud-upload"></span></a></li>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right scroll-link user_icon">
