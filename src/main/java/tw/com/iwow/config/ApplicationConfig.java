@@ -19,11 +19,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("tw.com.iwow.service")
+@ComponentScan(basePackages = { "tw.com.iwow.service", "tw.com.iwow.security" })
 @EnableJpaRepositories("tw.com.iwow.dao")
 @EnableTransactionManagement
 public class ApplicationConfig {
-	@Bean(destroyMethod="close")
+	@Bean(destroyMethod = "close")
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -41,7 +41,8 @@ public class ApplicationConfig {
 			entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
 			HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
 			Properties hibernateSetting = new Properties();
-			hibernateSetting.load(new FileInputStream(getClass().getClassLoader().getResource("hibernateSetting.properties").getFile()));
+			hibernateSetting.load(new FileInputStream(
+					getClass().getClassLoader().getResource("hibernateSetting.properties").getFile()));
 			entityManagerFactory.setJpaVendorAdapter(jpaVendorAdapter);
 			entityManagerFactory.setPackagesToScan("tw.com.iwow.entity",
 					"org.springframework.data.jpa.convert.threeten");
@@ -61,5 +62,5 @@ public class ApplicationConfig {
 		txManager.setEntityManagerFactory(entityManagerFactory.getObject());
 		return txManager;
 	}
-	
+
 }
