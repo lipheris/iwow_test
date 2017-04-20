@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -48,14 +49,16 @@ public class TagController {
 	}
 
 	@RequestMapping(value = "/delete")
-	public String delete(Long id,Long tagId){
+	@ResponseBody
+	public Boolean delete(Long id,Long tagId){
 		System.out.println(id);
 		if(id!=null){
 		tagService.delete(tagId,id);
 		}else{
 		tagService.delete(id);
 		}
-		return "redirect:/iwow/picture/tags?id="+id;
+		return true;
+//		return "redirect:/iwow/picture/tags?id="+id;
 	}
 	@RequestMapping(value="/insert")
 	public String insert(Model model,Long id ,Tag tag){

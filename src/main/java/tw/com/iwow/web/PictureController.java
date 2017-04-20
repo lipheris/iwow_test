@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,7 +77,7 @@ public class PictureController {
 
 	}
 
-	/* 多張圖片修改 */
+	/* 導向多張圖片修改 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/member/picturesedit")
 	public String listAJAX(Model model) throws SQLException, UnsupportedEncodingException {
 		Collection<Picture> pictureList = pictureService.findAll();
@@ -126,16 +127,19 @@ public class PictureController {
 
 	/* 圖片刪除 */
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/delete")
-	public String deletePicture(Model model, Long id) {
+	@ResponseBody
+	public Boolean deletePicture(Model model, Long id) {
 		pictureService.delete(id);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/member/picturesEdit";
+		return true;
+//		return "/iwow/member/picturesEdit";
 	}
 
-	/**/
+	/*多張圖片修改起中幾張*/
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update")
-	public String updatePicture(Model model, String picName, String visibility, String assort, Long id)
+	@ResponseBody
+	public Boolean updatePicture(Model model, String picName, String visibility, String assort, Long id)
 			throws SQLException, UnsupportedEncodingException {
 		Picture pic = pictureService.getById(id);
 		pic.setName(picName);
@@ -144,7 +148,8 @@ public class PictureController {
 		pictureService.update(pic);
 		Collection<Picture> pictureList = pictureService.findAll();
 		model.addAttribute("pictureList", pictureList);
-		return "/iwow/member/picturesEdit";
+		return true;
+//		return "/iwow/member/picturesEdit";
 	}
 
 	/*-------------------insert picture description----------------*/
