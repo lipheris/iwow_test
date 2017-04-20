@@ -1,0 +1,32 @@
+.social{
+	margin-top:40px;
+	font-family:Microsoft JhengHei;
+	text-align:left;
+}
+/* search */
+#search{
+	margin-left:25px;
+}
+/* social_box */
+.social_box{
+	padding:10px 20px;
+} 
+.social_box:hover{
+   background-color:#DDDDDD;
+}
+/* social_box_img */
+.social_box_img{
+	border-radius:100px;
+	width:50px;
+} 
+/* social_box_name */
+.social_box_name{
+	margin:10px;
+}
+/* social_box_btn */
+.social_box_btn{
+	border-radius:5px;
+	float:right;
+	margin-top:10px;
+	margin-right:5px;
+}
