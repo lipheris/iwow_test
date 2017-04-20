@@ -26,7 +26,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import tw.com.iwow.enums.Gender;
 import tw.com.iwow.web.jsonview.Views;
-@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "member_uuid" )
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.UUIDGenerator.class, property = "member_uuid")
 @Entity
 @Table(name = "MEMBERS")
 public class Member {
@@ -59,15 +60,13 @@ public class Member {
 	/*
 	 * 以上傳者身分對Picture建立@OneToMany雙向關聯
 	 */
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="uploader")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "uploader")
 	private Set<Picture> picUploads = new HashSet<>();
 	/*
 	 * 以收藏者身分對Picture建立@ManyToMany雙向關聯,主控方在Member
 	 */
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "PIC_COLLS", 
-				joinColumns = @JoinColumn(name = "COL_ID", referencedColumnName = "ID"), 
-				inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
+	@JoinTable(name = "PIC_COLLS", joinColumns = @JoinColumn(name = "COL_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "PIC_ID", referencedColumnName = "ID"))
 	private Set<Picture> picColls = new HashSet<>();
 	/*
 	 * 以下單者身分對Order建立@OneToMany單向關聯
@@ -79,10 +78,8 @@ public class Member {
 	 * 對角色身分table建立@ManytoMany單向關聯,主控方在Member
 	 */
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable( name = "MEM_ROLES", 
-				joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), 
-				inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
-	private Set<Role> roles = new HashSet<>() ;
+	@JoinTable(name = "MEM_ROLES", joinColumns = @JoinColumn(name = "MEM_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"))
+	private Set<Role> roles = new HashSet<>();
 	/*
 	 * 斗內雙方與斗內資料建立@OneToMany關聯,主控方在Donation
 	 */
@@ -98,10 +95,21 @@ public class Member {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "followings")
 	private Set<Member> followers = new HashSet<>();
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable( name = "FOLLOW_RELATION", 
-				joinColumns = @JoinColumn(name = "FOLLOWING", referencedColumnName = "ID"), 
-				inverseJoinColumns = @JoinColumn(name = "FOLLOWER", referencedColumnName = "ID"))
+	@JoinTable(name = "FOLLOW_RELATION", joinColumns = @JoinColumn(name = "FOLLOWING", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "FOLLOWER", referencedColumnName = "ID"))
 	private Set<Member> followings = new HashSet<>();
+
+	public Member() {
+		super();
+	}
+
+	public Member(Member member) {
+		this.id = member.id;
+		this.email = member.email;
+		this.password = member.password;
+		this.nickname = member.nickname;
+		this.roles = member.roles;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -229,26 +237,28 @@ public class Member {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
-	
-	public void addRole(Role role){
+
+	public void addRole(Role role) {
 		this.roles.add(role);
 	}
-	
-	public void removeRole(Role role){
+
+	public void removeRole(Role role) {
 		this.roles.remove(role);
 	}
 
-
-	public void addPicColl(Picture picColl){
+	public void addPicColl(Picture picColl) {
 		this.picColls.add(picColl);
 	}
-	public void removePicColl(Picture picColl){
+
+	public void removePicColl(Picture picColl) {
 		this.picColls.remove(picColl);
 	}
-	public void addPicColls(Collection<Picture> picColls){
+
+	public void addPicColls(Collection<Picture> picColls) {
 		this.picColls.addAll(picColls);
 	}
-	public void removePicColls(Collection<Picture> picColls){
+
+	public void removePicColls(Collection<Picture> picColls) {
 		this.picColls.removeAll(picColls);
 	}
 
@@ -275,10 +285,12 @@ public class Member {
 	public void setFollowings(Set<Member> followings) {
 		this.followings = followings;
 	}
-	public void addFollowing(Member following){
+
+	public void addFollowing(Member following) {
 		this.followings.add(following);
 	}
-	public void removeFollowing(Member following){
+
+	public void removeFollowing(Member following) {
 		this.followings.remove(following);
 	}
 }
