@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import tw.com.iwow.service.MemberDetailsService;
+import tw.com.iwow.security.MemberDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -44,9 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.rememberMeParameter("rememberMe")
 //			.tokenRepository(tokenRepository)
 //			.tokenValiditySeconds(86400)
-		.and()
+			.and()
 			.csrf()
-		.and()
+			.ignoringAntMatchers("/chat/**")
+            .and()
+            .headers()
+            // allow same origin to frame our site to support iframe SockJS
+            .frameOptions().sameOrigin()
+            .and()
 			.exceptionHandling()
 			.accessDeniedPage("/403");
 	}
