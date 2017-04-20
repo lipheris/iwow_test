@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -93,8 +94,8 @@ public class GroupController {
 	@JsonView(Views.ShowGroups.class)
 	@RequestMapping(method = RequestMethod.GET,produces = { "application/json" },value="/search")
 	@ResponseBody
-	public Set<Group> search(@RequestParam(value="ctx",required = false) String param){			
-		return groupService.search("ctx");
+	public Set<Group> search(@RequestParam(value="ctx",required = false) String param){
+		return groupService.search(param);
 	}
 	
 	@RequestMapping(value="/add")
@@ -102,10 +103,10 @@ public class GroupController {
 		return "/iwow/group/groupAdd";
 	}
 	
-	/*Group新增(包含創建者)*/
-	@RequestMapping(value="/create",method = RequestMethod.GET)
+	/*Group新增(包含創建者+圖片)*/
+	@RequestMapping(value="/create",method = RequestMethod.POST)
 	@ResponseBody
-	public Boolean createGroup(Group group){		
+	public Boolean createGroup(Group group,@RequestParam CommonsMultipartFile photo){
 		Group temp = groupService.getByName(group.getName());
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();		
 		if(temp==null){
@@ -113,7 +114,7 @@ public class GroupController {
 			Group groupNew=groupService.create(group);
 			groupNew.setMemid(member.getId());
 			groupNew.addMember(member);
-			groupService.update(groupNew);
+			groupService.uploadPhoto(groupNew, photo);
 			return true;
 		}
 		return false;
