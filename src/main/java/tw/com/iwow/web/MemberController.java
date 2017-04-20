@@ -101,8 +101,8 @@ public class MemberController {
 	
 	@RequestMapping(value="/update")
 	public String update(Member member){
-		Member mem=memberService.findById(member.getId());
-		memberService.update(member);
+		Member mem = memberService.findById(member.getId());
+		memberService.update(mem);
 		return "redirect:/iwow/index_user";
 	}
 	
