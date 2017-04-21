@@ -31,7 +31,7 @@ import tw.com.iwow.web.jsonview.Views;
 @Entity
 @Table(name = "MEMBERS")
 public class Member {
-	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class })
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class, Views.MemberProfile.class })
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -43,7 +43,8 @@ public class Member {
 	@JsonView(Views.UserDetails.class)
 	@Column(name = "NAME")
 	private String name;
-	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class ,Views.UserDetails.class })
+	@JsonView(value = { Views.ShowPicture.class, Views.ShowTag.class, Views.UserDetails.class,
+			Views.MemberProfile.class })
 	@Column(name = "NICKNAME")
 	private String nickname;
 	@Enumerated(EnumType.STRING)
@@ -59,7 +60,7 @@ public class Member {
 	@Column(name = "ADDRESS")
 	@JsonView(Views.UserDetails.class)
 	private String address;
-	@JsonView(value = { Views.ShowPicUploader.class , Views.UserDetails.class})
+	@JsonView(value = { Views.ShowPicUploader.class, Views.UserDetails.class })
 	@Column(name = "PHOTO_ADDR")
 	private String photoAddr;
 	/*
@@ -112,7 +113,6 @@ public class Member {
 		this.email = member.email;
 		this.password = member.password;
 		this.nickname = member.nickname;
-		this.roles = member.roles;
 	}
 
 	public Long getId() {
