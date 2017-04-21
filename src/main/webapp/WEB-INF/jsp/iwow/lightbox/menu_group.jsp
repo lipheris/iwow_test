@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<head>
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_parametername" content="${_csrf.parameterName}"/>
+ </head>
 <style>
 .social {
 	margin-top: 40px;
@@ -36,6 +41,8 @@
 	margin-top: 10px;
 	margin-right: 5px;
 }
+
+
 </style>
 <script src='<c:url value="/js/group.js"/>'></script>
 <script src='<c:url value="/js/banner_search.js"/>'></script>
@@ -53,31 +60,29 @@
 	<div class="social" id="social">
 
 		<!-- search	-->
+					
 		<nav class="navbar navbar-light bg-faded justify-content-between">
-			<form class="form-inline" id="searchForm"
-				action='<c:url value="/iwow/group/search" />' method="get">
-				<div class="form-group">
-					<input type="text" class="form-control mr-sm-2"
-						placeholder="Search Group" id="searchCtx" name="ctx" />
-					<button type="button"
-						class="btn btn-default glyphicon glyphicon-search my-2 my-sm-0"
-						id="searchBtn"></button>
+			<form class="form-inline">
+				<div>
+					<input type="text" class="form-control mr-sm-2" placeholder="Search Group" id="searchCtx" name="ctx" />
+					<button type="button" class="btn btn-default glyphicon glyphicon-search my-2 my-sm-0" id="searchBtn"></button>
+					<button type="button" class="btn btn-default glyphicon glyphicon-search" id="findAllBtn">個人社群</button>
 				</div>
+				
 			</form>
 		</nav>
-		<div id="findAllBtn">
-			<button type="button"
-				class="btn btn-default glyphicon glyphicon-search" id="findAllBtn"></button>
+
+		<div id="createBtn">            
+			<button type="button" class="btn btn-primary  " id="createBtn">新建社團</button>			
+		</div>
+		<div id="createbox">		
 		</div>
 
-
 		<!-- social box -->
-		<div 	id = "boxs">
+		<div id = "boxs">
 		</div> 
 		<!-- social box end -->
 				
-<!-- 			<button type="button" class="btn btn-danger social_box_btn">退出</button> -->
-<!-- 			<button type="button" class="btn btn-info social_box_btn">加入</button> -->
 	</div>
 
 	<div class="res-group js-lightbox-group"></div>

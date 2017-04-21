@@ -70,12 +70,17 @@ public class GroupService {
 	
 	@Transactional
 	public Group uploadPhoto(Group group, CommonsMultipartFile photo){
+		if(photo==null){
+			  group.setPhotoAd("/images/laope.jpg");
+			  return groupDao.save(group);
+		    }
+				
 		try{
 		CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 	    CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 	    CloudBlobContainer container = blobClient.getContainerReference("abencontainer");
 	    String name = LocalDateTime.now().toString() + UUID.randomUUID().toString();
-	    CloudBlockBlob blob = container.getBlockBlobReference(name + ".jpg");
+	    CloudBlockBlob blob = container.getBlockBlobReference(name + ".jpg");	  
 		blob.upload(photo.getInputStream(), photo.getSize());
 		group.setPhotoAd(
 				"https://eeit9230.blob.core.windows.net/abencontainer/" + name + ".jpg");	

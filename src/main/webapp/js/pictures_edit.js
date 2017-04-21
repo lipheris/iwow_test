@@ -270,13 +270,54 @@ $(function(){
 										})
 								})
 								.appendTo(social_box_div);
-							tagtemp=false;
 						})
+					temp=3;
+				}
+				else{
+					$(event.target).nextAll().remove();
+					var id=picture.id,
+						dsc=picture.description
+					var picture_desc_div=$("<div>描述:</div>")
+					 .addClass("picture_desc")
+					 .attr("id","picture_desc")
+					 .appendTo(social_box_div);
+					$("<input>")		
+					.addClass("picture_box_id")
+					.attr("type", "hidden")
+					.attr("name", "id")
+					.attr("value", id)
+					.appendTo(picture_desc_div).after("<div></div>");
+										
+					$("<input>")
+					.addClass("picture_box_name")
+					.attr("type", "text")
+					.attr("name", "dsc")
+					.attr("value", dsc)
+					.appendTo(picture_desc_div)
+					$("<button>")
+					.addClass("picture_box_edit")
+					.text("修改")
+					.click(function(event) {
+						event.preventDefault();
+						var url = "/iwowwow/iwow/update/dsc";
+						$.get(url, {
+							"dsc" : picture.description,
+							"id" : picture.id
+						}, function(response) {
+							if (response) {
+								swal({
+									type : 'success',
+									text : '修改成功!',
+									showConfirmButton : false,
+									customClass : 'swal',
+									timer : 1000,
+								});
+							}
+						})
+					})
+					.appendTo(picture_desc_div);
 					temp=1;
 				}
-//				else{
-//					temp1
-//				}
 			})
 					$(social_box_div).appendTo(boxs_div)
 									

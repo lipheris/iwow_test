@@ -1,9 +1,45 @@
-//var all_groups_div = $("div[id='pic_related']");
-//var all_groups;
-//var member_id = [mem_id];
-//var group_info_div=$("div[id='group_info']");
-//var social_box_div=$("div[id='social_box']");
 $(function(){
+			
+
+	
+	
+	$("button[id='createBtn']").click(function(){
+		var createBtn_div=$("div[id='createBtn']");
+		var create_box_div=$("div[id='createbox']")
+		
+		var token = $("meta[name='_csrf']").attr("content");
+		var param = $("meta[name='_csrf_parametername']").attr("content");
+		$(create_box_div).empty();
+		var	form_div=$("<form></form>")
+			.addClass("form-inline")
+			.attr("action","/iwowwow/iwow/group/create?"+param+"="+token )			
+			.attr("method","post")
+			.attr("enctype","multipart/form-data")
+			.attr("id","create_btn")
+			.appendTo(create_box_div);
+			
+		var	input=$("<input>")
+			.addClass("form-control")
+			.attr("id","groupName")
+			.attr("name","name")
+			.attr("type","text");
+		
+		var input_btn=$("<input>")
+			.attr("type","file")
+			.attr("name","photo")
+			.attr("id","photo")	
+		
+		var input_send=$("<input>")
+			.attr("type","submit")
+			.attr("value","Create")
+			.attr("name","submit")
+			form_div.append(input);
+			form_div.append(input_btn);
+			form_div.append(input_send);			
+					
+	})
+	
+	
 	/*Search*/
 	$("button[id='searchBtn']").click(function(){		
 		var boxs_div=$("div[id='boxs']");
@@ -47,7 +83,7 @@ $(function(){
 	});
 
 	/*FindAll*/
-	$("div[id='findAllBtn']").click(function(){
+	$("button[id='findAllBtn']").click(function(){
 		var boxs_div=$("div[id='boxs']");
 		$(boxs_div).empty();
 			$.getJSON("/iwowwow/iwow/group/find_groups",function (groups){								
@@ -95,7 +131,4 @@ function show_group(group) {
 	$("#group_info > #group_create_name").text(group.memid);
 	$("img[id='group_img']").attr("src", group.photoAd);
 }
-
-
-
 

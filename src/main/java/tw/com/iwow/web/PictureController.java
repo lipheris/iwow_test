@@ -152,7 +152,18 @@ public class PictureController {
 		return true;
 //		return "/iwow/member/picturesEdit";
 	}
-
+	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/update/dsc")
+	@ResponseBody
+	public Boolean updatePictureDsc(Model model, String dsc, Long id)
+			{
+		System.out.println(dsc+" "+id);
+		Picture pic = pictureService.getById(id);
+		pic.setDescription(dsc);
+		pictureService.update(pic);
+		Collection<Picture> pictureList = pictureService.findAll();
+		model.addAttribute("pictureList", pictureList);
+		return true;
+	}
 	/*-------------------insert picture description----------------*/
 	@RequestMapping(value = "/insertDescription", method = RequestMethod.GET)
 	public String picturePage(Model model, @RequestParam(name = "getId") Long picId, String typein,

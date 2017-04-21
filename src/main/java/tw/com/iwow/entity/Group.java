@@ -28,17 +28,19 @@ public class Group {
 	@Column(name = "ID")
 	private Long id;
 	
-	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
+	@JsonView(value = {Views.ShowGroups.class})
 	@Column(name = "NAME")
 	private String name; 
-	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
+	
+	@JsonView(value = {Views.ShowGroups.class})
 	@Column(name="PHOTO_ADDRESS")
 	private String photoAd;
-	@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })	
+	
+	@JsonView(value = {Views.ShowGroups.class})	
 	@Column(name="GROUP_CREATOR")
 	private Long memid;
 	
-	//@JsonView(value = {Views.ShowGroups.class,Views.MemberDetails.class })
+	@JsonView(value = {Views.ShowGroups.class,Views.MemDetails.class })
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(	name = "GROUP_MEMS", 
 				joinColumns = @JoinColumn(name = "GROUP_ID", referencedColumnName = "ID"), 
