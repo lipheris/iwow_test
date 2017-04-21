@@ -52,7 +52,7 @@
 					<td><a href='<c:url value='/iwow/picture/getalldetail?id=${anOrderBean.id}' />'>
 							${anOrderBean.id} </a></td>
 					<td>${anOrderBean.update}</td>
-					<td><a href="<c:url value='/iwow/picture/download?id=${anOrderBean.id}' />">Picture Download</a></td>
+					
 				</tr>
 			</c:forEach>
 			</tbody>

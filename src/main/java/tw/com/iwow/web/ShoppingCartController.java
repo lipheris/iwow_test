@@ -1,9 +1,14 @@
 package tw.com.iwow.web;
 
-import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilterInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,10 +19,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JFileChooser;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +33,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.microsoft.azure.storage.CloudStorageAccount;
-import com.microsoft.azure.storage.blob.CloudBlob;
-import com.microsoft.azure.storage.blob.CloudBlobClient;
-import com.microsoft.azure.storage.blob.CloudBlobContainer;
-import com.microsoft.azure.storage.blob.ListBlobItem;
-
 import tw.com.iwow.entity.Order;
 import tw.com.iwow.entity.OrderDetail;
 import tw.com.iwow.entity.Picture;
 import tw.com.iwow.service.OrderService;
 import tw.com.iwow.service.PictureService;
+
 
 @Controller
 @RequestMapping(value = "/iwow/picture")
@@ -46,7 +46,6 @@ public class ShoppingCartController {
 	private static final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=iwowblob;AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA=="
 			+ "AccountName=iwowblob;"
 			+ "AccountKey=aSzX3lBzin0MehMzxDUo0jULu2A7PhtrH+0WxEaFuyj1AwpXwnwjkcOLM3BJwBFKZNVxDGza8f4t4JNcUlQNUA==";
-
 	@Autowired
 	private OrderService orderService;
 	@Autowired
@@ -212,50 +211,90 @@ public class ShoppingCartController {
 
 //	 下載圖庫-----------------------------------------------------------------------------------
 	@RequestMapping("/download")
-	public String downloadPic(Long id, Model model) throws IOException {
-		try {
-			JFileChooser chooser = new JFileChooser();
-		    chooser.setCurrentDirectory(new java.io.File("."));
-		    chooser.setDialogTitle("choosertitle");
-		    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		    chooser.setAcceptAllFileFilterUsed(false);
-
-		    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-		      System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
-		      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
-		    } else {
-		      System.out.println("No Selection ");
-		      return "redirect:/iwow/cart/orderlist";
-		    }
-		    String fileName=chooser.getSelectedFile().toString();
-		    System.out.println(fileName);
-			// Retrieve storage account from connection-string.
-			CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
-			// Create the blob client.
-			CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
-			// Retrieve reference to a previously created container.
-			CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
-			// Loop through each blob item in the container.
-			for (ListBlobItem blobItem : container.listBlobs()) {
-				// If the item is a blob, not a virtual directory.
-				// Download the item and save it to a file with the same
-				// name.
-				CloudBlob blob = (CloudBlob) blobItem;
-				Set<OrderDetail> orderDetails = orderService.getOrder(id).getOrderDetails();
-				for (OrderDetail orderDetail : orderDetails) {
-					String address = pictureService.getById(orderDetail.getPicId()).getPictureAddress();
-					if (address.equals(blob.getUri().toString())) {
-						
-						blob.download(new FileOutputStream(fileName +"\\"+ orderDetail.getPicName() + ".jpg"));
-					}
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "redirect:/iwow/picture/orderlistdetail";
+	public void downloadPic(Long id, Model model,HttpServletResponse response) throws IOException {
+//		try {
+//			JFileChooser chooser = new JFileChooser();
+//		    chooser.setCurrentDirectory(new java.io.File("."));
+//		    chooser.setDialogTitle("choosertitle");
+//		    chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//		    chooser.setAcceptAllFileFilterUsed(false);
+//
+//		    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+//		      System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
+//		      System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+//		    } else {
+//		      System.out.println("No Selection ");
+////		      return "redirect:/iwow/cart/orderlist";
+//		    }
+//		    String fileName=chooser.getSelectedFile().toString();
+//		    System.out.println(fileName);
+//			// Retrieve storage account from connection-string.
+//			CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+//			// Create the blob client.
+//			CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+//			// Retrieve reference to a previously created container.
+//			CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+//			// Loop through each blob item in the container.
+//			for (ListBlobItem blobItem : container.listBlobs()) {
+//				// If the item is a blob, not a virtual directory.
+//				// Download the item and save it to a file with the same
+//				// name.
+//				CloudBlob blob = (CloudBlob) blobItem;
+//				Set<OrderDetail> orderDetails = orderService.getOrder(id).getOrderDetails();
+//				for (OrderDetail orderDetail : orderDetails) {
+//					String address = pictureService.getById(orderDetail.getPicId()).getPictureAddress();
+//					if (address.equals(blob.getUri().toString())) {
+//						
+//						blob.download(new FileOutputStream(fileName +"\\"+ orderDetail.getPicName() + ".jpg"));
+//					}
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return "redirect:/iwow/picture/orderlistdetail";
+		String filePath= pictureService.getById(id).getPictureAddress();
+		String name= pictureService.getById(id).getName();
+		URL url = new URL(filePath);  
+		File file = new File("https://"+filePath);  
+			  //设置浏览器显示的内容类型为Zip  (很重要,欺骗浏览器下载的是zip文件,就不会自己打开了)  
+		    response.setContentType("application/zip");  
+		    //设置内容作为附件下载  fileName有后缀,比如1.jpg  
+		    response.setHeader("Content-Disposition", "attachment; filename="+name+".jpg");  
+		    ServletOutputStream out = null;  
+		    try {  
+		        // 通过文件路径获得File对象(假如此路径中有一个download.pdf文件)  
+		    	InputStream inputStream = url.openStream();
+		    	System.out.println(inputStream);
+//		        InputStream inputStream = FileManageUtils.downLoadFile(filePath);//此处是为了获得输出流  
+		        // 3.通过response获取ServletOutputStream对象(out)  
+		        out = response.getOutputStream();  
+		        int b = 0;  
+		        byte[] buffer = new byte[512];  
+		        while (b != -1) {  
+		            b = inputStream.read(buffer);  
+		            // 4.写到输出流(out)中  
+		            out.write(buffer, 0, b);  
+		        }  
+		        inputStream.close();  
+		    } catch (Exception e) {  
+		        e.printStackTrace();  
+		    } finally {  
+		        try {  
+		            if (out != null)  
+		            out.close();  
+		        } catch (IOException e) {  
+		            e.printStackTrace();  
+		        }  
+		        try {  
+		            if (out != null)  
+		            out.flush();  
+		        } catch (IOException e) {  
+		            e.printStackTrace();  
+		        }  
+		    }  
+		
 	}
-
 	@RequestMapping(value = "/orderconfirm")
 	public String orderconfirm() {
 		return "/iwow/picture/orderconfirm";

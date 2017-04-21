@@ -218,6 +218,7 @@ $(function(){
 							.addClass("tag_new_name")
 							.attr("type","text")
 							.attr("name","tagname")
+							.attr("id","addtagname")
 							.insertAfter(tags_box_div)
 							$("<button>")
 								.addClass("tag_insert")
@@ -225,7 +226,7 @@ $(function(){
 								.insertAfter(tags_box_div)
 								.click(function(event){
 									event.preventDefault();
-									var tagname=$("input[name=tagname]").val()
+									var tagname=$("#addtagname").val()
 									var test=$(picture.id)[0];
 									event.preventDefault();
 									console.log(tagname) 
@@ -275,8 +276,7 @@ $(function(){
 				}
 				else{
 					$(event.target).nextAll().remove();
-					var id=picture.id,
-						dsc=picture.description
+					var id=picture.id
 					var picture_desc_div=$("<div>描述:</div>")
 					 .addClass("picture_desc")
 					 .attr("id","picture_desc")
@@ -292,16 +292,19 @@ $(function(){
 					.addClass("picture_box_name")
 					.attr("type", "text")
 					.attr("name", "dsc")
-					.attr("value", dsc)
+					.attr("value", picture.description)
+					.attr("id", "picdsc")
 					.appendTo(picture_desc_div)
 					$("<button>")
 					.addClass("picture_box_edit")
 					.text("修改")
 					.click(function(event) {
+						var dsc=$('#picdsc').val();
+						console.log(dsc);
 						event.preventDefault();
 						var url = "/iwowwow/iwow/update/dsc";
 						$.get(url, {
-							"dsc" : picture.description,
+							"dsc" : dsc,
 							"id" : picture.id
 						}, function(response) {
 							if (response) {
