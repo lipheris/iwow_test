@@ -170,7 +170,7 @@ legend {
 				<!-- 預約排程投稿 -->
 
 				<div class="form-group has-error">
-					<label class="control-label" for="inputError">預約投稿：</label> <input
+					<label class="control-label" for="inputError">上傳日期：</label> <input
 						type="checkbox" value="reservation" id="reservation" /> <input
 						type="text" name="update" id="datepicker" value="" />
 				</div>

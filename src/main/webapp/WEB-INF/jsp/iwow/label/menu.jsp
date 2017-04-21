@@ -32,13 +32,13 @@
 <!-- 		</form> -->
 <!-- 	編輯個人資料 -->
 
-			<a href='javascript:' onClick="jsLightbox('res-profile-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">修改個人資料</span></a>
-			<a href='javascript:' onClick="jsLightbox('res-friends-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">好友</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-profile-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">編輯個人資料</span></a>
+<!-- 			<a href='javascript:' onClick="jsLightbox('res-friends-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">好友</span></a> -->
 			<a href='javascript:' onClick="jsLightbox('res-follow-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">追隨中</span></a>
-			<a href='javascript:' onClick="jsLightbox('res-fans-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">粉絲</span></a>
+<!-- 			<a href='javascript:' onClick="jsLightbox('res-fans-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">粉絲</span></a> -->
 			<a href='javascript:' onClick="jsLightbox('res-group-popup', 500, 400, 385)"  class="smoothScroll"><span class="menu_text">群組</span></a>
-			<a href="#" onClick="jsLightbox('res-picturesedit-popup', 500, 400, 385)"  class="smoothScroll" id="pictures_edit"><span class="menu_text">修改圖片</span></a>
-			<a href='javascript:' onClick="jsLightbox('res-upgradeAuthority-popup', 500, 400, 385)"  class="smoothScroll" id="member_upgrade"><span class="menu_text">成為高級會員</span></a>
+			<a href="#" onClick="jsLightbox('res-picturesedit-popup', 500, 400, 385)"  class="smoothScroll" id="pictures_edit"><span class="menu_text">編輯圖片</span></a>
+			<a href='javascript:' onClick="jsLightbox('res-upgradeAuthority-popup', 500, 400, 385)"  class="smoothScroll" id="member_upgrade"><span class="menu_text">黃金會員</span></a>
 			<a href='<c:url value="/iwow/picture/showcartcontent"/>'   class="smoothScroll"><span class="menu_text">前往購物車</span></a>
 		</div>
 		

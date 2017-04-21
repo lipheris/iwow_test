@@ -44,20 +44,20 @@ public class MemberController {
 	@Autowired
 	private RoleDao roleDao;
 	
-	@RequestMapping(value="/checkUserEmail")
-	@ResponseBody
-	public String checkUserEmail(Member form){
-		String UserEmail = form.getEmail(); //取得使用者輸入的Email	
-		if(UserEmail != null && UserEmail.trim().length() != 0){ //檢查使用者輸入的Email不為null與空白
-			Member member = memberService.getByEmail(UserEmail); //測試使用者輸入的email是否可抓取資料庫內的資料
-			if(member == null){ //如果member為null代表資料庫內沒該筆email，帳號可註冊
-				return "帳號不存在";	
-			} else {
-				return "帳號已存在";
-			}//如果member不為null代表資料庫內有該筆email的資料，帳號不可註冊				
-		}
-		return null;
-	}
+//	@RequestMapping(value="/checkUserEmail")
+//	@ResponseBody
+//	public String checkUserEmail(Member form){
+//		String UserEmail = form.getEmail(); //取得使用者輸入的Email	
+//		if(UserEmail != null && UserEmail.trim().length() != 0){ //檢查使用者輸入的Email不為null與空白
+//			Member member = memberService.getByEmail(UserEmail); //測試使用者輸入的email是否可抓取資料庫內的資料
+//			if(member == null){ //如果member為null代表資料庫內沒該筆email，帳號可註冊
+//				return "帳號不存在";	
+//			} else {
+//				return "帳號已存在";
+//			}//如果member不為null代表資料庫內有該筆email的資料，帳號不可註冊				
+//		}
+//		return null;
+//	}
 	
 	@RequestMapping(method = RequestMethod.GET, produces = { "application/json" }, value = "/user_profile")
 	@JsonView(Views.UserDetails.class)

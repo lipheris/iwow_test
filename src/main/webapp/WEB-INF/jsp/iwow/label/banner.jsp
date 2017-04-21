@@ -46,6 +46,7 @@
 				<li><a href="javascript:formSubmit()">Logout</a></li>
 			</ul>
 			
+			<!-- 沒東西 -->
 			<ul class="nav navbar-nav navbar-right scroll-link banner_icon">
 				<li><a href="#"><span class="glyphicon glyphicon-envelope"></span></a></li>
 			</ul>

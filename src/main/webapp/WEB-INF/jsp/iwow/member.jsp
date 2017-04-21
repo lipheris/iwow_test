@@ -70,7 +70,7 @@
 }
 </style>
 </head>
-<body onload='document.logoutForm.username.focus();'>
+<body>
 	<!-- banner import -->
 	<c:import url="label/banner.jsp" />
 	
@@ -86,8 +86,10 @@
 	
 	<!-- 作者照片與名字 -->
 	<div class="user_profile">
-		<img class="user_profile_img" src="https://secure.gravatar.com/avatar/afb1c54ac11486de1a71f6e0cd3ccc16?s=100&r=g&d=https://pacdn.500px.org/userpic.png">
-		<span class="user_profile_name" >Tom</span>
+		
+				<img class="user_profile_img">
+				<span class="user_profile_name"></span>
+			
 	</div>
 	
 	<!-- Follow、Add Friend、Hire按鈕 -->
@@ -111,15 +113,6 @@
 	<div class="user_bottom">
 	<!-- Works、Followers、Following、Likes、Service -->
 	<div class="user_nav">
-		<a href="#" class="user_nav_active">Works</a>
-		<p class="user_nav_slash">/</p>
-<!-- 		<a href="#" class="user_nav_active">Followers</a> -->
-<!-- 		<p class="user_nav_slash">/</p> -->
-<!-- 		<a href="#" class="user_nav_active">Following</a> -->
-<!-- 		<p class="user_nav_slash">/</p> -->
-		<a href="#" class="user_nav_active">Likes</a>
-		<p class="user_nav_slash">/</p>
-		<a href="#" class="user_nav_active">Service</a>
 	</div>
 
 	<!-- Works、Followers、Following、Likes、Service結果 -->
@@ -135,14 +128,19 @@
 //抓取登入者上傳的圖片
 	$(function(){
 		$.getJSON('/iwowwow/iwow/pictures/edit',function(data){
-// 			console.log(data);
 			var docFragment = $(document.createDocumentFragment());
 			$.each(data,function(index,picture){
-// 				console.log(picture.pictureAddress);
 				var img_pic = $("<img />").attr("src",picture.pictureAddress).addClass("user_works_picture");
 				docFragment.append(img_pic);
  			})
  			$(".user_works").append(docFragment);
+		})
+	});
+	//抓取登入者的資料（暱稱、頭像)跟banner有重複	
+	$(function(){
+		$.getJSON('/iwowwow/iwow/member/user_profile',function(user_profile){
+	  			var user_pic = $(".user_profile_img").attr("src",user_profile.photoAddr);
+				$(".user_profile_name").html("<p>" + user_profile.nickname + "</p>");
 		})
 	});
 

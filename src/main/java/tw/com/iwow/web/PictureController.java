@@ -70,7 +70,7 @@ public class PictureController {
 		if (StringUtils.isEmpty(buyCarCookie) || buyCarCookie == null) {
 
 			response.addCookie(new Cookie("buyCar", null));
-			System.out.println("buyCarCookieP=" + buyCarCookie);
+			//System.out.println("buyCarCookieP=" + buyCarCookie);
 		}
 
 		return "/iwow/picture";

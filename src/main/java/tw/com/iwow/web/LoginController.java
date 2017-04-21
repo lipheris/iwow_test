@@ -21,10 +21,10 @@ public class LoginController {
 		return "/iwow/login"; 
 	}
 	
-	@RequestMapping(value = "/signup")
-	public String signup(){
-		return "/iwow/signup";
-	}
+//	@RequestMapping(value = "/signup")
+//	public String signup(){
+//		return "/iwow/signup";
+//	}
 	
 	/*------------------錯誤顯示--------------------------*/
 	

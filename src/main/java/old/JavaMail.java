@@ -1,4 +1,4 @@
-package test;
+package old;
 
 import java.util.Properties;    
 import javax.mail.*;    

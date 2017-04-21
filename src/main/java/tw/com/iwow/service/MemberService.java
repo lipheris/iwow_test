@@ -20,8 +20,7 @@ public class MemberService {
 
 	@Autowired
 	private MemberDao memberDao;
-	@Autowired
-	private RoleDao roleDao;
+
 	public Member getByEmail(String email) {
 		return memberDao.findByEmail(email);
 	}
