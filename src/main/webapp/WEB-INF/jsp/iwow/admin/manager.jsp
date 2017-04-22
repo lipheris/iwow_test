@@ -156,8 +156,8 @@ tr:hover {background-color:#FF0000}
 										<td>${ra.date}</td>
 										<td>${ra.state}</td>
 										<td>12</td>
-										<td>13</td>
-										<td>14</td>
+										<td>${ra.desc}</td>
+										<td>${ra.picture.id}</td>
 										</tr>
 									</c:forEach>
 								</c:if>
