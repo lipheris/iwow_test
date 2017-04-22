@@ -28,15 +28,16 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.4.2/sweetalert2.min.css">
 <script type="text/javascript" src='<c:url value="/js/picture.js" />'></script>
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script>
 	// jQuery datepicker
-	$(function() {
-		$("#datepicker").datepicker({
-			minDate : -0,
-			maxDate : "+1Y",
-		}).datepicker("setDate", "0");
-	});
+// 	$(function() {
+// 		$("#datepicker").datepicker({
+// 			minDate : -0,
+// 			maxDate : "+1Y",
+// 		}).datepicker("setDate", "0");
+// 	});
 </script>
 
 <style>
@@ -185,13 +186,21 @@ legend {
 
 			</fieldset>
 		</form>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"
+	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	crossorigin="anonymous"></script>		
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script type="text/javascript">
 			var max_fields = 5; //maximum input boxes allowed
 			var wrapper = $(".input_fields_wrap"); //Fields wrapper
 			var add_button = (".add_field_button"); //Add button ID
 			var x = 1; //initlal text box count
-
+			$(function() {
+				$("#datepicker").datepicker({
+					minDate : -0,
+					maxDate : "+1Y",
+				}).datepicker("setDate", "0");
+			});
 			$('#suggest')
 					.on(
 							"click",
