@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-			.antMatchers("/iwow/admin")
+			.antMatchers("/iwow/admin/manager")
 				.hasRole("ADMIN")
 			.antMatchers("/login*", "/iwow/signup" ,"/js/**" ,"/css/**" ,"/images/**")
 				.permitAll()
@@ -46,11 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.tokenValiditySeconds(86400)
 			.and()
 			.csrf()
-			.ignoringAntMatchers("/chat/**")
-            .and()
-            .headers()
+//			.ignoringAntMatchers("/chat/**")
+//          .and()
+//          .headers()
             // allow same origin to frame our site to support iframe SockJS
-            .frameOptions().sameOrigin()
+//          .frameOptions().sameOrigin()
             .and()
 			.exceptionHandling()
 			.accessDeniedPage("/403");

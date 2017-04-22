@@ -39,7 +39,7 @@ $( function() {
 	<fieldset>
 			<legend>修改個人資料</legend>
 	
-	<form action="/iwowwow/iwow/member/update" method="post">
+<!-- 	<form action="/iwowwow/iwow/member/update" method="post"> -->
 	
 	<!-- ID -->
 	<input type="hidden" name="id" value="${editMember.id}" />	
