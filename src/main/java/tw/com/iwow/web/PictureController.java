@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -90,7 +90,7 @@ public class PictureController {
 	public String methodPost(Model model) throws Exception {
 		Collection<Picture> pictureList = pictureService.findAll();
 		// 處理null
-		Collection<Picture> picsT = new ArrayList<Picture>();
+		Collection<Picture> picsT = new HashSet<Picture>();
 		for (Picture pics : pictureList) {
 			if (pics.getPictureAddress() != null) {
 				picsT.add(pics);
@@ -116,13 +116,13 @@ public class PictureController {
 		LocalDate ld = LocalDate.parse(update, dtf);
 		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
 		picture.setUpdate(ldt);
-
 		if (tags == null) {
 			pictureService.insert(picture, pic);
 		} else {
 			pictureService.insert(picture, pic, tags);
 		}
-		return "redirect:/iwow/index";
+		Long id=pictureService.getTop();
+		return "redirect:/iwow/picture/"+id;
 	}
 
 	/* 圖片刪除 */
