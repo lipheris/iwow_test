@@ -116,13 +116,13 @@ public class PictureController {
 		LocalDate ld = LocalDate.parse(update, dtf);
 		LocalDateTime ldt = LocalDateTime.of(ld, LocalTime.MIN);
 		picture.setUpdate(ldt);
-
 		if (tags == null) {
 			pictureService.insert(picture, pic);
 		} else {
 			pictureService.insert(picture, pic, tags);
 		}
-		return "redirect:/iwow/index";
+		Long id=pictureService.getTop();
+		return "redirect:/iwow/picture/"+id;
 	}
 
 	/* 圖片刪除 */

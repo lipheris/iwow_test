@@ -18,7 +18,7 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 			+ "AND (p.name LIKE CONCAT('%',:param,'%') "
 			+ "OR t.name LIKE CONCAT('%',:param,'%')"
 			+ "OR p.uploader IN (SELECT m FROM Member m WHERE m.name LIKE CONCAT('%',:param,'%')))";
-
+	public static final String find_less_id="select top 1 id from pictures order by id desc";
 	public Picture findByPictureAddress(String pictureAddress);
 	public Picture findByName(String name);
 	public Set<Picture> findByTagsName(String tagName);
@@ -31,4 +31,6 @@ public interface PictureDao extends JpaRepository<Picture, Long> {
 	 */
 	@Query(FIND_ID_BY_SEARCH)
 	public Set<Picture> search(@Param("param")String param);
+	@Query(value=find_less_id, nativeQuery = true )
+	public Long findOrderById();
 }

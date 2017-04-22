@@ -167,5 +167,7 @@ public class PictureService {
 	public void deleteText(Long id) {
 		picDescriptionDao.delete(id);;
 	}
-	
+	public Long getTop() {
+		return pictureDao.findOrderById();
+	}
 }
