@@ -50,7 +50,7 @@ private TradeService tradeService;
 		String tradeDesc = "升級會員";
 		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=http://192.168.21.117:8080/iwowwow/iwow/trade/buy&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"&MerchantID=2000132&MerchantTradeDate="
 				+ reportDate2 + "&MerchantTradeNo=DX" + reportDate
-				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount=100&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
+				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount=1500&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
 		String test2 = null;
 		System.out.println(test);
 		try {
@@ -65,12 +65,6 @@ private TradeService tradeService;
 		String sha256hex = DigestUtils.sha256Hex(test2.toLowerCase());
 		System.out.println(sha256hex);
 
-//		model.addObject("ItemName", ItemName);
-//		model.addObject("tradeDesc", tradeDesc);
-//		model.addObject("reportDate", reportDate);
-//		model.addObject("reportDate2", reportDate2);
-//		model.addObject("checkMacValue", sha256hex.toUpperCase());
-//		return model;
 		model.put("ItemName", ItemName);
 		model.put("tradeDesc", tradeDesc);
 		model.put("reportDate", reportDate);

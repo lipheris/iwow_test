@@ -9,12 +9,17 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +29,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -174,6 +180,46 @@ public class ShoppingCartController {
 				buyList.add(pic);
 			}
 		}
+		String[] ItemNames=null;
+		for(Picture temp :buyList){
+			
+		}
+		String ItemName="";
+		DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
+		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		String reportDate2 = df2.format(today);
+		if(ItemNames!=null){
+			for(String temp:ItemNames){
+				ItemName=ItemName+"#"+temp;
+			}
+			ItemName=ItemName.substring(1);
+		}else{
+		ItemName = "黃金會員";
+		}
+		String tradeDesc = "升級會員";
+		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=http://192.168.21.117:8080/iwowwow/iwow/trade/buy&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"&MerchantID=2000132&MerchantTradeDate="
+				+ reportDate2 + "&MerchantTradeNo=DX" + reportDate
+				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount=100&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
+		String test2 = null;
+		System.out.println(test);
+		try {
+			test2 = URLEncoder.encode(test, "UTF-8").replace("%2d", "-").replace("%5f", "_").replace("%2e", ".")
+					.replace("%21", "!").replace("%2a", "*").replace("%28", "(").replace("%29", ")").replace("%20", "+")
+					.toLowerCase().toLowerCase();
+			System.out.println(test2);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String sha256hex = DigestUtils.sha256Hex(test2.toLowerCase());
+		System.out.println(sha256hex);
+		model.addAttribute("ItemName", ItemName);
+		model.addAttribute("tradeDesc", tradeDesc);
+		model.addAttribute("reportDate", reportDate);
+		model.addAttribute("reportDate2", reportDate2);
+		model.addAttribute("checkMacValue", sha256hex.toUpperCase());
 		model.addAttribute("picMsg", buyList);
 		return "/iwow/cart/showcartcontent";
 	}
