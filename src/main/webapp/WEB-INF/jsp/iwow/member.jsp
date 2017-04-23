@@ -22,7 +22,7 @@
 }
 .user_profile_img{
 	float: left;
-	width:130px;
+	height:130px;
 	margin:20px;
 }
 .user_profile_name{

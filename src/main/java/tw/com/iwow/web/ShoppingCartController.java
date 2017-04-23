@@ -9,12 +9,17 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,6 +29,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +38,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.iwow.entity.Order;
 import tw.com.iwow.entity.OrderDetail;
@@ -92,7 +99,8 @@ public class ShoppingCartController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/process", method = RequestMethod.GET)
-	public String processOrder(@RequestParam("DSC") String dsc, HttpServletResponse response, Model model,
+	@ResponseBody
+	public Boolean processOrder(@RequestParam("DSC") String dsc, HttpServletResponse response, Model model,
 			HttpServletRequest request) throws UnsupportedEncodingException {
 		String cookie = "";
 		for (Cookie c : request.getCookies()) {
@@ -127,11 +135,11 @@ public class ShoppingCartController {
 			response.addCookie(new Cookie("buyCar", null));
 			model.addAttribute("OrderBean", order);
 			model.addAttribute("price", price);
-			return "/iwow/cart/showorderdetail";
-
+//			return "/iwow/cart/showorderdetail";
+			return true;
 		} else {
-
-			return "redirect:/iwow/index";
+			return false;
+//			return "redirect:/iwow/index";
 		}
 
 	}
@@ -174,6 +182,47 @@ public class ShoppingCartController {
 				buyList.add(pic);
 			}
 		}
+		String tradeDesc="";
+		Long price = 0L;
+		Long count=0L;
+		for(Picture temp :buyList){
+			tradeDesc = tradeDesc+temp.getName()+" ";
+			price=price+100L;
+			count++;
+		}
+		String ItemName="";
+		DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
+		DateFormat df2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		String reportDate2 = df2.format(today);
+		ItemName = "購買圖片";
+		Long orderNew=orderService.getOrder();
+		String ClientBackURL="http://192.168.21.117:8080/iwowwow/iwow/picture/getalldetail?id="+orderNew;
+		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL="+ClientBackURL+"&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"x"+count+"&MerchantID=2000132&MerchantTradeDate="
+				+ reportDate2 + "&MerchantTradeNo=DX" + reportDate
+				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount="+price+"&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
+		String test2 = null;
+		System.out.println(test);
+		try {
+			test2 = URLEncoder.encode(test, "UTF-8").replace("%2d", "-").replace("%5f", "_").replace("%2e", ".")
+					.replace("%21", "!").replace("%2a", "*").replace("%28", "(").replace("%29", ")").replace("%20", "+")
+					.toLowerCase().toLowerCase();
+			System.out.println(test2);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String sha256hex = DigestUtils.sha256Hex(test2.toLowerCase());
+		System.out.println(sha256hex);
+		model.addAttribute("ItemName", ItemName);
+		model.addAttribute("tradeDesc", tradeDesc);
+		model.addAttribute("reportDate", reportDate);
+		model.addAttribute("reportDate2", reportDate2);
+		model.addAttribute("ClientBackURL", ClientBackURL);
+		model.addAttribute("count", count);
+		model.addAttribute("price", price);
+		model.addAttribute("checkMacValue", sha256hex.toUpperCase());
 		model.addAttribute("picMsg", buyList);
 		return "/iwow/cart/showcartcontent";
 	}

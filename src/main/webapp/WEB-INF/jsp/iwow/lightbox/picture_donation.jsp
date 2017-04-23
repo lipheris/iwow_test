@@ -53,7 +53,7 @@ $(function() {
 	    
  		$.get("/iwowwow/iwow/donation/insert",{"receiver":picture_uploader.id,"amount":$("#amount").val()},
  				function(data){
- 					if(data == "true"){
+ 					if(data){
  						swal("DONATE成功！", "感謝您，您的支持是繪師進步的動力！", "success");
  					}
  			});

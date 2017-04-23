@@ -141,7 +141,7 @@ tr:hover {background-color:#FF0000}
                                         <th>Id</th>
                                         <th>Date</th>
                                         <th>處理狀態</th>
-                                        <th>Update_time</th>
+                                        
                                         <th>檢舉理由</th>
                                         <th>Pic_id</th>
                                     </tr>
@@ -155,7 +155,7 @@ tr:hover {background-color:#FF0000}
 										<td>${ra.id}</td>
 										<td>${ra.date}</td>
 										<td>${ra.state}</td>
-										<td>12</td>
+										
 										<td>${ra.desc}</td>
 										<td>${ra.picture.id}</td>
 										</tr>

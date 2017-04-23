@@ -361,15 +361,56 @@ label {
 				<textarea rows=4 name="DSC" cols=70></textarea>
 			</div>
 		</form>
+		
+<form id="formCreditCard" method="post" accept-charset="UTF-8"
+ action="https://payment-stage.allpay.com.tw/Cashier/AioCheckOut/V2" >
+<input type="hidden" name="MerchantID" value="2000132" />
+<input type="hidden" name="MerchantTradeNo" value="DX${reportDate}0c16" />
+<input type="hidden" name="MerchantTradeDate" value="${reportDate2}" />
+<input type="hidden" name="PaymentType" value="aio" />
+<input type="hidden" name="TotalAmount" value="${price}" />
+<input type="hidden" name="TradeDesc" value="${tradeDesc}" />
+<input type="hidden" name="ItemName" value="${ItemName}x${count}" />
+<input type="hidden" name="ReturnURL" value="http://192.168.21.117:8080/iwowwow/iwow/trade/get" />
+<input type="hidden" name="ChoosePayment" value="Credit" checked="checked" />
+<input type="hidden" name="ClientBackURL" value="${ClientBackURL}" />
+<input type="hidden" name="CreditInstallment" value="" />
+<input type="hidden" name="InstallmentAmount" value="" />
+<input type="hidden" name="Redeem" value="" />
+<input type="hidden" name="EncryptType" value="1" />
+<input type="hidden" name="CheckMacValue" value="${checkMacValue}" />
+<!-- <input type="submit" value="送出訂單" /> -->
+
+</form>
 			<div class="end">
-				<a href="javascript:;"
-					onclick="document.getElementById('form1').submit();"><button
-						class="checkout">Checkout</button></a> 
+<!-- 				<a href="javascript:;" id="check" -->
+<!-- 					onclick="document.getElementById('form1').submit();"> -->
+					<button	class="checkout" id="check">Checkout</button></a> 
 				<a href="<c:url value='/iwow/picture/giveup' />" onClick="return Abort();">
 				<button class="giveup">Give up</button></a>
 			</div>
 		
 
 	</div>
+	<script type="text/javascript" src="../../js/jquery-1.11.3.min.js"></script>
+	<script>
+	$(function(){
+		$("#check").on(type="click",function(){
+			var dsc=$("textarea[name='DSC']").val();		
+			console.log(dsc)
+			$.getJSON("/iwowwow/iwow/picture/process",{"DSC":dsc},function(event){
+				if(event){
+					
+					document.getElementById("formCreditCard").submit();
+				}
+				else{
+					document.location.href='${pageContext.servletContext.contextPath}/iwow/index';
+				}
+			})
+				
+			
+		})
+	})
+	</script>
 </body>
 </html>

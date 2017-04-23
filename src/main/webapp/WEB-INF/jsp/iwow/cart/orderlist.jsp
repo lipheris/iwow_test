@@ -43,7 +43,6 @@
 				<tr>
 					<th>Order Nnumber</th>
 					<th >Order Date</th>
-					<th>Download</th>
 				</tr>
 			</thead>
 			<tbody>

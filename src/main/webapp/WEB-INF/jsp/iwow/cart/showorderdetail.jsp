@@ -324,8 +324,7 @@ label {
 							curious once and ate one myself. I'm a fan.</p>
 					</div>
 					<div class="product-price">100</div>
-					<div class="product-quantity">1</div>
-					<div><a href="<c:url value='/iwow/picture/download?id=${aBean.picId}' />">      Picture Download</a></div>
+					<div class="product-quantity"><a href="<c:url value='/iwow/picture/download?id=${aBean.picId}' />">Picture Download</a></div>
 					<div class="product-line-price" value="${aBean.price}">100</div>
 				</div>
 				<c:set var="subtotal" value="${subtotal+aBean.price}" />
