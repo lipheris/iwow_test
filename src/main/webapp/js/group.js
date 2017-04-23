@@ -1,7 +1,4 @@
-$(function(){
-			
-
-	
+$(function(){	
 	
 	$("button[id='createBtn']").click(function(){
 		var createBtn_div=$("div[id='createBtn']");
@@ -14,8 +11,8 @@ $(function(){
 			.addClass("form-inline")
 			.attr("action","/iwowwow/iwow/group/create?"+param+"="+token )			
 			.attr("method","post")
-			.attr("enctype","multipart/form-data")
 			.attr("id","create_btn")
+			.attr("enctype","multipart/form-data")			
 			.appendTo(create_box_div);
 			
 		var	input=$("<input>")
@@ -28,15 +25,56 @@ $(function(){
 			.attr("type","file")
 			.attr("name","photo")
 			.attr("id","photo")	
-		
 		var input_send=$("<input>")
 			.attr("type","submit")
+			.attr("id","create_btn")
 			.attr("value","Create")
 			.attr("name","submit")
+
+//		var input_send=$("<a></a>")
+//			.attr("href","javascript:formSubmit2()")
+//			.attr("id","create")
+//			.text("create")
 			form_div.append(input);
 			form_div.append(input_btn);
 			form_div.append(input_send);			
-					
+		
+			$('#create_btn').on('submit',(function(e) {
+				e.preventDefault();
+			   var serializeData = $(this).serialize();
+			   
+			   $(this).ajaxSubmit({
+			        type:'POST',
+			        url: "/iwowwow/iwow/group/create?"+param+"="+token,
+			        dataType: 'json', 
+			        data: serializeData,                   
+			         
+			        contentType: false,      
+			        cache: false,             
+			        processData:false,      
+			          		      
+			        success:function(response) {
+						if (response) {
+							swal({
+								type : 'success',
+								text : '新增成功!',
+								showConfirmButton : false,
+								customClass : 'swal',
+								timer : 1000,
+								
+							});
+							$(create_box_div).empty();
+						} 
+					}
+			       
+			    });
+			}));
+			   
+
+			$("#photo").on("change", function() {
+			    $(this).parent().submit();
+			});
+		
 	})
 	
 	
@@ -125,10 +163,27 @@ $(function(){
 		});
 	});
 
+ 
+//function formSubmit2() {   		
+//	
+//		var frm=document.getElementById("create_btn");
+//		
+//	    frm.submit(function (ev) {
+//		
+//	        $.ajax({            
+//	            url: frm.attr('action'),
+//	            type: frm.attr('method'),
+//	            data: frm.serialize(),
+//	            dataType:'json',
+//	            success: function (data) {
+//	            	
+//	                console.log(data)
+//	            }
+//	        });
+//
+//	        ev.preventDefault();
+//	    });		
+//	}   
 
-function show_group(group) {
-	$("#group_info > #group_name").text(group.name);
-	$("#group_info > #group_create_name").text(group.memid);
-	$("img[id='group_img']").attr("src", group.photoAd);
-}
+  
 

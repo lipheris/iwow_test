@@ -60,7 +60,7 @@ aside {
 					<img id="group_img">
 				</div>
 				
-			
+						
 <!-- </form> -->
 </aside>
 

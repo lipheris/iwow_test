@@ -44,6 +44,7 @@
 
 
 </style>
+<script src='<c:url value="/js/jquery.form.js"/>'></script>
 <script src='<c:url value="/js/group.js"/>'></script>
 <script src='<c:url value="/js/banner_search.js"/>'></script>
 
