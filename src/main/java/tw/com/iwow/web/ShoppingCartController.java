@@ -176,6 +176,9 @@ public class ShoppingCartController {
 
 		Collection<Picture> picsT = pictureService.findAll();
 		List<Picture> buyList = new ArrayList<Picture>();
+		if(buyCarCookie==null){
+			return "/iwow/cart/showcartcontent";
+		}
 		List<String> buyCarList = Arrays.asList(buyCarCookie.split(","));
 		for (Picture pic : picsT) {
 			if (buyCarList.indexOf(pic.getId().toString()) != -1) {
