@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.com.iwow.entity.Order;
 import tw.com.iwow.entity.OrderDetail;
@@ -98,7 +99,8 @@ public class ShoppingCartController {
 	 * @throws UnsupportedEncodingException
 	 */
 	@RequestMapping(value = "/process", method = RequestMethod.GET)
-	public String processOrder(@RequestParam("DSC") String dsc, HttpServletResponse response, Model model,
+	@ResponseBody
+	public Boolean processOrder(@RequestParam("DSC") String dsc, HttpServletResponse response, Model model,
 			HttpServletRequest request) throws UnsupportedEncodingException {
 		String cookie = "";
 		for (Cookie c : request.getCookies()) {
@@ -133,11 +135,11 @@ public class ShoppingCartController {
 			response.addCookie(new Cookie("buyCar", null));
 			model.addAttribute("OrderBean", order);
 			model.addAttribute("price", price);
-			return "/iwow/cart/showorderdetail";
-
+//			return "/iwow/cart/showorderdetail";
+			return true;
 		} else {
-
-			return "redirect:/iwow/index";
+			return false;
+//			return "redirect:/iwow/index";
 		}
 
 	}
@@ -181,9 +183,12 @@ public class ShoppingCartController {
 			}
 		}
 		String tradeDesc="";
-		String[] ItemNames=null;
+		Long price = 0L;
+		Long count=0L;
 		for(Picture temp :buyList){
-			tradeDesc = tradeDesc+temp.getName();
+			tradeDesc = tradeDesc+temp.getName()+" ";
+			price=price+100L;
+			count++;
 		}
 		String ItemName="";
 		DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
@@ -191,10 +196,12 @@ public class ShoppingCartController {
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
 		String reportDate2 = df2.format(today);
-		ItemName = "黃金會員";
-		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=http://192.168.21.117:8080/iwowwow/iwow/trade/buy&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"&MerchantID=2000132&MerchantTradeDate="
+		ItemName = "購買圖片";
+		Long orderNew=orderService.getOrder();
+		String ClientBackURL="http://192.168.21.117:8080/iwowwow/iwow/picture/getalldetail?id="+orderNew;
+		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL="+ClientBackURL+"&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"x"+count+"&MerchantID=2000132&MerchantTradeDate="
 				+ reportDate2 + "&MerchantTradeNo=DX" + reportDate
-				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount=100&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
+				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount="+price+"&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
 		String test2 = null;
 		System.out.println(test);
 		try {
@@ -212,6 +219,9 @@ public class ShoppingCartController {
 		model.addAttribute("tradeDesc", tradeDesc);
 		model.addAttribute("reportDate", reportDate);
 		model.addAttribute("reportDate2", reportDate2);
+		model.addAttribute("ClientBackURL", ClientBackURL);
+		model.addAttribute("count", count);
+		model.addAttribute("price", price);
 		model.addAttribute("checkMacValue", sha256hex.toUpperCase());
 		model.addAttribute("picMsg", buyList);
 		return "/iwow/cart/showcartcontent";

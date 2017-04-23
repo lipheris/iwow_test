@@ -75,4 +75,7 @@ public class OrderService {
 		return uploaderId;
 		
 	}
+	public Long getOrder(){
+		return orderdao.findOrderById();
+	}
 }
