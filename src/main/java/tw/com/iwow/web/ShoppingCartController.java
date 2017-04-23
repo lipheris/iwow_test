@@ -180,9 +180,10 @@ public class ShoppingCartController {
 				buyList.add(pic);
 			}
 		}
+		String tradeDesc="";
 		String[] ItemNames=null;
 		for(Picture temp :buyList){
-			
+			tradeDesc = tradeDesc+temp.getName();
 		}
 		String ItemName="";
 		DateFormat df = new SimpleDateFormat("MMddyyyyHHmmss");
@@ -190,15 +191,7 @@ public class ShoppingCartController {
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
 		String reportDate2 = df2.format(today);
-		if(ItemNames!=null){
-			for(String temp:ItemNames){
-				ItemName=ItemName+"#"+temp;
-			}
-			ItemName=ItemName.substring(1);
-		}else{
 		ItemName = "黃金會員";
-		}
-		String tradeDesc = "升級會員";
 		String test = "HashKey=5294y06JbISpM5x9&ChoosePayment=Credit&ClientBackURL=http://192.168.21.117:8080/iwowwow/iwow/trade/buy&CreditInstallment=&EncryptType=1&InstallmentAmount=&ItemName="+ItemName+"&MerchantID=2000132&MerchantTradeDate="
 				+ reportDate2 + "&MerchantTradeNo=DX" + reportDate
 				+ "0c16&PaymentType=aio&Redeem=&ReturnURL=http://192.168.21.117:8080/iwowwow/iwow/trade/get&TotalAmount=100&TradeDesc="+tradeDesc+"&HashIV=v77hoKGq4kWxNNIS";
