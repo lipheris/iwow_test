@@ -14,6 +14,9 @@
     display:inline-block;width:300px;position: absolute;top:410px;border-radius: 5px 5px 5px 5px; 
     left: 20px;height:400px;border:1px solid #ddd;overflow:scroll;
 }
+.input-group{
+	z-index:-20;
+}
 .remove_type{float:right;}
 </style>
 <div class="message">
