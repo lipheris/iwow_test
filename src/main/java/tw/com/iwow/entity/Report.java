@@ -26,7 +26,7 @@ public class Report {
 	@Column(name = "STATE")
 	// state 為區分report 狀態為處理/未處理
 	private Boolean state;
-	@ManyToOne(fetch = FetchType.LAZY, optional=false)
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
 	@JoinColumn(name = "PIC_ID", referencedColumnName = "ID")
 	private Picture picture;
 

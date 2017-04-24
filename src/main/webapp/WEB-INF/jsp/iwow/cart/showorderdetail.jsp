@@ -319,9 +319,7 @@ label {
 					</div>
 					<div class="product-details">
 						<div class="product-title">${aBean.picName}</div>
-						<p class="product-description">The best dog bones of all time.
-							Holy crap. Your dog will be begging for these things! I got
-							curious once and ate one myself. I'm a fan.</p>
+						<p class="product-description"></p>
 					</div>
 					<div class="product-price">100</div>
 					<div class="product-quantity"><a href="<c:url value='/iwow/picture/download?id=${aBean.picId}' />">Picture Download</a></div>
